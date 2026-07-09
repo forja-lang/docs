@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="AOT (aot.rs) — Forja">
+  <h1>AOT – Compilación Ahead‑Of‑Time</h1>
+  <p><strong>Archivo:</strong> <code>src/aot.rs</code></p>
+  <h2>¿Por qué existe?</h2>
+  <p>Permite pre‑compilar programas Forja a código nativo antes de la ejecución, mejorando el arranque y el rendimiento.</p>
+  <h2>Cómo funciona</h2>
+  <p>El compilador genera bytecode y luego lo traduce a código nativo usando el backend ASM o LLVM.</p>
+  <h2>Ejemplo de código</h2>
+  ```rust
+  // uso típico del AOT
+  let binary = forja::compilar_aot("programa.forja").unwrap();
+  println!("Archivo binario generado: {}", binary);
+  ```
+</Layout>

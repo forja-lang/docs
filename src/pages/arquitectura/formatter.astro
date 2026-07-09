@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Formatter (formatter.rs) — Forja">
+  <h1>Formatter – Formateador de Código Forja</h1>
+  <p><strong>Archivo:</strong> <code>src/formatter.rs</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>Normaliza la presentación del código fuente (indentación, espaciado, saltos de línea) para mejorar la legibilidad y permitir comparaciones de diff consistentes.</p>
+
+  <h2>Cómo funciona</h2>
+  <p>Parsea el código con el lexer, genera un AST y luego lo recorre aplicando reglas de estilo definidas en la estructura <code>FormatOptions</code>.</p>
+
+  <h2>Ejemplo de uso</h2>
+  <p>Ejemplo: se formatea un fragmento de código fuente con <code>forja::formatear</code> y se muestra el resultado.</p>
+</Layout>

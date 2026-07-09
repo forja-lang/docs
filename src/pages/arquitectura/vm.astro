@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Máquina Virtual (vm.rs) — Forja">
+  <h1>Máquina Virtual (VM) de Forja</h1>
+
+  <p><strong>Archivo:</strong> <code>src/vm.rs</code></p>
+
+  <p>La VM es el <strong>intérprete stack‑based</strong> que ejecuta el bytecode generado por el compilador. Está diseñada para ser sencilla, segura y extensible, permitiendo que nuevos back‑ends (ASM, LLVM, WASM) reutilicen la misma lógica de ejecución.</p>
+
+  <h2>Diseño general</h2>
+  <ul>
+    <li><code>struct VM</code>: Contiene el estado de ejecución:
+      <ul>
+        <li><code>pc: usize</code> – contador de programa (puntero a la siguiente opcode).</li>
+        <li><code>stack: Vec&lt;Valor&gt;</code> – pila de valores operandos.</li>
+        <li><code>globals: HashMap&lt;String, Valor&gt;</code> – variables globales accesibles por nombre.</li>
+        <li><code>locals: Vec&lt;Valor&gt;</code> – almacenamiento de variables locales por índice (acceso O(1)).</li>
+        <li><code>functions: HashMap&lt;String, Vec&lt;Opcode&gt;&gt;</code> – tabla de funciones definidas por el usuario.</li>
+        <li><code>builtins: HashMap&lt;BuiltinKind, fn(&mut VM, usize)&gt;</code> – despacho de built‑ins.</li>
+        <li><code>error_handler: Option&lt;fn(&mut VM, ErrorForja)&gt;</code> – manejo de errores de tiempo de ejecución.</li>
+      </ul>
+    </li>
+    <li><code>enum Valor</code>: Representa los tipos de datos soportados en tiempo de ejecución (Entero, Decimal, Texto, Booleano, Nulo, etc.). Cada variante almacena el dato en un <code>Rc&lt;str&gt;</code> o tipos primitivos.</li>
+  </ul>
+
+  <h2>Loop principal de ejecución</h2>
+   <p>Ejemplo: la función <code>run</code> itera sobre el bytecode con un bucle <code>while</code>, usa <code>match</code> para cada <code>Opcode</code> y actualiza la pila y el contador del programa.</p>
+  <p>El <code>match</code> cubre todos los opcodes definidos en <code>src/bytecode.rs</code>. Cada rama realiza la operación correspondiente sobre la pila o el entorno.</p>
+
+  <h2>Gestión de funciones</h2>
+  <ul>
+    <li><code>fn call_function(&mut self, name: &str, argc: usize) -> Result&lt;(), ErrorForja&gt;</code>: Prepara un nuevo frame de pila, copia los argumentos y salta al cuerpo de la función.</li>
+    <li>Al terminar una función, <code>ret</code> restaura <code>pc</code> al punto de llamada y destruye el frame local.</li>
+  </ul>
+
+  <h2>Built‑ins y extensibilidad</h2>
+  <p>Los built‑ins están registrados en <code>VM::register_builtin</code>. Cada builtin recibe una referencia mutable al VM y el número de argumentos que ya están en la pila.</p>
+   <p>El builtin <code>builtin_escribir</code> escribe en la salida estándar el texto pasado como argumento cuando <code>argc == 1</code>. Se extrae el valor del stack, se verifica que sea <code>Valor::Texto</code> y se imprime usando <code>print!</code>.</p>
+  <p>Los usuarios pueden añadir nuevos built‑ins mediante la API pública <code>VM::add_builtin</code> que inserta la función en el hashmap.</p>
+
+  <h2>Errores y depuración</h2>
+  <ul>
+    <li>El opcode <code>Error(ErrorForja)</code> permite propagar errores de tiempo de compilación a la VM.</li>
+    <li>El campo <code>error_handler</code> permite establecer una callback personalizada (por ejemplo, para imprimir trazas de pila).</li>
+  </ul>
+
+  <h2>Relación con otros módulos</h2>
+  <ul>
+    <li><code>bytecode.rs</code>: Define los <code>Opcode</code> que la VM interpreta.</li>
+    <li><code>compiler_asm.rs</code> y <code>compiler_llvm.rs</code>: Generan bytecode como una de sus salidas.</li>
+    <li><code>uops.rs</code>: Opcionalmente, la VM puede ejecutar directamente una lista de <code>Uop</code> (modo JIT) mediante <code>VM::execute_uops</code> (no documentado aquí).</li>
+  </ul>
+</Layout>

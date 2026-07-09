@@ -1,0 +1,21 @@
+<!-- Safe JIT page -->
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="JIT (jit.rs) — Forja">
+  <h1>JIT – Generador Just‑In‑Time</h1>
+  <p><strong>Archivo:</strong> <code>src/jit.rs</code></p>
+
+  <h2>¿Por qué?</h2>
+  <p>Compila código Forja a código nativo en tiempo de ejecución.</p>
+
+  <h2>Cómo funciona</h2>
+  <p>El JIT traduce micro‑operaciones (<code>Uop</code>) a instrucciones de máquina y ejecuta el código resultante.</p>
+
+  <h2>Para qué se usa</h2>
+  <p>Se activa cuando el programa supera un umbral de complejidad.</p>
+
+  <h2>Ejemplo de uso</h2>
+  <p>Ejemplo – se llama <code>forja_ejecutar_con_jit</code> con la opción JIT activada.</p>
+</Layout>

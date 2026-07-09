@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="VM Fast (vm_fast.rs) — Forja">
+  <h1>VM Fast – Variante Optimizada</h1>
+  <p><strong>Archivo:</strong> <code>src/vm_fast.rs</code></p>
+  <h2>¿Por qué?</h2>
+  <p>Implementa una versión optimizada de la VM tradicional, reduciendo overhead de checks y usando estructuras de datos más compactas para mejorar el rendimiento en programas de tamaño medio.</p>
+  <h2>Cómo funciona</h2>
+  <ul>
+    <li>Utiliza un <code>Vec&lt;Valor&gt;</code> pre‑alocado y mantiene un puntero de stack interno para evitar operaciones de push/pop costosas.</li>
+    <li>El dispatch de opcodes está escrito con <code>match</code> en forma de tabla de funciones para reducir branching.</li>
+    <li>Se eliminan validaciones de tipo en tiempo de ejecución bajo la asunción de que el compilador ya garantizó la corrección.</li>
+  </ul>
+  <h2>Para qué se usa</h2>
+  <p>Se selecciona automáticamente con la bandera <code>--fast</code> o cuando la detección de entorno indica suficiente capacidad de memoria.</p>
+</Layout>

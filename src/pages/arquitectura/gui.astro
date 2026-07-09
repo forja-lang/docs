@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="GUI (gui.rs) — Forja">
+  <h1>Interfaz Gráfica (GUI)</h1>
+  <p><strong>Archivo:</strong> <code>src/gui.rs</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>La GUI brinda una interfaz visual para interactuar con el compilador y la máquina virtual, ofreciendo exploración del AST, visualización de bytecode y ejecución de programas sin usar la terminal.</p>
+
+  <h2>¿Cómo funciona?</h2>
+  <p>Se implementa usando <code>xilem</code>, un toolkit declarativo basado en <code>druid</code> y <code>piet</code>. El código define una estructura de widgets que describe la UI y la lógica se conecta a través de mensajes y actualizaciones de estado. Los componentes principales incluyen <code>AstViewer</code>, <code>BytecodeViewer</code> y <code>TerminalPanel</code>. La comunicación interna con el backend del compilador se hace mediante canales <code>std::sync::mpsc</code>.</p>
+
+  <h2>¿Para qué se usa?</h2>
+  <p>Ideal para demostraciones, depuración visual y material educativo. La GUI se lanza con el sub‑comando <code>forja gui</code>.</p>
+</Layout>

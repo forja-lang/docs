@@ -1,0 +1,20 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="JIT Engine (jit_engine.rs) — Forja">
+  <h1>JIT Engine – Motor de Compilación Dinámica</h1>
+  <p><strong>Archivo:</strong> <code>src/jit_engine.rs</code></p>
+
+  <h2>¿Por qué?</h2>
+  <p>Coordina el proceso completo de generación, caché y ejecución de código nativo a partir de <code>Uop</code>. Centraliza la gestión de memoria ejecutable y la relación entre símbolos del lenguaje y la ABI del host.</p>
+
+  <h2>Cómo funciona</h2>
+    <p>El motor JIT expone una API para crear una instancia, compilar Uops a código nativo y ejecutar la función resultante, usando una caché de símbolos y transmutación segura.</p>
+
+  <h2>Para qué se usa</h2>
+  <p>Invocado por <code>vm_jit.rs</code> cuando la opción <code>--jit</code> está habilitada. Permite que funciones "calientes" se ejecuten a velocidad casi nativa.</p>
+
+  <h2>Ejemplo de uso</h2>
+   <p>Ejemplo – se crea un <code>JitEngine</code>, se compila una lista de <code>Uop</code> y se ejecuta la función resultante.</p>
+</Layout>

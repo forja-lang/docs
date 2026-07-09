@@ -1,0 +1,69 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Manejo de errores (Resultado/Opcion) — Forja">
+  <h1>Manejo de errores: <code>Resultado</code> y <code>Opcion</code></h1>
+
+  <p>Forja adopta el patrón de <strong>Resultado</strong> para operaciones que pueden fallar, y <strong>Opcion</strong> para valores que pueden estar ausentes. Ambas son variantes de tipos algebraicos definidos en el preludio.</p>
+
+  <h2><code>Opcion</code></h2>
+
+  <p>Úsalo cuando un valor pueda ser <code>Algun(valor)</code> o <code>Ninguno</code>. Evita el uso de <code>nulo</code> y fuerza el manejo explícito del caso ausente.</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📦 Definición</span></div>
+    <pre><code><span class="kw">tipo</span> Opcion&lt;T&gt; = Algun(T) | Ninguno</code></pre>
+  </div>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🧪 Ejemplo</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">primer_caracter</span>(texto: <span class="ty">Texto</span>) &rarr; <span class="ty">Opcion</span>&lt;<span class="ty">Texto</span>&gt; &lbrace;
+    <span class="kw">si</span> (texto == <span class="st">""</span>) &lbrace;
+        <span class="kw">retornar</span> <span class="kw">Ninguno</span>
+    &rbrace;
+    <span class="kw">retornar</span> <span class="kw">Algun</span>(texto[0])
+&rbrace;
+
+<span class="kw">variable</span> r = <span class="fn">primer_caracter</span>(<span class="st">"forja"</span>)
+
+<span class="kw">coincidir</span> (r) &lbrace;
+    <span class="kw">caso</span> Algun(c) &rarr; <span class="fn">escribir</span>(<span class="st">"Primer letra: "</span> + c)
+    <span class="kw">caso</span> Ninguno &rarr; <span class="fn">escribir</span>(<span class="st">"Vacío"</span>)
+&rbrace;</code></pre>
+  </div>
+
+  <h2><code>Resultado</code></h2>
+
+  <p>Úsalo para operaciones que pueden devolver <code>Exito(valor)</code> o <code>Error(mensaje)</code>.</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📦 Definición</span></div>
+    <pre><code><span class="kw">tipo</span> Resultado&lt;T, E&gt; = Exito(T) | Error(E)</code></pre>
+  </div>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🧪 Ejemplo</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">dividir</span>(a: <span class="ty">Entero</span>, b: <span class="ty">Entero</span>) &rarr; <span class="ty">Resultado</span>&lt;<span class="ty">Entero</span>, <span class="ty">Texto</span>&gt; &lbrace;
+    <span class="kw">si</span> (b == 0) &lbrace;
+        <span class="kw">retornar</span> <span class="kw">Error</span>(<span class="st">"División por cero"</span>)
+    &rbrace;
+    <span class="kw">retornar</span> <span class="kw">Exito</span>(a / b)
+&rbrace;
+
+<span class="kw">variable</span> r = <span class="fn">dividir</span>(10, 2)
+
+<span class="kw">coincidir</span> (r) &lbrace;
+    <span class="kw">caso</span> Exito(valor) &rarr; <span class="fn">escribir</span>(<span class="st">"Resultado: "</span> + valor)
+    <span class="kw">caso</span> Error(msg) &rarr; <span class="fn">escribir</span>(<span class="st">"Error: "</span> + msg)
+&rbrace;</code></pre>
+  </div>
+
+  <h2>Alias útiles del preludio</h2>
+
+  <table>
+    <tr><th>Tipo</th><th>Definición</th><th>Uso común</th></tr>
+    <tr><td><code>Opcion&lt;T&gt;</code></td><td><code>Algun(T) | Ninguno</code></td><td>Valores ausentes</td></tr>
+    <tr><td><code>Resultado&lt;T, E&gt;</code></td><td><code>Exito(T) | Error(E)</code></td><td>Operaciones fallibles</td></tr>
+  </table>
+</Layout>

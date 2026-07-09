@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Sistema de errores (error.rs) — Forja">
+  <h1>Sistema de Errores e Internos de Diagnóstico</h1>
+
+  <p><strong>Archivo:</strong> <code>src/error.rs</code></p>
+
+  <p>Forja implementa un motor de diagnóstico educativo diseñado para asistir activamente al estudiante o desarrollador. En lugar de limitarse a abortar la compilación con mensajes crípticos, localiza con precisión el origen y ofrece soluciones directas en español.</p>
+
+  <div class="info">
+    💡 <strong>Filosofía Educativa:</strong> Los errores son clasificados bajo nombres tradicionales o educativos (como "Ortografía" para errores léxicos, o "Gramática" para errores sintácticos) para suavizar la curva de aprendizaje de compiladores.
+  </div>
+
+  <h2>Módulo <code>color</code></h2>
+  <p>Proporciona formateo de salida ANSI para la terminal, facilitando la legibilidad de los reportes coloreados.</p>
+  <ul>
+    <li><code>rojo</code>, <code>verde</code>, <code>amarillo</code>, <code>azul</code>, <code>magenta</code>, <code>cyan</code>, <code>gris</code>, <code>negrita</code>: Funciones auxiliares que envuelven un string con los códigos ANSI de escape correspondientes y añaden el reset al final.
+      <ul>
+        <li><strong>¿Por qué?:</strong> Para no repetir secuencias de escape ANSI por todo el compilador y garantizar que la terminal se limpie automáticamente.</li>
+        <li><strong>¿Cómo?:</strong> Concatena el string de entrada entre la constante del color y la constante de reseteo (<code>RESET = "\x1b[0m"</code>).</li>
+        <li><strong>¿Para qué?:</strong> Colorear secciones clave del error en la salida CLI estándar.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>Enumeración <code>ErrorTipo</code></h2>
+  <p>Representa las categorías fundamentales de errores en el ciclo de vida del compilador:</p>
+  <table>
+    <tr><th>Variante</th><th>Categoría Educativa</th><th>Fase de Origen</th><th>Propósito</th></tr>
+    <tr><td><code>ErrorLexico</code></td><td>Ortografía</td><td>Lexer</td><td>Caracteres extraños, cadenas o comentarios sin cerrar.</td></tr>
+    <tr><td><code>ErrorSintactico</code></td><td>Gramática</td><td>Parser</td><td>Incumplimiento de la gramática formal del lenguaje.</td></tr>
+    <tr><td><code>ErrorDePropiedad</code></td><td>Pertenencia</td><td>Borrow Checker</td><td>Violación de reglas de ciclo de vida u ownership.</td></tr>
+    <tr><td><code>ErrorDeTipo</code></td><td>Tipos de datos</td><td>Type Checker</td><td>Incompatibilidad semántica de tipos en asignaciones o llamadas.</td></tr>
+    <tr><td><code>ErrorSemantico</code></td><td>Significado</td><td>Semántica</td><td>Variables no declaradas, ámbitos rotos o variables duplicadas.</td></tr>
+    <tr><td><code>ErrorInterno</code></td><td>Interno</td><td>Cualquiera</td><td>Fallas no recuperables de la VM, IO o bugs del compilador.</td></tr>
+  </table>
+
+  <h2>Estructura principal <code>ErrorForja</code></h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>Definición de ErrorForja</span></div>
+    <pre><code><span class="kw">pub struct</span> ErrorForja &lbrace;
+    <span class="kw">pub</span> tipo: ErrorTipo,
+    <span class="kw">pub</span> linea: usize,
+    <span class="kw">pub</span> columna: usize,
+    <span class="kw">pub</span> mensaje: String,
+    <span class="kw">pub</span> sugerencia: String,
+&rbrace;</code></pre>
+  </div>
+
+  <h2>Desglose de Funciones de <code>ErrorForja</code></h2>
+
+  <h3><code>pub fn new(tipo: ErrorTipo, linea: usize, columna: usize, mensaje: &str, sugerencia: &str) -> Self</code></h3>
+  <ul>
+    <li><strong>¿Por qué?:</strong> Constructor simplificado para instanciar estructuras de error uniformes en cualquier parte del pipeline.</li>
+    <li><strong>¿Cómo?:</strong> Convierte las referencias de string en <code>String</code> con asignación en heap y devuelve el objeto <code>ErrorForja</code>.</li>
+    <li><strong>¿Para qué?:</strong> Usado por el Lexer, Parser y Type Checker para instanciar y lanzar errores.</li>
+  </ul>
+
+  <h3><code>pub fn mostrar_con_contexto(&self, source: &str) -> String</code></h3>
+  <ul>
+    <li><strong>¿Por qué?:</strong> Facilita la comprensión visual del error mostrando la línea exacta del código fuente que falló, junto con la línea anterior y posterior para dar contexto al usuario.</li>
+    <li><strong>¿Cómo?:</strong> 
+      <ol>
+        <li>Divide el código fuente en líneas usando <code>source.lines()</code>.</li>
+        <li>Identifica el índice correspondiente restando 1 a <code>self.linea</code>.</li>
+        <li>Si existe una línea anterior, la agrega con formato <code>[NroLínea] │ [Texto]</code>.</li>
+        <li>Agrega la línea del error apuntando con un cursor <code>↑ [Mensaje]</code> desplazado espacialmente según la columna.</li>
+        <li>Si existe una línea posterior, la concatena para completar el bloque visual.</li>
+        <li>Añade el emoji representativo y la sugerencia de corrección formateada al pie del error.</li>
+      </ol>
+    </li>
+    <li><strong>¿Para qué?:</strong> Generar el reporte contextualizado que se imprime en consola al fallar la compilación o transpilación en la terminal.</li>
+  </ul>
+
+  <h3><code>pub fn to_json(&self) -> String</code></h3>
+  <ul>
+    <li><strong>¿Por qué?:</strong> Permite integraciones sencillas con extensiones de editores (como VS Code) u otros servicios web sin añadir dependencias pesadas de serialización.</li>
+    <li><strong>¿Cómo?:</strong> Formatea manualmente un string crudo interpolando las propiedades del error. Llama internamente a <code>escape_json</code> para asegurar la validez sintáctica del JSON final.</li>
+    <li><strong>¿Para qué?:</strong> Formatear la salida de errores en JSON cuando se ejecuta con la bandera <code>--json-errors</code>.</li>
+  </ul>
+
+  <h3><code>fn escape_json(&self, s: &str) -> String</code></h3>
+  <ul>
+    <li><strong>¿Por qué?:</strong> Para prevenir inyecciones JSON accidentales o de sintaxis cuando el mensaje de error contiene caracteres de control o comillas dobles.</li>
+    <li><strong>¿Cómo?:</strong> Recorre cada carácter del string de entrada en un loop. Si encuentra caracteres especiales (<code>\</code>, <code>"</code>, salto de línea, retorno de carro, tabulación), los reemplaza por su secuencia de escape JSON correspondiente. Los caracteres de control no estándar se convierten a secuencias unicode hexadecimales.</li>
+    <li><strong>¿Para qué?:</strong> Garantizar la robustez sintáctica de la cadena producida por <code>to_json()</code>.</li>
+  </ul>
+
+  <h2>Funciones del Módulo Asociadas</h2>
+
+  <h3><code>pub fn emoji_para(tipo: &ErrorTipo) -> &'static str</code></h3>
+  <ul>
+    <li><strong>¿Por qué?:</strong> Brinda un identificador visual rápido para que el usuario asocie la naturaleza del error de inmediato.</li>
+    <li><strong>¿Cómo?:</strong> Mapea cada variante de <code>ErrorTipo</code> a un emoji representativo (por ejemplo, 🏷️ para errores de propiedad/ownership o 🧠 para semántica).</li>
+    <li><strong>¿Para qué?:</strong> Proporcionar el emoji impreso al renderizar el error.</li>
+  </ul>
+
+  <h3><code>pub fn categoria_educativa(tipo: &ErrorTipo) -> &'static str</code></h3>
+  <ul>
+    <li><strong>¿Por qué?:</strong> Traducir jerga técnica de compiladores a términos comunes de lectoescritura.</li>
+    <li><strong>¿Cómo?:</strong> Usa un match para mapear <code>ErrorLexico</code> a "Ortografía", <code>ErrorSintactico</code> a "Gramática", <code>ErrorDePropiedad</code> a "Pertenencia", etc.</li>
+    <li><strong>¿Para qué?:</strong> Encabezado del reporte impreso en terminal o consumido en los diagnósticos del IDE.</li>
+  </ul>
+</Layout>

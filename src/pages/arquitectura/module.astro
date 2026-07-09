@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Módulo (module.rs) — Forja">
+  <h1>ModuleResolver – Resolución de Módulos y Paquetes</h1>
+  <p><strong>Archivo:</strong> <code>src/module.rs</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>Gestiona la carga y composición de módulos de código Forja, permitiendo que los archivos <code>.fa</code> se importen entre sí y que dependencias externas provengan de paquetes publicados.</p>
+
+  <h2>Cómo funciona</h2>
+  <ol>
+    <li>Normaliza la ruta solicitada, evitando traversals (<code>../</code>) y rutas absolutas.</li>
+    <li>Intenta resolver la ruta dentro del directorio raíz del proyecto.
+      <ul>
+        <li>Si el archivo existe, lo lee, tokeniza, parsea y resuelve recursivamente cualquier <code>Importar</code> interno.</li>
+        <li>Almacena el resultante <code>Programa</code> en <code>cache</code> para reutilización.</li>
+      </ul>
+    </li>
+    <li>Si no está presente localmente, delega al <code>PackageResolver</code> (si está configurado) para buscar el módulo en paquetes externos.</li>
+    <li>En caso de error, devuelve <code>ErrorForja</code> explicando la causa (ruta inválida, archivo inexistente, paquete no encontrado).</li>
+  </ol>
+
+  <h2>Estructuras clave</h2>
+<h3>Estructuras clave</h3>
+<p>El módulo define <code>ModuleResolver</code> con los campos <code>root_dir</code>, <code>cache</code> y <code>package_resolver</code>. Proporciona los métodos <code>new</code> y <code>resolver</code> para crear y resolver módulos.</p>
+
+  <h2>Relación con otras partes del compilador</h2>
+  <ul>
+    <li>Se invoca desde la CLI (<code>main.rs</code>) y el REPL al cargar scripts.</li>
+    <li>Utiliza <code>Lexer</code> y <code>Parser</code> para transformar el código fuente en AST.</li>
+    <li>El <code>PackageResolver</code> maneja dependencias externas (crates Forja).</li>
+  </ul>
+</Layout>

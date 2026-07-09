@@ -1,0 +1,20 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="REPL (repl.rs) — Forja">
+  <h1>REPL – Interfaz de Línea de Comandos Interactiva</h1>
+  <p><strong>Archivo:</strong> <code>src/repl.rs</code></p>
+  <h2>¿Por qué?</h2>
+  <p>Permite a los usuarios escribir y ejecutar fragmentos de código Forja en tiempo real, facilitando pruebas rápidas, depuración y exploración del lenguaje sin necesidad de crear archivos fuente.</p>
+  <h2>Cómo funciona</h2>
+  <ul>
+    <li>Lee líneas de entrada mediante <code>std::io::stdin()</code> con un prompt <code>&gt;&gt; </code>.</li>
+    <li>Parsea cada línea usando el mismo pipeline del compilador (lexer → parser → AST).</li>
+    <li>Compila a bytecode con <code>compiler_asm.rs</code> o directamente a <code>bytecode.rs</code> y ejecuta con la VM (<code>vm::run</code>).</li>
+    <li>Mantiene un estado persistente entre iteraciones (variables, funciones) mediante una instancia global de <code>VM</code>.</li>
+    <li>Soporta comandos internos (por ejemplo <code>:quit</code>, <code>:reset</code>, <code>:load &lt;file&gt;</code>) mediante un pequeño dispatcher de comandos.</li>
+  </ul>
+  <h2>Para qué se usa</h2>
+  <p>Ideal para aprendizaje, experimentación y debugging avanzado, así como para scripts rápidos que no justifiquen crear un proyecto completo.</p>
+</Layout>

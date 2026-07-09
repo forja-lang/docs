@@ -1,0 +1,100 @@
+﻿---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Pattern Matching (coincidir/caso) — Forja">
+  <h1>Pattern Matching: <code>coincidir</code> / <code>caso</code></h1>
+
+  <p>Forja soporta <strong>pattern matching</strong> con <code><span class="kw">coincidir</span></code> y <code><span class="kw">caso</span></code>. Te permite evaluar un valor contra múltiples patrones y desestructurar tipos algebraicos, tuplas y valores literales.</p>
+
+  <div class="info">💡 <strong>Analogía:</strong> Es un <code>si</code> súper-cargado que pregunta “¿esto se ve como...?” en lugar de solo “¿es mayor que 5?”.</div>
+
+  <h2>Sintaxis básica</h2>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📐 Estructura</span></div>
+    <pre><code><span class="kw">coincidir</span> (expresión) &lbrace;
+    <span class="kw">caso</span> patrón1 &rarr; &lbrace;
+        <span class="co">// código si coincide con patrón1</span>
+    &rbrace;
+    <span class="kw">caso</span> patrón2 &rarr; &lbrace;
+        <span class="co">// código si coincide con patrón2</span>
+    &rbrace;
+&rbrace;</code></pre>
+  </div>
+
+  <h2>Coincidir con valores</h2>
+
+  <p>El caso más simple: comparar contra valores concretos o rangos:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🔢 Números</span></div>
+    <pre><code><span class="kw">variable</span> dia = 3
+
+<span class="kw">coincidir</span> (dia) &lbrace;
+    <span class="kw">caso</span> 1 &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Lunes"</span>)
+    &rbrace;
+    <span class="kw">caso</span> 2 &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Martes"</span>)
+    &rbrace;
+    <span class="kw">caso</span> 3 &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Miércoles"</span>)
+    &rbrace;
+    <span class="kw">caso</span> _ &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Fin de semana"</span>)
+    &rbrace;
+&rbrace;
+<span class="co">// → Miércoles</span></code></pre>
+  </div>
+
+  <h2>Tipos algebraicos (enums)</h2>
+
+  <p>Podés desestructurar variantes de un <code>tipo</code> definido con <code>tipo</code>:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📦 Enums</span></div>
+    <pre><code><span class="kw">tipo</span> Resultado = Exito(Entero) | Error(Texto)
+
+<span class="kw">variable</span> r = Exito(200)
+
+<span class="kw">coincidir</span> (r) &lbrace;
+    <span class="kw">caso</span> Exito(codigo) &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"OK: "</span> + codigo)
+    &rbrace;
+    <span class="kw">caso</span> Error(msg) &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Falló: "</span> + msg)
+    &rbrace;
+&rbrace;</code></pre>
+  </div>
+
+  <h2>Patrones múltiples y comodín</h2>
+
+  <p>Podés combinar patrones con <code>|</code> y usar <code>_</code> como comodín:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🔀 Pipes y wildcard</span></div>
+    <pre><code><span class="kw">coincidir</span> (nota) &lbrace;
+    <span class="kw">caso</span> 10 | 9 &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Excelente"</span>)
+    &rbrace;
+    <span class="kw">caso</span> 8 | 7 &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Bueno"</span>)
+    &rbrace;
+    <span class="kw">caso</span> _ &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Reprobar"</span>)
+    &rbrace;
+&rbrace;</code></pre>
+  </div>
+
+  <h2>Equivalencia con Rust</h2>
+
+  <table>
+    <tr><th>Forja</th><th>Rust</th></tr>
+    <tr><td><code>coincidir (x) &lbrace; caso ... &rbrace;</code></td><td><code>match x &lbrace; ... &rbrace;</code></td></tr>
+    <tr><td><code>caso 1 &rarr; &lbrace; ... &rbrace;</code></td><td><code>1 => &lbrace; ... &rbrace;</code></td></tr>
+    <tr><td><code>caso _ &rarr; &lbrace; ... &rbrace;</code></td><td><code>_ => &lbrace; ... &rbrace;</code></td></tr>
+    <tr><td><code>caso Algo(n) &rarr; &lbrace; ... &rbrace;</code></td><td><code>Algo(n) => &lbrace; ... &rbrace;</code></td></tr>
+    <tr><td><code>caso 1 | 2 &rarr; &lbrace; ... &rbrace;</code></td><td><code>1 | 2 => &lbrace; ... &rbrace;</code></td></tr>
+  </table>
+</Layout>

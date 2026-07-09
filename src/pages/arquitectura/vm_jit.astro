@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="VM JIT (vm_jit.rs) — Forja">
+  <h1>VM JIT – Versión Just‑In‑Time</h1>
+  <p><strong>Archivo:</strong> <code>src/vm_jit.rs</code></p>
+  <h2>¿Por qué existe?</h2>
+  <p>Proporciona una ejecución más rápida que la VM interpretada tradicional mediante compilación en tiempo de ejecución a código nativo. Ideal para scripts largos o REPL interactivo donde la sobrecarga de interpretación sería prohibitiva.</p>
+  <h2>Cómo funciona</h2>
+  <ul>
+    <li>Recibe la lista de <code>Uop</code> generada por <code>compiler_asm.rs</code>.</li>
+    <li>El <em>emitter JIT</em> traduce cada <code>Uop</code> a código máquina usando la API de <code>dynasmrt</code> (o similar) y lo coloca en una memoria ejecutable.</li>
+    <li>Se mantiene un cache de funciones JIT para reutilizar código generado entre llamadas.</li>
+    <li>En caso de error de compilación JIT, se hace fallback a la VM interpretada.</li>
+  </ul>
+  <h2>Para qué se usa</h2>
+  <p>Se activa automáticamente cuando la opción de línea de comandos <code>--jit</code> está presente o cuando el REPL detecta que el programa supera un umbral de tamaño.</p>
+</Layout>

@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Compiler ASM (compiler_asm.rs) — Forja">
+  <h1>Compiler ASM – Generador de Assembly Nativo</h1>
+  <p><strong>Archivo:</strong> <code>src/compiler_asm.rs</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>Convierte la representación intermedia <code>Uop</code> en código ensamblador específico de la arquitectura objetivo (x86‑64 o ARM).</p>
+
+  <h2>Cómo funciona</h2>
+  <p>El generador recorre la lista de <code>Uop</code>, emite instrucciones usando la crate <code>dynasmrt</code> y produce un buffer de bytes ejecutable que la VM o el JIT pueden cargar.</p>
+
+  <h2>Ejemplo de generación</h2>
+<p>Ejemplo: se crea un <code>AsmGenerator</code>, se emite un <code>Uop::Add</code>, se finaliza y se imprimen los bytes resultantes.</p>
+</Layout>

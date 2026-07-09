@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Diagrama (diagrama.rs) — Forja">
+  <h1>Diagrama – Representación Visual del Flujo del Compilador</h1>
+  <p><strong>Archivo:</strong> <code>src/diagrama.rs</code></p>
+  <h2>¿Por qué existe?</h2>
+  <p>Genera diagramas que ilustran el flujo de datos entre los distintos pasos del compilador (lexer → parser → AST → bytecode → VM).</p>
+  <h2>Cómo funciona</h2>
+  <p>Utiliza la crate <code>graphviz</code> para crear nodos y aristas que representan cada fase y las dependencias entre ellas.</p>
+  <h2>Ejemplo de generación</h2>
+  ```rust
+  let dot = Diagrama::new()
+      .add_phase("Lexer")
+      .add_phase("Parser")
+      .add_phase("Bytecode")
+      .add_edge("Lexer", "Parser")
+      .add_edge("Parser", "Bytecode")
+      .to_dot();
+  println!("{}", dot);
+  ```
+</Layout>

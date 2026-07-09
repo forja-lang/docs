@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Prelude (prelude.rs) — Forja">
+  <h1>Prelude del Lenguaje (Prelude)</h1>
+  <p><strong>Archivo:</strong> <code>src/prelude.rs</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>Define los símbolos y utilidades que están automáticamente disponibles en cada programa Forja sin necesidad de importarlos explícitamente, similar al prelude de Rust o Haskell.</p>
+
+  <h2>¿Qué contiene?</h2>
+  <ul>
+    <li>Re‑exports de tipos básicos (<code>i64</code>, <code>f64</code>, <code>String</code>, etc.).</li>
+    <li>Funciones estándar de la biblioteca (por ejemplo <code>println</code>, <code>read_line</code>, <code>len</code>).</li>
+    <li>Macros de conveniencia para manejo de errores y aserciones.</li>
+  </ul>
+
+  <h2>Cómo se usa</h2>
+  <p>El compilador incluye automáticamente <code>prelude.rs</code> al comienzo de cada módulo raíz. Los usuarios pueden sobrescribirlo añadiendo su propio <code>prelude.rs</code> en el proyecto.</p>
+
+  <h2>Ejemplo de contenido</h2>
+  <p>Ejemplo: se re-exportan los tipos básicos y se define una macro de aserción simplificada.</p>
+</Layout>

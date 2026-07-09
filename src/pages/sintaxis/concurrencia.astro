@@ -1,0 +1,79 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Concurrencia (hilos/canales) — Forja">
+  <h1>Concurrencia: hilos y canales</h1>
+
+  <p>Forja tiene concurrencia inspirada en Go y Rust: <strong>hilos ligeros</strong>, <strong>canales de comunicación</strong>, <strong>envío/recepción</strong> y <strong>select</strong> para multiplexar canales.</p>
+
+  <h2>Crear un hilo</h2>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🧵 Sintaxis</span></div>
+    <pre><code><span class="kw">variable</span> h = <span class="kw">hilo</span> &lbrace;
+    <span class="co">// código que se ejecuta en otro hilo</span>
+    <span class="kw">retornar</span> resultado
+&rbrace;</code></pre>
+  </div>
+
+  <h2>Canales</h2>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📡 canales</span></div>
+    <pre><code><span class="kw">variable</span> tx, rx = <span class="fn">canal</span>()
+
+<span class="kw">hilo</span> &lbrace;
+    tx.<span class="fn">enviar</span>(<span class="st">"hola"</span>)
+&rbrace;
+
+<span class="kw">variable</span> msg = rx.<span class="fn">recibir</span>()
+<span class="fn">escribir</span>(msg) <span class="co">// → hola</span></code></pre>
+  </div>
+
+  <h2>Select sobre múltiples canales</h2>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📡 seleccionar</span></div>
+    <pre><code><span class="kw">seleccionar</span> &lbrace;
+    <span class="kw">caso</span> rx -> dato -> &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Recibido: "</span> + dato)
+    &rbrace;
+    <span class="kw">tiempo</span> 1000 -> &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Timeout"</span>)
+    &rbrace;
+    <span class="kw">otro</span> -> &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Sin datos"</span>)
+    &rbrace;
+&rbrace;</code></pre>
+  </div>
+
+  <h2>Esperar y unir hilos</h2>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>⏳ Espera</span></div>
+    <pre><code><span class="kw">variable</span> h = <span class="kw">hilo</span> &lbrace;
+    <span class="fn">esperar</span>(2)
+    <span class="kw">retornar</span> <span class="st">"listo"</span>
+&rbrace;
+
+<span class="kw">variable</span> resultado = h.<span class="fn">unir</span>()
+<span class="fn">escribir</span>(resultado) <span class="co">// → listo</span></code></pre>
+  </div>
+
+  <h2>Keywords de concurrencia</h2>
+
+  <table>
+    <tr><th>Keyword</th><th>Descripción</th></tr>
+    <tr><td><code>hilo</code></td><td>Lanza un hilo ligero</td></tr>
+    <tr><td><code>canal()</code></td><td>Crea un canal de comunicación</td></tr>
+    <tr><td><code>.enviar(valor)</code></td><td>Envía un dato por el canal</td></tr>
+    <tr><td><code>.recibir()</code></td><td>Recibe un dato del canal</td></tr>
+    <tr><td><code>.unir()</code></td><td>Espera a que el hilo termine</td></tr>
+    <tr><td><code>esperar(ms)</code></td><td>Pausa la ejecución en milisegundos</td></tr>
+    <tr><td><code>seleccionar</code></td><td>Select multiplexado sobre canales</td></tr>
+    <tr><td><code>caso</code></td><td>Brazo de recepción dentro de <code>seleccionar</code></td></tr>
+    <tr><td><code>tiempo</code></td><td>Timeout en <code>seleccionar</code></td></tr>
+    <tr><td><code>otro</code></td><td>Caso default en <code>seleccionar</code></td></tr>
+  </table>
+</Layout>

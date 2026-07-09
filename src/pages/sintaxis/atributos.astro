@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Atributos (@test / @derive) — Forja">
+  <h1>Atributos: <code>@test</code> y <code>@derive</code></h1>
+
+  <p>Los atributos son anotaciones que se escriben con <code>@</code> sobre funciones, clases o campos. Forja incluye soporte para <strong>tests integrados</strong> y <strong>derivación automática</strong> de comportamientos.</p>
+
+  <h2><code>@test</code></h2>
+
+  <p>Marca una función como test. Podés agrupar tests en un archivo y ejecutarlos con <code>forja test archivo.fa</code>.</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🧪 Tests</span></div>
+    <pre><code><span class="kw">@test</span>
+<span class="kw">funcion</span> <span class="fn">test_suma</span>() &lbrace;
+    <span class="fn">asegurar</span>(<span class="fn">suma</span>(2, 3) == 5)
+    <span class="fn">asegurar</span>(<span class="fn">suma</span>(-1, 1) == 0)
+&rbrace;
+
+<span class="kw">@test</span>
+<span class="kw">funcion</span> <span class="fn">test_resta</span>() &lbrace;
+    <span class="fn">asegurar</span>(<span class="fn">resta</span>(10, 3) == 7)
+&rbrace;</code></pre>
+  </div>
+
+  <h2><code>@derive</code></h2>
+
+  <p>Deriva implementaciones automáticas para clases (similar a Rust). Actualmente soporta:</p>
+
+  <table>
+    <tr><th>Derive</th><th>Descripción</th></tr>
+    <tr><td><code>Mostrar</code></td><td>Implementa formato legible en strings</td></tr>
+    <tr><td><code>Igual</code></td><td>Implementa <code>==</code> y <code>!=</code></td></tr>
+  </table>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🏷️ Derive</span></div>
+    <pre><code><span class="kw">@derive</span>(Mostrar, Igual)
+<span class="kw">clase</span> Punto &lbrace;
+    x
+    y
+    <span class="kw">constructor</span>(x, y) &lbrace;
+        <span class="kw">este</span>.x = x
+        <span class="kw">este</span>.y = y
+    &rbrace;
+&rbrace;
+
+<span class="kw">variable</span> a = <span class="kw">nuevo</span> Punto(1, 2)
+<span class="kw">variable</span> b = <span class="kw">nuevo</span> Punto(1, 2)
+<span class="fn">asegurar</span>(a == b) <span class="co">// Igual deriva ==</span></code></pre>
+  </div>
+
+  <h2>Uso combinado</h2>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🧪 + 🏷️</span></div>
+    <pre><code><span class="kw">@derive</span>(Mostrar, Igual)
+<span class="kw">clase</span> Usuario &lbrace;
+    nombre
+    edad
+    <span class="kw">constructor</span>(nombre, edad) &lbrace;
+        <span class="kw">este</span>.nombre = nombre
+        <span class="kw">este</span>.edad = edad
+    &rbrace;
+&rbrace;
+
+<span class="kw">@test</span>
+<span class="kw">funcion</span> <span class="fn">test_usuario</span>() &lbrace;
+    <span class="kw">variable</span> u1 = <span class="kw">nuevo</span> Usuario(<span class="st">"Ana"</span>, 30)
+    <span class="kw">variable</span> u2 = <span class="kw">nuevo</span> Usuario(<span class="st">"Ana"</span>, 30)
+    <span class="fn">asegurar</span>(u1 == u2)
+&rbrace;</code></pre>
+  </div>
+</Layout>

@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Class Descriptor (class_descriptor.rs) — Forja">
+  <h1>Class Descriptor – Descripción de Clases y Objetos</h1>
+  <p><strong>Archivo:</strong> <code>src/class_descriptor.rs</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>Define la metadata de las clases del lenguaje (campos, métodos, herencia) que la VM usa para crear instancias y resolver atributos.</p>
+
+  <h2>Cómo funciona</h2>
+  <p>Un <code>ClassDescriptor</code> contiene un mapa de nombres de campos a índices y una lista de métodos. El parser llena esta estructura al encontrar la declaración <code>clase</code>.</p>
+
+  <h2>Ejemplo de estructura</h2>
+  <p>Ejemplo: la estructura <code>ClassDescriptor</code> contiene los campos <code>nombre</code>, <code>campos</code> y <code>metodos</code>.</p>
+</Layout>

@@ -1,0 +1,81 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="GUI (importar 'gui') — Forja">
+  <h1>GUI nativa con Xilem</h1>
+
+  <p>Forja puede abrir una <strong>ventana gráfica nativa</strong> usando <code>importar "gui"</code>. Internamente transpila tu código a Rust y usa el framework <strong>Xilem</strong> con GPU (<strong>Vello</strong>/<strong>wgpu</strong>) para renderizar widgets reactivos.</p>
+
+  <div class="info">💡 Para ejecutar código GUI necesitás compilar Forja con <code>--features gui</code>. Si no lo hiciste, visitá <a href="/instalacion">Instalación</a>.</div>
+
+  <h2>Ejemplo mínimo</h2>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📄 gui.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"gui"</span>
+
+<span class="kw">funcion</span> <span class="fn">al_saludar</span>() &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"¡Hola!"</span>)
+&rbrace;
+
+<span class="kw">funcion</span> <span class="fn">main</span>() &lbrace;
+    <span class="kw">variable</span> nombre = <span class="st">""</span>
+    <span class="kw">variable</span> volumen = 50
+
+    <span class="fn">columna</span>(
+        <span class="fn">etiqueta</span>(<span class="st">"🎯 Forja GUI"</span>),
+        <span class="fn">entrada_texto</span>(<span class="st">"nombre"</span>),
+        <span class="fn">deslizante</span>(<span class="st">"volumen"</span>, 0, 100),
+        <span class="fn">casilla</span>(<span class="st">"Activo"</span>, <span class="st">"nombre"</span>),
+        <span class="fn">boton</span>(<span class="st">"Saludar"</span>, &al_saludar)
+    )
+&rbrace;</code></pre>
+  </div>
+
+  <h2>Layouts</h2>
+
+  <table>
+    <tr><th>Función Forja</th><th>Widget Xilem</th><th>Descripción</th></tr>
+    <tr><td><code>columna(hijos...)</code></td><td><code>flex(Axis::Vertical, ...)</code></td><td>Contenedor vertical</td></tr>
+    <tr><td><code>fila(hijos...)</code></td><td><code>flex(Axis::Horizontal, ...)</code></td><td>Contenedor horizontal</td></tr>
+    <tr><td><code>pila(hijos...)</code></td><td><code>zstack(...)</code></td><td>Superposición en Z</td></tr>
+    <tr><td><code>desplazable(hijo)</code></td><td><code>portal(...)</code></td><td>Contenedor con scroll</td></tr>
+    <tr><td><code>panel_dividido(a, b, dir)</code></td><td><code>split(...)</code></td><td>Panel redimensionable</td></tr>
+    <tr><td><code>caja_fija(hijo, ancho, alto)</code></td><td><code>sized_box(...)</code></td><td>Caja con tamaño fijo</td></tr>
+  </table>
+
+  <h2>Widgets</h2>
+
+  <table>
+    <tr><th>Función Forja</th><th>Descripción</th></tr>
+    <tr><td><code>etiqueta(texto)</code></td><td>Texto estático</td></tr>
+    <tr><td><code>etiqueta_dinamica(variable)</code></td><td>Texto que se actualiza automáticamente</td></tr>
+    <tr><td><code>texto_enriquecido(texto)</code></td><td>Texto Markdown con formato</td></tr>
+    <tr><td><code>entrada_texto(variable)</code></td><td>Campo de texto simple</td></tr>
+    <tr><td><code>area_texto(variable)</code></td><td>Área de texto multilínea</td></tr>
+    <tr><td><code>boton(texto, &callback)</code></td><td>Botón con callback</td></tr>
+    <tr><td><code>casilla(etiqueta, variable)</code></td><td>Casilla de verificación</td></tr>
+    <tr><td><code>deslizante(variable, min, max)</code></td><td>Control deslizante</td></tr>
+    <tr><td><code>barra_progreso(variable)</code></td><td>Barra de progreso</td></tr>
+    <tr><td><code>cargando()</code></td><td>Indicador de carga</td></tr>
+    <tr><td><code>separador()</code></td><td>Línea separadora</td></tr>
+    <tr><td><code>espacio(tamaño)</code></td><td>Espaciador</td></tr>
+  </table>
+
+  <h2>Ejecutar</h2>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🖼️ Comandos</span></div>
+    <pre><code><span class="co"># Native runner (AST directo a Xilem, sin compilar Rust)</span>
+cargo run --features gui --bin forja -- run --native examples/204_login_final.fa
+
+<span class="co"># Transpilado a Rust (genera .exe autónomo)</span>
+cargo run --features gui --bin forja -- transpile examples/204_login_final.fa
+cd .forja_gui_cache && cargo run --release
+
+<span class="co"># GUI Launcher directo</span>
+cargo build --features gui
+.\target\debug\forja-gui.exe examples/204_login_final.fa</code></pre>
+  </div>
+</Layout>

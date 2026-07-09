@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Bytecode (bytecode.rs) — Forja">
+  <h1>Bytecode y Opcodes de la Máquina Virtual de Forja</h1>
+  <p><strong>Archivo:</strong> <code>src/bytecode.rs</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <ul>
+    <li>Separación de concerns entre compilador y VM.</li>
+    <li>Portabilidad a distintas arquitecturas.</li>
+    <li>Optimización mediante opcode‑fusion.</li>
+  </ul>
+
+  <h2>Estructuras clave</h2>
+  <h3>Enum <code>BuiltinKind</code></h3>
+  <p>Ejemplo: el <code>enum BuiltinKind</code> lista los builtin disponibles (Escribir, Longitud, Len, Tipo, ATexto, EsNumero, EsTexto, Empujar, Obtener, Remover, Nuevo).</p>
+
+  <h3>Enum <code>Opcode</code></h3>
+  <p>Ejemplo: el <code>enum Opcode</code> define los códigos de operación de la VM, como <code>PushEntero(i64)</code>, <code>Add</code>, <code>Jump(usize)</code>, etc.</p>
+
+  <h2>Interpretación del bytecode</h2>
+  <ol>
+    <li>Se crea un <code>Vec&lt;Opcode&gt;</code> con el bytecode generado.</li>
+    <li>Un bucle <code>while pc &lt; bytecode.len()</code> despacha cada opcode mediante <code>match</code>.</li>
+    <li>El stack es <code>Vec&lt;Valor&gt;</code> donde <code>Valor</code> engloba los tipos soportados.</li>
+    <li>Variables por índice usan vectores pre‑alojados para acceso O(1).</li>
+    <li>Llamadas a built‑ins o funciones se delegan al dispatcher correspondiente.</li>
+    <li>Opcode‑fusion combina operaciones comunes para reducir sobrecarga.</li>
+  </ol>
+
+  <h2>Ejemplo de ejecución</h2>
+  <pre><code class="language-rust">let bytecode = vec![
+    Opcode::PushTexto(Rc::from("Hola")),
+    Opcode::CallBuiltin(BuiltinKind::Escribir, 1),
+    Opcode::Halt,
+];
+</code></pre>
+</Layout>

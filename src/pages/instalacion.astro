@@ -1,0 +1,77 @@
+﻿---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Instalación — Forja">
+  <h1>Instalación</h1>
+
+  <p>Compilá Forja desde el código fuente. Solo necesitás <strong>Rust</strong> instalado en tu sistema.</p>
+
+  <div class="info">💡 <strong>Requisito único:</strong> <a href="https://rustup.rs" target="_blank">rustup.rs</a> — Instalá Rust con <code>rustup-init.exe</code> en Windows, o con el script oficial en Linux/Mac.</div>
+
+  <ol class="step-list">
+    <li><strong>Clonar el repositorio</strong> — Descargá el código fuente de Forja</li>
+    <li><strong>Compilar</strong> — Usá Cargo para build en modo debug o release</li>
+    <li><strong>Verificar</strong> — Comprobá que el binario funciona</li>
+    <li><strong>Ejecutar los tests</strong> — Corré la suite de ~50 tests</li>
+    <li><strong>Probar con un ejemplo</strong> — Ejecutá tu primer programa</li>
+  </ol>
+
+  <h2>1. Clonar el repositorio</h2>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📥 Terminal</span></div>
+    <pre><code>git clone https://github.com/lococoi/forja.git
+<span class="kw">cd</span> forja</code></pre>
+  </div>
+
+  <h2>2. Compilar</h2>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🔨 Modo debug</span></div>
+    <pre><code>cargo build</code></pre>
+  </div>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🚀 Modo release (recomendado para benchmarks)</span></div>
+    <pre><code>cargo build --release</code></pre>
+  </div>
+
+  <h2>3. Verificar</h2>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>✅ Probar el binario</span></div>
+    <pre><code>.\target\release\forja.exe --help</code></pre>
+  </div>
+
+  <p>Deberías ver la ayuda completa del comando Forja con todas las opciones disponibles.</p>
+
+  <div class="info">🔧 <strong>Pro tip:</strong> Agregá la carpeta del binario a tu PATH para usar <code>forja</code> desde cualquier directorio:
+  <br><code>$env:Path += ";C:\Users\tu.usuario\forja\target\release\"</code> (PowerShell)</div>
+
+  <h2>4. Ejecutar los tests</h2>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🧪 Suite de 90+ tests</span></div>
+    <pre><code><span class="co"># Todos los tests</span>
+cargo test
+
+<span class="co"># Tests por módulo</span>
+cargo test -- lexer
+cargo test -- parser
+cargo test -- semantics
+cargo test -- transpiler
+cargo test -- bytecode
+cargo test -- vm</code></pre>
+  </div>
+
+  <h2>5. Probar con un ejemplo</h2>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🎯 Primer programa</span></div>
+    <pre><code>cargo run --release --bin forja -- run examples/01_hola.fa
+<span class="co">// → ¡Hola, mundo desde Forja!</span></code></pre>
+  </div>
+
+  <p>Si ves el mensaje, ¡todo funciona! Ahora estás listo para <a href="/uso">usar Forja</a>.</p>
+</Layout>

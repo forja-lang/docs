@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="CLI (main.rs) — Forja">
+  <h1>Interfaz de Línea de Comandos (CLI)</h1>
+  <p><strong>Archivo:</strong> <code>src/main.rs</code></p>
+  <h2>¿Por qué existe?</h2>
+  <p>Provee el punto de entrada del compilador Forja, permitiendo compilar archivos, ejecutar REPL, generar bytecode, asm o LLVM, y acceder a opciones de profiling o JIT.</p>
+  <h2>¿Cómo funciona?</h2>
+  <ul>
+    <li>Utiliza <code>clap</code> para definir sub‑comandos (<code>build</code>, <code>run</code>, <code>repl</code>, <code>profile</code>, etc.).</li>
+    <li>Parsea los argumentos y delega a los módulos correspondientes:
+      <ul>
+        <li><code>compiler_asm.rs</code> o <code>compiler_llvm.rs</code> para generación de código.</li>
+        <li><code>vm.rs</code> para ejecución de bytecode.</li>
+        <li><code>fprofiler.rs</code> opcionalmente para medir rendimiento.</li>
+      </ul>
+    </li>
+    <li>Implementa manejo de errores centralizado que convierte <code>ErrorForja</code> en códigos de salida del proceso.</li>
+  </ul>
+  <h2>¿Para qué se usa?</h2>
+  <p>El usuario final invoca la herramienta desde la terminal, por ejemplo:</p>
+  <pre><code>forja build src/example.forja --target asm --arch x86_64</code></pre>
+  <p>o arranca el REPL:</p>
+  <pre><code>forja repl</code></pre>
+</Layout>

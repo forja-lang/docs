@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="AST (ast.rs) — Forja">
+  <h1>AST – Árbol de Sintaxis Abstracta</h1>
+  <p><strong>Archivo:</strong> <code>src/ast.rs</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>Representa la estructura sintáctica del código Forja después del análisis léxico, permitiendo transformaciones y generación de bytecode.</p>
+
+  <h2>Cómo funciona</h2>
+  <p>El parser recorre los tokens y construye nodos de tipo <code>Declaracion</code>, <code>Expresion</code>, <code>Tipo</code>, etc., formando un árbol que luego consume el compilador.</p>
+
+  <h2>Ejemplo de nodo</h2>
+  <p>Un nodo de expresión suele declararse como una enumeración con variantes como <code>Literal</code>, <code>Variable</code> y <code>Llamada</code>. Cada variante contiene los datos necesarios para representar esa parte del código.</p>
+</Layout>

@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Micro‑Operaciones (uops.rs) — Forja">
+  <h1>uops – Micro‑Operaciones del Backend JIT</h1>
+
+  <p><strong>Archivo:</strong> <code>src/uops.rs</code></p>
+
+  <p>Este módulo define la <em>unidad mínima de trabajo</em> que la capa JIT del compilador Forja traduce a código máquina nativo. Cada <code>Uop</code> (micro‑operation) representa una instrucción de nivel muy bajo que a su vez puede mapearse a una o más instrucciones ensamblador reales según la arquitectura objetivo.</p>
+
+  <h2>Motivación</h2>
+  <ul>
+    <li>Permite que el optimizador de alto nivel (<code>optimizer.rs</code>) trabaje sobre una representación más cercana al hardware sin depender de la sintaxis de ensamblador específica.</li>
+    <li>Facilita la generación de código para varias arquitecturas manteniendo una única lógica de transformación (<code>uops → asm</code>).</li>
+    <li>Ofrece un punto de extensión donde se pueden añadir nuevas optimizaciones de <em>peephole</em> antes de la emisión final.</li>
+  </ul>
+
+  <h2>Enum <code>Uop</code></h2>
+<p>The <code>Uop</code> enum defines the micro‑operations used by the JIT compiler. It includes variants for loading and storing registers, immediate values, arithmetic operations, comparisons, logical operations, control‑flow constructs (jumps, labels), function calls, and other miscellaneous actions. See the source file <code>src/uops.rs</code> for the full list.</p>
+
+  <h2>Flujo de generación</h2>
+  <ol>
+    <li>El compilador de alto nivel (<code>compiler_asm.rs</code>) genera una lista de <code>Uop</code> a partir del AST.</li>
+    <li>El <em>pass</em> de optimización de <code>uops.rs</code> recorre la secuencia y aplica transformaciones como <em>constant folding</em>, <em>dead‑code elimination</em> y <em>instruction merging</em> (p. ej. combinar <code>LoadImmI64</code> + <code>StoreReg</code> en una sola <code>MovRegImm</code> del backend).</li>
+    <li>Finalmente, la fase de <em>emitter</em> (<code>compiler_asm.rs</code> método <code>emit_uops</code>) traduce cada <code>Uop</code> a la sintaxis de ensamblador específica de la arquitectura (x86‑64, ARM64).</li>
+  </ol>
+
+  <h2>Extensibilidad</h2>
+  <p>Para añadir una nueva micro‑operación:</p>
+  <ul>
+    <li>Agregar la variante al enum <code>Uop</code>.</li>
+    <li>Actualizar el <em>match</em> de <code>emit_uops</code> para generar la sintaxis correspondiente según <code>TargetArch</code>.</li>
+    <li>Si la operación requiere optimizaciones, incluir lógica dentro del <em>pass</em> <code>optimize_uops</code>.</li>
+  </ul>
+</Layout>

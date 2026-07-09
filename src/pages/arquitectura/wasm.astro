@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="WASM (crates/forja-wasm/src/lib.rs) — Forja">
+  <h1>Forja WASM – Compilador en el Navegador</h1>
+  <p><strong>Archivo:</strong> <code>crates/forja-wasm/src/lib.rs</code></p>
+  <h2>¿Por qué existe?</h2>
+  <p>Expone la funcionalidad central del compilador Forja como un módulo WebAssembly, permitiendo que la comunidad interactúe con el lenguaje directamente desde navegadores sin necesidad de instalar Rust.</p>
+  <h2>Cómo funciona</h2>
+  <ol>
+    <li>Se compila el crate con <code>wasm-pack</code> generando <code>.wasm</code> y bindings JavaScript.</li>
+    <li>Las funciones públicas están decoradas con <code>#[wasm_bindgen]</code> para ser invocables desde JS.</li>
+    <li>Funciones clave:
+      <ul>
+        <li><code>compilar</code>: Transforma código Forja a Rust (fallback) y devuelve el código o un mensaje de error.</li>
+        <li><code>forja_ejecutar</code>: Compila y ejecuta el programa dentro de la VM, devolviendo la salida.</li>
+        <li><code>obtener_ejemplos</code>: Provee una lista de ejemplos de código en formato JSON.</li>
+        <li><code>codificar_url / decodificar_url</code>: Helpers para compartir código mediante URL‑encoding.</li>
+        <li><code>forja_tokenizar</code>: Tokeniza el código y devuelve un JSON con los tokens.</li>
+        <li><code>version</code>: Exposición de la versión del compilador.</li>
+      </ul>
+    </li>
+    <li>El runtime JavaScript carga el <code>.wasm</code> y conecta los bindings a una UI interactiva (playground).</li>
+  </ol>
+  <h2>Estructura del código</h2>
+  <p>Ejemplo: la API WASM expone funciones como <code>compilar</code>, <code>forja_ejecutar</code>, <code>obtener_ejemplos</code>, <code>codificar_url</code>, <code>decodificar_url</code>, <code>forja_tokenizar</code> y <code>version</code>, todas marcadas con <code>#[wasm_bindgen]</code> para ser llamadas desde JavaScript.</p>
+  <h2>Relación con el resto del proyecto</h2>
+  <ul>
+    <li>Reusa la lógica del crate <code>forja</code> (módulos <code>compiler_*</code>, <code>vm</code>, etc.) mediante llamadas a la biblioteca principal.</li>
+    <li>El playground web en <code>docs/src/pages/playground</code> (si existe) consume estas funciones para ofrecer una experiencia “online”.</li>
+    <li>El LSP y la CLI pueden usar la misma API interna; el WASM solo expone un subconjunto seguro para el entorno del navegador.</li>
+  </ul>
+</Layout>
