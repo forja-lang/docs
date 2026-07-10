@@ -814,6 +814,10 @@ const { title, description } = Astro.props;
       if (newContent && mainInner) {
         mainInner.innerHTML = newContent.innerHTML;
       }
+      // Actualizar título de la página
+      const newTitle = doc.querySelector('title');
+      if (newTitle) document.title = newTitle.textContent;
+      // Marcar link activo
       const newLink = Array.from(sidebarLinks).find(l => l.getAttribute('href') === url);
       if (newLink) setActive(newLink);
       if (pushState) history.pushState(null, '', url);
@@ -835,8 +839,25 @@ const { title, description } = Astro.props;
     loadPage(location.pathname, false);
   });
 
-  const currentLink = Array.from(sidebarLinks).find(l => l.getAttribute('href') === location.pathname);
-  if (currentLink) setActive(currentLink);
+  /** Determina el link activo comparando el path actual contra los href del menú.
+   *  Con base='/docs', los href se transforman a /docs/... en el build */
+  let bestMatch = null;
+  let bestLen = 0;
+  const currentPath = location.pathname.replace(/\/+$/, '');
+  sidebarLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href) return;
+    const hrefClean = href.replace(/\/+$/, '');
+    // Coincidencia exacta o el menú que sea prefijo del path actual
+    if (hrefClean === currentPath) {
+      bestMatch = link;
+      bestLen = hrefClean.length;
+    } else if (hrefClean.length > bestLen && currentPath.startsWith(hrefClean)) {
+      bestMatch = link;
+      bestLen = hrefClean.length;
+    }
+  });
+  if (bestMatch) setActive(bestMatch);
 })();
 </script>
   </body>
