@@ -26,7 +26,8 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Download WASM playground
+      - name: Download WASM playground from latest release
+        continue-on-error: true
         run: |
           curl -sL \
             https://github.com/forja-lang/forja/releases/latest/download/forja_wasm_bg.wasm \
@@ -34,6 +35,17 @@ jobs:
           curl -sL \
             https://github.com/forja-lang/forja/releases/latest/download/forja_wasm.js \
             -o src/wasm/forja_wasm.js
+      - name: Verify WASM files (fallback to local if download failed)
+        run: |
+          if grep -q "Not Found" src/wasm/forja_wasm.js 2>/dev/null; then
+            echo "⚠️  Download failed (404), restoring local files..."
+            git checkout -- src/wasm/forja_wasm.js src/wasm/forja_wasm_bg.wasm 2>/dev/null || true
+          fi
+          if [ ! -f src/wasm/forja_wasm.js ] || [ ! -f src/wasm/forja_wasm_bg.wasm ]; then
+            echo "❌ Missing WASM files — build will fail"
+          else
+            echo "✅ WASM files ready"
+          fi
 
       - run: npm ci
       - run: npm run build
