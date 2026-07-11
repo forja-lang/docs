@@ -22,12 +22,12 @@ const { title, description } = Astro.props;
       *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
       :root {
-        --bg: #241716;
-        --bg-card: #2a1a18;
-        --bg-hover: #33201d;
-        --bg-elevated: #3a2522;
-        --border: #3d2824;
-        --border-glow: #4a302c;
+        --bg: #0c0e14;
+        --bg-card: #11141c;
+        --bg-hover: #171b26;
+        --bg-elevated: #1a1f2e;
+        --border: #1e2538;
+        --border-glow: #2a3348;
         --text: #edf2f7;
         --text-dim: #94a3b8;
         --text-muted: #5b6a84;
@@ -38,6 +38,7 @@ const { title, description } = Astro.props;
         --fuego-dark: #c4311a;
         --fuego-bg: rgba(237, 69, 44, 0.08);
         --llama: #e07040;
+        --fuego-gradient: linear-gradient(135deg, #ed452c, #e8895c);
 
         --acero: #6366f1;
         --acero-glow: #4f46e5;
@@ -75,7 +76,7 @@ const { title, description } = Astro.props;
       .sidebar {
         width: var(--sidebar-w);
         min-width: var(--sidebar-w);
-        background: linear-gradient(180deg, var(--bg-card) 0%, #1f1311 100%);
+        background: linear-gradient(180deg, var(--bg-card) 0%, #0f131d 100%);
         border-right: 1px solid var(--border);
         height: 100vh;
         position: sticky;
@@ -93,8 +94,8 @@ const { title, description } = Astro.props;
         right: -1px;
         width: 1px;
         height: 100%;
-        background: linear-gradient(180deg, transparent, var(--fuego), transparent);
-        opacity: 0.15;
+        background: linear-gradient(180deg, transparent, var(--fuego), var(--llama), transparent);
+        opacity: 0.12;
       }
 
       .sidebar-header {
@@ -132,7 +133,7 @@ const { title, description } = Astro.props;
       .sidebar-header .logo-text {
         font-size: 1.35rem;
         font-weight: 800;
-        background: linear-gradient(135deg, var(--fuego-light), var(--fuego));
+        background: linear-gradient(135deg, var(--llama), var(--fuego));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -180,7 +181,7 @@ const { title, description } = Astro.props;
 
       .sidebar-nav a:hover {
         color: var(--text);
-        background: var(--bg-hover);
+        background: linear-gradient(90deg, var(--fuego-bg), var(--bg-hover) 60%);
         border-left-color: var(--fuego);
       }
 
@@ -189,6 +190,7 @@ const { title, description } = Astro.props;
         background: var(--fuego-bg);
         border-left-color: var(--fuego);
         font-weight: 500;
+        box-shadow: inset 3px 0 10px rgba(237, 69, 44, 0.08);
       }
 
       .sidebar-nav a.sub { padding-left: 36px; font-size: 0.82rem; }
@@ -210,12 +212,39 @@ const { title, description } = Astro.props;
         padding: 0;
         max-width: 100%;
         min-width: 0;
+        position: relative;
+      }
+
+      .main::before {
+        content: '';
+        position: fixed;
+        top: -200px;
+        right: -200px;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(237, 69, 44, 0.03) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .main::after {
+        content: '';
+        position: fixed;
+        bottom: -200px;
+        left: -200px;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(232, 137, 92, 0.025) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
       }
 
       .main-inner {
         max-width: 880px;
         margin: 0 auto;
         padding: 48px 56px 80px;
+        position: relative;
+        z-index: 1;
       }
 
       @media (max-width: 1100px) {
@@ -267,7 +296,7 @@ const { title, description } = Astro.props;
         content: '';
         flex: 1;
         height: 1px;
-        background: linear-gradient(to right, var(--border), transparent);
+        background: linear-gradient(to right, rgba(237, 69, 44, 0.4), rgba(232, 137, 92, 0.15), transparent);
       }
 
       h3 {
@@ -294,7 +323,7 @@ const { title, description } = Astro.props;
         align-items: center;
         justify-content: space-between;
         padding: 8px 16px;
-        background: linear-gradient(135deg, #1a1110, #1f1412);
+        background: linear-gradient(135deg, #0a0d14, #0e111a);
         border: 1px solid var(--border);
         border-bottom: none;
         border-radius: 10px 10px 0 0;
@@ -311,7 +340,7 @@ const { title, description } = Astro.props;
         left: 0;
         right: 0;
         height: 1px;
-        background: linear-gradient(to right, transparent, var(--fuego), transparent);
+        background: linear-gradient(to right, transparent, var(--fuego), var(--llama), transparent);
         opacity: 0.15;
       }
 
@@ -322,7 +351,7 @@ const { title, description } = Astro.props;
       }
 
       pre {
-        background: linear-gradient(135deg, #1a1110, #1f1412);
+        background: linear-gradient(135deg, #0b0e16, #0f131e);
         border: 1px solid var(--border);
         border-radius: 10px;
         padding: 18px 22px;
@@ -331,7 +360,7 @@ const { title, description } = Astro.props;
         font-family: var(--font-mono);
         font-size: 0.82rem;
         line-height: 1.65;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(237, 69, 44, 0.04);
+        box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(245, 158, 11, 0.03);
         position: relative;
       }
 
@@ -413,9 +442,9 @@ const { title, description } = Astro.props;
       .info strong { color: var(--acero-light); }
 
       .warning {
-        background: rgba(237, 69, 44, 0.06);
-        border-color: rgba(237, 69, 44, 0.15);
-        color: #fca5a5;
+        background: rgba(245, 158, 11, 0.06);
+        border-color: rgba(245, 158, 11, 0.15);
+        color: #fde68a;
       }
       .warning::before { background: var(--fuego); }
       .warning strong { color: var(--fuego-light); }
@@ -487,7 +516,7 @@ const { title, description } = Astro.props;
         left: -40px;
         right: -40px;
         bottom: -20px;
-        background: radial-gradient(ellipse 600px 300px at 50% 0%, rgba(237, 69, 44, 0.05), transparent 70%);
+        background: radial-gradient(ellipse 600px 300px at 50% 0%, rgba(237, 69, 44, 0.04), transparent 70%);
         pointer-events: none;
       }
 
@@ -521,7 +550,7 @@ const { title, description } = Astro.props;
       }
 
       .hero .badge.dot {
-        border-color: transparent;
+        border-color: rgba(237, 69, 44, 0.2);
         background: var(--fuego-bg);
         color: var(--fuego-light);
       }
@@ -560,7 +589,7 @@ const { title, description } = Astro.props;
         border-color: var(--fuego);
         background: var(--bg-hover);
         transform: translateY(-2px);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 0 0 1px rgba(237, 69, 44, 0.05);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 0 0 1px rgba(237, 69, 44, 0.08);
       }
 
       .feature-card:hover::before { opacity: 0.4; }

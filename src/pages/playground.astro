@@ -67,7 +67,7 @@ import Layout from '../layouts/Layout.astro';
     align-items: center;
     justify-content: space-between;
     padding: 8px 14px;
-    background: linear-gradient(135deg, #0a0d14, #0e111a);
+    background: linear-gradient(135deg, var(--bg-hover), var(--bg-card));
     border-bottom: 1px solid var(--border);
     font-size: 0.8rem;
     color: var(--text-dim);
@@ -117,7 +117,7 @@ import Layout from '../layouts/Layout.astro';
   .editor {
     flex: 1; min-height: 350px; padding: 16px;
     font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.6;
-    color: #e2e8f0; background: #0b0e16; border: none; outline: none;
+    color: #e2e8f0; background: var(--bg-card); border: none; outline: none;
     resize: vertical; tab-size: 4;
   }
   .editor::placeholder { color: var(--text-muted); }
@@ -125,7 +125,7 @@ import Layout from '../layouts/Layout.astro';
     flex: 1; min-height: 350px; padding: 16px;
     font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.6;
     color: var(--text-dim); white-space: pre-wrap; overflow-y: auto;
-    background: #0b0e16;
+    background: var(--bg-card);
   }
   .output .placeholder { color: var(--text-muted); font-style: italic; }
   .output .stdout { color: var(--verde); }
