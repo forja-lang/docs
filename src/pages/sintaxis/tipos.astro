@@ -15,6 +15,7 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code><span class="ty">Decimal</span></code></td><td><code>f64</code></td><td>Punto flotante (64 bits)</td><td><code>3.14</code>, <code>-0.5</code></td></tr>
     <tr><td><code><span class="ty">Texto</span></code></td><td><code>String</code></td><td>Cadena UTF-8</td><td><code>"Hola"</code></td></tr>
     <tr><td><code><span class="ty">Booleano</span></code></td><td><code>bool</code></td><td>Valor lógico</td><td><code>verdadero</code>, <code>falso</code></td></tr>
+    <tr><td><code><span class="ty">Exacto</span></code></td><td><code>BigDecimal</code></td><td>Precisión arbitraria (coeficiente i128 + escala)</td><td><code>3.1415926535</code></td></tr>
     <tr><td><code>nulo</code></td><td><code>()</code></td><td>Valor nulo / unit</td><td><code>nulo</code></td></tr>
     <tr><td><code>[T]</code></td><td><code>Vec&lt;T&gt;</code></td><td>Arreglo dinámico</td><td><code>[1, 2, 3]</code></td></tr>
     <tr><td><code>&lbrace;K: V&rbrace;</code></td><td><code>HashMap&lt;K, V&gt;</code></td><td>Mapa / diccionario</td><td><code>&lbrace;"clave": "valor"&rbrace;</code></td></tr>
@@ -102,6 +103,18 @@ persona[<span class="st">"edad"</span>] = 31</code></pre>
 <span class="kw">tipo</span> Color = Rojo | Verde | Azul</code></pre>
   </div>
 
+  <h2>Tipos compuestos</h2>
+
+  <p>Forja también ofrece tipos compuestos para colecciones y resultados:</p>
+
+  <table>
+    <tr><th>Tipo Forja</th><th>Descripción</th><th>Ejemplo</th></tr>
+    <tr><td><code>Arreglo[T]</code></td><td>Arreglo dinámico de elementos <code>T</code></td><td><code>[1, 2, 3]</code></td></tr>
+    <tr><td><code>Map{K: V}</code></td><td>Mapa / diccionario con claves <code>K</code> y valores <code>V</code></td><td><code>{"clave": "valor"}</code></td></tr>
+    <tr><td><code>Resultado&lt;T, E&gt;</code></td><td>Operación que puede ser <code>Exito(T)</code> o <code>Error(E)</code></td><td><code>Resultado&lt;Entero, Texto&gt;</code></td></tr>
+    <tr><td><code>Opcion&lt;T&gt;</code></td><td>Valor opcional: <code>Algun(T)</code> o <code>Ninguno</code></td><td><code>Opcion&lt;Texto&gt;</code></td></tr>
+  </table>
+
   <h2>Anotaciones explícitas</h2>
 
   <p>Cuando querés ser específico con los tipos:</p>
@@ -123,6 +136,7 @@ persona[<span class="st">"edad"</span>] = 31</code></pre>
     <tr><td><code>Texto</code></td><td><code>String</code></td></tr>
     <tr><td><code>Booleano</code></td><td><code>bool</code></td></tr>
     <tr><td><code>nulo</code></td><td><code>()</code></td></tr>
+    <tr><td><code>Exacto</code></td><td><code>BigDecimal</code></td></tr>
     <tr><td><code>[valor, ...]</code></td><td><code>vec![valor, ...]</code></td></tr>
     <tr><td><code>&lbrace;"k": v&rbrace;</code></td><td><code>HashMap</code></td></tr>
 <tr><td><code>tipo X = A | B</code></td><td><code>enum X &lbrace; A, B &rbrace;</code></td></tr>

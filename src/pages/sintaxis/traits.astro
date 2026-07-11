@@ -5,23 +5,23 @@ import Layout from '../../layouts/Layout.astro';
 <Layout title="Traits e interfaces — Forja">
   <h1>Traits e interfaces</h1>
 
-  <p>Forja soporta <strong>traits</strong> (interfaces) y su implementación para clases. Permiten definir comportamientos compartidos y polimorfismo paramétrico con genéricos.</p>
+  <p>Forja soporta <strong>rasgos</strong> (interfaces/traits) y su implementación para clases. Permiten definir comportamientos compartidos y polimorfismo paramétrico con genéricos.</p>
 
-  <h2>Definir un trait</h2>
+  <h2>Definir un rasgo</h2>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>📐 Sintaxis</span></div>
-    <pre><code><span class="kw">trait</span> NombreTrait &lbrace;
+    <pre><code><span class="kw">rasgo</span> NombreRasgo &lbrace;
     <span class="kw">funcion</span> metodo1(param1: <span class="ty">Tipo</span>) &rarr; <span class="ty">Retorno</span>
     <span class="kw">funcion</span> metodo2() <span class="co">// opcional: cuerpo por defecto</span>
 &rbrace;</code></pre>
   </div>
 
-  <h2>Implementar un trait</h2>
+  <h2>Implementar un rasgo</h2>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🧬 Implementación</span></div>
-    <pre><code><span class="kw">implementa</span> NombreTrait <span class="kw">para</span> MiClase &lbrace;
+    <pre><code><span class="kw">implementa</span> NombreRasgo <span class="kw">para</span> MiClase &lbrace;
     <span class="kw">funcion</span> metodo1(param1: <span class="ty">Tipo</span>) &rarr; <span class="ty">Retorno</span> &lbrace;
         <span class="kw">retornar</span> ...
     &rbrace;
@@ -31,8 +31,8 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Ejemplo completo</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🎓 Traits + Clases</span></div>
-    <pre><code><span class="kw">trait</span> Volador &lbrace;
+    <div class="code-header"><span>🎓 Rasgos + Clases</span></div>
+    <pre><code><span class="kw">rasgo</span> Volador &lbrace;
     <span class="kw">funcion</span> <span class="fn">volar</span>() &rarr; <span class="ty">Texto</span>
     <span class="kw">funcion</span> <span class="fn">aterrizar</span>() <span class="co">// default vacío</span>
 &rbrace;
@@ -44,7 +44,7 @@ import Layout from '../../layouts/Layout.astro';
 
 <span class="kw">implementa</span> Volador <span class="kw">para</span> Pajaro &lbrace;
     <span class="kw">funcion</span> <span class="fn">volar</span>() &rarr; <span class="ty">Texto</span> &lbrace;
-        <span class="kw">retornar</span> <span class="st">"</span><span class="kw">este</span>.nombre <span class="st"> está volando..."</span>
+        <span class="kw">retornar</span> <span class="kw">este</span>.nombre + <span class="st">" está volando..."</span>
     &rbrace;
 &rbrace;
 
@@ -52,7 +52,7 @@ import Layout from '../../layouts/Layout.astro';
 <span class="fn">escribir</span>(p.<span class="fn">volar</span>())</code></pre>
   </div>
 
-  <h2>Genéricos con traits</h2>
+  <h2>Genéricos con rasgos</h2>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🔄 Genéricos boundeados</span></div>
@@ -61,12 +61,25 @@ import Layout from '../../layouts/Layout.astro';
 &rbrace;</code></pre>
   </div>
 
+  <h2>Cláusula <code>donde</code></h2>
+
+  <p>Para bounds complejos con múltiples rasgos, usá la cláusula <code><span class="kw">donde</span></code>:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📍 Where</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">procesar</span>&lt;T&gt;(valor: T)
+    <span class="kw">donde</span> T: Volador + Mostrar
+&lbrace;
+    <span class="fn">escribir</span>(valor.<span class="fn">volar</span>())
+&rbrace;</code></pre>
+  </div>
+
   <h2>Keywords relacionadas</h2>
 
   <table>
     <tr><th>Keyword</th><th>Descripción</th></tr>
-    <tr><td><code>trait</code></td><td>Define una interfaz</td></tr>
-    <tr><td><code>implementa</code></td><td>Implementa un trait para una clase</td></tr>
+    <tr><td><code>rasgo</code></td><td>Define una interfaz</td></tr>
+    <tr><td><code>implementa</code></td><td>Implementa un rasgo para una clase</td></tr>
     <tr><td><code>donde</code></td><td>Cláusula where para bounds complejos</td></tr>
   </table>
 </Layout>

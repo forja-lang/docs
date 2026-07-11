@@ -35,16 +35,16 @@ import Layout from '../layouts/Layout.astro';
     </thead>
     <tbody>
       <tr><td><strong>Lenguaje</strong></td><td>Rust (edition 2021)</td><td><code>src/main.rs</code>, <code>src/lib.rs</code></td></tr>
-      <tr><td><strong>CLI</strong></td><td>15+ comandos en español/inglés</td><td><code>src/main.rs</code> (833 líneas)</td></tr>
+      <tr><td><strong>CLI</strong></td><td>20+ comandos en español/inglés</td><td><code>src/main.rs</code> (1818 líneas)</td></tr>
       <tr><td><strong>Lexer + Parser</strong></td><td>Recursive Descent</td><td><code>src/lexer.rs</code>, <code>src/parser.rs</code></td></tr>
       <tr><td><strong>Semántica</strong></td><td>Type Checker + Borrow Checker</td><td><code>src/semantics.rs</code></td></tr>
-      <tr><td><strong>Bytecode</strong></td><td>40+ opcodes stack-based</td><td><code>src/bytecode.rs</code> (1206 líneas)</td></tr>
-      <tr><td><strong>Micro-opcodes</strong></td><td>Expansión + optimización de opcodes</td><td><code>src/uops.rs</code> (463 líneas)</td></tr>
-      <tr><td><strong>VM v1</strong></td><td>Stack-based original</td><td><code>src/vm.rs</code> (2040 líneas)</td></tr>
-      <tr><td><strong>VM v3 DT</strong></td><td>Direct Threading (u8 planos)</td><td><code>src/vm_jit.rs</code> (649 líneas)</td></tr>
-      <tr><td><strong>VM v5 Fast 🏆</strong></td><td>NaN tagging, stack caching, producción</td><td><code>src/vm_fast.rs</code> (3610 líneas)</td></tr>
+      <tr><td><strong>Bytecode</strong></td><td>60+ opcodes stack-based</td><td><code>src/bytecode.rs</code> (3212 líneas)</td></tr>
+      <tr><td><strong>Micro-opcodes</strong></td><td>Expansión + optimización de opcodes</td><td><code>src/uops.rs</code> (798 líneas)</td></tr>
+      <tr><td><strong>VM v1</strong></td><td>Stack-based original</td><td><code>src/vm.rs</code> (2935 líneas)</td></tr>
+      <tr><td><strong>VM v3 DT</strong></td><td>Direct Threading (u8 planos)</td><td><code>src/vm_jit.rs</code> (799 líneas)</td></tr>
+      <tr><td><strong>VM v5 Fast 🏆</strong></td><td>NaN tagging, stack caching, producción</td><td><code>src/vm_fast.rs</code> (5341 líneas)</td></tr>
       <tr><td><strong>JIT Nativo ⚡</strong></td><td>Generación de código x86-64 en memoria</td><td><code>src/jit.rs</code>, <code>src/jit_engine.rs</code></td></tr>
-      <tr><td><strong>Compilador ASM</strong></td><td>x86-64 Win/Linux, ARM64 + gcc -O2</td><td><code>src/compiler_asm.rs</code> (2393 líneas)</td></tr>
+      <tr><td><strong>Compilador ASM</strong></td><td>x86-64 Win/Linux, ARM64 + gcc -O2</td><td><code>src/compiler_asm.rs</code> (3015 líneas)</td></tr>
       <tr><td><strong>Compilador AOT</strong></td><td>.exe autónomo con bytecode incrustado</td><td><code>src/aot.rs</code>, <code>src/selfrun.rs</code></td></tr>
       <tr><td><strong>Optimizador</strong></td><td>Constant folding + Dead Code Elimination</td><td><code>src/optimizer.rs</code></td></tr>
       <tr><td><strong>Módulos</strong></td><td>Importación con seguridad anti path traversal</td><td><code>src/module.rs</code></td></tr>
@@ -53,6 +53,13 @@ import Layout from '../layouts/Layout.astro';
       <tr><td><strong>Formatter</strong></td><td>Formateo automático de código</td><td><code>src/formatter.rs</code></td></tr>
       <tr><td><strong>Diagrama</strong></td><td>HTML interactivo del AST</td><td><code>src/diagrama.rs</code></td></tr>
       <tr><td><strong>Extensión VSCode</strong></td><td>TextMate grammar + snippets</td><td><code>vscode/forja-syntax/</code></td></tr>
+      <tr><td><strong>Compilador LLVM</strong></td><td>Generación de IR + optimización LLVM</td><td><code>src/compiler_llvm.rs</code> (911 líneas)</td></tr>
+      <tr><td><strong>Design by Contract</strong></td><td>pre/post condiciones, invariantes</td><td><code>src/ast.rs</code>, <code>src/bytecode.rs</code></td></tr>
+      <tr><td><strong>Hot Reload</strong></td><td>Recargar módulos en caliente</td><td><code>src/module.rs</code>, <code>src/vm_fast.rs</code></td></tr>
+      <tr><td><strong>Profiler integrado</strong></td><td>Perfilado de funciones y VMs</td><td><code>src/fprofiler.rs</code> (164 líneas)</td></tr>
+      <tr><td><strong>Package Manager</strong></td><td>add, remove, install, forja.json</td><td><code>src/package_config.rs</code>, <code>src/package_resolver.rs</code></td></tr>
+      <tr><td><strong>Debugger</strong></td><td>Depurador integrado (DAP)</td><td><code>src/debugger.rs</code> (600 líneas)</td></tr>
+      <tr><td><strong>GUI Nativa</strong></td><td>Xilem runtime, ventanas nativas</td><td><code>src/gui_nativa.rs</code> (5942 líneas)</td></tr>
     </tbody>
   </table>
 
@@ -77,7 +84,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="feature-card">
       <span class="icon">🦀</span>
       <h4>Escrito en Rust</h4>
-      <p>26+ módulos de Rust puro. Sin dependencias externas para el núcleo del compilador (ni serde, ni JSON, ni runtime pesado).</p>
+      <p>36+ módulos de Rust puro (~42,000+ líneas). Sin dependencias externas para el núcleo del compilador (ni serde, ni JSON, ni runtime pesado).</p>
     </div>
     <div class="feature-card">
       <span class="icon">⎔</span>
@@ -128,6 +135,26 @@ import Layout from '../layouts/Layout.astro';
       <span class="icon">📂</span>
       <h4>Sistema de módulos</h4>
       <p>Organizá tu código en archivos separados con <code>importar</code>. Resolvedor con protección contra path traversal.</p>
+    </div>
+    <div class="feature-card">
+      <span class="icon">🔒</span>
+      <h4>Design by Contract</h4>
+      <p>Precondiciones (<code>requiere</code>), postcondiciones (<code>asegura</code>) e invariantes (<code>siempre</code>) para código más confiable.</p>
+    </div>
+    <div class="feature-card">
+      <span class="icon">🔄</span>
+      <h4>Hot Reload</h4>
+      <p>Recargá funciones y módulos sin reiniciar. Ideal para desarrollo interactivo con feedback inmediato.</p>
+    </div>
+    <div class="feature-card">
+      <span class="icon">📊</span>
+      <h4>Profiler integrado</h4>
+      <p>Perfilá tiempos de ejecución por función. Descubrí cuellos de botella sin herramientas externas.</p>
+    </div>
+    <div class="feature-card">
+      <span class="icon">🔷</span>
+      <h4>Compilador LLVM</h4>
+      <p>Backend alternativo que genera LLVM IR. Optimizaciones avanzadas y potencial multi-plataforma con el pipeline LLVM.</p>
     </div>
   </div>
 
@@ -181,19 +208,20 @@ forja build examples/01_hola.fa -o programa.exe
     <summary><strong>📊 Comparación de velocidad entre modos</strong></summary>
     <table>
       <thead>
-        <tr><th>Modo</th><th>fib(30)</th><th>Bucle suma 100k</th><th>vs Rust nativo</th></tr>
+        <tr><th>Modo</th><th>fib(30)</th><th>Bucle suma 10M</th><th>nested_loop(1000)</th><th>vs Rust nativo</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>🦀 Rust nativo</strong></td><td>~0.01 μs</td><td>~21.82 μs</td><td><strong>1.0x</strong></td></tr>
-        <tr><td><code>build-asm</code> (gcc -O2)</td><td>54.94 μs</td><td>51.24 μs</td><td><strong>~2.3x</strong> ⚡</td></tr>
-        <tr><td><code>run --asm</code> (gcc -O2)</td><td>54.94 μs</td><td>51.24 μs</td><td><strong>~2.3x</strong> ⚡</td></tr>
-        <tr><td><strong>JIT Nativo x86-64</strong></td><td>—</td><td>153.18 μs</td><td><strong>7.0x</strong> ⚡</td></tr>
-        <tr><td>🐍 Python (CPython 3.11)</td><td>0.53 μs</td><td>4,117 μs</td><td>188.7x</td></tr>
-        <tr><td><code>run</code> (ForjaFast v5 🏆)</td><td>113.99 μs</td><td>9,544 μs</td><td><strong>437.3x</strong></td></tr>
-        <tr><td><code>run --vm jit</code> (VM v3 JIT-DT)</td><td>28.59 μs</td><td>34,864 μs</td><td>1,597x</td></tr>
-        <tr><td><code>run --vm vm</code> (VM v1 Original)</td><td>20.84 μs</td><td>91,795 μs</td><td>4,206x</td></tr>
+        <tr><td><strong>🦀 Rust nativo</strong></td><td>~1.94 ms</td><td>~2.28 ms</td><td>~0.044 ms</td><td><strong>1.0x</strong></td></tr>
+        <tr><td><code>transpile</code> (Forja AOT + rustc -O)</td><td>~1.94 ms</td><td>~2.28 ms</td><td>~0.044 ms</td><td><strong>~1.0x</strong> ⚡</td></tr>
+        <tr><td><code>build-asm</code> (gcc -O2)</td><td>54.94 μs</td><td>—</td><td>—</td><td><strong>~2.3x</strong> ⚡</td></tr>
+        <tr><td><strong>JIT Nativo x86-64</strong></td><td>—</td><td>153.18 μs</td><td>—</td><td><strong>7.0x</strong> ⚡</td></tr>
+        <tr><td>🐍 Python (CPython 3.12)</td><td>77.15 ms</td><td>320 ms</td><td>3.62 ms</td><td><strong>~40–140x</strong></td></tr>
+        <tr><td><code>run</code> (ForjaFast v5 🏆)</td><td>113.99 μs</td><td>9,544 μs</td><td>—</td><td><strong>~437x</strong></td></tr>
+        <tr><td><code>run --vm jit</code> (VM v3 DT)</td><td>28.59 μs</td><td>34,864 μs</td><td>—</td><td>~1,597x</td></tr>
+        <tr><td><code>run --vm vm</code> (VM v1 Original)</td><td>20.84 μs</td><td>91,795 μs</td><td>—</td><td>~4,206x</td></tr>
       </tbody>
     </table>
+    <p><em>Benchmarks actualizados al 9 Jul 2026. Forja AOT <code>transpile</code> + <code>rustc -O</code> rinde igual que Rust nativo (mismo backend LLVM). Los benchmarks de VM varían según el hardware.</em></p>
   </details>
 
   <h2>Empezá a escribir en 5 minutos</h2>

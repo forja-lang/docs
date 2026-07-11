@@ -30,6 +30,16 @@ import Layout from '../../layouts/Layout.astro';
 <span class="kw">tipo</span> Color = Rojo | Verde | Azul</code></pre>
   </div>
 
+  <h2>Tipos genéricos</h2>
+
+  <p>Los tipos algebraicos pueden tener parámetros genéricos para ser reutilizables:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🧬 Genéricos</span></div>
+    <pre><code><span class="kw">tipo</span> Resultado&lt;T, E&gt; = Exito(T) | Error(E)
+<span class="kw">tipo</span> Opcion&lt;T&gt; = Algun(T) | Ninguno</code></pre>
+  </div>
+
   <h2>Uso con <code>coincidir</code></h2>
 
   <p>Los tipos algebraicos se usan junto con <code>coincidir</code> para hacer pattern matching:</p>
@@ -69,5 +79,5 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code>caso Algo(n) &rarr; &lbrace; ... &rbrace;</code></td><td><code>Opcion::Algo(n) =&gt; &lbrace; ... &rbrace;</code></td></tr>
   </table>
 
-  <div class="warning">⚠️ <strong>Estado:</strong> Los tipos algebraicos están definidos a nivel de AST y lexer. El soporte completo en la VM y transpilador está en desarrollo.</div>
+  <div class="warning">⚠️ <strong>Estado:</strong> Los tipos algebraicos están definidos a nivel de AST y lexer con soporte parcial en VM y transpilador. El soporte completo está en desarrollo activo.</div>
 </Layout>

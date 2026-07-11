@@ -96,6 +96,30 @@ alumno.presentarse()
 <span class="fn">escribir</span>(p.x)  <span class="co">// → nulo (no inicializado)</span></code></pre>
   </div>
 
+  <h2>Traits e interfaces</h2>
+
+  <p>Las clases pueden implementar <strong>rasgos</strong> (interfaces) con <code><span class="kw">rasgo</span></code> e <code><span class="kw">implementa</span></code>:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🧬 Rasgo + Clase</span></div>
+    <pre><code><span class="kw">rasgo</span> Volador &lbrace;
+    <span class="kw">funcion</span> <span class="fn">volar</span>() -> <span class="ty">Texto</span>
+&rbrace;
+
+<span class="kw">clase</span> Pajaro &lbrace;
+    nombre
+    <span class="kw">constructor</span>(n) &lbrace; <span class="kw">este</span>.nombre = n &rbrace;
+&rbrace;
+
+<span class="kw">implementa</span> Volador <span class="kw">para</span> Pajaro &lbrace;
+    <span class="kw">funcion</span> <span class="fn">volar</span>() -> <span class="ty">Texto</span> &lbrace;
+        <span class="kw">retornar</span> <span class="kw">este</span>.nombre + <span class="st">" vuela"</span>
+    &rbrace;
+&rbrace;</code></pre>
+  </div>
+
+  <div class="info">💡 Los rasgos se definen con <code>rasgo</code> y se implementan con <code>implementa ... para</code>. Son equivalentes a <code>trait</code> e <code>impl ... for</code> en Rust.</div>
+
   <h2>Equivalencia con Rust</h2>
 
   <table>

@@ -58,6 +58,26 @@ saludo(<span class="st">"Forja"</span>)   <span class="co">// → Hola, Forja!</
 
   <div class="info">💡 El tipo de retorno se indica con <code>-> Tipo</code> (igual que en Rust). Si no se especifica, se infiere.</div>
 
+  <h2>Funciones externas (FFI)</h2>
+
+  <p>Usá <code><span class="kw">externo</span></code> para declarar funciones definidas en otros lenguajes (C, Rust, etc.):</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🔌 FFI</span></div>
+    <pre><code><span class="kw">externo</span> <span class="kw">funcion</span> <span class="fn">printf</span>(formato: <span class="ty">Texto</span>) -> <span class="ty">Entero</span></code></pre>
+  </div>
+
+  <h2>Funciones genéricas</h2>
+
+  <p>Las funciones pueden tener parámetros genéricos con restricciones de rasgo usando <code>&lt;T: Rasgo&gt;</code>:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🔄 Genéricos</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">imprimir</span>&lt;T: <span class="kw">Rasgo</span>&gt;(valor: T) &lbrace;
+    <span class="fn">escribir</span>(valor.<span class="fn">mostrar</span>())
+&rbrace;</code></pre>
+  </div>
+
   <h2>Parámetros por referencia</h2>
 
   <p>Usá <code><span class="kw">prestado</span></code> para indicar que un parámetro se pasa como referencia (<code>&T</code> en Rust). Esto permite que la variable original siga disponible después de la llamada:</p>

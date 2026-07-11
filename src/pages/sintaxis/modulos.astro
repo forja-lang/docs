@@ -9,6 +9,17 @@ import Layout from '../../layouts/Layout.astro';
 
   <div class="info">💡 <strong>Idea:</strong> Dividí tu programa en archivos separados y conectalos con <code>importar</code>. Cada archivo es un módulo.</div>
 
+  <h2>Importar módulos externos (FFI)</h2>
+
+  <p>Usá <code><span class="kw">externo</span></code> para importar módulos de sistemas externos o bibliotecas en otros lenguajes:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🔌 Externo</span></div>
+    <pre><code><span class="kw">externo</span> <span class="kw">importar</span> <span class="st">"libreria"</span></code></pre>
+  </div>
+
+  <p>Esto permite acceder a funciones definidas en C, Rust u otros lenguajes con las declaraciones <code>externo funcion</code> correspondientes.</p>
+
   <h2>Sintaxis</h2>
 
   <div class="code-block-wrapper">

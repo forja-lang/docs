@@ -59,6 +59,20 @@ import Layout from '../../layouts/Layout.astro';
 &rbrace;</code></pre>
   </div>
 
+  <h2>Keyword <code>resultado</code> en contratos</h2>
+
+  <p>La keyword <code><span class="kw">resultado</span></code> se usa dentro de postcondiciones (<code>asegura</code>) para referirse al valor de retorno de una función. Es parte del sistema de <strong>Design by Contract</strong> de Forja:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📜 Postcondición</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">dividir</span>(a: <span class="ty">Entero</span>, b: <span class="ty">Entero</span>) -> <span class="ty">Entero</span>
+    <span class="kw">requiere</span> b != 0
+    <span class="kw">asegura</span> <span class="kw">resultado</span> * b == a
+&lbrace;
+    <span class="kw">retornar</span> a / b
+&rbrace;</code></pre>
+  </div>
+
   <h2>Alias útiles del preludio</h2>
 
   <table>

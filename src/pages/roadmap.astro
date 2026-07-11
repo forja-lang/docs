@@ -7,7 +7,7 @@ import Layout from '../layouts/Layout.astro';
 
   <p>El desarrollo de Forja está organizado en <strong>10 hitos</strong> que representan la evolución del compilador, desde un transpilador simple hasta un sistema completo con 3 VMs, JIT nativo, compilador ASM multi-arquitectura, y playground WASM.</p>
 
-  <div class="info">🔥 <strong>Estado actual:</strong> Forja v0.7.0 — 28+ módulos, ~12,000+ líneas de Rust, 3 VMs + JIT nativo x86-64, 3 backends de ejecución (VM, ASM, JIT).</div>
+  <div class="info">🔥 <strong>Estado actual:</strong> Forja v1.0-rc — 36+ módulos, ~42,000+ líneas de Rust, 3 VMs + JIT nativo x86-64, 4 backends de ejecución (VM, ASM, JIT, LLVM), package manager, stdlib, LSP + DAP.</div>
 
   <h2>✅ Hito A: Runtime Stub — Ejecutable autónomo</h2>
 
@@ -151,18 +151,43 @@ import Layout from '../layouts/Layout.astro';
     <tr><td>Resaltado de sintaxis para .fa</td><td>✅ Completado</td></tr>
   </table>
 
+  <h2>✅ Hito L: Package Manager + Stdlib (v0.8.0)</h2>
+
+  <p>Sistema de paquetes funcional: <code>forja add</code>, <code>forja remove</code>, <code>forja install</code>, formato <code>forja.json</code>, y stdlib con fs, json, matemáticas.</p>
+
+  <table>
+    <tr><th>Componente</th><th>Estado</th></tr>
+    <tr><td><code>forja add/remove/install</code> — gestión de dependencias</td><td>✅ Completado</td></tr>
+    <tr><td><code>forja.json</code> — configuración de proyecto</td><td>✅ Completado</td></tr>
+    <tr><td><code>PackageResolver</code> — resolución de dependencias</td><td>✅ Completado</td></tr>
+    <tr><td>Stdlib (fs, json, matemáticas, io, resultado)</td><td>✅ Completado</td></tr>
+  </table>
+
+  <h2>✅ Hito M: Debugger + LSP + Perf (v0.9.0)</h2>
+
+  <p>Depurador funcional con DAP, servidor de lenguaje con completado y diagnósticos, y mejoras de rendimiento.</p>
+
+  <table>
+    <tr><th>Componente</th><th>Estado</th></tr>
+    <tr><td>LSP — diagnósticos en tiempo real</td><td>✅ Completado</td></tr>
+    <tr><td>LSP — completado, hover, go-to-definition</td><td>✅ Completado</td></tr>
+    <tr><td>DAP Debugger (<code>src/debugger.rs</code>)</td><td>✅ Completado</td></tr>
+    <tr><td>200 ejemplos validados</td><td>✅ Completado</td></tr>
+  </table>
+
   <h2>🧩 Features planeadas</h2>
 
   <div class="feature-grid">
-    <div class="feature-card"><span class="icon">🗄️</span><h4>LSP Server</h4><p>Servidor de lenguaje para completado, diagnósticos y navegación en IDEs</p></div>
+    <div class="feature-card"><span class="icon">🌐</span><h4>Sitio web + Playground integrado</h4><p>Sitio profesional con playground WASM, documentación y ejemplos en vivo (v1.0.0)</p></div>
+    <div class="feature-card"><span class="icon">📖</span><h4>Documentación completa</h4><p>Referencia del lenguaje, tutorial, guía de arquitectura, y mejores prácticas</p></div>
     <div class="feature-card"><span class="icon">📊</span><h4>Tuplas y enums nativos</h4><p>Soporte completo en runtime para tipos compuestos</p></div>
     <div class="feature-card"><span class="icon">🖥️</span><h4>BD integrada</h4><p>Soporte completo para <code>BD()</code> con consultas</p></div>
-    <div class="feature-card"><span class="icon">🔬</span><b>Inferencia de tipos completa</b><p>Tracking completo de tipos no-Copy a través de funciones</p></div>
+    <div class="feature-card"><span class="icon">🔬</span><h4>Inferencia de tipos completa</h4><p>Tracking completo de tipos no-Copy a través de funciones</p></div>
     <div class="feature-card"><span class="icon">⚡</span><h4>JIT híbrido completo</h4><p>Profiler de hot paths + compilación automática + POO/funciones en JIT</p></div>
-    <div class="feature-card"><span class="icon">🎮</span><h4>Más ejemplos</h4><p>Algoritmos, estructuras de datos, juegos, aplicaciones</p></div>
     <div class="feature-card"><span class="icon">🔧</span><h4>Optimizaciones avanzadas</h4><p>Inline de funciones, eliminación de sub-expresiones comunes, desenrollado de bucles</p></div>
     <div class="feature-card"><span class="icon">🌐</span><h4>Más targets ASM</h4><p>RISC-V, WASM nativo, GPU compute</p></div>
-    <div class="feature-card"><span class="icon">📦</span><h4>Package manager</h4><p>Sistema de paquetes para compartir código Forja</p></div>
+    <div class="feature-card"><span class="icon">📦</span><h4>Package registry</h4><p>Registro público de paquetes (<code>forja publish</code>) para compartir librerías</p></div>
+    <div class="feature-card"><span class="icon">🤖</span><h4>CI/CD + Binarios pre-compilados</h4><p>Builds multi-platform automáticos, releases oficiales</p></div>
   </div>
 
   <div class="tip"><strong>🔥 ¿Querés contribuir?</strong> Forja es código abierto (source-available). Si te interesa alguna de estas features, ¡podés empezar a implementarla! Mirá la <a href="/docs/arquitectura/pipeline">arquitectura</a> para entender la base.</div>

@@ -49,8 +49,10 @@ import Layout from '../../layouts/Layout.astro';
     <tr><th>Op</th><th>Descripción</th><th>Ejemplo</th></tr>
     <tr><td><code><span class="op">&&</span></code></td><td>Y (AND)</td><td><code>activo && edad >= 18</code></td></tr>
     <tr><td><code><span class="op">||</span></code></td><td>O (OR)</td><td><code>x == 0 || y == 0</code></td></tr>
-    <tr><td><code><span class="op">!</span></code></td><td>NO (NOT)</td><td><code>!activo</code></td></tr>
+    <tr><td><code><span class="op">!</span></code> / <code><span class="kw">no</span></code></td><td>NO (NOT)</td><td><code>!activo</code> / <code>no activo</code></td></tr>
   </table>
+
+  <div class="info">💡 Además de <code>!</code>, podés usar la keyword <code><span class="kw">no</span></code> como operador de negación lógica en español: <code>si (no activo) &lbrace; ... &rbrace;</code></div>
 
   <h2>Referencia y acceso</h2>
 
@@ -62,7 +64,10 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code><span class="op">-></span></code></td><td>Flecha de retorno o brazo de match</td><td><code>-> Entero</code>, <code>caso 1 -> "uno"</code></td></tr>
     <tr><td><code><span class="op">::</span></code></td><td>Acceso cualificado a módulo/trait</td><td><code>std::io</code>, <code>Volador::volar</code></td></tr>
     <tr><td><code><span class="op">..</span></code></td><td>Rango</td><td><code>1..10</code></td></tr>
+    <tr><td><code><span class="op">?</span></code></td><td>Propagación de errores (try)</td><td><code>valor?</code></td></tr>
   </table>
+
+  <div class="tip"><strong>⚡ Propagación de errores:</strong> El operador <code>?</code> propaga errores automáticamente. Si la expresión es <code>Error(msg)</code>, la función retorna el error. Si es <code>Exito(valor)</code>, extrae el valor. Ideal para encadenar operaciones fallibles.</div>
 
   <h2>Precedencia de operadores</h2>
 

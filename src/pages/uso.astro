@@ -5,7 +5,7 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Uso (CLI) — Forja">
   <h1>Uso del CLI</h1>
 
-  <p>Forja tiene <strong>15+ comandos</strong> organizados en 4 categorías: ejecución, compilación, utilidades y proyectos. Todos los comandos aceptan su nombre en español e inglés.</p>
+  <p>Forja tiene <strong>20+ comandos</strong> organizados en 5 categorías: ejecución, compilación, gestión de paquetes, utilidades y proyectos. Todos los comandos aceptan su nombre en español e inglés.</p>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>📋 Ayuda completa</span></div>
@@ -13,6 +13,7 @@ import Layout from '../layouts/Layout.astro';
 
 COMANDOS:
   ejecutar <archivo>         Ejecutar .fa en la VM
+  test [archivo]            Ejecutar tests (funciones con @test)
   repl                       Modo interactivo
   diagrama <archivo>         Generar diagrama HTML del código
   compilar <archivo>         Generar .exe autónomo
@@ -21,6 +22,10 @@ COMANDOS:
   transpilar <archivo>       Exportar a proyecto Rust
   nuevo <nombre>             Crear nuevo proyecto
   iniciar                    Inicializar proyecto aquí
+  add <paquete> [version]   Añadir dependencia
+  remove <paquete>           Eliminar dependencia
+  install                    Instalar todas las dependencias
+  medir <archivo>            Benchmark de VMs [--iters N] [--vm ...]
   aprender                   Tutorial interactivo
   palabras                   Lista de palabras clave
   colorear <archivo>         Colorear código en terminal
@@ -29,8 +34,8 @@ COMANDOS:
   ayuda [tema]               Mostrar esta ayuda
 
 Los comandos también aceptan su nombre en inglés:
-  run, build, transpile, build-asm, asm, new, init, learn,
-  keywords, highlight, explain, help, fmt, format, doc
+  run, build, transpile, build-asm, asm, new, init, add, remove, install,
+  learn, keywords, highlight, explain, help, fmt, format, doc, test, bench
 
 EJEMPLOS:
    forja ejecutar examples/01_hola.fa
@@ -38,9 +43,10 @@ EJEMPLOS:
    forja compilar-asm examples/01_hola.fa
    forja compilar-asm examples/01_hola.fa --target arm64 -o programa
    forja repl
-   forja formatear examples/01_hola.fa
-   forja colorear examples/01_hola.fa
-   forja nuevo mi_programa</code></pre>
+    forja formatear examples/01_hola.fa
+    forja colorear examples/01_hola.fa
+    forja test examples/mis_pruebas.fa
+    forja nuevo mi_programa</code></pre>
   </div>
 
   <h2><code>transpile|t|transpilar</code> — Forja → Rust</h2>
@@ -88,7 +94,7 @@ forja run examples/14_adivina.fa
   <div class="code-block-wrapper">
     <div class="code-header"><span>💬 Sesión de ejemplo</span></div>
     <pre><code>$ forja repl
-🔨 Forja v0.2.0 — Escribí 'salir' para terminar
+🔨 Forja v1.0-rc — Escribí 'salir' para terminar
 
 > <span class="kw">variable</span> x = 5
 > x = x + 10
@@ -331,6 +337,57 @@ Para mostrar algo en pantalla, usamos:
   <div class="code-block-wrapper">
     <div class="code-header"><span>📄 Ejemplo</span></div>
     <pre><code>forja doc examples/10_clases.fa</code></pre>
+  </div>
+
+  <h2><code>test|tests|probar [archivo]</code> — Ejecutar tests</h2>
+
+  <p>Ejecuta funciones marcadas con <code>@test</code> en archivos <code>.fa</code>. Sin argumento, busca y ejecuta todos los tests en <code>examples/</code>.</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🧪 Ejemplos</span></div>
+    <pre><code><span class="co"># Ejecutar tests de un archivo específico</span>
+forja test examples/mis_pruebas.fa
+
+<span class="co"># Ejecutar todos los tests en examples/</span>
+forja test</code></pre>
+  </div>
+
+  <h2><code>medir|bench|benchmark <archivo></code> — Benchmark de VMs</h2>
+
+  <p>Mide tiempos de ejecución en todas las VMs disponibles: creación, carga, ejecución en frío y en caliente.</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>⏱️ Ejemplos</span></div>
+    <pre><code><span class="co"># Medir en todas las VMs</span>
+forja medir examples/bench_fib.fa
+
+<span class="co"># Medir en una VM específica</span>
+forja medir examples/bench_fib.fa --vm fast
+
+<span class="co"># Con iteraciones personalizadas</span>
+forja medir examples/bench_fib.fa --iters 10
+
+<span class="co"># Modo ASM nativo</span>
+forja medir examples/bench_fib.fa --asm</code></pre>
+  </div>
+
+  <h2><code>add|agregar|remove|remover|install|instalar</code> — Gestión de paquetes</h2>
+
+  <p>Administrador de dependencias integrado. Los paquetes se declaran en <code>forja.json</code> y se almacenan en el directorio del proyecto.</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📦 Ejemplos</span></div>
+    <pre><code><span class="co"># Añadir dependencia</span>
+forja add json-util
+
+<span class="co"># Añadir con versión específica</span>
+forja add json-util 0.2.0
+
+<span class="co"># Eliminar dependencia</span>
+forja remove json-util
+
+<span class="co"># Instalar todas las dependencias del proyecto</span>
+forja install</code></pre>
   </div>
 
   <h2><code>help|ayuda [tema]</code> — Ayuda detallada</h2>

@@ -61,6 +61,19 @@ import Layout from '../../layouts/Layout.astro';
 <span class="fn">escribir</span>(resultado) <span class="co">// → listo</span></code></pre>
   </div>
 
+  <h2>Bloque reactivo <code>cuando</code></h2>
+
+  <p>El bloque <code><span class="kw">cuando</span></code> permite ejecutar código cuando una variable cambia (observer/reactivo):</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>👀 Observador</span></div>
+    <pre><code><span class="kw">variable</span> contador = 0
+
+<span class="kw">cuando</span> (contador) &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"Contador cambió a "</span> + contador)
+&rbrace;</code></pre>
+  </div>
+
   <h2>Keywords de concurrencia</h2>
 
   <table>
@@ -75,5 +88,6 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code>caso</code></td><td>Brazo de recepción dentro de <code>seleccionar</code></td></tr>
     <tr><td><code>tiempo</code></td><td>Timeout en <code>seleccionar</code></td></tr>
     <tr><td><code>otro</code></td><td>Caso default en <code>seleccionar</code></td></tr>
+    <tr><td><code>cuando</code></td><td>Bloque observer/reactivo sobre cambios de variable</td></tr>
   </table>
 </Layout>

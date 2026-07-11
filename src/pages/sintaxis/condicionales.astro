@@ -81,8 +81,18 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code><span class="op">&#x3C;=</span></code></td><td>Menor o igual</td><td><code>x &#x3C;= 100</code></td></tr>
     <tr><td><code><span class="op">&&</span></code></td><td>Y lógico</td><td><code>x > 0 && x &#x3C; 10</code></td></tr>
     <tr><td><code><span class="op">||</span></code></td><td>O lógico</td><td><code>x == 0 || y == 0</code></td></tr>
-    <tr><td><code><span class="op">!</span></code></td><td>NO lógico</td><td><code>!activo</code></td></tr>
+    <tr><td><code><span class="op">!</span></code> / <code><span class="kw">no</span></code></td><td>NO lógico</td><td><code>!activo</code> / <code>no activo</code></td></tr>
   </table>
+
+  <p>Además del operador <code>!</code>, podés usar la keyword <code><span class="kw">no</span></code> para negación lógica en español:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🇪🇸 NOT en español</span></div>
+    <pre><code><span class="kw">variable</span> activo = falso
+<span class="kw">si</span> (<span class="kw">no</span> activo) &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"No está activo"</span>)
+&rbrace;</code></pre>
+  </div>
 
   <h2>Equivalencia con Rust</h2>
 

@@ -48,6 +48,8 @@ import Layout from '../../layouts/Layout.astro';
 <span class="co">// → Miércoles</span></code></pre>
   </div>
 
+  <div class="tip"><strong>💡 Alternativa:</strong> También podés usar <code><span class="kw">otro</span></code> como wildcard/default explícito en lugar de <code>_</code>: <code>caso otro &rarr; &lbrace; ... &rbrace;</code></div>
+
   <h2>Tipos algebraicos (enums)</h2>
 
   <p>Podés desestructurar variantes de un <code>tipo</code> definido con <code>tipo</code>:</p>
@@ -96,5 +98,6 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code>caso _ &rarr; &lbrace; ... &rbrace;</code></td><td><code>_ => &lbrace; ... &rbrace;</code></td></tr>
     <tr><td><code>caso Algo(n) &rarr; &lbrace; ... &rbrace;</code></td><td><code>Algo(n) => &lbrace; ... &rbrace;</code></td></tr>
     <tr><td><code>caso 1 | 2 &rarr; &lbrace; ... &rbrace;</code></td><td><code>1 | 2 => &lbrace; ... &rbrace;</code></td></tr>
+    <tr><td><code>caso otro &rarr; &lbrace; ... &rbrace;</code></td><td><code>_ => &lbrace; ... &rbrace;</code> (default)</td></tr>
   </table>
 </Layout>
