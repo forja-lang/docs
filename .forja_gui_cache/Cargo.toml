@@ -1,9 +1,0 @@
-[package]
-name = "forja_gui_app"
-version = "0.1.0"
-edition = "2021"
-
-[workspace]
-
-[dependencies]
-forja-gui-rt = { path = "C:/Users/gaucho/forja/docs/crates/forja-gui-rt" }
