@@ -13,6 +13,8 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} | Forja</title>
     <meta name="description" content={description || "Documentación del lenguaje de programación Forja (fa)"} />
+    <link rel="icon" type="image/x-icon" href="/docs/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/docs/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style is:global>
@@ -20,21 +22,21 @@ const { title, description } = Astro.props;
       *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
       :root {
-        --bg: #0c0e14;
-        --bg-card: #11141c;
-        --bg-hover: #171b26;
-        --bg-elevated: #1a1f2e;
-        --border: #1e2538;
-        --border-glow: #2a3348;
+        --bg: #241716;
+        --bg-card: #2a1a18;
+        --bg-hover: #33201d;
+        --bg-elevated: #3a2522;
+        --border: #3d2824;
+        --border-glow: #4a302c;
         --text: #edf2f7;
         --text-dim: #94a3b8;
         --text-muted: #5b6a84;
 
-        --fuego: #f59e0b;
-        --fuego-glow: #d97706;
-        --fuego-light: #fbbf24;
-        --fuego-dark: #b45309;
-        --fuego-bg: rgba(245, 158, 11, 0.08);
+        --fuego: #ed452c;
+        --fuego-glow: #d63a22;
+        --fuego-light: #f06a4f;
+        --fuego-dark: #c4311a;
+        --fuego-bg: rgba(237, 69, 44, 0.08);
 
         --acero: #6366f1;
         --acero-glow: #4f46e5;
@@ -72,7 +74,7 @@ const { title, description } = Astro.props;
       .sidebar {
         width: var(--sidebar-w);
         min-width: var(--sidebar-w);
-        background: linear-gradient(180deg, var(--bg-card) 0%, #0f131d 100%);
+        background: linear-gradient(180deg, var(--bg-card) 0%, #1f1311 100%);
         border-right: 1px solid var(--border);
         height: 100vh;
         position: sticky;
@@ -473,7 +475,7 @@ const { title, description } = Astro.props;
         font-weight: 600;
         font-family: var(--font-mono);
       }
-      .tag.kw { background: rgba(245, 158, 11, 0.12); color: var(--fuego-light); }
+      .tag.kw { background: var(--fuego-bg); color: var(--fuego-light); }
       .tag.ty { background: rgba(6, 182, 212, 0.12); color: var(--cian); }
       .tag.fn { background: rgba(16, 185, 129, 0.12); color: var(--verde); }
       .tag.st { background: rgba(251, 191, 36, 0.12); color: var(--fuego-light); }
