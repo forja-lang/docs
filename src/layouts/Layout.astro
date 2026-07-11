@@ -32,13 +32,11 @@ const { title, description } = Astro.props;
         --text-dim: #94a3b8;
         --text-muted: #5b6a84;
 
-        --fuego: #ed452c;
-        --fuego-glow: #d63a22;
-        --fuego-light: #e8895c;
-        --fuego-dark: #c4311a;
-        --fuego-bg: rgba(237, 69, 44, 0.08);
-        --llama: #e07040;
-        --fuego-gradient: linear-gradient(135deg, #ed452c, #e8895c);
+        --fuego: #f59e0b;
+        --fuego-glow: #d97706;
+        --fuego-light: #fbbf24;
+        --fuego-dark: #b45309;
+        --fuego-bg: rgba(245, 158, 11, 0.08);
 
         --acero: #6366f1;
         --acero-glow: #4f46e5;
@@ -94,8 +92,8 @@ const { title, description } = Astro.props;
         right: -1px;
         width: 1px;
         height: 100%;
-        background: linear-gradient(180deg, transparent, var(--fuego), var(--llama), transparent);
-        opacity: 0.12;
+        background: linear-gradient(180deg, transparent, var(--fuego), transparent);
+        opacity: 0.15;
       }
 
       .sidebar-header {
@@ -133,7 +131,7 @@ const { title, description } = Astro.props;
       .sidebar-header .logo-text {
         font-size: 1.35rem;
         font-weight: 800;
-        background: linear-gradient(135deg, var(--llama), var(--fuego));
+        background: linear-gradient(135deg, var(--fuego-light), var(--fuego));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -181,7 +179,7 @@ const { title, description } = Astro.props;
 
       .sidebar-nav a:hover {
         color: var(--text);
-        background: linear-gradient(90deg, var(--fuego-bg), var(--bg-hover) 60%);
+        background: var(--bg-hover);
         border-left-color: var(--fuego);
       }
 
@@ -190,7 +188,6 @@ const { title, description } = Astro.props;
         background: var(--fuego-bg);
         border-left-color: var(--fuego);
         font-weight: 500;
-        box-shadow: inset 3px 0 10px rgba(237, 69, 44, 0.08);
       }
 
       .sidebar-nav a.sub { padding-left: 36px; font-size: 0.82rem; }
@@ -212,39 +209,12 @@ const { title, description } = Astro.props;
         padding: 0;
         max-width: 100%;
         min-width: 0;
-        position: relative;
-      }
-
-      .main::before {
-        content: '';
-        position: fixed;
-        top: -200px;
-        right: -200px;
-        width: 600px;
-        height: 600px;
-        background: radial-gradient(circle, rgba(237, 69, 44, 0.03) 0%, transparent 70%);
-        pointer-events: none;
-        z-index: 0;
-      }
-
-      .main::after {
-        content: '';
-        position: fixed;
-        bottom: -200px;
-        left: -200px;
-        width: 500px;
-        height: 500px;
-        background: radial-gradient(circle, rgba(232, 137, 92, 0.025) 0%, transparent 70%);
-        pointer-events: none;
-        z-index: 0;
       }
 
       .main-inner {
         max-width: 880px;
         margin: 0 auto;
         padding: 48px 56px 80px;
-        position: relative;
-        z-index: 1;
       }
 
       @media (max-width: 1100px) {
@@ -274,7 +244,7 @@ const { title, description } = Astro.props;
         margin-bottom: 16px;
         letter-spacing: -0.8px;
         line-height: 1.15;
-        background: linear-gradient(135deg, var(--text) 40%, var(--llama));
+        background: linear-gradient(135deg, var(--text) 40%, var(--fuego-light));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -296,7 +266,7 @@ const { title, description } = Astro.props;
         content: '';
         flex: 1;
         height: 1px;
-        background: linear-gradient(to right, rgba(237, 69, 44, 0.4), rgba(232, 137, 92, 0.15), transparent);
+        background: linear-gradient(to right, var(--border), transparent);
       }
 
       h3 {
@@ -340,7 +310,7 @@ const { title, description } = Astro.props;
         left: 0;
         right: 0;
         height: 1px;
-        background: linear-gradient(to right, transparent, var(--fuego), var(--llama), transparent);
+        background: linear-gradient(to right, transparent, var(--fuego), transparent);
         opacity: 0.15;
       }
 
@@ -498,7 +468,7 @@ const { title, description } = Astro.props;
         font-weight: 600;
         font-family: var(--font-mono);
       }
-      .tag.kw { background: var(--fuego-bg); color: var(--fuego-light); }
+      .tag.kw { background: rgba(245, 158, 11, 0.12); color: var(--fuego-light); }
       .tag.ty { background: rgba(6, 182, 212, 0.12); color: var(--cian); }
       .tag.fn { background: rgba(16, 185, 129, 0.12); color: var(--verde); }
       .tag.st { background: rgba(251, 191, 36, 0.12); color: var(--fuego-light); }
@@ -516,7 +486,7 @@ const { title, description } = Astro.props;
         left: -40px;
         right: -40px;
         bottom: -20px;
-        background: radial-gradient(ellipse 600px 300px at 50% 0%, rgba(237, 69, 44, 0.04), transparent 70%);
+        background: radial-gradient(ellipse 600px 300px at 50% 0%, rgba(245, 158, 11, 0.04), transparent 70%);
         pointer-events: none;
       }
 
@@ -550,7 +520,7 @@ const { title, description } = Astro.props;
       }
 
       .hero .badge.dot {
-        border-color: rgba(237, 69, 44, 0.2);
+        border-color: transparent;
         background: var(--fuego-bg);
         color: var(--fuego-light);
       }
@@ -589,7 +559,7 @@ const { title, description } = Astro.props;
         border-color: var(--fuego);
         background: var(--bg-hover);
         transform: translateY(-2px);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 0 0 1px rgba(237, 69, 44, 0.08);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 0 0 1px rgba(245, 158, 11, 0.05);
       }
 
       .feature-card:hover::before { opacity: 0.4; }
