@@ -58,15 +58,115 @@ nombre = <span class="st">"Otro nombre"</span></code></pre>
 <span class="kw">variable</span> contador = 0</code></pre>
   </div>
 
-  <h2>Inferencia de tipos</h2>
+  <div class="info">💡 Forja infiere el tipo automáticamente. Solo necesitás especificarlo cuando no hay valor inicial o cuando querés forzar un tipo distinto al inferido.</div>
 
-  <p>Si no se especifica el tipo, Forja lo infiere automáticamente del valor asignado:</p>
+
+  <h2>Reasignación de variables</h2>
+
+  <p>Una vez declarada con <code>variable</code>, podés cambiar su valor con el operador <code>=</code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🤖 Inferencia automática</span></div>
-    <pre><code><span class="kw">variable</span> ciudad = <span class="st">"Buenos Aires"</span>   <span class="co">// inferido → Texto</span>
-<span class="kw">variable</span> edad = 25                  <span class="co">// inferido → Entero</span></code></pre>
+    <div class="code-header"><span>📝 Reasignación</span></div>
+    <pre><code><span class="kw">variable</span> contador = 0
+contador = 10            <span class="co">// ✅ Reasignación permitida</span>
+contador = contador + 1  <span class="co">// ✅ Se puede reasignar con expresiones</span>
+
+<span class="kw">constante</span> maximo = 100
+<span class="co">// maximo = 200  → ErrorDePropiedad (❌ constante es inmutable)</span></code></pre>
   </div>
+
+  <div class="warning">⚠️ Solo las variables declaradas con <code>variable</code> pueden reasignarse. Las declaradas con <code>constante</code> son inmutables.</div>
+
+
+  <h2>Asignación múltiple</h2>
+
+  <p>Podés declarar varias variables de una sola vez separándolas con comas. Todas comparten la misma mutabilidad y el mismo valor inicial:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 Múltiples variables</span></div>
+    <pre><code><span class="kw">variable</span> a, b = 0          <span class="co">// a = 0, b = 0 (ambas mutables)</span>
+<span class="kw">constante</span> x, y = 10        <span class="co">// x = 10, y = 10 (ambas inmutables)</span>
+<span class="kw">variable</span> m, n = <span class="fn">leer</span>()    <span class="co">// ambas reciben el mismo valor de entrada</span></code></pre>
+  </div>
+
+  <div class="info">💡 Es útil para inicializar varias variables al mismo valor, o para recibir el mismo resultado en múltiples variables.</div>
+
+
+  <h2>Destructuring (asignación por patrón)</h2>
+
+  <p>Forja permite declarar variables <strong>destructuring</strong> (desestructurando) tuplas y arreglos en una sola línea. Especialmente útil con funciones que retornan múltiples valores como <code>canal()</code>.</p>
+
+  <h3>Con tuplas <code>variable (x, y) = expr</code></h3>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📦 Destructuring de tupla</span></div>
+    <pre><code><span class="co">// canal() retorna (emisor, receptor)</span>
+<span class="kw">variable</span> (tx, rx) = <span class="fn">canal</span>()
+
+<span class="co">// También funciona con tuplas literales</span>
+<span class="kw">variable</span> (nombre, edad) = (<span class="st">"Ana"</span>, 30)</code></pre>
+  </div>
+
+  <h3>Con arreglos <code>variable [a, b] = expr</code></h3>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📦 Destructuring de arreglo</span></div>
+    <pre><code><span class="kw">variable</span> [primero, segundo] = [1, 2, 3]
+<span class="co">// primero = 1, segundo = 2</span></code></pre>
+  </div>
+
+  <div class="info">💡 El destructuring con tuplas se usa frecuentemente con <code>canal()</code> para obtener el emisor y receptor en una sola línea.</div>
+
+
+  <h2>Referencias a variables (<code>&</code> y <code>&mut</code>)</h2>
+
+  <p>Forja permite crear <strong>referencias (préstamos)</strong> a variables usando el operador <code>&</code>. Esto permite acceder al valor sin transferir la propiedad (ownership):</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🔗 Préstamo inmutable (<code>&</code>)</span></div>
+    <pre><code><span class="kw">variable</span> x = 42
+<span class="kw">variable</span> ref = &x        <span class="co">// referencia (préstamo) a x</span>
+<span class="fn">escribir</span>(x)               <span class="co">// ✅ x sigue siendo el dueño</span>
+<span class="fn">escribir</span>(ref)             <span class="co">// ✅ se puede leer via la referencia</span></code></pre>
+  </div>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🔗 Préstamo mutable (<code>&mut</code>)</span></div>
+    <pre><code><span class="kw">variable</span> x = 42
+<span class="kw">variable</span> ref = &mut x    <span class="co">// préstamo mutable</span>
+ref = 100                 <span class="co">// ✅ se puede modificar a través de la referencia</span>
+<span class="co">// x = 50  → ❌ Error si hay préstamos activos</span></code></pre>
+  </div>
+
+  <div class="warning">⚠️ <strong>Reglas de préstamos:</strong> Podés tener múltiples referencias inmutables (<code>&</code>) O una única referencia mutable (<code>&mut</code>), pero no ambas a la vez. El Borrow Checker verifica estas reglas en tiempo de compilación.</div>
+
+  <p>📖 <strong>Más información:</strong> Consultá la página de <a href="/docs/sintaxis/ownership">Ownership y préstamos</a> para entender el sistema completo de ownership, el keyword <code>prestado</code> en parámetros, y las reglas del Borrow Checker.</p>
+
+
+  <h2>El keyword <code>mut</code> en parámetros</h2>
+
+  <p>El keyword <code>mut</code> se usa junto con <code>prestado</code> en los parámetros de función para indicar un <strong>préstamo mutable</strong> (<code>&mut T</code> en Rust):</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 Parámetro prestado mutable</span></div>
+    <pre><code><span class="kw">funcion</span> incrementar(<span class="kw">prestado</span> <span class="kw">mut</span> valor) &lbrace;
+    valor = valor + 1   <span class="co">// ✅ se puede modificar porque es prestado mut</span>
+&rbrace;
+
+<span class="kw">variable</span> x = 5
+incrementar(&mut x)     <span class="co">// pasamos una referencia mutable</span>
+<span class="fn">escribir</span>(x)              <span class="co">// → 6</span></code></pre>
+  </div>
+
+  <p>Combinaciones posibles de parámetros:</p>
+
+  <table>
+    <tr><th>Sintaxis</th><th>Equivalente Rust</th><th>Descripción</th></tr>
+    <tr><td><code>nombre</code></td><td><code>nombre: T</code></td><td>Por valor (ownership se transfiere)</td></tr>
+    <tr><td><code>prestado nombre</code></td><td><code>nombre: &T</code></td><td>Referencia inmutable</td></tr>
+    <tr><td><code>prestado mut nombre</code></td><td><code>nombre: &mut T</code></td><td>Referencia mutable</td></tr>
+  </table>
+
 
   <h2>Equivalencia con Rust</h2>
 
@@ -78,6 +178,12 @@ nombre = <span class="st">"Otro nombre"</span></code></pre>
     <tr><td><code>constante x = 5</code></td><td><code>let x = 5;</code></td></tr>
     <tr><td><code>variable x: Entero = 5</code></td><td><code>let mut x: i64 = 5;</code></td></tr>
     <tr><td><code>constante x: Texto = "a"</code></td><td><code>let x: String = String::from("a");</code></td></tr>
+    <tr><td><code>variable a, b = 0</code></td><td><code>let mut a = 0; let mut b = 0;</code></td></tr>
+    <tr><td><code>variable (tx, rx) = canal()</code></td><td><code>let (mut tx, mut rx) = channel();</code></td></tr>
+    <tr><td><code>&x</code></td><td><code>&x</code></td></tr>
+    <tr><td><code>&mut x</code></td><td><code>&mut x</code></td></tr>
+    <tr><td><code>prestado param</code></td><td><code>param: &Tipo</code></td></tr>
+    <tr><td><code>prestado mut param</code></td><td><code>param: &mut Tipo</code></td></tr>
   </table>
 
   <div class="warning">⚠️ <strong>Diferencia clave con Rust:</strong> En Rust las variables son <strong>inmutables por defecto</strong>. Forja invierte esto: <code>variable</code> es mutable, <code>constante</code> es inmutable. Esto es más intuitivo para quienes están aprendiendo.</div>

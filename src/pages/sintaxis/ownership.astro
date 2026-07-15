@@ -49,7 +49,7 @@ contador = contador + 1   <span class="co">// ✅ OK: es mutable</span>
   <p>Indica que un parámetro de función se recibe por referencia, no por valor. Así la variable original no se mueve (no pierde ownership):</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📥 Referencia en parámetro</span></div>
+    <div class="code-header"><span>📥 Referencia inmutable</span></div>
     <pre><code><span class="kw">funcion</span> mostrar(<span class="kw">prestado</span> valor) &lbrace;
     <span class="fn">escribir</span>(<span class="st">"El valor es: "</span> + valor)
 &rbrace;
@@ -60,6 +60,23 @@ mostrar(dato)                          <span class="co">// presta dato a la func
   </div>
 
   <div class="info">💡 <strong>Sin <code>prestado</code>: </strong> Si el parámetro no lleva <code>prestado</code>, el valor se <strong>mueve</strong> a la función y la variable original ya no se puede usar.</div>
+
+  <h3>Préstamo mutable con <code>prestado mut</code></h3>
+
+  <p>Si además de prestar necesitás que la función <strong>modifique</strong> el valor, usá <code>prestado mut</code>. Equivale a <code>&mut T</code> en Rust:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📥 Referencia mutable</span></div>
+    <pre><code><span class="kw">funcion</span> duplicar(<span class="kw">prestado</span> <span class="kw">mut</span> valor) &lbrace;
+    valor = valor * 2    <span class="co">// se puede modificar</span>
+&rbrace;
+
+<span class="kw">variable</span> x = 5
+duplicar(&mut x)                     <span class="co">// pasamos &mut explicitamente</span>
+<span class="fn">escribir</span>(x)                           <span class="co">// right-arrow 10</span></code></pre>
+  </div>
+
+  <div class="warning">⚠️ Cuando usás <code>prestado mut</code>, la llamada debe pasar una referencia mutable explícita con <code>&mut</code>. No podés tener otros préstamos activos mientras exista un préstamo mutable.</div>
 
   <h2>Errores que previene el Borrow Checker</h2>
 
@@ -106,6 +123,7 @@ mostrar(dato)
     <tr><td><code>&x</code></td><td><code>&x</code></td></tr>
     <tr><td><code>&mut x</code></td><td><code>&mut x</code></td></tr>
     <tr><td><code>prestado param</code></td><td><code>param: &Tipo</code></td></tr>
+    <tr><td><code>prestado mut param</code></td><td><code>param: &mut Tipo</code></td></tr>
   </table>
 
   <div class="warning">⚠️ <strong>Estado actual:</strong> El Borrow Checker de Forja está operativo para verificar declaración de variables, mutabilidad y ámbitos. El tracking completo de movimientos (move) para tipos no-Copy está en desarrollo activo. La keyword <code><span class="kw">prestado</span></code> en parámetros de función habilita el borrowing explícito.</div>

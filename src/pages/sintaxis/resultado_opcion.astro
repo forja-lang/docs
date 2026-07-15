@@ -13,12 +13,12 @@ import Layout from '../../layouts/Layout.astro';
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>📦 Definición</span></div>
-    <pre><code><span class="kw">tipo</span> Opcion&lt;T&gt; = Algun(T) | Ninguno</code></pre>
+    <pre><code><span class="kw">tipo</span> Opcion<T> = Algun(T) | Ninguno</code></pre>
   </div>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🧪 Ejemplo</span></div>
-    <pre><code><span class="kw">funcion</span> <span class="fn">primer_caracter</span>(texto: <span class="ty">Texto</span>) &rarr; <span class="ty">Opcion</span>&lt;<span class="ty">Texto</span>&gt; &lbrace;
+    <pre><code><span class="kw">funcion</span> <span class="fn">primer_caracter</span>(texto: <span class="ty">Texto</span>) &rarr; <span class="ty">Opcion</span><<span class="ty">Texto</span>> &lbrace;
     <span class="kw">si</span> (texto == <span class="st">""</span>) &lbrace;
         <span class="kw">retornar</span> <span class="kw">Ninguno</span>
     &rbrace;
@@ -39,12 +39,12 @@ import Layout from '../../layouts/Layout.astro';
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>📦 Definición</span></div>
-    <pre><code><span class="kw">tipo</span> Resultado&lt;T, E&gt; = Exito(T) | Error(E)</code></pre>
+    <pre><code><span class="kw">tipo</span> Resultado<T, E> = Exito(T) | Error(E)</code></pre>
   </div>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🧪 Ejemplo</span></div>
-    <pre><code><span class="kw">funcion</span> <span class="fn">dividir</span>(a: <span class="ty">Entero</span>, b: <span class="ty">Entero</span>) &rarr; <span class="ty">Resultado</span>&lt;<span class="ty">Entero</span>, <span class="ty">Texto</span>&gt; &lbrace;
+    <pre><code><span class="kw">funcion</span> <span class="fn">dividir</span>(a: <span class="ty">Entero</span>, b: <span class="ty">Entero</span>) &rarr; <span class="ty">Resultado</span><<span class="ty">Entero</span>, <span class="ty">Texto</span>> &lbrace;
     <span class="kw">si</span> (b == 0) &lbrace;
         <span class="kw">retornar</span> <span class="kw">Error</span>(<span class="st">"División por cero"</span>)
     &rbrace;
@@ -73,11 +73,70 @@ import Layout from '../../layouts/Layout.astro';
 &rbrace;</code></pre>
   </div>
 
+  <div class="info">💡 Las postcondiciones se evalúan después de ejecutar la función. La keyword <code>resultado</code> representa el valor de retorno.</div>
+
+
+  <h3>Keyword <code>anterior</code> — valor previo en postcondiciones</h3>
+
+  <p>La keyword <code><span class="kw">anterior</span></code> captura el valor de una expresión <strong>antes</strong> de ejecutar la función. Se usa dentro de <code>asegura</code> para referirse al estado previo:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📜 Postcondición con anterior</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">incrementar</span>(<span class="kw">prestado</span> <span class="kw">mut</span> x: <span class="ty">Entero</span>)
+    <span class="kw">asegura</span> x == <span class="kw">anterior</span>(x) + 1
+&lbrace;
+    x = x + 1
+&rbrace;</code></pre>
+  </div>
+
+  <p><code>anterior(x)</code> guarda el valor de <code>x</code> al entrar a la función. La postcondición verifica que <code>x</code> incrementó exactamente en 1.</p>
+
+
+  <h3>Keyword <code>siempre</code> — Invariante de clase</h3>
+
+  <p>La keyword <code><span class="kw">siempre</span></code> define <strong>invariantes</strong> de clase: condiciones que deben cumplirse siempre, antes y después de cualquier método. Si un método deja la clase en un estado inválido, el invariante se rompe:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📜 Invariante de clase</span></div>
+    <pre><code><span class="kw">clase</span> CuentaBancaria &lbrace;
+    saldo
+
+    <span class="kw">constructor</span>(saldo_inicial) &lbrace;
+        <span class="kw">este</span>.saldo = saldo_inicial
+    &rbrace;
+
+    <span class="kw">funcion</span> depositar(<span class="kw">prestado</span> <span class="kw">mut</span> cantidad: <span class="ty">Entero</span>)
+        <span class="kw">requiere</span> cantidad > 0
+        <span class="kw">asegura</span> <span class="kw">este</span>.saldo == <span class="kw">anterior</span>(<span class="kw">este</span>.saldo) + cantidad
+    &lbrace;
+        <span class="kw">este</span>.saldo = <span class="kw">este</span>.saldo + cantidad
+    &rbrace;
+
+    <span class="co">// Invariante: el saldo nunca puede ser negativo</span>
+    <span class="kw">siempre</span> <span class="kw">este</span>.saldo >= 0
+&rbrace;</code></pre>
+  </div>
+
+  <div class="warning">⚠️ El invariante <code>siempre</code> se verifica al final de cada método de la clase. Si un método no lo cumple, se reporta un error en tiempo de ejecución.</div>
+
+
+  <h2>Tabla completa de Design by Contract</h2>
+
+  <table>
+    <tr><th>Keyword</th><th>Dónde se usa</th><th>Descripción</th><th>Ejemplo</th></tr>
+    <tr><td><code>requiere</code></td><td>Función / Método</td><td>Precondición: debe cumplirse antes de ejecutar</td><td><code>requiere b != 0</code></td></tr>
+    <tr><td><code>asegura</code></td><td>Función / Método</td><td>Postcondición: se verifica después de ejecutar</td><td><code>asegura resultado * b == a</code></td></tr>
+    <tr><td><code>resultado</code></td><td>Postcondición (<code>asegura</code>)</td><td>Representa el valor de retorno de la función</td><td><code>asegura resultado > 0</code></td></tr>
+    <tr><td><code>anterior</code></td><td>Postcondición (<code>asegura</code>)</td><td>Captura el valor de una expresión antes de ejecutar</td><td><code>asegura x == anterior(x) + 1</code></td></tr>
+    <tr><td><code>siempre</code></td><td>Clase</td><td>Invariante: condición que se cumple siempre en toda instancia</td><td><code>siempre este.saldo >= 0</code></td></tr>
+  </table>
+
+
   <h2>Alias útiles del preludio</h2>
 
   <table>
     <tr><th>Tipo</th><th>Definición</th><th>Uso común</th></tr>
-    <tr><td><code>Opcion&lt;T&gt;</code></td><td><code>Algun(T) | Ninguno</code></td><td>Valores ausentes</td></tr>
-    <tr><td><code>Resultado&lt;T, E&gt;</code></td><td><code>Exito(T) | Error(E)</code></td><td>Operaciones fallibles</td></tr>
+    <tr><td><code>Opcion<T></code></td><td><code>Algun(T) | Ninguno</code></td><td>Valores ausentes</td></tr>
+    <tr><td><code>Resultado<T, E></code></td><td><code>Exito(T) | Error(E)</code></td><td>Operaciones fallibles</td></tr>
   </table>
 </Layout>
