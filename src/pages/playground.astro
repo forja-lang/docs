@@ -18,6 +18,7 @@ import Layout from '../layouts/Layout.astro';
             <span class="toggle-track"><span class="toggle-thumb"></span></span>
           </label>
           <button id="btnRun" class="btn-run">▶ Ejecutar</button>
+          <button id="btnGui" class="btn-gui" title="Ejecutar con GUI Canvas 2D">🎨 GUI</button>
           <button id="btnClear" class="btn-clear">🗑 Limpiar</button>
         </div>
       </div>
@@ -31,6 +32,14 @@ import Layout from '../layouts/Layout.astro';
       <div id="output" class="output">
         <span class="placeholder">Presioná ▶ Ejecutar para correr el código</span>
       </div>
+    </div>
+  </div>
+
+  <!-- GUI Canvas section -->
+  <div class="gui-section" id="guiSection" style="display:none;">
+    <h2>GUI Canvas</h2>
+    <div class="gui-canvas-container">
+      <canvas id="forja-canvas" width="600" height="400"></canvas>
     </div>
   </div>
 
@@ -107,6 +116,13 @@ import Layout from '../layouts/Layout.astro';
     transition: all 0.15s;
   }
   .btn-run:hover { filter: brightness(1.2); transform: translateY(-1px); }
+  .btn-gui {
+    background: linear-gradient(135deg, #6750A4, #7C6FBE); color: #fff; border: none;
+    padding: 4px 14px; border-radius: 6px; cursor: pointer;
+    font-size: 0.78rem; font-weight: 600; font-family: var(--font);
+    transition: all 0.15s;
+  }
+  .btn-gui:hover { filter: brightness(1.2); transform: translateY(-1px); }
   .btn-clear {
     background: var(--bg-elevated); color: var(--text-dim);
     border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px;
@@ -144,12 +160,37 @@ import Layout from '../layouts/Layout.astro';
   .example-btn:hover {
     border-color: var(--fuego); color: var(--fuego-light); background: var(--fuego-bg);
   }
+  .gui-section {
+    margin-bottom: 24px;
+  }
+  .gui-section h2 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .gui-canvas-container {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--bg-card);
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+  }
+  #forja-canvas {
+    display: block;
+    max-width: 100%;
+    border-radius: 6px;
+    background: #fef7ff;
+  }
   @media (max-width: 768px) { .playground-layout { grid-template-columns: 1fr; } }
 </style>
 
 <script>
   let wasmLoaded: boolean = false;
   let forjaWasm: any = null;
+  let guiWasmLoaded: boolean = false;
+  let forjaWasmGui: any = null;
 
   async function cargarWASM() {
     try {
@@ -164,16 +205,31 @@ import Layout from '../layouts/Layout.astro';
     }
   }
 
+  async function cargarWASMGUI() {
+    try {
+      // @ts-ignore
+      forjaWasmGui = await import('../wasm/forja_wasm_gui.js');
+      await forjaWasmGui.default();
+      guiWasmLoaded = true;
+      console.log('✅ Forja WASM GUI cargado exitosamente');
+    } catch (e: any) {
+      console.warn('⚠ Forja WASM GUI no disponible:', e.message);
+      guiWasmLoaded = false;
+    }
+  }
+
   function initPlayground() {
     const codigo = document.getElementById('codigo') as HTMLTextAreaElement;
     const output = document.getElementById('output') as HTMLDivElement;
     const status = document.getElementById('status') as HTMLSpanElement;
     const btnRun = document.getElementById('btnRun') as HTMLButtonElement;
+    const btnGui = document.getElementById('btnGui') as HTMLButtonElement;
     const btnClear = document.getElementById('btnClear') as HTMLButtonElement;
     const liveSwitch = document.getElementById('liveSwitch') as HTMLInputElement;
+    const guiSection = document.getElementById('guiSection') as HTMLDivElement;
     let liveTimeout: any = null;
 
-    if (!codigo || !output || !status || !btnRun || !btnClear || !liveSwitch) {
+    if (!codigo || !output || !status || !btnRun || !btnGui || !btnClear || !liveSwitch) {
       console.warn('⚠ Faltan elementos esenciales en el DOM del playground');
       return;
     }
@@ -232,6 +288,44 @@ import Layout from '../layouts/Layout.astro';
       }, 50);
     }
 
+    function ejecutarGUI() {
+      const source = codigo.value.trim();
+      if (!source) {
+        output.innerHTML = '<span class="stderr">⚠ No hay código para ejecutar</span>';
+        return;
+      }
+
+      // Mostrar sección GUI
+      if (guiSection) guiSection.style.display = 'block';
+
+      setStatus('🎨 renderizando GUI...', 'status-running');
+
+      setTimeout(async () => {
+        try {
+          if (guiWasmLoaded && forjaWasmGui && typeof forjaWasmGui.ejecutar_gui === 'function') {
+            const resultado = forjaWasmGui.ejecutar_gui('forja-canvas', source);
+            if (resultado === 'ok') {
+              setStatus('✓ GUI renderizada', 'status-timing');
+            } else {
+              setStatus('⚠ ' + resultado, 'status-error');
+            }
+          } else if (wasmLoaded && forjaWasm) {
+            // Fallback: mostrar el resultado textual si GUI WASM no está cargado
+            // pero mostrar un mensaje sobre la GUI
+            setStatus('🎨 GUI WASM no disponible, mostrando output textual', 'status-error');
+            // Intentar renderizar igual en canvas con el código
+            output.innerHTML = '<span class="stderr">⚠ GUI WASM no cargado. Compilá con wasm-pack build --target web --release en crates/forja-wasm-gui/</span>';
+          } else {
+            output.innerHTML = '<span class="stderr">⚠ WASM no disponible.</span>';
+            setStatus('⚠ sin WASM', 'status-error');
+          }
+        } catch (err: any) {
+          output.innerHTML = '<span class="stderr">⛔ ' + err.message + '</span>';
+          setStatus('❌ error GUI', 'status-error');
+        }
+      }, 50);
+    }
+
     function limpiar() {
       codigo.value = '';
       output.innerHTML = '<span class="placeholder">Editor limpiado</span>';
@@ -254,6 +348,7 @@ import Layout from '../layouts/Layout.astro';
     }
 
     btnRun.addEventListener('click', ejecutar);
+    btnGui.addEventListener('click', ejecutarGUI);
     btnClear.addEventListener('click', limpiar);
     codigo.addEventListener('input', onCodigoChange);
 
@@ -278,7 +373,10 @@ import Layout from '../layouts/Layout.astro';
     });
 
     // Cargar WASM y ejecutar auto si hay código y live está activo
-    cargarWASM().then(() => {
+    Promise.all([
+      cargarWASM(),
+      cargarWASMGUI(),
+    ]).then(() => {
       if (codigo.value.trim() && liveSwitch.checked) ejecutar();
     });
   }
