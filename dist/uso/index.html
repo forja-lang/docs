@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="es"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Uso (CLI) — Forja | Forja</title><meta name="description" content="Documentación del lenguaje de programación Forja (fa)"><link rel="icon" type="image/x-icon" href="/docs/favicon.ico"><link rel="shortcut icon" type="image/x-icon" href="/docs/favicon.ico"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/docs/_astro/Layout.Cp11aA97.css"></head> <body> <aside class="sidebar"> <div class="sidebar-header"> <a href="/docs/" class="logo"> <div class="logo-icon"><img src="/docs/logo.png" alt="Forja"></div> <span class="logo-text">Forja</span> </a> <div class="logo-sub">Lenguaje en español</div> </div> <nav class="sidebar-nav"> <div class="section-title">Introducción</div> <a href="/docs/">¿Qué es Forja?</a> <a href="/docs/playground">Playground</a> <a href="/docs/instalacion">Instalación</a> <a href="/docs/uso">Uso (CLI)</a> <div class="section-title">Guía del Lenguaje</div> <a href="/docs/sintaxis/variables" class="sub"><span class="nav-dot"></span>Variables y constantes</a> <a href="/docs/sintaxis/tipos" class="sub"><span class="nav-dot"></span>Tipos de datos</a> <a href="/docs/sintaxis/funciones" class="sub"><span class="nav-dot"></span>Funciones</a> <a href="/docs/sintaxis/condicionales" class="sub"><span class="nav-dot"></span>Condicionales</a> <a href="/docs/sintaxis/bucles" class="sub"><span class="nav-dot"></span>Bucles</a> <a href="/docs/sintaxis/clases" class="sub"><span class="nav-dot"></span>Clases y POO</a> <a href="/docs/sintaxis/ownership" class="sub"><span class="nav-dot"></span>Ownership</a> <a href="/docs/sintaxis/operadores" class="sub"><span class="nav-dot"></span>Operadores</a> <a href="/docs/sintaxis/entrada" class="sub"><span class="nav-dot"></span>Entrada de usuario</a> <a href="/docs/sintaxis/coincidir" class="sub"><span class="nav-dot"></span>Pattern matching</a> <a href="/docs/sintaxis/enums" class="sub"><span class="nav-dot"></span>Tipos algebraicos</a> <a href="/docs/sintaxis/traits" class="sub"><span class="nav-dot"></span>Traits / Interfaces</a> <a href="/docs/sintaxis/gui" class="sub"><span class="nav-dot"></span>GUI nativa (Xilem)</a> <a href="/docs/sintaxis/concurrencia" class="sub"><span class="nav-dot"></span>Concurrencia</a> <a href="/docs/sintaxis/atributos" class="sub"><span class="nav-dot"></span>Atributos (@test / @derive)</a> <a href="/docs/sintaxis/resultado_opcion" class="sub"><span class="nav-dot"></span>Resultado / Opcion</a> <a href="/docs/sintaxis/modulos" class="sub"><span class="nav-dot"></span>Módulos (importar)</a> <div class="section-title">Arquitectura</div> <a href="/docs/arquitectura/pipeline" class="sub"><span class="nav-dot"></span>Pipeline de compilación</a> <a href="/docs/arquitectura/lexer" class="sub"><span class="nav-dot"></span>Lexer (lexer.rs)</a> <a href="/docs/arquitectura/token" class="sub"><span class="nav-dot"></span>Tokens (token.rs)</a> <a href="/docs/arquitectura/parser" class="sub"><span class="nav-dot"></span>Parser (parser.rs)</a> <a href="/docs/arquitectura/ast" class="sub"><span class="nav-dot"></span>AST (ast.rs)</a> <a href="/docs/arquitectura/semantica" class="sub"><span class="nav-dot"></span>Borrow Checker (semantics.rs)</a> <a href="/docs/arquitectura/symbol_table" class="sub"><span class="nav-dot"></span>Tabla de Símbolos (symbol_table.rs)</a> <a href="/docs/arquitectura/class_descriptor" class="sub"><span class="nav-dot"></span>Descriptores de Clase (class_descriptor.rs)</a> <a href="/docs/arquitectura/optimizer" class="sub"><span class="nav-dot"></span>Optimizador (optimizer.rs)</a> <a href="/docs/arquitectura/formatter" class="sub"><span class="nav-dot"></span>Formateador (formatter.rs)</a> <a href="/docs/arquitectura/diagrama" class="sub"><span class="nav-dot"></span>Diagrama del AST (diagrama.rs)</a> <a href="/docs/arquitectura/transpilador" class="sub"><span class="nav-dot"></span>Transpilador Rust (transpiler.rs)</a> <a href="/docs/arquitectura/compiler_asm" class="sub"><span class="nav-dot"></span>Compilador Ensamblador (compiler_asm.rs)</a> <a href="/docs/arquitectura/compiler_llvm" class="sub"><span class="nav-dot"></span>Compilador LLVM IR (compiler_llvm.rs)</a> <a href="/docs/arquitectura/bytecode" class="sub"><span class="nav-dot"></span>Bytecode (bytecode.rs)</a> <a href="/docs/arquitectura/uops" class="sub"><span class="nav-dot"></span>Uops / Micro-opcodes (uops.rs)</a> <a href="/docs/arquitectura/vm" class="sub"><span class="nav-dot"></span>Máquina Virtual v1 (vm.rs)</a> <a href="/docs/arquitectura/vm_jit" class="sub"><span class="nav-dot"></span>Máquina Virtual v3 JIT (vm_jit.rs)</a> <a href="/docs/arquitectura/vm_fast" class="sub"><span class="nav-dot"></span>Máquina Virtual v5 Fast (vm_fast.rs)</a> <a href="/docs/arquitectura/jit" class="sub"><span class="nav-dot"></span>Compilador JIT Nativo (jit.rs)</a> <a href="/docs/arquitectura/jit_engine" class="sub"><span class="nav-dot"></span>Orquestador JIT (jit_engine.rs)</a> <a href="/docs/arquitectura/repl" class="sub"><span class="nav-dot"></span>Entorno REPL (repl.rs)</a> <a href="/docs/arquitectura/aot" class="sub"><span class="nav-dot"></span>Compilador AOT (aot.rs)</a> <a href="/docs/arquitectura/selfrun" class="sub"><span class="nav-dot"></span>Auto-ejecutor stub (selfrun.rs)</a> <a href="/docs/arquitectura/module" class="sub"><span class="nav-dot"></span>Gestor de Módulos (module.rs)</a> <a href="/docs/arquitectura/prelude" class="sub"><span class="nav-dot"></span>Preludio del Lenguaje (prelude.rs)</a> <a href="/docs/arquitectura/package_resolver" class="sub"><span class="nav-dot"></span>Resolución de Paquetes (package_resolver.rs)</a> <a href="/docs/arquitectura/package_config" class="sub"><span class="nav-dot"></span>Configuración forja.json (package_config.rs)</a> <a href="/docs/arquitectura/wasm" class="sub"><span class="nav-dot"></span>Soporte Web/WASM (forja-wasm)</a> <a href="/docs/arquitectura/vscode" class="sub"><span class="nav-dot"></span>Servidor LSP & VSCode (forja_lsp.rs)</a> <a href="/docs/arquitectura/biblioteca" class="sub"><span class="nav-dot"></span>API de Biblioteca (lib.rs)</a> <a href="/docs/arquitectura/gui" class="sub"><span class="nav-dot"></span>Interfaz Gráfica UI (gui.rs)</a> <a href="/docs/arquitectura/fprofiler" class="sub"><span class="nav-dot"></span>Profiler integrado (fprofiler.rs)</a> <a href="/docs/arquitectura/cli" class="sub"><span class="nav-dot"></span>CLI Punto de Entrada (main.rs)</a> <div class="section-title">Referencia</div> <a href="/docs/errores">Sistema de errores</a> <a href="/docs/ejemplos">Ejemplos</a> <a href="/docs/roadmap">Roadmap</a> </nav> </aside> <main class="main"> <div class="main-inner">  <h1>Uso del CLI</h1> <p>Forja tiene <strong>20+ comandos</strong> organizados en 5 categorías: ejecución, compilación, gestión de paquetes, utilidades y proyectos. Todos los comandos aceptan su nombre en español e inglés.</p> <div class="code-block-wrapper"> <div class="code-header"><span>📋 Ayuda completa</span></div> <pre><code>🔨 Forja (fa) — Lenguaje educativo con VM propia
+
+COMANDOS:
+  ejecutar <archivo>         Ejecutar .fa en la VM
+  test [archivo]            Ejecutar tests (funciones con @test)
+  repl                       Modo interactivo
+  diagrama <archivo>         Generar diagrama HTML del código
+  compilar <archivo>         Generar .exe autónomo
+  compilar-asm <archivo>     Compilar a assembly nativo [--target <arch>] [-o <salida>]
+  formatear <archivo>        Formatear código .fa
+  transpilar <archivo>       Exportar a proyecto Rust
+  nuevo <nombre>             Crear nuevo proyecto
+  iniciar                    Inicializar proyecto aquí
+  add <paquete> [version]   Añadir dependencia
+  remove <paquete>           Eliminar dependencia
+  install                    Instalar todas las dependencias
+  medir <archivo>            Benchmark de VMs [--iters N] [--vm ...]
+  aprender                   Tutorial interactivo
+  palabras                   Lista de palabras clave
+  colorear <archivo>         Colorear código en terminal
+  explicar <palabra>         Explicar un concepto
+  documentar <archivo>       Generar documentación desde AST
+  ayuda [tema]               Mostrar esta ayuda
+
+Los comandos también aceptan su nombre en inglés:
+  run, build, transpile, build-asm, asm, new, init, add, remove, install,
+  learn, keywords, highlight, explain, help, fmt, format, doc, test, bench
+
+EJEMPLOS:
+   forja ejecutar examples/01_hola.fa
+   forja compilar examples/01_hola.fa -o programa.exe
+   forja compilar-asm examples/01_hola.fa
+   forja compilar-asm examples/01_hola.fa --target arm64 -o programa
+   forja repl
+    forja formatear examples/01_hola.fa
+    forja colorear examples/01_hola.fa
+    forja test examples/mis_pruebas.fa
+    forja nuevo mi_programa</archivo></palabra></archivo></archivo></paquete></paquete></nombre></archivo></archivo></salida></arch></archivo></archivo></archivo></archivo></code></pre> </div> <h2><code>transpile|t|transpilar</code> — Forja → Rust</h2> <p>Genera código <strong>Rust compilable</strong> desde un archivo <code>.fa</code>. Ideal si querés llevar tu programa a producción con Rust o aprender cómo se traduce cada concepto. Si el argumento pasado al CLI termina en <code>.fa</code>, transpila automáticamente.</p> <div class="info">💡 <strong>¿Sabías que…?</strong> El código Rust generado es perfectamente compilable con <code>rustc</code>. Podés usarlo como puente para aprender Rust progresivamente.</div> <div class="code-block-wrapper"> <div class="code-header"><span>📄 Ejemplos de transpilación</span></div> <pre><code><span class="co"># Automático (default si el arg termina en .fa)</span>
+forja examples/01_hola.fa
+
+<span class="co"># Con salida personalizada</span>
+forja transpile examples/01_hola.fa -o salida.rs
+
+<span class="co"># Atajo 't'</span>
+forja t examples/10_clases.fa
+
+<span class="co"># Errores en JSON (ideal para IDEs)</span>
+forja transpile examples/10_clases.fa --json-errors</code></pre> </div> <h2><code>run|ejecutar|correr</code> — Ejecutar en VM</h2> <p>Compila y ejecuta el <strong>bytecode</strong> directamente en la Máquina Virtual. No necesitás Rust instalado para ejecutar programas. La VM usada es <strong>ForjaFast v5</strong> (la más rápida de las 3 VMs).</p> <div class="code-block-wrapper"> <div class="code-header"><span>⚡ Ejemplos de ejecución</span></div> <pre><code>forja run examples/01_hola.fa
+<span class="co">// → ¡Hola, mundo desde Forja!</span>
+
+forja run examples/10_clases.fa
+<span class="co">// → Hola, soy Ana y tengo 20 años</span>
+<span class="co">// → Es mayor de edad</span>
+
+forja run examples/14_adivina.fa
+<span class="co">// → Juego: adivina el número</span></code></pre> </div> <h2><code>repl</code> — Modo interactivo</h2> <p>Intérprete línea por línea. Ideal para <strong>aprender</strong>, <strong>experimentar</strong> y <strong>debuggear</strong> algoritmos sin crear archivos. Las variables persisten entre líneas.</p> <div class="code-block-wrapper"> <div class="code-header"><span>💬 Sesión de ejemplo</span></div> <pre><code>$ forja repl
+🔨 Forja v1.0-rc — Escribí 'salir' para terminar
+
+> <span class="kw">variable</span> x = 5
+> x = x + 10
+> <span class="fn">escribir</span>(x)
+15
+> <span class="kw">constante</span> nombre = <span class="st">"Gaucho"</span>
+> <span class="fn">escribir</span>(<span class="st">"Hola "</span> + nombre)
+Hola Gaucho
+> salir
+👋 ¡Hasta luego!</code></pre> </div> <h2><code>build|compilar|construir</code> — Ejecutable autónomo</h2> <p>Genera un <code>.exe</code> que contiene la VM + bytecode incrustado. Funciona en <strong>cualquier PC</strong> sin Rust, sin scripts, sin dependencias.</p> <div class="tip"><strong>🔧 ¿Cómo funciona?</strong> Forja se copia a sí mismo (AOT compiler) y le agrega el bytecode al final del .exe. Al ejecutarlo, el módulo <code>selfrun</code> detecta el bytecode, lo deserializa y lo ejecuta en la VM. ¡Un solo archivo que es compilador y runtime a la vez!</div> <div class="code-block-wrapper"> <div class="code-header"><span>📦 Ejemplo de build</span></div> <pre><code>forja build examples/01_hola.fa -o hola.exe
+<span class="co">// → ✅ Ejecutable generado: hola.exe (1234 bytes)</span>
+
+<span class="co">// Ahora cualquiera puede ejecutarlo, sin Rust:</span>
+./hola.exe
+<span class="co">// → ¡Hola, mundo desde Forja!</span></code></pre> </div> <h2><code>build-asm|compilar-asm|asm</code> — Assembly nativo (⚡ el más rápido)</h2> <p>Genera código <strong>assembly x86-64 o ARM64</strong> directamente desde tu <code>.fa</code> y lo compila con <code>gcc -O2</code>. Es la forma <strong>más rápida</strong> de ejecutar Forja — velocidad nativa, igual que C o Rust compilado.</p> <div class="info">⚡ <strong>Rendimiento:</strong> El assembly nativo es ~<strong>1,750x más rápido</strong> que la VM de Forja, y ~<strong>30x más rápido</strong> que Python.</div> <div class="code-block-wrapper"> <div class="code-header"><span>🛠️ Ejemplos de build-asm</span></div> <pre><code><span class="co"># Mínimo: genera el ejecutable automáticamente (target = plataforma actual)</span>
+forja build-asm examples/01_hola.fa
+
+<span class="co"># Con nombre de salida personalizado</span>
+forja build-asm examples/01_hola.fa -o programa.exe
+
+<span class="co"># Especificar arquitectura destino</span>
+forja build-asm examples/01_hola.fa --target arm64 -o programa
+
+<span class="co"># Especificar Linux x86-64</span>
+forja build-asm examples/01_hola.fa --target x86_64-linux -o prog
+
+<span class="co"># El assembly generado se puede compilar manualmente</span>
+forja build-asm examples/01_hola.fa --target x86_64-windows -o prog
+gcc -O2 -o prog.exe prog.s</code></pre> </div> <details> <summary><strong>🎯 Targets disponibles</strong></summary> <table> <thead> <tr><th>Flag</th><th>Arquitectura</th><th>Convención</th><th>Args (enteros)</th></tr> </thead> <tbody> <tr><td><em>(ninguno)</em></td><td>Detección automática</td><td>Según SO y CPU</td><td>—</td></tr> <tr><td><code>--target x86_64-windows</code></td><td>x86-64</td><td>Microsoft x64</td><td>RCX, RDX, R8, R9 + 32B shadow</td></tr> <tr><td><code>--target x86_64-linux</code></td><td>x86-64</td><td>System V AMD64</td><td>RDI, RSI, RDX, RCX, R8, R9</td></tr> <tr><td><code>--target arm64</code></td><td>ARM64 AArch64</td><td>ARM64</td><td>X0..X7</td></tr> </tbody> </table> </details> <details> <summary><strong>🔧 ¿Cómo se compara con otros modos?</strong></summary> <table> <thead> <tr><th>Modo</th><th>Velocidad (fib(30))</th><th>vs Python</th></tr> </thead> <tbody> <tr><td><code>build-asm</code> (gcc -O2)</td><td>~51 μs</td><td><strong>~80x más rápido que Python</strong></td></tr> <tr><td><code>run --vm fast</code> (ForjaFast v5 🏆)</td><td>~9,544 μs</td><td>~2.3x más lento que Python</td></tr> <tr><td>Python (CPython 3.11)</td><td>~4,117 μs</td><td>— referencia</td></tr> <tr><td><code>run --vm vm</code> (VM v1 Original)</td><td>~91,795 μs</td><td>~22x más lento que Python</td></tr> <tr><td><code>run --vm jit</code> (VM v3 Direct Threading)</td><td>~34,864 μs</td><td>~8.5x más lento que Python</td></tr> </tbody> </table> </details> <h2><code>fmt|formatear|format</code> — Formatear código</h2> <p>Aplica formato consistente al código Forja: indentación de 4 espacios, espacios alrededor de operadores, llaves en la misma línea.</p> <div class="code-block-wrapper"> <div class="code-header"><span>🎨 Ejemplo</span></div> <pre><code><span class="co"># Antes (desordenado)</span>
+forja fmt examples/01_hola.fa
+
+<span class="co"># Después: código formateado con estilo consistente</span></code></pre> </div> <h2><code>run|ejecutar --native</code> — GUI nativa con Xilem</h2> <p>Ejecuta archivos <code>.fa</code> que usen <code>importar "gui"</code> en una ventana nativa, ya sea compilando el proyecto a Rust+Xilem o usando el runtime de GUI nativa sin cargo previo (si compilaste Forja con <code>--features gui</code>).</p> <div class="code-block-wrapper"> <div class="code-header"><span>🖼️ Ejemplo</span></div> <pre><code><span class="co"># Native runner (AST directo a Xilem, sin compilar Rust)</span>
+cargo run --features gui --bin forja -- run --native examples/204_login_final.fa
+
+<span class="co"># Transpilado a Rust (genera .exe autónomo)</span>
+cargo run --features gui --bin forja -- transpile examples/204_login_final.fa
+cd .forja_gui_cache && cargo run --release
+
+<span class="co"># GUI Launcher directo</span>
+cargo build --features gui
+.\target\debug\forja-gui.exe examples/204_login_final.fa</code></pre> </div> <h2><code>highlight|colorear|color</code> — Colorear código en terminal</h2> <p>Muestra el código Forja con resaltado de sintaxis ANSI directamente en la terminal. Usa la misma paleta de colores que la documentación web y la extensión de VS Code.</p> <div class="code-block-wrapper"> <div class="code-header"><span>🌈 Ejemplo</span></div> <pre><code>forja highlight examples/01_hola.fa
+<span class="co">// Muestra el código con keywords en amarillo,</span>
+<span class="co">// funciones en verde, tipos en cian, strings en brillante</span></code></pre> </div> <h2><code>keywords|palabras|lista</code> — Palabras clave</h2> <p>Lista todas las palabras clave del lenguaje con su descripción:</p> <div class="code-block-wrapper"> <div class="code-header"><span>📚 Salida</span></div> <pre><code>forja keywords
+  📚 Palabras clave de Forja
+
+  PALABRA         QUÉ HACE
+  ─────────────── ───────────────────────────────
+   escribir        Muestra mensajes en pantalla
+   leer            Lee entrada del usuario
+   variable/var    Declara una variable (mutable)
+   constante/const Declara una constante (inmutable)
+   mut             Modificador de mutabilidad
+   si/sino         Condicional
+   mientras        Bucle condicional
+   para            Bucle con contador
+   repetir         Repite N veces
+   funcion/fun     Define una función
+   retornar        Devuelve un valor
+   clase           Define una clase
+   constructor     Constructor de clase
+   nuevo           Crea instancia de clase
+   este            Objeto actual (self)
+   prestado        Préstamo por referencia (&)
+   importar        Importa módulos
+   coincidir       Pattern matching
+   caso            Caso de pattern matching
+   tipo            Tipo algebraico (enum)
+   otro            Caso default en seleccionar
+   verdadero       Booleano verdadero
+   falso           Booleano falso
+   nulo            Valor nulo
+   BD              Base de datos
+   hilo            Lanza un hilo
+   canal           Crea un canal de comunicación
+   seleccionar     Select sobre canales
+   trait           Definición de trait
+   implementa      Implementación de trait
+   externo         Función externa (FFI)
+   asegurar        Asserts en tests
+   @test/@derive   Atributos</code></pre> </div> <h2><code>explain|explicar <palabra></palabra></code> — Explicar concepto</h2> <p>Muestra una explicación detallada con ejemplos de cualquier palabra clave:</p> <div class="code-block-wrapper"> <div class="code-header"><span>📖 Ejemplo</span></div> <pre><code>forja explicar funcion
+📖 'funcion' agrupa código para reutilizarlo.
+   Ej: funcion suma(a, b) &lbrace; retornar a + b &rbrace;</code></pre> </div> <h2><code>new|nuevo|crear <nombre></nombre></code> — Nuevo proyecto</h2> <p>Crea un proyecto Forja con la estructura de directorios estándar:</p> <div class="code-block-wrapper"> <div class="code-header"><span>📁 Estructura generada</span></div> <pre><code>forja nuevo mi_programa
+✅ Proyecto 'mi_programa' creado
+   cd mi_programa && forja run main.fa
+
+mi_programa/
+├── main.fa          # Punto de entrada
+├── forja.json       # Configuración del proyecto
+└── modulos/         # Directorio para módulos</code></pre> </div> <h2><code>init|iniciar</code> — Inicializar proyecto aquí</h2> <p>Inicializa un proyecto en el directorio actual (igual que <code>new</code> pero sin crear subdirectorio):</p> <div class="code-block-wrapper"> <div class="code-header"><span>📁 Ejemplo</span></div> <pre><code>mkdir mi_proyecto && cd mi_proyecto
+forja init</code></pre> </div> <h2><code>learn|aprender</code> — Tutorial interactivo</h2> <p>Tutorial paso a paso desde la terminal. Ideal para quienes empiezan desde cero:</p> <div class="code-block-wrapper"> <div class="code-header"><span>🎓 Salida</span></div> <pre><code>forja learn
+🎓 Forja — Aprendé a programar
+
+Lección 1: Mostrar mensajes
+═══════════════════════════
+
+Para mostrar algo en pantalla, usamos:
+  escribir("texto")</code></pre> </div> <h2><code>diagrama|grafico|diagram</code> — Diagrama HTML del AST</h2> <p>Genera un archivo HTML interactivo con el árbol de sintaxis abstracta (AST) del código. Cada nodo se puede expandir/colapsar. Ideal para entender cómo el compilador interpreta tu código.</p> <div class="code-block-wrapper"> <div class="code-header"><span>🌳 Ejemplo</span></div> <pre><code>forja diagrama examples/07_funciones.fa
+<span class="co">// Genera: examples/funciones.html</span>
+<span class="co">// Abrí el HTML en el navegador para ver el árbol</span></code></pre> </div> <h2><code>doc|documentar</code> — Documentación desde AST</h2> <p>Genera documentación automática del código analizando el AST. Extrae funciones, clases y sus parámetros.</p> <div class="code-block-wrapper"> <div class="code-header"><span>📄 Ejemplo</span></div> <pre><code>forja doc examples/10_clases.fa</code></pre> </div> <h2><code>test|tests|probar [archivo]</code> — Ejecutar tests</h2> <p>Ejecuta funciones marcadas con <code>@test</code> en archivos <code>.fa</code>. Sin argumento, busca y ejecuta todos los tests en <code>examples/</code>.</p> <div class="code-block-wrapper"> <div class="code-header"><span>🧪 Ejemplos</span></div> <pre><code><span class="co"># Ejecutar tests de un archivo específico</span>
+forja test examples/mis_pruebas.fa
+
+<span class="co"># Ejecutar todos los tests en examples/</span>
+forja test</code></pre> </div> <h2><code>medir|bench|benchmark <archivo></archivo></code> — Benchmark de VMs</h2> <p>Mide tiempos de ejecución en todas las VMs disponibles: creación, carga, ejecución en frío y en caliente.</p> <div class="code-block-wrapper"> <div class="code-header"><span>⏱️ Ejemplos</span></div> <pre><code><span class="co"># Medir en todas las VMs</span>
+forja medir examples/bench_fib.fa
+
+<span class="co"># Medir en una VM específica</span>
+forja medir examples/bench_fib.fa --vm fast
+
+<span class="co"># Con iteraciones personalizadas</span>
+forja medir examples/bench_fib.fa --iters 10
+
+<span class="co"># Modo ASM nativo</span>
+forja medir examples/bench_fib.fa --asm</code></pre> </div> <h2><code>add|agregar|remove|remover|install|instalar</code> — Gestión de paquetes</h2> <p>Administrador de dependencias integrado. Los paquetes se declaran en <code>forja.json</code> y se almacenan en el directorio del proyecto.</p> <div class="code-block-wrapper"> <div class="code-header"><span>📦 Ejemplos</span></div> <pre><code><span class="co"># Añadir dependencia</span>
+forja add json-util
+
+<span class="co"># Añadir con versión específica</span>
+forja add json-util 0.2.0
+
+<span class="co"># Eliminar dependencia</span>
+forja remove json-util
+
+<span class="co"># Instalar todas las dependencias del proyecto</span>
+forja install</code></pre> </div> <h2><code>help|ayuda [tema]</code> — Ayuda detallada</h2> <p>Muestra ayuda general o sobre un tema específico:</p> <div class="code-block-wrapper"> <div class="code-header"><span>❓ Ejemplos</span></div> <pre><code>forja ayuda
+forja help funcion
+forja --help</code></pre> </div> <h2>Compilar el Rust generado</h2> <p>Si usaste <code>transpile</code>, el archivo <code>.rs</code> generado se compila con Rust de forma estándar:</p> <div class="code-block-wrapper"> <div class="code-header"><span>🦀 Compilar con rustc</span></div> <pre><code>rustc examples/hola_mundo.rs
+./hola_mundo</code></pre> </div> <h2>Ejecutar benchmarks</h2> <p>Forja incluye varios benchmarks para medir rendimiento:</p> <div class="code-block-wrapper"> <div class="code-header"><span>📊 Benchmarks disponibles</span></div> <pre><code>cargo run --release --bin bench-jit          # JIT Nativo vs ForjaFast vs Rust
+cargo run --release --bin bench-jit-100k     # JIT con 100k iteraciones
+cargo run --release --bin bench-vms          # VM Original vs JIT(DT) vs ForjaFast
+cargo run --release --bin bench-forjafast    # Todas las VMs (cold + hot)
+cargo run --release --bin bench-rust-native  # Rust nativo (baseline)
+cargo run --release --bin bench-clean        # ForjaFast vs Python
+cargo run --release --bin bench-completo     # Completo vs Rust/Python/Go
+cargo run --release --bin bench-cpython-opt  # Optimizaciones CPython</code></pre> </div>  </div> </main> <script type="module">(()=>{const r=document.querySelectorAll(".sidebar-nav a"),i=document.querySelector(".main-inner");function o(t){r.forEach(e=>e.classList.remove("active")),t.classList.add("active")}async function s(t,e=!0){try{const m=await(await fetch(t)).text(),f=new DOMParser().parseFromString(m,"text/html"),h=f.querySelector(".main-inner");h&&i&&(i.innerHTML=h.innerHTML);const u=f.querySelector("title");u&&(document.title=u.textContent);const d=Array.from(r).find(p=>p.getAttribute("href")===t);d&&o(d),e&&history.pushState(null,"",t)}catch(n){console.error("Navigation error",n)}}r.forEach(t=>{const e=t.getAttribute("href");!e||!e.startsWith("/docs/")||t.addEventListener("click",n=>{n.preventDefault(),s(e)})}),window.addEventListener("popstate",()=>{s(location.pathname,!1)});let a=null,c=0;const l=location.pathname.replace(/\/+$/,"");r.forEach(t=>{const e=t.getAttribute("href");if(!e)return;const n=e.replace(/\/+$/,"");(n===l||n.length>c&&l.startsWith(n))&&(a=t,c=n.length)}),a&&o(a)})();</script> </body> </html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="es"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ejemplos completos — Forja | Forja</title><meta name="description" content="Documentación del lenguaje de programación Forja (fa)"><link rel="icon" type="image/x-icon" href="/docs/favicon.ico"><link rel="shortcut icon" type="image/x-icon" href="/docs/favicon.ico"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/docs/_astro/Layout.Cp11aA97.css"></head> <body> <aside class="sidebar"> <div class="sidebar-header"> <a href="/docs/" class="logo"> <div class="logo-icon"><img src="/docs/logo.png" alt="Forja"></div> <span class="logo-text">Forja</span> </a> <div class="logo-sub">Lenguaje en español</div> </div> <nav class="sidebar-nav"> <div class="section-title">Introducción</div> <a href="/docs/">¿Qué es Forja?</a> <a href="/docs/playground">Playground</a> <a href="/docs/instalacion">Instalación</a> <a href="/docs/uso">Uso (CLI)</a> <div class="section-title">Guía del Lenguaje</div> <a href="/docs/sintaxis/variables" class="sub"><span class="nav-dot"></span>Variables y constantes</a> <a href="/docs/sintaxis/tipos" class="sub"><span class="nav-dot"></span>Tipos de datos</a> <a href="/docs/sintaxis/funciones" class="sub"><span class="nav-dot"></span>Funciones</a> <a href="/docs/sintaxis/condicionales" class="sub"><span class="nav-dot"></span>Condicionales</a> <a href="/docs/sintaxis/bucles" class="sub"><span class="nav-dot"></span>Bucles</a> <a href="/docs/sintaxis/clases" class="sub"><span class="nav-dot"></span>Clases y POO</a> <a href="/docs/sintaxis/ownership" class="sub"><span class="nav-dot"></span>Ownership</a> <a href="/docs/sintaxis/operadores" class="sub"><span class="nav-dot"></span>Operadores</a> <a href="/docs/sintaxis/entrada" class="sub"><span class="nav-dot"></span>Entrada de usuario</a> <a href="/docs/sintaxis/coincidir" class="sub"><span class="nav-dot"></span>Pattern matching</a> <a href="/docs/sintaxis/enums" class="sub"><span class="nav-dot"></span>Tipos algebraicos</a> <a href="/docs/sintaxis/traits" class="sub"><span class="nav-dot"></span>Traits / Interfaces</a> <a href="/docs/sintaxis/gui" class="sub"><span class="nav-dot"></span>GUI nativa (Xilem)</a> <a href="/docs/sintaxis/concurrencia" class="sub"><span class="nav-dot"></span>Concurrencia</a> <a href="/docs/sintaxis/atributos" class="sub"><span class="nav-dot"></span>Atributos (@test / @derive)</a> <a href="/docs/sintaxis/resultado_opcion" class="sub"><span class="nav-dot"></span>Resultado / Opcion</a> <a href="/docs/sintaxis/modulos" class="sub"><span class="nav-dot"></span>Módulos (importar)</a> <div class="section-title">Arquitectura</div> <a href="/docs/arquitectura/pipeline" class="sub"><span class="nav-dot"></span>Pipeline de compilación</a> <a href="/docs/arquitectura/lexer" class="sub"><span class="nav-dot"></span>Lexer (lexer.rs)</a> <a href="/docs/arquitectura/token" class="sub"><span class="nav-dot"></span>Tokens (token.rs)</a> <a href="/docs/arquitectura/parser" class="sub"><span class="nav-dot"></span>Parser (parser.rs)</a> <a href="/docs/arquitectura/ast" class="sub"><span class="nav-dot"></span>AST (ast.rs)</a> <a href="/docs/arquitectura/semantica" class="sub"><span class="nav-dot"></span>Borrow Checker (semantics.rs)</a> <a href="/docs/arquitectura/symbol_table" class="sub"><span class="nav-dot"></span>Tabla de Símbolos (symbol_table.rs)</a> <a href="/docs/arquitectura/class_descriptor" class="sub"><span class="nav-dot"></span>Descriptores de Clase (class_descriptor.rs)</a> <a href="/docs/arquitectura/optimizer" class="sub"><span class="nav-dot"></span>Optimizador (optimizer.rs)</a> <a href="/docs/arquitectura/formatter" class="sub"><span class="nav-dot"></span>Formateador (formatter.rs)</a> <a href="/docs/arquitectura/diagrama" class="sub"><span class="nav-dot"></span>Diagrama del AST (diagrama.rs)</a> <a href="/docs/arquitectura/transpilador" class="sub"><span class="nav-dot"></span>Transpilador Rust (transpiler.rs)</a> <a href="/docs/arquitectura/compiler_asm" class="sub"><span class="nav-dot"></span>Compilador Ensamblador (compiler_asm.rs)</a> <a href="/docs/arquitectura/compiler_llvm" class="sub"><span class="nav-dot"></span>Compilador LLVM IR (compiler_llvm.rs)</a> <a href="/docs/arquitectura/bytecode" class="sub"><span class="nav-dot"></span>Bytecode (bytecode.rs)</a> <a href="/docs/arquitectura/uops" class="sub"><span class="nav-dot"></span>Uops / Micro-opcodes (uops.rs)</a> <a href="/docs/arquitectura/vm" class="sub"><span class="nav-dot"></span>Máquina Virtual v1 (vm.rs)</a> <a href="/docs/arquitectura/vm_jit" class="sub"><span class="nav-dot"></span>Máquina Virtual v3 JIT (vm_jit.rs)</a> <a href="/docs/arquitectura/vm_fast" class="sub"><span class="nav-dot"></span>Máquina Virtual v5 Fast (vm_fast.rs)</a> <a href="/docs/arquitectura/jit" class="sub"><span class="nav-dot"></span>Compilador JIT Nativo (jit.rs)</a> <a href="/docs/arquitectura/jit_engine" class="sub"><span class="nav-dot"></span>Orquestador JIT (jit_engine.rs)</a> <a href="/docs/arquitectura/repl" class="sub"><span class="nav-dot"></span>Entorno REPL (repl.rs)</a> <a href="/docs/arquitectura/aot" class="sub"><span class="nav-dot"></span>Compilador AOT (aot.rs)</a> <a href="/docs/arquitectura/selfrun" class="sub"><span class="nav-dot"></span>Auto-ejecutor stub (selfrun.rs)</a> <a href="/docs/arquitectura/module" class="sub"><span class="nav-dot"></span>Gestor de Módulos (module.rs)</a> <a href="/docs/arquitectura/prelude" class="sub"><span class="nav-dot"></span>Preludio del Lenguaje (prelude.rs)</a> <a href="/docs/arquitectura/package_resolver" class="sub"><span class="nav-dot"></span>Resolución de Paquetes (package_resolver.rs)</a> <a href="/docs/arquitectura/package_config" class="sub"><span class="nav-dot"></span>Configuración forja.json (package_config.rs)</a> <a href="/docs/arquitectura/wasm" class="sub"><span class="nav-dot"></span>Soporte Web/WASM (forja-wasm)</a> <a href="/docs/arquitectura/vscode" class="sub"><span class="nav-dot"></span>Servidor LSP & VSCode (forja_lsp.rs)</a> <a href="/docs/arquitectura/biblioteca" class="sub"><span class="nav-dot"></span>API de Biblioteca (lib.rs)</a> <a href="/docs/arquitectura/gui" class="sub"><span class="nav-dot"></span>Interfaz Gráfica UI (gui.rs)</a> <a href="/docs/arquitectura/fprofiler" class="sub"><span class="nav-dot"></span>Profiler integrado (fprofiler.rs)</a> <a href="/docs/arquitectura/cli" class="sub"><span class="nav-dot"></span>CLI Punto de Entrada (main.rs)</a> <div class="section-title">Referencia</div> <a href="/docs/errores">Sistema de errores</a> <a href="/docs/ejemplos">Ejemplos</a> <a href="/docs/roadmap">Roadmap</a> </nav> </aside> <main class="main"> <div class="main-inner">  <h1>Ejemplos completos</h1> <p>Todos los ejemplos están en la carpeta <code>examples/</code> y se ejecutan con:</p> <div class="code-block-wrapper"> <div class="code-header"><span>⚡ Ejecutar un ejemplo</span></div> <pre><code>cargo run --release --bin forja -- run examples/<ejemplo>.fa</ejemplo></code></pre> </div> <h2>1. Hola Mundo</h2> <p>El clásico de clásicos. Tu primer programa en Forja:</p> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/01_hola.fa</span></div> <pre><code><span class="co">// Programa Hola Mundo en Forja</span>
+<span class="fn">escribir</span>(<span class="st">"¡Hola, mundo desde Forja!"</span>)</code></pre> </div> <div class="info">💡 <strong>Output:</strong> <code>¡Hola, mundo desde Forja!</code></div> <h2>2. Variables y constantes</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/02_variables.fa</span></div> <pre><code><span class="kw">variable</span> nombre = <span class="st">"Gaucho"</span>
+<span class="kw">variable</span> edad = 30
+<span class="kw">constante</span> altura = 1.85
+
+<span class="fn">escribir</span>(<span class="st">"Nombre: "</span> + nombre)
+<span class="fn">escribir</span>(<span class="st">"Edad: "</span> + edad)
+
+edad = 31
+<span class="fn">escribir</span>(<span class="st">"Nueva edad: "</span> + edad)
+
+<span class="co">// altura = 2.0  // ❌ ErrorDePropiedad (es constante)</span></code></pre> </div> <h2>3. Tipos explícitos</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/03_tipos.fa</span></div> <pre><code><span class="kw">variable</span> nombre: <span class="ty">Texto</span> = <span class="st">"Gaucho"</span>
+<span class="kw">variable</span> edad: <span class="ty">Entero</span> = 30
+<span class="kw">variable</span> altura: <span class="ty">Decimal</span> = 1.85
+<span class="kw">constante</span> activo: <span class="ty">Booleano</span> = verdadero
+
+<span class="co">// Sin tipo (inferido automáticamente)</span>
+<span class="kw">variable</span> ciudad = <span class="st">"Buenos Aires"</span>
+
+<span class="fn">escribir</span>(<span class="st">"Edad: "</span> + edad)
+<span class="fn">escribir</span>(<span class="st">"Altura: "</span> + altura)</code></pre> </div> <h2>4. Funciones</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/07_funciones.fa</span></div> <pre><code><span class="kw">funcion</span> suma(a, b) &lbrace;
+    <span class="kw">retornar</span> a + b
+&rbrace;
+
+<span class="kw">variable</span> resultado = suma(3, 4)
+<span class="fn">escribir</span>(<span class="st">"Suma: "</span> + resultado)
+
+<span class="kw">funcion</span> saludo(nombre) &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"Hola, "</span> + nombre + <span class="st">"!"</span>)
+&rbrace;
+
+saludo(<span class="st">"Mundo"</span>)
+saludo(<span class="st">"Forja"</span>)</code></pre> </div> <h2>5. Condicionales</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/05_condicionales.fa</span></div> <pre><code><span class="kw">variable</span> x = 10
+<span class="kw">variable</span> y = 5
+
+<span class="kw">si</span> (x > y) &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"x es mayor que y"</span>)
+&rbrace; <span class="kw">sino</span> &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"x no es mayor que y"</span>)
+&rbrace;
+
+<span class="co">// Anidados</span>
+<span class="kw">variable</span> nota = 85
+<span class="kw">si</span> (nota >= 90) &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"Excelente!"</span>)
+&rbrace; <span class="kw">sino</span> &lbrace;
+    <span class="kw">si</span> (nota >= 70) &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Buen trabajo!"</span>)
+    &rbrace; <span class="kw">sino</span> &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Sigue intentando!"</span>)
+    &rbrace;
+&rbrace;</code></pre> </div> <h2>6. Bucles</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/06_bucles.fa</span></div> <pre><code><span class="co">// Mientras</span>
+<span class="kw">variable</span> contador = 0
+<span class="kw">mientras</span> (contador &lt; 5) &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"Contador: "</span> + contador)
+    contador = contador + 1
+&rbrace;
+
+<span class="co">// Para</span>
+<span class="kw">para</span> (<span class="kw">variable</span> i = 0; i &lt; 3; i = i + 1) &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"i = "</span> + i)
+&rbrace;
+
+<span class="co">// Repetir</span>
+<span class="kw">repetir</span> (4) &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"Esto se repite 4 veces"</span>)
+&rbrace;</code></pre> </div> <h2>7. Clases y POO</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/10_clases.fa</span></div> <pre><code><span class="kw">clase</span> Estudiante &lbrace;
+    nombre
+    edad
+
+    <span class="kw">constructor</span>(n, e) &lbrace;
+        <span class="kw">este</span>.nombre = n
+        <span class="kw">este</span>.edad = e
+    &rbrace;
+
+    <span class="kw">funcion</span> presentarse() &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Hola, soy "</span> + <span class="kw">este</span>.nombre +
+                <span class="st">" y tengo "</span> + <span class="kw">este</span>.edad + <span class="st">" años"</span>)
+    &rbrace;
+
+    <span class="kw">funcion</span> esMayorDeEdad() -> <span class="ty">Booleano</span> &lbrace;
+        <span class="kw">retornar</span> <span class="kw">este</span>.edad >= 18
+    &rbrace;
+&rbrace;
+
+<span class="kw">variable</span> alumno = <span class="kw">nuevo</span> Estudiante(<span class="st">"Ana"</span>, 20)
+alumno.presentarse()
+
+<span class="kw">si</span> (alumno.esMayorDeEdad()) &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"Es mayor de edad"</span>)
+&rbrace; <span class="kw">sino</span> &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"Es menor de edad"</span>)
+&rbrace;</code></pre> </div> <h2>8. Pattern Matching</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/112_match_exhaustivo.fa</span></div> <pre><code><span class="kw">variable</span> dia = 3
+
+<span class="kw">coincidir</span> (dia) &lbrace;
+    <span class="kw">caso</span> 1 &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Lunes"</span>)
+    &rbrace;
+    <span class="kw">caso</span> 2 &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Martes"</span>)
+    &rbrace;
+    <span class="kw">caso</span> 3 &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Miércoles"</span>)
+    &rbrace;
+    <span class="kw">caso</span> _ &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Otro día"</span>)
+    &rbrace;
+&rbrace;</code></pre> </div> <h2>9. Tipos algebraicos (enums)</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/111_match_enum.fa</span></div> <pre><code><span class="kw">tipo</span> Resultado = Exito(Entero) | Error(Texto)
+
+<span class="kw">funcion</span> dividir(a, b) &lbrace;
+    <span class="kw">si</span> (b == 0) &lbrace;
+        <span class="kw">retornar</span> Error(<span class="st">"No se puede dividir por cero"</span>)
+    &rbrace; <span class="kw">sino</span> &lbrace;
+        <span class="kw">retornar</span> Exito(a / b)
+    &rbrace;
+&rbrace;
+
+<span class="kw">variable</span> res = dividir(10, 2)
+
+<span class="kw">coincidir</span> (res) &lbrace;
+    <span class="kw">caso</span> Exito(valor) &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Resultado: "</span> + valor)
+    &rbrace;
+    <span class="kw">caso</span> Error(msg) &rarr; &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Error: "</span> + msg)
+    &rbrace;
+&rbrace;
+<span class="co">// → Resultado: 5</span></code></pre> </div> <h2>10. Módulos (importar)</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 main + modulos/utilidades.fa</span></div> <pre><code><span class="co">// main.fa</span>
+<span class="kw">importar</span> <span class="st">"modulos/utilidades"</span>
+
+<span class="fn">escribir</span>(<span class="fn">sumar</span>(5, 3))
+<span class="fn">escribir</span>(<span class="fn">restar</span>(10, 4))</code></pre> </div> <div class="code-block-wrapper"> <div class="code-header"><span>📄 modulos/utilidades.fa</span></div> <pre><code><span class="kw">funcion</span> sumar(a, b) &lbrace;
+    <span class="kw">retornar</span> a + b
+&rbrace;
+
+<span class="kw">funcion</span> restar(a, b) &lbrace;
+    <span class="kw">retornar</span> a - b
+&rbrace;</code></pre> </div> <h2>11. Arreglos</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/08_arrays.fa</span></div> <pre><code><span class="kw">variable</span> numeros = [10, 20, 30, 40, 50]
+<span class="fn">escribir</span>(<span class="st">"Primer elemento: "</span> + numeros[0])
+<span class="fn">escribir</span>(<span class="st">"Cantidad: "</span> + numeros.length())
+
+<span class="co">// Modificar elementos</span>
+numeros[2] = 99
+<span class="fn">escribir</span>(<span class="st">"Elemento modificado: "</span> + numeros[2])</code></pre> </div> <h2>12. Strings</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/09_strings.fa</span></div> <pre><code><span class="co">// Concatenación</span>
+<span class="kw">variable</span> saludo = <span class="st">"Hola"</span>
+<span class="kw">variable</span> nombre = <span class="st">"Mundo"</span>
+<span class="fn">escribir</span>(saludo + <span class="st">", "</span> + nombre + <span class="st">"!"</span>)
+
+<span class="co">// Strings con números</span>
+<span class="kw">variable</span> edad = 25
+<span class="fn">escribir</span>(<span class="st">"Tengo "</span> + edad + <span class="st">" años"</span>)</code></pre> </div> <h2>13. Mapas (diccionarios)</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/11_mapas.fa</span></div> <pre><code><span class="kw">variable</span> persona = &lbrace;<span class="st">"nombre"</span>: <span class="st">"Ana"</span>, <span class="st">"edad"</span>: 30&rbrace;
+<span class="fn">escribir</span>(<span class="st">"Nombre: "</span> + persona[<span class="st">"nombre"</span>])
+<span class="fn">escribir</span>(<span class="st">"Edad: "</span> + persona[<span class="st">"edad"</span>])
+
+<span class="co">// Modificar valores</span>
+persona[<span class="st">"edad"</span>] = 31
+<span class="fn">escribir</span>(<span class="st">"Nueva edad: "</span> + persona[<span class="st">"edad"</span>])</code></pre> </div> <h2>14. Entrada de usuario</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/12_input.fa</span></div> <pre><code><span class="fn">escribir</span>(<span class="st">"¿Cómo te llamás?"</span>)
+<span class="kw">variable</span> nombre = <span class="fn">leer</span>()
+<span class="fn">escribir</span>(<span class="st">"Hola, "</span> + nombre + <span class="st">"!"</span>)</code></pre> </div> <h2>15. Juego: Adivina el número</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/14_adivina.fa</span></div> <pre><code><span class="co">// Juego completo: adiviná el número secreto</span>
+<span class="fn">escribir</span>(<span class="st">"🎯 Adiviná el número (1-100)"</span>)
+
+<span class="kw">variable</span> secreto = 42
+<span class="kw">variable</span> intento = 0
+<span class="kw">variable</span> adivinado = falso
+
+<span class="kw">mientras</span> (!adivinado) &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"Tu intento: "</span>)
+    <span class="kw">variable</span> guess = <span class="fn">leer</span>()
+    intento = intento + 1
+
+    <span class="kw">si</span> (guess &lt; secreto) &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"📈 Más alto"</span>)
+    &rbrace; <span class="kw">sino</span> <span class="kw">si</span> (guess &gt; secreto) &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"📉 Más bajo"</span>)
+    &rbrace; <span class="kw">sino</span> &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"🎉 Correcto! Lo lograste en "</span> + intento + <span class="st">" intentos"</span>)
+        adivinado = verdadero
+    &rbrace;
+&rbrace;</code></pre> </div> <h2>16. Traits y polimorfismo</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/91_trait_simple.fa</span></div> <pre><code><span class="kw">trait</span> Volador &lbrace;
+    <span class="kw">funcion</span> <span class="fn">volar</span>() &rarr; <span class="ty">Texto</span>
+&rbrace;
+
+<span class="kw">clase</span> Pajaro &lbrace;
+    nombre
+    <span class="kw">constructor</span>(n) &lbrace; <span class="kw">este</span>.nombre = n &rbrace;
+&rbrace;
+
+<span class="kw">implementa</span> Volador <span class="kw">para</span> Pajaro &lbrace;
+    <span class="kw">funcion</span> <span class="fn">volar</span>() &rarr; <span class="ty">Texto</span> &lbrace;
+        <span class="kw">retornar</span> <span class="st">"</span><span class="kw">este</span>.nombre <span class="st"> está volando"</span>
+    &rbrace;
+&rbrace;</code></pre> </div> <h2>17. Concurrencia</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/70_concurrencia.fa</span></div> <pre><code><span class="kw">variable</span> tx, rx = <span class="fn">canal</span>()
+
+<span class="kw">hilo</span> &lbrace;
+    tx.<span class="fn">enviar</span>(<span class="st">"Hola desde el hilo"</span>)
+&rbrace;
+
+<span class="kw">variable</span> msg = rx.<span class="fn">recibir</span>()
+<span class="fn">escribir</span>(msg) <span class="co">// → Hola desde el hilo</span></code></pre> </div> <h2>18. GUI nativa</h2> <div class="code-block-wrapper"> <div class="code-header"><span>📄 examples/204_login_final.fa</span></div> <pre><code><span class="kw">importar</span> <span class="st">"gui"</span>
+
+<span class="kw">funcion</span> <span class="fn">login</span>() &lbrace;
+    <span class="kw">si</span> (usuario && clave) &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Ingresando..."</span>)
+    &rbrace;
+&rbrace;
+
+<span class="kw">funcion</span> <span class="fn">main</span>() &lbrace;
+    <span class="fn">columna</span>(
+        <span class="fn">etiqueta</span>(<span class="st">"Iniciar sesión"</span>),
+        <span class="fn">entrada_texto</span>(<span class="st">"usuario"</span>),
+        <span class="fn">entrada_texto</span>(<span class="st">"clave"</span>),
+        <span class="fn">boton</span>(<span class="st">"Ingresar"</span>, &login)
+    )
+&rbrace;</code></pre> </div> <h2>Probarlos todos</h2> <p>Ejecutá cualquiera de estos ejemplos con:</p> <div class="code-block-wrapper"> <div class="code-header"><span>⚡ Lista de ejemplos disponibles</span></div> <pre><code><span class="co"># Básicos (01-09)</span>
+forja run examples/01_hola.fa
+forja run examples/02_variables.fa
+forja run examples/03_tipos.fa
+forja run examples/04_operaciones.fa
+forja run examples/05_condicionales.fa
+forja run examples/06_bucles.fa
+forja run examples/07_funciones.fa
+forja run examples/08_arrays.fa
+forja run examples/09_strings.fa
+
+<span class="co"># Intermedios (10-14)</span>
+forja run examples/10_clases.fa
+forja run examples/11_mapas.fa
+forja run examples/12_input.fa
+forja run examples/13_errores.fa
+forja run examples/14_adivina.fa
+
+<span class="co"># Avanzados (traits, concurrencia, GUI)</span>
+forja run examples/91_trait_simple.fa
+forja run examples/70_concurrencia.fa
+cargo run --features gui --bin forja -- run --native examples/204_login_final.fa</code></pre> </div>  </div> </main> <script type="module">(()=>{const r=document.querySelectorAll(".sidebar-nav a"),i=document.querySelector(".main-inner");function o(t){r.forEach(e=>e.classList.remove("active")),t.classList.add("active")}async function s(t,e=!0){try{const m=await(await fetch(t)).text(),f=new DOMParser().parseFromString(m,"text/html"),h=f.querySelector(".main-inner");h&&i&&(i.innerHTML=h.innerHTML);const u=f.querySelector("title");u&&(document.title=u.textContent);const d=Array.from(r).find(p=>p.getAttribute("href")===t);d&&o(d),e&&history.pushState(null,"",t)}catch(n){console.error("Navigation error",n)}}r.forEach(t=>{const e=t.getAttribute("href");!e||!e.startsWith("/docs/")||t.addEventListener("click",n=>{n.preventDefault(),s(e)})}),window.addEventListener("popstate",()=>{s(location.pathname,!1)});let a=null,c=0;const l=location.pathname.replace(/\/+$/,"");r.forEach(t=>{const e=t.getAttribute("href");if(!e)return;const n=e.replace(/\/+$/,"");(n===l||n.length>c&&l.startsWith(n))&&(a=t,c=n.length)}),a&&o(a)})();</script> </body> </html>

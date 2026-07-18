@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../../layouts/Layout.astro';
 ---
 
@@ -13,7 +13,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>📦 Definición</span></div>
-    <pre><code><span class="kw">tipo</span> Opcion<T> = Algun(T) | Ninguno</code></pre>
+    <pre><code><span class="kw">tipo</span> Opcion&lt;T&gt; = Algun(T) | Ninguno</code></pre>
   </div>
 
   <div class="code-block-wrapper">
@@ -39,7 +39,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>📦 Definición</span></div>
-    <pre><code><span class="kw">tipo</span> Resultado<T, E> = Exito(T) | Error(E)</code></pre>
+    <pre><code><span class="kw">tipo</span> Resultado&lt;T, E&gt; = Exito(T) | Error(E)</code></pre>
   </div>
 
   <div class="code-block-wrapper">
@@ -136,7 +136,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <table>
     <tr><th>Tipo</th><th>Definición</th><th>Uso común</th></tr>
-    <tr><td><code>Opcion<T></code></td><td><code>Algun(T) | Ninguno</code></td><td>Valores ausentes</td></tr>
-    <tr><td><code>Resultado<T, E></code></td><td><code>Exito(T) | Error(E)</code></td><td>Operaciones fallibles</td></tr>
+    <tr><td><code>Opcion&lt;T&gt;</code></td><td><code>Algun(T) | Ninguno</code></td><td>Valores ausentes</td></tr>
+    <tr><td><code>Resultado&lt;T, E&gt;</code></td><td><code>Exito(T) | Error(E)</code></td><td>Operaciones fallibles</td></tr>
   </table>
 </Layout>

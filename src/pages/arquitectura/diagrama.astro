@@ -40,7 +40,7 @@ forja diagrama <span class="st">"ejemplo.fa"</span> -o -             <span class
   <ol>
     <li><strong>Punto de entrada:</strong> <code>generar()</code> crea un nodo <strong>"Inicio"</strong> y un nodo <strong>"Fin"</strong>, y enlaza el bloque principal de declaraciones entre ellos.</li>
     <li><strong>Bloques secuenciales:</strong> Cada declaración produce nodos con flechas <code>--></code> entre sí. Las funciones y clases se agrupan en <code>subgraph</code>.</li>
-    <li><strong>Condicionales <code>si/sino</code>:</strong> Crea un nodo rombo <code>{ }</code> con la condición, y dos ramas: <code>-- Si --></code> y <code>-- Sino --></code> que se unen al final.</li>
+    <li><strong>Condicionales <code>si/sino</code>:</strong> Crea un nodo rombo <code>&lbrace; &rbrace;</code> con la condición, y dos ramas: <code>-- Si --></code> y <code>-- Sino --></code> que se unen al final.</li>
     <li><strong>Bucles <code>mientras</code>:</strong> Nodo rombo + flecha de retroalimentación (<code>be --> cond_node</code>) + salida <code>-- No --></code>.</li>
     <li><strong>Bucles <code>para</code>:</strong> Tres nodos: Init (rectángulo), Condición (rombo), Incremento (rectángulo) con retroalimentación.</li>
     <li><strong>Bucles <code>repetir</code>:</strong> Nodo rombo con <code>-- Bucle --></code> y retroalimentación, más <code>-- Fin --></code>.</li>
@@ -55,7 +55,7 @@ forja diagrama <span class="st">"ejemplo.fa"</span> -o -             <span class
     <tr><th>Forma</th><th>Sintaxis Mermaid</th><th>Uso en DiagramGenerator</th></tr>
     <tr><td>Inicio / Fin</td><td><code>([label])</code></td><td>Nodos redondeados para start/end de función y programa</td></tr>
     <tr><td>Acción</td><td><code>[label]</code></td><td>Variables, asignaciones, llamadas, retornos</td></tr>
-    <tr><td>Decisión</td><td><code>{label}</code></td><td>Condiciones de <code>si</code>, <code>mientras</code>, <code>para</code>, <code>repetir</code></td></tr>
+    <tr><td>Decisión</td><td><code>&lbrace;label&rbrace;</code></td><td>Condiciones de <code>si</code>, <code>mientras</code>, <code>para</code>, <code>repetir</code></td></tr>
   </table>
 
   <h2>Ejemplo de entrada y salida</h2>
@@ -90,7 +90,7 @@ forja diagrama <span class="st">"ejemplo.fa"</span> -o -             <span class
 
     N4[x = 10]
     N0 --> N4
-    N5{si (x > 5)}
+    N5&lbrace;si (x > 5)&rbrace;
     N4 --> N5
     N6[saludar("Mundo")]
     N5 -- Si --> N6
@@ -110,19 +110,19 @@ forja diagrama <span class="st">"ejemplo.fa"</span> -o -             <span class
     <tr><td><code>variable x = 5</code></td><td>Nodo rectángulo: <code>[var x = 5]</code></td></tr>
     <tr><td><code>constante x = 5</code></td><td>Nodo rectángulo: <code>[const x = 5]</code></td></tr>
     <tr><td><code>x = 10</code> (asignación)</td><td>Nodo rectángulo: <code>[x = 10]</code></td></tr>
-    <tr><td><code>funcion f(p) { ... }</code></td><td><code>subgraph Fn_f</code> con Inicio → cuerpo → Fin</td></tr>
-    <tr><td><code>clase C { ... }</code></td><td><code>subgraph Class_C</code> con <code>subgraph</code> por método</td></tr>
-    <tr><td><code>si (cond) { ... } sino { ... }</code></td><td>Nodo rombo + ramas <code>Si</code>/<code>Sino</code> + merge</td></tr>
-    <tr><td><code>mientras (cond) { ... }</code></td><td>Nodo rombo + retroalimentación + salida <code>No</code></td></tr>
-    <tr><td><code>para (i=0; i<N; i++) { ... }</code></td><td>Init → Cond(rombo) → cuerpo → Inc → retroalimentación</td></tr>
-    <tr><td><code>repetir (N) { ... }</code></td><td>Nodo rombo <code>repetir N veces</code> + retroalimentación</td></tr>
-    <tr><td><code>cuando (var) { ... }</code></td><td>Nodo rombo <code>cuando (var)</code> + cuerpo</td></tr>
+    <tr><td><code>funcion f(p) &lbrace; ... &rbrace;</code></td><td><code>subgraph Fn_f</code> con Inicio → cuerpo → Fin</td></tr>
+    <tr><td><code>clase C &lbrace; ... &rbrace;</code></td><td><code>subgraph Class_C</code> con <code>subgraph</code> por método</td></tr>
+    <tr><td><code>si (cond) &lbrace; ... &rbrace; sino &lbrace; ... &rbrace;</code></td><td>Nodo rombo + ramas <code>Si</code>/<code>Sino</code> + merge</td></tr>
+    <tr><td><code>mientras (cond) &lbrace; ... &rbrace;</code></td><td>Nodo rombo + retroalimentación + salida <code>No</code></td></tr>
+    <tr><td><code>para (i=0; i&lt;N; i++) &lbrace; ... &rbrace;</code></td><td>Init → Cond(rombo) → cuerpo → Inc → retroalimentación</td></tr>
+    <tr><td><code>repetir (N) &lbrace; ... &rbrace;</code></td><td>Nodo rombo <code>repetir N veces</code> + retroalimentación</td></tr>
+    <tr><td><code>cuando (var) &lbrace; ... &rbrace;</code></td><td>Nodo rombo <code>cuando (var)</code> + cuerpo</td></tr>
     <tr><td><code>retornar expr</code></td><td>Nodo rectángulo: <code>[retornar expr]</code></td></tr>
     <tr><td><code>f(args)</code> (llamada)</td><td>Nodo rectángulo: <code>[f(args)]</code></td></tr>
     <tr><td><code>importar "ruta"</code></td><td>Comentario: <code>%% Importar "ruta"</code></td></tr>
     <tr><td><code>tipo X = A | B</code></td><td>Nodo rectángulo con la definición</td></tr>
-    <tr><td><code>rasgo R { metodos }</code></td><td><code>subgraph Rasgo_R</code></td></tr>
-    <tr><td><code>implementa R para C { ... }</code></td><td><code>subgraph Impl_R_C</code> con métodos</td></tr>
+    <tr><td><code>rasgo R &lbrace; metodos &rbrace;</code></td><td><code>subgraph Rasgo_R</code></td></tr>
+    <tr><td><code>implementa R para C &lbrace; ... &rbrace;</code></td><td><code>subgraph Impl_R_C</code> con métodos</td></tr>
     <tr><td><code>variable a, b = expr</code></td><td>Nodo rectángulo: <code>[a, b = expr]</code></td></tr>
   </table>
 
