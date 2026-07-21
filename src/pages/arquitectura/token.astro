@@ -23,7 +23,9 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code>sino</code></td><td><code>Sino</code></td><td>Rama alternativa para el condicional.</td></tr>
     <tr><td><code>mientras</code></td><td><code>Mientras</code></td><td>Bucle controlado por condición booleana.</td></tr>
     <tr><td><code>para</code></td><td><code>Para</code></td><td>Bucle clásico de estilo C (inicialización; condición; incremento).</td></tr>
-    <tr><td><code>repetir</code></td><td><code>Repetir</code></td><td>Bucle de repetición fija (ej: <code>repetir 5 veces</code>).</td></tr>
+    <tr><td><code>repetir</code></td><td><code>Repetir</code></td><td>Bucle de repetición fija.</td></tr>
+    <tr><td><code>romper</code> / <code>break</code></td><td><code>Romper</code></td><td>Sale del bucle activo inmediatamente.</td></tr>
+    <tr><td><code>continuar</code> / <code>continue</code></td><td><code>Continuar</code></td><td>Pasa a la siguiente iteración del bucle.</td></tr>
     <tr><td><code>clase</code></td><td><code>Clase</code></td><td>Declara una nueva definición de tipo estructurado (Clase).</td></tr>
     <tr><td><code>constructor</code></td><td><code>Constructor</code></td><td>Declara la función constructora de una clase.</td></tr>
     <tr><td><code>este</code></td><td><code>Este</code></td><td>Referencia a la instancia actual del objeto (similar a <code>this</code> o <code>self</code>).</td></tr>
@@ -47,11 +49,18 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code>enviar</code></td><td><code>Enviar</code></td><td>Envía un mensaje por canal.</td></tr>
     <tr><td><code>recibir</code></td><td><code>Recibir</code></td><td>Bloquea y recibe un mensaje desde un canal.</td></tr>
     <tr><td><code>unir</code></td><td><code>Unir</code></td><td>Bloquea esperando la finalización de un hilo.</td></tr>
-    <tr><td><code>trait</code></td><td><code>Trait</code></td><td>Define interfaces / traits para polimorfismo.</td></tr>
+    <tr><td><code>rasgo</code></td><td><code>Rasgo</code></td><td>Define interfaces / traits para polimorfismo.</td></tr>
     <tr><td><code>implementa</code></td><td><code>Implementa</code></td><td>Implementa un trait para una clase específica.</td></tr>
+    <tr><td><code>donde</code></td><td><code>Donde</code></td><td>Cláusula de restricciones de tipo.</td></tr>
     <tr><td><code>seleccionar</code></td><td><code>Seleccionar</code></td><td>Selección no bloqueante de canales (select concurrente).</td></tr>
     <tr><td><code>tiempo</code></td><td><code>Tiempo</code></td><td>Rama de timeout en seleccionar.</td></tr>
     <tr><td><code>otro</code></td><td><code>Otro</code></td><td>Rama por defecto en seleccionar.</td></tr>
+    <tr><td><code>cuando</code></td><td><code>Cuando</code></td><td>Bloque reactivo/observador.</td></tr>
+    <tr><td><code>requiere</code></td><td><code>Requiere</code></td><td>Precondición (Design by Contract).</td></tr>
+    <tr><td><code>asegura</code></td><td><code>Asegura</code></td><td>Postcondición (Design by Contract).</td></tr>
+    <tr><td><code>siempre</code></td><td><code>Siempre</code></td><td>Invariante de clase (Design by Contract).</td></tr>
+    <tr><td><code>resultado</code></td><td><code>ResultadoKw</code></td><td>Valor de retorno en postcondiciones.</td></tr>
+    <tr><td><code>anterior</code></td><td><code>Anterior</code></td><td>Valor anterior en postcondiciones.</td></tr>
   </table>
 
   <h3>2. Tipos de Datos Primitivos</h3>

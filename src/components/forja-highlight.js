@@ -18,7 +18,7 @@ const TOKENS = [
   { type: 'comment', regex: /\/\/.*$/gm },
   { type: 'comment', regex: /\/\*[\s\S]*?\*\//gm },
   { type: 'string',  regex: /"([^"\\]|\\.)*"/gm },
-  { type: 'keyword', regex: /\b(constructor|seleccionar|implementa|coincidir|resultado|constante|importar|mientras|prestado|variable|anterior|asegura|externo|externa|funcion|recibir|repetir|requiere|retornar|siempre|enviar|tiempo|cuando|clase|nuevo|rasgo|donde|canal|caso|este|hilo|otro|para|sino|tipo|unir|mut|BD|no|si)\b/gm },
+  { type: 'keyword', regex: /\b(constructor|seleccionar|implementa|coincidir|resultado|constante|importar|mientras|prestado|variable|anterior|asegura|externo|externa|funcion|recibir|repetir|romper|continuar|requiere|retornar|siempre|enviar|tiempo|cuando|clase|nuevo|rasgo|donde|canal|caso|este|hilo|otro|para|sino|tipo|unir|mut|BD|no|si|o)\b/gm },
   { type: 'type',    regex: /\b(Booleano|Decimal|Entero|Exacto|Texto|Nulo)\b/gm },
   { type: 'function',regex: /\b(escribir|leer)\b/gm },
   { type: 'keyword', regex: /\b(verdadero|falso|nulo)\b/gm },
