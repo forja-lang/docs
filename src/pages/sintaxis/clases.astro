@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from '../../layouts/Layout.astro';
 ---
 
@@ -76,10 +76,29 @@ alumno.presentarse()
   <p>Instancia una clase y (si existe) llama al constructor automáticamente:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🚀 Instanciación</span></div>
-    <pre><code><span class="kw">variable</span> p = <span class="kw">nuevo</span> Persona(<span class="st">"Juan"</span>)    <span class="co">// con constructor</span>
+    <div class="code-header"><span>🚀 Instanciación posicional</span></div>
+    <pre><code><span class="kw">variable</span> p = <span class="kw">nuevo</span> Persona(<span class="st">"Juan"</span>)    <span class="co">// con constructor posicional</span>
 <span class="kw">variable</span> q = <span class="kw">nuevo</span> Punto()               <span class="co">// sin constructor</span></code></pre>
   </div>
+
+  <h2>Inicialización struct-literal</h2>
+
+  <p>Podés inicializar objetos usando llaves con nombres de campo, sin necesidad de definir un constructor posicional:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🏗️ Struct-literal</span></div>
+    <pre><code><span class="kw">clase</span> Persona &lbrace;
+    nombre
+    edad
+&rbrace;
+
+<span class="co">// Inicialización con llaves y nombres de campo</span>
+<span class="kw">variable</span> p = <span class="kw">nuevo</span> Persona &lbrace; nombre: <span class="st">"Ana"</span>, edad: 25 &rbrace;
+<span class="fn">escribir</span>(p.nombre) <span class="co">// → "Ana"</span>
+<span class="fn">escribir</span>(p.edad)   <span class="co">// → 25</span></code></pre>
+  </div>
+
+  <div class="info">💡 La sintaxis struct-literal <code>nuevo Clase &lbrace; campo: valor &rbrace;</code> es especialmente útil cuando la clase tiene muchos campos. El orden de los campos no importa y el código resulta más legible.</div>
 
   <h2>Clase sin constructor</h2>
 
@@ -128,6 +147,7 @@ alumno.presentarse()
     <tr><td><code>constructor(p) &lbrace; ... &rbrace;</code></td><td><code>fn nuevo(p: String) -> Self &lbrace; ... &rbrace;</code></td></tr>
     <tr><td><code>este.campo</code></td><td><code>self.campo</code></td></tr>
     <tr><td><code>nuevo X(args)</code></td><td><code>X::nuevo(args)</code></td></tr>
+    <tr><td><code>nuevo X &lbrace; campo: val &rbrace;</code></td><td><code>X &lbrace; campo: val &rbrace;</code></td></tr>
     <tr><td><code>objeto.metodo()</code></td><td><code>objeto.metodo()</code></td></tr>
   </table>
 </Layout>

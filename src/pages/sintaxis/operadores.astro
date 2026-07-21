@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from '../../layouts/Layout.astro';
 ---
 
@@ -68,6 +68,25 @@ import Layout from '../../layouts/Layout.astro';
   </table>
 
   <div class="tip"><strong>⚡ Propagación de errores:</strong> El operador <code>?</code> propaga errores automáticamente. Si la expresión es <code>Error(msg)</code>, la función retorna el error. Si es <code>Exito(valor)</code>, extrae el valor. Ideal para encadenar operaciones fallibles.</div>
+
+  <h2>Operador ternario</h2>
+
+  <p>El operador ternario permite expresiones condicionales en línea:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>❓ Ternario</span></div>
+    <pre><code><span class="kw">variable</span> edad = 20
+<span class="kw">variable</span> categoria = edad >= 18 <span class="op">?</span> <span class="st">"Mayor"</span> <span class="op">:</span> <span class="st">"Menor"</span>
+<span class="fn">escribir</span>(categoria) <span class="co">// → "Mayor"</span>
+
+<span class="co">// Se puede anidar (aunque se recomienda usar si/sino para legibilidad)</span>
+<span class="kw">variable</span> precio = edad > 65 <span class="op">?</span> 0 <span class="op">:</span> (edad >= 18 <span class="op">?</span> 100 <span class="op">:</span> 50)</code></pre>
+  </div>
+
+  <table>
+    <tr><th>Op</th><th>Sintaxis</th><th>Descripción</th></tr>
+    <tr><td><code><span class="op">? :</span></code></td><td><code>cond ? val_si : val_no</code></td><td>Si <code>cond</code> es verdadero retorna <code>val_si</code>, sino <code>val_no</code></td></tr>
+  </table>
 
   <h2>Precedencia de operadores</h2>
 

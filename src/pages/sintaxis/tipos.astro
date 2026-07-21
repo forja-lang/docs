@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from '../../layouts/Layout.astro';
 ---
 
@@ -53,6 +53,27 @@ import Layout from '../../layouts/Layout.astro';
 <span class="kw">variable</span> tabulado = <span class="st">"Col1\tCol2"</span></code></pre>
   </div>
 
+  <h2>Interpolación de cadenas</h2>
+
+  <p>Podés incrustar expresiones dentro de literales de texto usando <code>{expresion}</code> o <code>${expresion}</code>:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🔗 Interpolación</span></div>
+    <pre><code><span class="kw">variable</span> nombre = <span class="st">"Mundo"</span>
+<span class="kw">variable</span> edad = 25
+
+<span class="co">// Interpolación directa con llaves</span>
+<span class="fn">escribir</span>(<span class="st">"Hola {nombre}, tenés {edad} años"</span>)
+
+<span class="co">// Interpolación con dólar-llave (expresiones complejas)</span>
+<span class="fn">escribir</span>(<span class="st">"Resultado: ${2 + 3}"</span>)
+
+<span class="co">// Escape: \{ produce una llave literal</span>
+<span class="fn">escribir</span>(<span class="st">"Llave literal: \{no interpola\}"</span>)</code></pre>
+  </div>
+
+  <div class="info">💡 Ambas formas (<code>{expr}</code> y <code>${expr}</code>) son equivalentes. Usá la que te resulte más cómoda. Para incluir llaves literales, escapá con <code>\{</code> y <code>\}</code>.</div>
+
   <h2>Arreglos</h2>
 
   <div class="code-block-wrapper">
@@ -64,10 +85,13 @@ import Layout from '../../layouts/Layout.astro';
 numeros[0]  <span class="co">// → 1</span>
 
 <span class="co">// Longitud</span>
-numeros.length()  <span class="co">// → 5</span>
+numeros.longitud()  <span class="co">// → 5 (alias: .length())</span>
 
 <span class="co">// Modificar</span>
-numeros[2] = 99</code></pre>
+numeros[2] = 99
+
+<span class="co">// Agregar al final</span>
+numeros.empujar(6)  <span class="co">// (alias: .push())</span></code></pre>
   </div>
 
   <h2>Mapas (diccionarios)</h2>
@@ -78,9 +102,43 @@ numeros[2] = 99</code></pre>
 <span class="co">// Acceso por clave</span>
 persona[<span class="st">"nombre"</span>]  <span class="co">// → "Ana"</span>
 
+<span class="co">// Acceso con sintaxis de punto (equivalente)</span>
+persona.nombre  <span class="co">// → "Ana"</span>
+persona.edad    <span class="co">// → 30</span>
+
 <span class="co">// Modificar valor</span>
 persona[<span class="st">"edad"</span>] = 31</code></pre>
   </div>
+
+  <div class="info">💡 La sintaxis <code>mapa.clave</code> es azúcar sintáctico para <code>mapa["clave"]</code>. Podés usar ambas formas indistintamente.</div>
+
+  <h2>Métodos integrados en primitivos</h2>
+
+  <p>Los tipos <code>Texto</code> y <code>Arreglo</code> tienen métodos integrados que podés llamar con sintaxis orientada a objetos:</p>
+
+  <h3>Métodos de <code>Texto</code></h3>
+
+  <table>
+    <tr><th>Método</th><th>Alias</th><th>Descripción</th><th>Ejemplo</th></tr>
+    <tr><td><code>.longitud()</code></td><td><code>.length()</code></td><td>Cantidad de caracteres</td><td><code>"hola".longitud()</code> → <code>4</code></td></tr>
+    <tr><td><code>.a_mayusculas()</code></td><td><code>.to_upper()</code></td><td>Convierte a mayúsculas</td><td><code>"hola".a_mayusculas()</code> → <code>"HOLA"</code></td></tr>
+    <tr><td><code>.a_minusculas()</code></td><td><code>.to_lower()</code></td><td>Convierte a minúsculas</td><td><code>"HOLA".a_minusculas()</code> → <code>"hola"</code></td></tr>
+    <tr><td><code>.contiene(sub)</code></td><td><code>.contains(sub)</code></td><td>Verifica si contiene subcadena</td><td><code>"hola".contiene("ol")</code> → <code>verdadero</code></td></tr>
+    <tr><td><code>.dividir(sep)</code></td><td><code>.split(sep)</code></td><td>Divide por separador</td><td><code>"a,b,c".dividir(",")</code> → <code>["a", "b", "c"]</code></td></tr>
+    <tr><td><code>.recortar()</code></td><td><code>.trim()</code></td><td>Elimina espacios</td><td><code>" hola ".recortar()</code> → <code>"hola"</code></td></tr>
+    <tr><td><code>.invertir()</code></td><td><code>.reverse()</code></td><td>Invierte la cadena</td><td><code>"abc".invertir()</code> → <code>"cba"</code></td></tr>
+    <tr><td><code>.reemplazar(a, b)</code></td><td><code>.replace(a, b)</code></td><td>Reemplaza ocurrencias</td><td><code>"hola".reemplazar("o", "0")</code> → <code>"h0la"</code></td></tr>
+  </table>
+
+  <h3>Métodos de <code>Arreglo</code></h3>
+
+  <table>
+    <tr><th>Método</th><th>Alias</th><th>Descripción</th><th>Ejemplo</th></tr>
+    <tr><td><code>.longitud()</code></td><td><code>.length()</code></td><td>Cantidad de elementos</td><td><code>[1,2,3].longitud()</code> → <code>3</code></td></tr>
+    <tr><td><code>.empujar(elem)</code></td><td><code>.push(elem)</code></td><td>Agrega al final</td><td><code>arr.empujar(4)</code></td></tr>
+    <tr><td><code>.obtener(i)</code></td><td><code>.get(i)</code></td><td>Obtiene por índice</td><td><code>arr.obtener(0)</code></td></tr>
+    <tr><td><code>.remover(i)</code></td><td><code>.remove(i)</code></td><td>Elimina por índice</td><td><code>arr.remover(1)</code></td></tr>
+  </table>
 
   <h2>Tipos algebraicos (enums)</h2>
 
