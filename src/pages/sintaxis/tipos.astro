@@ -55,7 +55,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <h2>Interpolación de cadenas</h2>
 
-  <p>Podés incrustar expresiones dentro de literales de texto usando <code>{expresion}</code> o <code>${expresion}</code>:</p>
+  <p>Podés incrustar expresiones dentro de literales de texto usando <code>&#123;expresion&#125;</code> o <code>$&#123;expresion&#125;</code>:</p>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🔗 Interpolación</span></div>
@@ -63,16 +63,16 @@ import Layout from '../../layouts/Layout.astro';
 <span class="kw">variable</span> edad = 25
 
 <span class="co">// Interpolación directa con llaves</span>
-<span class="fn">escribir</span>(<span class="st">"Hola {nombre}, tenés {edad} años"</span>)
+<span class="fn">escribir</span>(<span class="st">"Hola &#123;nombre&#125;, tenés &#123;edad&#125; años"</span>)
 
 <span class="co">// Interpolación con dólar-llave (expresiones complejas)</span>
-<span class="fn">escribir</span>(<span class="st">"Resultado: ${2 + 3}"</span>)
+<span class="fn">escribir</span>(<span class="st">"Resultado: $&#123;2 + 3&#125;"</span>)
 
-<span class="co">// Escape: \{ produce una llave literal</span>
-<span class="fn">escribir</span>(<span class="st">"Llave literal: \{no interpola\}"</span>)</code></pre>
+<span class="co">// Escape: \&#123; produce una llave literal</span>
+<span class="fn">escribir</span>(<span class="st">"Llave literal: \&#123;no interpola\&#125;"</span>)</code></pre>
   </div>
 
-  <div class="info">💡 Ambas formas (<code>{expr}</code> y <code>${expr}</code>) son equivalentes. Usá la que te resulte más cómoda. Para incluir llaves literales, escapá con <code>\{</code> y <code>\}</code>.</div>
+  <div class="info">💡 Ambas formas (<code>&#123;expr&#125;</code> y <code>$&#123;expr&#125;</code>) son equivalentes. Usá la que te resulte más cómoda. Para incluir llaves literales, escapá con <code>\&#123;</code> y <code>\&#125;</code>.</div>
 
   <h2>Arreglos</h2>
 
