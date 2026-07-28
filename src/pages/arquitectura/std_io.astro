@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Módulo io — Entrada/Salida Estándar (stdlib) — Forja">
+  <h1>Módulo <code>io</code> — Entrada y Salida Estándar</h1>
+  <p><strong>Archivo:</strong> <code>stdlib/std/io.fa</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>Provee las operaciones fundamentales de <strong>entrada y salida</strong> estándar: leer de la consola, escribir a la consola, y leer líneas completas. Es el módulo más básico y el primero que cualquier programa Forja utiliza.</p>
+
+  <h2>Funciones principales</h2>
+  <table>
+    <tr><th>Función</th><th>Parámetros</th><th>Descripción</th></tr>
+    <tr><td><code>escribir</code></td><td>valor</td><td>Imprime un valor en la consola (sin salto de línea al final)</td></tr>
+    <tr><td><code>escribir_linea</code></td><td>valor</td><td>Imprime un valor con salto de línea al final</td></tr>
+    <tr><td><code>leer_linea</code></td><td>()</td><td>Lee una línea completa desde la entrada estándar (stdin)</td></tr>
+    <tr><td><code>leer_tecla</code></td><td>()</td><td>Lee una tecla individual sin esperar Enter (requiere modo raw)</td></tr>
+    <tr><td><code>imprimir</code></td><td>valor</td><td>Alias de <code>escribir</code></td></tr>
+    <tr><td><code>mostrar</code></td><td>valor</td><td>Alias de <code>escribir_linea</code></td></tr>
+  </table>
+
+  <h2>Uso básico</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📄 ejemplo_io.fa</span></div>
+    <pre><code><span class="fn">escribir</span>(<span class="st">"¿Cómo te llamas? "</span>)
+<span class="kw">variable</span> nombre = <span class="fn">leer_linea</span>()
+<span class="fn">escribir_linea</span>(<span class="st">"¡Hola, "</span> + nombre + <span class="st">"!"</span>)</code></pre>
+  </div>
+
+  <h2>Casos de uso</h2>
+  <ul>
+    <li><strong>Programas interactivos:</strong> Juegos (adivina el número, ahorcado), asistentes por línea de comandos</li>
+    <li><strong>Scripting:</strong> Procesamiento de entrada del usuario, menús interactivos</li>
+    <li><strong>Depuración:</strong> Imprimir valores de variables durante el desarrollo con <code>escribir_linea</code></li>
+    <li><strong>Logging simple:</strong> Salida de estado de programas en ejecución</li>
+  </ul>
+
+  <div class="tip"><strong>💡 Dato:</strong> Las funciones <code>escribir</code> y <code>escribir_linea</code> son las más usadas en todo el ecosistema Forja. <code>escribir_linea</code> es el equivalente a <code>println!</code> de Rust.</div>
+</Layout>

@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Módulos crypto / hash — Criptografía y Hashing (stdlib) — Forja">
+  <h1>Módulos <code>crypto</code> y <code>hash</code> — Criptografía y Hashing</h1>
+  <p><strong>Archivos:</strong> <code>stdlib/std/crypto.fa</code>, <code>stdlib/std/hash.fa</code></p>
+
+  <h2>¿Por qué existen?</h2>
+  <p>Exponen al usuario de Forja las operaciones criptográficas y de hashing implementadas en Rust en <code>src/crypto.rs</code>, <code>src/crypto_pq.rs</code> y <code>src/hash.rs</code>. Permiten cifrar datos, generar hashes, y usar criptografía post-cuántica desde código Forja.</p>
+
+  <h2>Módulo <code>crypto</code> — Cifrado y Criptografía</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>cifrar_aes_gcm(clave, iv, datos, aad)</code></td><td>Cifra datos con AES-256-GCM (autenticado)</td></tr>
+    <tr><td><code>descifrar_aes_gcm(clave, iv, cifrado, aad, tag)</code></td><td>Descifra datos cifrados con AES-256-GCM</td></tr>
+    <tr><td><code>cifrar_chacha20(clave, nonce, datos, aad)</code></td><td>Cifra datos con ChaCha20-Poly1305</td></tr>
+    <tr><td><code>descifrar_chacha20(clave, nonce, cifrado, aad, tag)</code></td><td>Descifra datos cifrados con ChaCha20-Poly1305</td></tr>
+    <tr><td><code>generar_bytes_aleatorios(n)</code></td><td>Genera n bytes criptográficamente aleatorios</td></tr>
+    <tr><td><code>generar_clave_aleatoria()</code></td><td>Genera una clave AES-256 aleatoria (32 bytes)</td></tr>
+    <tr><td><code>generar_iv_aleatorio()</code></td><td>Genera un IV aleatorio (12 bytes para GCM)</td></tr>
+    <tr><td><code>derivar_clave(contraseña, salt, iteraciones)</code></td><td>Deriva una clave usando PBKDF2-SHA256</td></tr>
+    <tr><td><code>generar_salt(longitud)</code></td><td>Genera un salt aleatorio para derivación</td></tr>
+    <tr><td><code>comparar_constante(a, b)</code></td><td>Comparación en tiempo constante (previene timing attacks)</td></tr>
+    <tr><td><code>generar_claves_pq()</code></td><td>Genera par de claves post-cuánticas (Kyber/ML-KEM)</td></tr>
+    <tr><td><code>encapsular_pk(clave_publica)</code></td><td>Encapsula un secreto compartido con cripto post-cuántica</td></tr>
+    <tr><td><code>desencapsular_pk(clave_secreta, ciphertext)</code></td><td>Recupera el secreto compartido</td></tr>
+  </table>
+
+  <h2>Módulo <code>hash</code> — Funciones Hash</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>hash_sha256(datos)</code></td><td>Calcula hash SHA-256 (32 bytes)</td></tr>
+    <tr><td><code>hash_sha384(datos)</code></td><td>Calcula hash SHA-384 (48 bytes)</td></tr>
+    <tr><td><code>hash_sha512(datos)</code></td><td>Calcula hash SHA-512 (64 bytes)</td></tr>
+    <tr><td><code>hash_sha3_256(datos)</code></td><td>Calcula hash SHA-3-256 (Keccak)</td></tr>
+    <tr><td><code>hash_blake3(datos)</code></td><td>Calcula hash BLAKE3 (rápido, moderno)</td></tr>
+    <tr><td><code>hmac_sha256(clave, datos)</code></td><td>Calcula HMAC con SHA-256</td></tr>
+    <tr><td><code>hash_archivo_sha256(ruta)</code></td><td>Calcula SHA-256 de un archivo completo</td></tr>
+    <tr><td><code>hash_archivo_blake3(ruta)</code></td><td>Calcula BLAKE3 de un archivo completo</td></tr>
+  </table>
+
+  <h2>Casos de uso</h2>
+  <ul>
+    <li><strong>Cifrado de datos:</strong> Proteger información sensible en reposo o en tránsito</li>
+    <li><strong>Autenticación:</strong> HMAC para verificar integridad de mensajes</li>
+    <li><strong>Verificación de integridad:</strong> Checksums SHA-256 de archivos descargados</li>
+    <li><strong>Derivación de claves:</strong> Convertir contraseñas en claves criptográficas</li>
+    <li><strong>Post-cuántico:</strong> Preparación para la era de computación cuántica con ML-KEM</li>
+  </ul>
+
+  <div class="tip"><strong>🔐 Seguridad:</strong> Forja implementa criptografía manualmente en Rust puro. Esto permite auditar el código y elimina dependencias externas. Siempre usá <code>comparar_constante</code> para comparar secrets.</div>
+</Layout>

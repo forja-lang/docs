@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Módulo matematica — Funciones Matemáticas (stdlib) — Forja">
+  <h1>Módulo <code>matematica</code> — Funciones y Constantes Matemáticas</h1>
+  <p><strong>Archivo:</strong> <code>stdlib/std/matematica.fa</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>Proporciona funciones matemáticas estándar: trigonometría, logaritmos, raíces, redondeo, generación de números aleatorios, y constantes fundamentales. Cubre las necesidades de cálculo científico y estadístico en Forja.</p>
+
+  <h2>Constantes</h2>
+  <table>
+    <tr><th>Nombre</th><th>Valor</th><th>Descripción</th></tr>
+    <tr><td><code>PI</code></td><td>3.141592653589793</td><td>Constante π (relación circunferencia/diámetro)</td></tr>
+    <tr><td><code>E</code></td><td>2.718281828459045</td><td>Constante de Euler (base de logaritmos naturales)</td></tr>
+    <tr><td><code>INFINITO</code></td><td>Inf</td><td>Representa infinito positivo</td></tr>
+    <tr><td><code>NAN</code></td><td>NaN</td><td>Representa "No es un Número"</td></tr>
+  </table>
+
+  <h2>Funciones principales</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>abs(x)</code></td><td>Valor absoluto</td></tr>
+    <tr><td><code>raiz(x)</code></td><td>Raíz cuadrada (sqrt)</td></tr>
+    <tr><td><code>exp(x)</code></td><td>e^x (exponencial)</td></tr>
+    <tr><td><code>ln(x)</code></td><td>Logaritmo natural (base e)</td></tr>
+    <tr><td><code>log(x, base)</code></td><td>Logaritmo en cualquier base</td></tr>
+    <tr><td><code>sen(x)</code></td><td>Seno (en radianes)</td></tr>
+    <tr><td><code>cos(x)</code></td><td>Coseno (en radianes)</td></tr>
+    <tr><td><code>tan(x)</code></td><td>Tangente (en radianes)</td></tr>
+    <tr><td><code>asen(x)</code></td><td>Arco seno</td></tr>
+    <tr><td><code>acos(x)</code></td><td>Arco coseno</td></tr>
+    <tr><td><code>atan(x)</code></td><td>Arco tangente</td></tr>
+    <tr><td><code>atan2(y, x)</code></td><td>Arco tangente de y/x (todos los cuadrantes)</td></tr>
+    <tr><td><code>senh(x)</code></td><td>Seno hiperbólico</td></tr>
+    <tr><td><code>cosh(x)</code></td><td>Coseno hiperbólico</td></tr>
+    <tr><td><code>tanh(x)</code></td><td>Tangente hiperbólica</td></tr>
+    <tr><td><code>redondear(x)</code></td><td>Redondea al entero más cercano</td></tr>
+    <tr><td><code>piso(x)</code></td><td>Redondea hacia abajo (floor)</td></tr>
+    <tr><td><code>techo(x)</code></td><td>Redondea hacia arriba (ceil)</td></tr>
+    <tr><td><code>potencia(base, exp)</code></td><td>Calcula base^exp (pow)</td></tr>
+    <tr><td><code>min(a, b)</code></td><td>Retorna el menor de dos valores</td></tr>
+    <tr><td><code>max(a, b)</code></td><td>Retorna el mayor de dos valores</td></tr>
+  </table>
+
+  <h2>Casos de uso</h2>
+  <ul>
+    <li><strong>Cálculo científico:</strong> Física, química, ingeniería</li>
+    <li><strong>Estadística:</strong> Análisis de datos, regresiones, distribuciones</li>
+    <li><strong>Gráficos:</strong> Cálculo de coordenadas, rotaciones, transformaciones</li>
+    <li><strong>Juegos:</strong> Física, detección de colisiones, movimiento</li>
+    <li><strong>Criptografía:</strong> Operaciones aritméticas para algoritmos criptográficos</li>
+  </ul>
+
+  <div class="info"><strong>🔢 Precisión:</strong> Todas las funciones trabajan con el tipo nativo <code>Decimal</code> (f64), ofreciendo precisión de 64 bits IEEE 754.</div>
+</Layout>

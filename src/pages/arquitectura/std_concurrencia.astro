@@ -1,0 +1,86 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Módulo concurrencia / atomicos — Hilos y Atómicos (stdlib) — Forja">
+  <h1>Módulos <code>concurrencia</code> y <code>atomicos</code> — Programación Concurrente</h1>
+  <p><strong>Archivos:</strong> <code>stdlib/std/concurrencia.fa</code>, <code>stdlib/std/atomicos.fa</code></p>
+
+  <h2>¿Por qué existen?</h2>
+  <p>Proveen capacidades de programación concurrente en Forja. <code>concurrencia.fa</code> implementa hilos (<code>hilo</code>), canales de comunicación (<code>canal</code>), y la primitiva <code>seleccionar</code> (select). <code>atomicos.fa</code> proporciona operaciones atómicas para acceso compartido sin locks.</p>
+
+  <h2>Módulo <code>concurrencia</code> — Hilos y Canales</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>hilo_crear(funcion)</code></td><td>Crea un nuevo hilo que ejecuta la función dada</td></tr>
+    <tr><td><code>hilo_dormir(ms)</code></td><td>Duerme el hilo actual por milisegundos</td></tr>
+    <tr><td><code>hilo_unir(handle)</code></td><td>Espera a que un hilo termine (join)</td></tr>
+    <tr><td><code>canal_crear()</code></td><td>Crea un canal de comunicación (retorna (tx, rx))</td></tr>
+    <tr><td><code>canal_enviar(tx, mensaje)</code></td><td>Envía un mensaje por el canal</td></tr>
+    <tr><td><code>canal_recibir(rx)</code></td><td>Recibe un mensaje del canal (bloqueante)</td></tr>
+    <tr><td><code>canal_intentar_recibir(rx)</code></td><td>Intenta recibir sin bloquear (no bloqueante)</td></tr>
+    <tr><td><code>seleccionar(rx1, rx2, ...)</code></td><td>Espera mensajes de múltiples canales (select)</td></tr>
+  </table>
+
+  <h2>Módulo <code>atomicos</code> — Operaciones Atómicas</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>EnteroAtomico.nuevo(valor)</code></td><td>Crea un nuevo entero atómico</td></tr>
+    <tr><td><code>atomico.cargar()</code></td><td>Carga el valor actual (load)</td></tr>
+    <tr><td><code>atomico.guardar(valor)</code></td><td>Guarda un nuevo valor (store)</td></tr>
+    <tr><td><code>atomico.intercambiar(valor)</code></td><td>Intercambia el valor atómicamente (swap)</td></tr>
+    <tr><td><code>atomico.comparar_intercambiar(esperado, nuevo)</code></td><td>CAS (Compare-And-Swap) atómico</td></tr>
+    <tr><td><code>atomico.sumar(valor)</code></td><td>Suma atómica (fetch_add)</td></tr>
+    <tr><td><code>atomico.restar(valor)</code></td><td>Resta atómica (fetch_sub)</td></tr>
+  </table>
+
+  <h2>Ejemplo: Productor-Consumidor</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📄 productor_consumidor.fa</span></div>
+    <pre><code><span class="kw">importar</span> concurrencia
+
+<span class="kw">variable</span> (tx, rx) = concurrencia.canal_crear()
+
+<span class="kw">funcion</span> productor() &brace;
+    <span class="kw">para</span> (<span class="kw">variable</span> i = 0; i < 5; i = i + 1) &brace;
+        concurrencia.canal_enviar(tx, i)
+        concurrencia.hilo_dormir(100)
+    &rbrace;
+&rbrace;
+
+<span class="kw">funcion</span> consumidor() &brace;
+    <span class="kw">para</span> (<span class="kw">variable</span> i = 0; i < 5; i = i + 1) &brace;
+        <span class="kw">variable</span> msg = concurrencia.canal_recibir(rx)
+        <span class="fn">escribir_linea</span>(<span class="st">"Recibido: "</span> + msg)
+    &rbrace;
+&rbrace;
+
+<span class="kw">variable</span> h1 = concurrencia.hilo_crear(productor)
+<span class="kw">variable</span> h2 = concurrencia.hilo_crear(consumidor)
+concurrencia.hilo_unir(h1)
+concurrencia.hilo_unir(h2)</code></pre>
+  </div>
+
+  <h2>Ejemplo: Select (equivalente a <code>select</code> en Go)</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📄 select.fa</span></div>
+    <pre><code><span class="kw">importar</span> concurrencia
+
+<span class="kw">variable</span> (tx1, rx1) = concurrencia.canal_crear()
+<span class="kw">variable</span> (tx2, rx2) = concurrencia.canal_crear()
+
+<span class="co">// seleccionar espera mensajes de múltiples canales</span>
+<span class="kw">variable</span> resultado = concurrencia.seleccionar(rx1, rx2)
+<span class="fn">escribir_linea</span>(<span class="st">"Llegó: "</span> + resultado)</code></pre>
+  </div>
+
+  <h2>Casos de uso</h2>
+  <ul>
+    <li><strong>Procesamiento paralelo:</strong> Distribuir trabajo entre múltiples hilos</li>
+    <li><strong>Comunicación entre hilos:</strong> Pasar mensajes de forma segura entre hilos</li>
+    <li><strong>Sincronización:</strong> Coordinar acceso a recursos compartidos</li>
+    <li><strong>Timeouts:</strong> Combinar <code>seleccionar</code> con temporizadores</li>
+  </ul>
+
+  <div class="info"><strong>💡 Modelo CSP:</strong> Forja implementa el modelo de <strong>Comunicación Secuencial de Procesos</strong> (CSP), similar a Go y Erlang. Las comunicaciones entre hilos se hacen mediante canales, no memoria compartida.</div>
+</Layout>

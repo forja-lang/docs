@@ -1,0 +1,73 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Módulo resultado — Opcion y Resultado (Option/Result) (stdlib) — Forja">
+  <h1>Módulo <code>resultado</code> — Tipos Option y Result</h1>
+  <p><strong>Archivo:</strong> <code>stdlib/std/resultado.fa</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>Proporciona utilidades para trabajar con los tipos algebraicos fundamentales de Forja: <strong>Opcion</strong> (Option — Alguno/None) y <strong>Resultado</strong> (Result — Ok/Error). Estos tipos son la columna vertebral del manejo de errores y valores opcionales en Forja.</p>
+
+  <div class="warning"><strong>📝 Cambio de semántica:</strong> En versiones recientes de Forja, los constructores de Opcion aceptan tanto la forma inglesa como la española: <code>Alguno(valor)</code> / <code>Algo(valor)</code> / <code>Some(valor)</code> para <code>some</code>, y <code>Ninguno()</code> / <code>None()</code> para <code>none</code>. La sintaxis recomendada es usar <code>Alguno</code> y <code>Ninguno</code>.</div>
+
+  <h2>Constructores</h2>
+  <table>
+    <tr><th>Tipo</th><th>Constructores</th><th>Descripción</th></tr>
+    <tr><td><strong>Opcion</strong></td><td><code>Alguno(valor)</code>, <code>Algo(valor)</code>, <code>Some(valor)</code></td><td>Representa la presencia de un valor</td></tr>
+    <tr><td><strong>Opcion</strong></td><td><code>Ninguno()</code>, <code>None()</code></td><td>Representa la ausencia de valor</td></tr>
+    <tr><td><strong>Resultado</strong></td><td><code>Ok(valor)</code></td><td>Representa una operación exitosa</td></tr>
+    <tr><td><strong>Resultado</strong></td><td><code>Error(mensaje)</code>, <code>Err(mensaje)</code></td><td>Representa un error con mensaje</td></tr>
+  </table>
+
+  <h2>Funciones principales</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>es_alguno(opcion)</code></td><td>Retorna verdadero si la opción es Alguno/Some</td></tr>
+    <tr><td><code>es_ninguno(opcion)</code></td><td>Retorna verdadero si es Ninguno/None</td></tr>
+    <tr><td><code>es_ok(resultado)</code></td><td>Retorna verdadero si es Ok</td></tr>
+    <tr><td><code>es_error(resultado)</code></td><td>Retorna verdadero si es Error</td></tr>
+    <tr><td><code>obtener_o_sino(opcion, default)</code></td><td>Extrae el valor o retorna un default (unwrap_or)</td></tr>
+    <tr><td><code>obtener_o_ninguno(opcion)</code></td><td>Extrae el valor o retorna Ninguno</td></tr>
+    <tr><td><code>mapear(opcion, fn)</code></td><td>Aplica una función al valor interno si existe (map)</td></tr>
+    <tr><td><code>a_resultado(opcion, mensaje_error)</code></td><td>Convierte Opcion a Resultado (ok_or)</td></tr>
+    <tr><td><code>resultado_ok(resultado)</code></td><td>Extrae el valor Ok o lanza error</td></tr>
+    <tr><td><code>resultado_error(resultado)</code></td><td>Extrae el mensaje de error</td></tr>
+  </table>
+
+  <h2>Uso con pattern matching</h2>
+  <p>La forma más común de trabajar con estos tipos es usando <code>coincidir</code>:</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📄 manejo_opcion.fa</span></div>
+    <pre><code><span class="kw">variable</span> usuario_opt = env.obtener(<span class="st">"USER"</span>)
+<span class="kw">coincidir</span> (usuario_opt) &brace;
+    <span class="kw">caso</span> Alguno(v) -> &brace;
+        <span class="fn">escribir_linea</span>(<span class="st">"Usuario: "</span> + v)
+    &rbrace;
+    <span class="kw">caso</span> Ninguno -> &brace;
+        <span class="fn">escribir_linea</span>(<span class="st">"Usuario: desconocido"</span>)
+    &rbrace;
+&rbrace;
+
+<span class="co">// Para Resultado:</span>
+<span class="kw">variable</span> archivo = <span class="fn">archivo_leer</span>(<span class="st">"datos.txt"</span>)
+<span class="kw">coincidir</span> (archivo) &brace;
+    <span class="kw">caso</span> Ok(contenido) -> &brace;
+        <span class="fn">escribir_linea</span>(<span class="st">"Contenido: "</span> + contenido)
+    &rbrace;
+    <span class="kw">caso</span> Error(msg) -> &brace;
+        <span class="fn">escribir_linea</span>(<span class="st">"Error: "</span> + msg)
+    &rbrace;
+&rbrace;</code></pre>
+  </div>
+
+  <h2>Casos de uso</h2>
+  <ul>
+    <li><strong>Manejo de errores:</strong> Reemplazar excepciones con valores de retorno explícitos</li>
+    <li><strong>Valores opcionales:</strong> Representar valores que pueden o no estar presentes (buscar en mapas, parsear, etc.)</li>
+    <li><strong>Encadenamiento seguro:</strong> Usar <code>mapear</code> y <code>obtener_o_sino</code> para operaciones sin riesgo de error</li>
+    <li><strong>FFI:</strong> Retornar Opcion o Resultado desde funciones nativas que pueden fallar</li>
+  </ul>
+
+  <div class="tip"><strong>💡 Filosofía:</strong> Forja promueve el manejo explícito de errores mediante tipos algebraicos en lugar de excepciones. Esto hace que el código sea más predecible y seguro, similar a Rust pero con sintaxis en español.</div>
+</Layout>

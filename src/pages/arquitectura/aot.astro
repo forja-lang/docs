@@ -3,16 +3,41 @@ import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout title="AOT (aot.rs) — Forja">
-  <h1>AOT – Compilación Ahead‑Of‑Time</h1>
+  <h1>AOT – Compilación Ahead‑Of‑Time a Nativo</h1>
   <p><strong>Archivo:</strong> <code>src/aot.rs</code></p>
+
   <h2>¿Por qué existe?</h2>
-  <p>Permite pre‑compilar programas Forja a código nativo antes de la ejecución, mejorando el arranque y el rendimiento.</p>
-  <h2>Cómo funciona</h2>
-  <p>El compilador genera bytecode y luego lo traduce a código nativo usando el backend ASM o LLVM.</p>
-  <h2>Ejemplo de código</h2>
-  ```rust
-  // uso típico del AOT
-  let binary = forja::compilar_aot("programa.forja").unwrap();
-  println!("Archivo binario generado: {}", binary);
-  ```
+  <p>Permite <strong>pre‑compilar programas Forja a binarios nativos estáticos</strong> antes de la ejecución, eliminando por completo la necesidad de la VM en tiempo de ejecución. Ideal para distribuir aplicaciones Forja como ejecutables independientes sin dependencias externas.</p>
+
+  <h2>Arquitectura</h2>
+  <p>El AOT compila el AST de Forja a código nativo a través de dos backends posibles:</p>
+  <ul>
+    <li><strong>Backend ASM</strong> (<code>compiler_asm.rs</code>): Genera código assembly x86-64/ARM64 que luego se ensambla con GCC/MSVC.</li>
+    <li><strong>Backend LLVM</strong> (<code>compiler_llvm.rs</code>): Genera IR de LLVM que se compila a nativo con <code>llc</code>.</li>
+  </ul>
+
+  <h2>Pipeline AOT</h2>
+  <ol>
+    <li><strong>Parseo:</strong> El archivo <code>.fa</code> se parsea a AST.</li>
+    <li><strong>Análisis semántico:</strong> Borrow checker, resolución de nombres y tipado.</li>
+    <li><strong>Generación:</strong> Se genera bytecode, assembly o LLVM IR.</li>
+    <li><strong>Compilación nativa:</strong> Se invoca al ensamblador/compilador externo (GCC, MSVC, <code>llc</code>).</li>
+    <li><strong>Enlace:</strong> Se genera un binario ejecutable estático.</li>
+  </ol>
+
+  <h2>API Pública</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>compilar_aot(origen) -> Result&#60;PathBuf&#62;</code></td><td>Compila un archivo .fa a binario nativo estático</td></tr>
+    <tr><td><code>compilar_aot_con_asm(origen) -> Result&#60;PathBuf&#62;</code></td><td>Compila usando el backend ASM (x86-64/ARM64)</td></tr>
+    <tr><td><code>compilar_aot_con_llvm(origen) -> Result&#60;PathBuf&#62;</code></td><td>Compila usando el backend LLVM IR</td></tr>
+  </table>
+
+  <h2>¿Cuándo se usa?</h2>
+  <p>Cuando se necesita un ejecutable independiente para distribución. El AOT es útil para:</p>
+  <ul>
+    <li>Distribuir aplicaciones Forja sin requerir el runtime de Forja</li>
+    <li>Maximizar rendimiento en producción (código nativo optimizado)</li>
+    <li>Integrar Forja en sistemas embebidos o con restricciones de recursos</li>
+  </ul>
 </Layout>

@@ -37,7 +37,11 @@ import Layout from '../layouts/Layout.astro';
       <tr><td><strong>Lenguaje</strong></td><td>Rust (edition 2021)</td><td><code>src/main.rs</code>, <code>src/lib.rs</code></td></tr>
       <tr><td><strong>CLI</strong></td><td>20+ comandos en español/inglés</td><td><code>src/main.rs</code> (1818 líneas)</td></tr>
       <tr><td><strong>Lexer + Parser</strong></td><td>Recursive Descent</td><td><code>src/lexer.rs</code>, <code>src/parser.rs</code></td></tr>
+      <tr><td><strong>Tokens</strong></td><td>Definición de tokens del lenguaje</td><td><code>src/token.rs</code></td></tr>
+      <tr><td><strong>AST</strong></td><td>Árbol de Sintaxis Abstracta</td><td><code>src/ast.rs</code></td></tr>
       <tr><td><strong>Semántica</strong></td><td>Type Checker + Borrow Checker</td><td><code>src/semantics.rs</code></td></tr>
+      <tr><td><strong>Tabla de Símbolos</strong></td><td>Resolución de nombres y ámbitos</td><td><code>src/symbol_table.rs</code></td></tr>
+      <tr><td><strong>Descriptores de Clase</strong></td><td>Metadatos de clases y herencia</td><td><code>src/class_descriptor.rs</code></td></tr>
       <tr><td><strong>Bytecode</strong></td><td>60+ opcodes stack-based</td><td><code>src/bytecode.rs</code> (3212 líneas)</td></tr>
       <tr><td><strong>Micro-opcodes</strong></td><td>Expansión + optimización de opcodes</td><td><code>src/uops.rs</code> (798 líneas)</td></tr>
       <tr><td><strong>VM v1</strong></td><td>Stack-based original</td><td><code>src/vm.rs</code> (2935 líneas)</td></tr>
@@ -48,18 +52,39 @@ import Layout from '../layouts/Layout.astro';
       <tr><td><strong>Compilador AOT</strong></td><td>.exe autónomo con bytecode incrustado</td><td><code>src/aot.rs</code>, <code>src/selfrun.rs</code></td></tr>
       <tr><td><strong>Optimizador</strong></td><td>Constant folding + Dead Code Elimination</td><td><code>src/optimizer.rs</code></td></tr>
       <tr><td><strong>Módulos</strong></td><td>Importación con seguridad anti path traversal</td><td><code>src/module.rs</code></td></tr>
+      <tr><td><strong>Transpilador Rust</strong></td><td>Forja → código Rust</td><td><code>src/transpiler.rs</code></td></tr>
+      <tr><td><strong>Compilador LLVM</strong></td><td>Generación de IR + optimización LLVM</td><td><code>src/compiler_llvm.rs</code> (911 líneas)</td></tr>
+      <tr><td><strong>Preludio</strong></td><td>Funciones intrínsecas del lenguaje</td><td><code>src/prelude.rs</code> (10 líneas)</td></tr>
       <tr><td><strong>WASM</strong></td><td>wasm-bindgen → playground en navegador</td><td><code>crates/forja-wasm/</code></td></tr>
       <tr><td><strong>REPL</strong></td><td>rustyline, variables persistentes</td><td><code>src/repl.rs</code></td></tr>
       <tr><td><strong>Formatter</strong></td><td>Formateo automático de código</td><td><code>src/formatter.rs</code></td></tr>
       <tr><td><strong>Diagrama</strong></td><td>HTML interactivo del AST</td><td><code>src/diagrama.rs</code></td></tr>
       <tr><td><strong>Extensión VSCode</strong></td><td>TextMate grammar + snippets</td><td><code>vscode/forja-syntax/</code></td></tr>
-      <tr><td><strong>Compilador LLVM</strong></td><td>Generación de IR + optimización LLVM</td><td><code>src/compiler_llvm.rs</code> (911 líneas)</td></tr>
       <tr><td><strong>Design by Contract</strong></td><td>pre/post condiciones, invariantes</td><td><code>src/ast.rs</code>, <code>src/bytecode.rs</code></td></tr>
       <tr><td><strong>Hot Reload</strong></td><td>Recargar módulos en caliente</td><td><code>src/module.rs</code>, <code>src/vm_fast.rs</code></td></tr>
       <tr><td><strong>Profiler integrado</strong></td><td>Perfilado de funciones y VMs</td><td><code>src/fprofiler.rs</code> (164 líneas)</td></tr>
       <tr><td><strong>Package Manager</strong></td><td>add, remove, install, forja.json</td><td><code>src/package_config.rs</code>, <code>src/package_resolver.rs</code></td></tr>
-      <tr><td><strong>Debugger</strong></td><td>Depurador integrado (DAP)</td><td><code>src/debugger.rs</code> (600 líneas)</td></tr>
+      <tr><td><strong>Debugger DAP</strong></td><td>Depurador integrado (DAP) + servidor</td><td><code>src/debugger.rs</code> (789 líneas), <code>src/bin/forja_dap.rs</code> (818 líneas)</td></tr>
+      <tr><td><strong>Servidor LSP</strong></td><td>Language Server Protocol para IDE</td><td><code>src/bin/forja_lsp.rs</code> (1538 líneas)</td></tr>
       <tr><td><strong>GUI Nativa</strong></td><td>Xilem runtime, ventanas nativas</td><td><code>src/gui_nativa.rs</code> (5942 líneas)</td></tr>
+      <tr><td><strong>Sistema de Errores</strong></td><td>Mensajes de error educativos en español</td><td><code>src/error.rs</code> (316 líneas)</td></tr>
+      <tr><td><strong>Base64</strong></td><td>Codificación/decodificación Base64</td><td><code>src/base64.rs</code> (152 líneas)</td></tr>
+      <tr><td><strong>Criptografía</strong></td><td>AES-GCM, ChaCha20-Poly1305, cifrado simétrico</td><td><code>src/crypto.rs</code> (1127 líneas)</td></tr>
+      <tr><td><strong>Criptografía Post-Cuántica</strong></td><td>ML-KEM, ML-DSA, SLH-DSA (FIPS 205/206)</td><td><code>src/crypto_pq.rs</code> (444 líneas)</td></tr>
+      <tr><td><strong>Hash</strong></td><td>BLAKE3, SHA-2, SHA-3 familia completa</td><td><code>src/hash.rs</code> (519 líneas)</td></tr>
+      <tr><td><strong>Memory-Mapped Files</strong></td><td>E/S de archivos mapeados en memoria</td><td><code>src/mmap.rs</code> (305 líneas)</td></tr>
+      <tr><td><strong>HTTP/2 Nativo (Core)</strong></td><td>Implementación HTTP/2 sobre h2 crate</td><td><code>src/native_h2_core.rs</code> (1495 líneas)</td></tr>
+      <tr><td><strong>HTTP/2 Nativo (TLS)</strong></td><td>Soporte TLS para HTTP/2 nativo</td><td><code>src/native_h2_tls.rs</code> (178 líneas)</td></tr>
+      <tr><td><strong>Registro Nativo</strong></td><td>Función FFI masiva: 5000+ líneas de bindings</td><td><code>src/native_registry.rs</code> (5110 líneas)</td></tr>
+      <tr><td><strong>SQLite Nativo</strong></td><td>Bindings directos a libsqlite3</td><td><code>src/native_sqlite.rs</code> (558 líneas)</td></tr>
+      <tr><td><strong>Sandbox</strong></td><td>Aislamiento de ejecución de código</td><td><code>src/sandbox.rs</code> (204 líneas)</td></tr>
+      <tr><td><strong>Terminal</strong></td><td>Utilidades de terminal (colores, cursor)</td><td><code>src/terminal.rs</code> (257 líneas)</td></tr>
+      <tr><td><strong>stdlib Incrustada</strong></td><td>Módulos de std empaquetados en el binario</td><td><code>src/stdlib_embedded.rs</code> (139 líneas)</td></tr>
+      <tr><td><strong>API Pública</strong></td><td>Biblioteca pública para integración (lib)</td><td><code>src/lib.rs</code></td></tr>
+      <tr><td><strong>LSP Completado</strong></td><td>Completado inteligente para IDE</td><td><code>lsp/completado.rs</code></td></tr>
+      <tr><td><strong>LSP Firma</strong></td><td>Firma de funciones en hover</td><td><code>lsp/firma.rs</code></td></tr>
+      <tr><td><strong>LSP Índice stdlib</strong></td><td>Índice de módulos stdlib para LSP</td><td><code>lsp/index_stdlib.rs</code></td></tr>
+      <tr><td><strong>LSP Snippets</strong></td><td>Snippets de código para IDE</td><td><code>lsp/snippets.rs</code></td></tr>
     </tbody>
   </table>
 

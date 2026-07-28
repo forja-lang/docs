@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Módulo colecciones — Arreglos, Mapas y Pilas (stdlib) — Forja">
+  <h1>Módulo <code>colecciones</code> — Estructuras de Datos</h1>
+  <p><strong>Archivo:</strong> <code>stdlib/std/colecciones.fa</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>Provee operaciones avanzadas sobre las estructuras de datos nativas de Forja: <strong>arreglos</strong> (listas), <strong>mapas</strong> (diccionarios), y agrega estructuras adicionales como <strong>pilas</strong> y <strong>conjuntos</strong>.</p>
+
+  <h2>Funciones sobre Arreglos</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>longitud(arr)</code></td><td>Retorna la cantidad de elementos</td></tr>
+    <tr><td><code>empujar(arr, valor)</code></td><td>Agrega un elemento al final (push)</td></tr>
+    <tr><td><code>sacar(arr)</code></td><td>Quita y retorna el último elemento (pop)</td></tr>
+    <tr><td><code>insertar(arr, idx, valor)</code></td><td>Inserta un elemento en una posición específica</td></tr>
+    <tr><td><code>eliminar(arr, idx)</code></td><td>Elimina el elemento en una posición</td></tr>
+    <tr><td><code>contiene(arr, valor)</code></td><td>Verifica si un valor existe en el arreglo</td></tr>
+    <tr><td><code>indice_de(arr, valor)</code></td><td>Busca el índice de un valor</td></tr>
+    <tr><td><code>ordenar(arr)</code></td><td>Ordena el arreglo in-place</td></tr>
+    <tr><td><code>invertir(arr)</code></td><td>Invierte el orden del arreglo</td></tr>
+    <tr><td><code>mapa(arr, fn)</code></td><td>Aplica una función a cada elemento (map)</td></tr>
+    <tr><td><code>filtrar(arr, fn)</code></td><td>Filtra elementos según un predicado (filter)</td></tr>
+    <tr><td><code>reducir(arr, fn, inicial)</code></td><td>Acumula valores (reduce/fold)</td></tr>
+  </table>
+
+  <h2>Funciones sobre Mapas</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>tiene(mapa, clave)</code></td><td>Verifica si una clave existe en el mapa</td></tr>
+    <tr><td><code>claves(mapa)</code></td><td>Retorna un arreglo con todas las claves</td></tr>
+    <tr><td><code>valores(mapa)</code></td><td>Retorna un arreglo con todos los valores</td></tr>
+    <tr><td><code>copiar(mapa)</code></td><td>Crea una copia superficial del mapa</td></tr>
+  </table>
+
+  <h2>Estructuras Adicionales</h2>
+  <h3>Pila (Stack)</h3>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>Pila.nueva()</code></td><td>Crea una pila vacía</td></tr>
+    <tr><td><code>pila.apilar(valor)</code></td><td>Agrega un elemento en la cima</td></tr>
+    <tr><td><code>pila.desapilar()</code></td><td>Quita y retorna el elemento de la cima</td></tr>
+    <tr><td><code>pila.tope()</code></td><td>Retorna el elemento en la cima sin quitarlo</td></tr>
+    <tr><td><code>pila.esta_vacia()</code></td><td>Verifica si la pila está vacía</td></tr>
+  </table>
+
+  <h2>Casos de uso</h2>
+  <ul>
+    <li><strong>Procesamiento de datos:</strong> Map/reduce sobre colecciones de datos</li>
+    <li><strong>Algoritmos:</strong> Búsqueda, ordenamiento, backtracking (con pilas)</li>
+    <li><strong>Estructuras temporales:</strong> Acumuladores, buffers, cachés en memoria</li>
+    <li><strong>Transformación de datos:</strong> Convertir, filtrar y agregar datos</li>
+  </ul>
+
+  <div class="tip"><strong>💡 Rendimiento:</strong> Las operaciones <code>mapa</code>, <code>filtrar</code> y <code>reducir</code> permiten escribir código declarativo y evitan bucles manuales, mejorando la legibilidad sin sacrificar rendimiento.</div>
+</Layout>

@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Módulo texto — Cadenas y Manipulación de Texto (stdlib) — Forja">
+  <h1>Módulo <code>texto</code> — Manipulación de Cadenas</h1>
+  <p><strong>Archivo:</strong> <code>stdlib/std/texto.fa</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>Proporciona operaciones avanzadas de manipulación de cadenas de texto: búsqueda, extracción, transformación, división, y trimming. Complementa las operaciones básicas de strings que vienen integradas en el lenguaje.</p>
+
+  <h2>Funciones principales</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>longitud(s)</code></td><td>Retorna el número de caracteres de la cadena</td></tr>
+    <tr><td><code>a_mayusculas(s)</code></td><td>Convierte toda la cadena a mayúsculas</td></tr>
+    <tr><td><code>a_minusculas(s)</code></td><td>Convierte toda la cadena a minúsculas</td></tr>
+    <tr><td><code>recortar(s)</code></td><td>Elimina espacios en blanco al inicio y final</td></tr>
+    <tr><td><code>contiene(s, subcadena)</code></td><td>Verifica si la cadena contiene una subcadena</td></tr>
+    <tr><td><code>empieza_con(s, prefijo)</code></td><td>Verifica si la cadena empieza con el prefijo dado</td></tr>
+    <tr><td><code>termina_con(s, sufijo)</code></td><td>Verifica si la cadena termina con el sufijo dado</td></tr>
+    <tr><td><code>dividir(s, separador)</code></td><td>Divide la cadena en un arreglo usando el separador</td></tr>
+    <tr><td><code>subcadena(s, inicio, fin)</code></td><td>Extrae una porción de la cadena entre índices</td></tr>
+    <tr><td><code>remplazar(s, buscado, reemplazo)</code></td><td>Reemplaza todas las ocurrencias de un patrón</td></tr>
+    <tr><td><code>invertir(s)</code></td><td>Invierte el orden de los caracteres</td></tr>
+    <tr><td><code>a_entero(s)</code></td><td>Convierte una cadena a entero (i64)</td></tr>
+    <tr><td><code>a_decimal(s)</code></td><td>Convierte una cadena a decimal (f64)</td></tr>
+    <tr><td><code>repetir(s, n)</code></td><td>Repite la cadena n veces</td></tr>
+    <tr><td><code>formatear(plantilla, valores)</code></td><td>Formatea una plantilla con valores (similar a f-strings)</td></tr>
+  </table>
+
+  <h2>Casos de uso</h2>
+  <ul>
+    <li><strong>Validación de entrada:</strong> Verificar formato de datos ingresados por el usuario</li>
+    <li><strong>Procesamiento de texto:</strong> Analizar archivos de texto, logs, y configuraciones</li>
+    <li><strong>Parser de comandos:</strong> Dividir y analizar comandos del usuario en interfaces CLI</li>
+    <li><strong>Generación de reportes:</strong> Formatear texto para salida en tablas o informes</li>
+    <li><strong>Limpieza de datos:</strong> Recortar, normalizar y transformar texto</li>
+  </ul>
+
+  <div class="info"><strong>💡 Integración:</strong> Este módulo trabaja en conjunto con el tipo nativo <code>Texto</code> de Forja. Las operaciones como <code>+</code> para concatenación y <code>[]</code> para acceso por índice son parte del lenguaje, mientras que las transformaciones complejas están en este módulo.</div>
+</Layout>

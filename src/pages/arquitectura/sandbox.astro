@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Sandbox (sandbox.rs) — Forja">
+  <h1>Sandbox de Red (Aislamiento de Ejecución)</h1>
+  <p><strong>Archivo:</strong> <code>src/sandbox.rs</code> (204 líneas)</p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>Implementa un <strong>sandbox de red</strong> que controla el acceso a operaciones de red (TCP/UDP) desde programas Forja. Por defecto, el sandbox está en modo <strong>"air-gapped"</strong>: ninguna conexión de red está permitida. Esto es fundamental para ejecutar código no confiable de manera segura.</p>
+
+  <h2>Modos de operación</h2>
+  <table>
+    <tr><th>Modo</th><th>Configuración</th><th>Comportamiento</th></tr>
+    <tr><td><strong>Air-gapped</strong> (default)</td><td><code>hosts_permitidos = None</code></td><td>No se permite NINGUNA conexión de red</td></tr>
+    <tr><td><strong>Hosts específicos</strong></td><td><code>hosts_permitidos = Some(["localhost", "127.0.0.1"])</code></td><td>Solo conexiones a hosts explicitamente permitidos</td></tr>
+    <tr><td><strong>Sin restricción</strong></td><td><code>hosts_permitidos = Some(["*"])</code></td><td>Todos los hosts están permitidos</td></tr>
+  </table>
+
+  <h2>API Pública</h2>
+  <table>
+    <tr><th>Función/Método</th><th>Descripción</th></tr>
+    <tr><td><code>SandboxRed::new()</code></td><td>Crea sandbox en modo air-gapped (sin red)</td></tr>
+    <tr><td><code>permitir_host(host)</code></td><td>Agrega un host a la lista de permitidos</td></tr>
+    <tr><td><code>permitir_puerto(puerto)</code></td><td>Agrega un puerto a la lista de permitidos</td></tr>
+    <tr><td><code>verificar(host, puerto)</code></td><td>Verifica si una conexión está permitida</td></tr>
+    <tr><td><code>modo_airgap()</code></td><td>Retorna true si el sandbox está en modo air-gapped</td></tr>
+  </table>
+
+  <h2>Control desde CLI</h2>
+  <p>El sandbox se configura desde la línea de comandos al ejecutar un programa Forja:</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🛡️ Flags de sandbox</span></div>
+    <pre><code><span class="co"># Modo air-gapped (por defecto, no hace falta flag)</span>
+forja run script.fa
+
+<span class="co"># Permitir hosts específicos</span>
+forja run --allow-net localhost,127.0.0.1 script.fa
+
+<span class="co"># Permitir todos los hosts</span>
+forja run --allow-net "*" script.fa
+
+<span class="co"># Restringir puertos</span>
+forja run --allow-port 80,443 script.fa
+
+<span class="co"># Combinación</span>
+forja run --allow-net localhost --allow-port 3000 script.fa</code></pre>
+  </div>
+
+  <div class="warning"><strong>⚠️ Seguridad:</strong> El sandbox de red es la primera línea de defensa. Se complementa con el sistema de módulos (que previene path traversal) y el diseño general de la VM que aísla la memoria entre programas.</div>
+</Layout>

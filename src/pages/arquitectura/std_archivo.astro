@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Módulo archivo / sistema — Archivos y Sistema Operativo (stdlib) — Forja">
+  <h1>Módulos <code>archivo</code> y <code>sistema</code> — Operaciones del Sistema</h1>
+  <p><strong>Archivos:</strong> <code>stdlib/std/archivo.fa</code>, <code>stdlib/std/sistema.fa</code></p>
+
+  <h2>¿Por qué existen?</h2>
+  <p>Proveen acceso al sistema de archivos y al sistema operativo. <code>archivo.fa</code> maneja la creación, lectura, escritura y eliminación de archivos. <code>sistema.fa</code> proporciona información del sistema (SO, arquitectura, versión de Forja) y permite ejecutar comandos del sistema.</p>
+
+  <h2>Módulo <code>archivo</code> — Operaciones de Archivos</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>archivo_leer(ruta)</code></td><td>Lee el contenido completo de un archivo como texto</td></tr>
+    <tr><td><code>archivo_escribir(ruta, contenido)</code></td><td>Escribe contenido a un archivo (sobrescribe)</td></tr>
+    <tr><td><code>archivo_agregar(ruta, contenido)</code></td><td>Agrega contenido al final de un archivo</td></tr>
+    <tr><td><code>archivo_eliminar(ruta)</code></td><td>Elimina un archivo</td></tr>
+    <tr><td><code>archivo_existe(ruta)</code></td><td>Verifica si un archivo existe</td></tr>
+    <tr><td><code>archivo_copiar(origen, destino)</code></td><td>Copia un archivo</td></tr>
+    <tr><td><code>archivo_mover(origen, destino)</code></td><td>Mueve/renombra un archivo</td></tr>
+    <tr><td><code>archivo_tamano(ruta)</code></td><td>Obtiene el tamaño de un archivo en bytes</td></tr>
+    <tr><td><code>archivo_permisos(ruta)</code></td><td>Obtiene los permisos de un archivo</td></tr>
+    <tr><td><code>directorio_crear(ruta)</code></td><td>Crea un directorio (y padres si es necesario)</td></tr>
+    <tr><td><code>directorio_listar(ruta)</code></td><td>Lista el contenido de un directorio</td></tr>
+    <tr><td><code>directorio_eliminar(ruta)</code></td><td>Elimina un directorio vacío</td></tr>
+  </table>
+
+  <h2>Módulo <code>sistema</code> — Información del Sistema</h2>
+  <table>
+    <tr><th>Función/Constante</th><th>Descripción</th></tr>
+    <tr><td><code>sistema_operativo()</code></td><td>Retorna el nombre del SO (windows, linux, macos)</td></tr>
+    <tr><td><code>arquitectura()</code></td><td>Retorna la arquitectura (x86_64, aarch64)</td></tr>
+    <tr><td><code>version_forja()</code></td><td>Retorna la versión del compilador Forja</td></tr>
+    <tr><td><code>tiempo_actividad()</code></td><td>Retorna segundos desde el inicio del sistema (uptime)</td></tr>
+    <tr><td><code>nombre_host()</code></td><td>Retorna el nombre del host</td></tr>
+    <tr><td><code>usuario_actual()</code></td><td>Retorna el nombre del usuario actual</td></tr>
+    <tr><td><code>directorio_actual()</code></td><td>Retorna el directorio de trabajo actual</td></tr>
+    <tr><td><code>directorio_temporal()</code></td><td>Retorna la ruta del directorio temporal</td></tr>
+    <tr><td><code>num_procesadores()</code></td><td>Retorna la cantidad de núcleos de CPU</td></tr>
+    <tr><td><code>memoria_total()</code></td><td>Retorna la memoria RAM total en bytes</td></tr>
+  </table>
+
+  <h2>Casos de uso</h2>
+  <ul>
+    <li><strong>Procesamiento de archivos:</strong> Leer configuraciones, procesar logs, transformar datos</li>
+    <li><strong>Scripts de sistema:</strong> Automatizar tareas de administración</li>
+    <li><strong>Persistencia:</strong> Guardar y cargar datos entre ejecuciones</li>
+    <li><strong>Portabilidad:</strong> Escribir scripts que funcionen en Windows, Linux y macOS</li>
+  </ul>
+
+  <div class="info"><strong>💡 Tip:</strong> Combiná <code>archivo_leer</code> con <code>json.parsear</code> para leer archivos de configuración JSON, o con <code>csv.leer</code> para procesar datos tabulares.</div>
+</Layout>

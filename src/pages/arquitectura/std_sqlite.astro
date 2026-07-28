@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Módulo sqlite — Bases de Datos SQLite (stdlib) — Forja">
+  <h1>Módulo <code>sqlite</code> — Bases de Datos SQLite</h1>
+  <p><strong>Archivo:</strong> <code>stdlib/std/sqlite.fa</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>Proporciona acceso completo a bases de datos <strong>SQLite</strong> desde programas Forja. Permite crear, consultar y manipular bases de datos SQLite con una API en español, incluyendo soporte para consultas parametrizadas (protección contra SQL injection).</p>
+
+  <h2>Funciones principales</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>sqlite_abrir(ruta)</code></td><td>Abre (o crea) una base de datos SQLite, retorna un handle</td></tr>
+    <tr><td><code>sqlite_cerrar(handle)</code></td><td>Cierra la conexión a la base de datos</td></tr>
+    <tr><td><code>sqlite_ejecutar(handle, sql)</code></td><td>Ejecuta SQL sin resultados (CREATE, INSERT, UPDATE, DELETE)</td></tr>
+    <tr><td><code>sqlite_consultar(handle, sql)</code></td><td>Ejecuta una consulta SELECT y retorna resultados como arreglo de mapas</td></tr>
+    <tr><td><code>sqlite_ultimo_id(handle)</code></td><td>Obtiene el último ID insertado (ROWID)</td></tr>
+    <tr><td><code>sqlite_tablas(handle)</code></td><td>Lista todas las tablas de la base de datos</td></tr>
+    <tr><td><code>sqlite_columnas(handle, tabla)</code></td><td>Lista las columnas de una tabla</td></tr>
+    <tr><td><code>sqlite_ejecutar_params(handle, sql, params)</code></td><td>Ejecuta SQL con parámetros (protege contra SQL injection)</td></tr>
+    <tr><td><code>sqlite_consultar_params(handle, sql, params)</code></td><td>Consulta con parámetros (protege contra SQL injection)</td></tr>
+  </table>
+
+  <h2>Ejemplo de uso</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📄 agenda.fa</span></div>
+    <pre><code><span class="kw">importar</span> sqlite
+
+<span class="co">// Abrir base de datos</span>
+<span class="kw">variable</span> db = sqlite.sqlite_abrir(<span class="st">"agenda.db"</span>)
+
+<span class="co">// Crear tabla</span>
+sqlite.sqlite_ejecutar(db, <span class="st">"CREATE TABLE IF NOT EXISTS contactos (</span>
+<span class="st">    id INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+<span class="st">    nombre TEXT NOT NULL,</span>
+<span class="st">    telefono TEXT</span>
+<span class="st">)"</span>)
+
+<span class="co">// Insertar usando parámetros (seguro)</span>
+sqlite.sqlite_ejecutar_params(db,
+    <span class="st">"INSERT INTO contactos (nombre, telefono) VALUES (?, ?)"</span>,
+    [<span class="st">"Ana"</span>, <span class="st">"123-456"</span>])
+
+<span class="co">// Consultar</span>
+<span class="kw">variable</span> resultados = sqlite.sqlite_consultar(db, <span class="st">"SELECT * FROM contactos"</span>)
+<span class="kw">para</span> (<span class="kw">variable</span> i = 0; i < colecciones.longitud(resultados); i = i + 1) &brace;
+    <span class="fn">escribir_linea</span>(resultados[i][<span class="st">"nombre"</span>])
+&rbrace;
+
+<span class="co">// Cerrar</span>
+sqlite.sqlite_cerrar(db)</code></pre>
+  </div>
+
+  <h2>Casos de uso</h2>
+  <ul>
+    <li><strong>Aplicaciones con persistencia:</strong> Agendas, inventarios, registros</li>
+    <li><strong>Análisis de datos:</strong> Consultar y procesar datos estructurados</li>
+    <li><strong>Prototipado rápido:</strong> Base de datos embebida sin servidor</li>
+    <li><strong>Aplicaciones desktop:</strong> Almacenamiento local para apps GUI</li>
+  </ul>
+
+  <div class="warning"><strong>⚠️ Seguridad:</strong> Siempre usá las funciones <code>*_params</code> cuando incluyas datos del usuario en consultas SQL. Esto previene <strong>SQL injection</strong>.</div>
+
+  <div class="info"><strong>💡 Sin servidor:</strong> SQLite es una base de datos embebida que no requiere un servidor separado. La base de datos es un solo archivo <code>.db</code> en el disco.</div>
+</Layout>

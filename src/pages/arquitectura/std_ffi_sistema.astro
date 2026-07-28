@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Módulos ffi / proceso / env / señal — Interoperabilidad y Sistema (stdlib) — Forja">
+  <h1>Módulos <code>ffi</code>, <code>proceso</code>, <code>env</code>, <code>señales</code> — Sistema e Interoperabilidad</h1>
+  <p><strong>Archivos:</strong> <code>stdlib/std/ffi.fa</code>, <code>stdlib/std/proceso.fa</code>, <code>stdlib/std/env.fa</code>, <code>stdlib/std/señales.fa</code>, <code>stdlib/std/ruta.fa</code>, <code>stdlib/std/arg.fa</code></p>
+
+  <h2>¿Por qué existen?</h2>
+  <p>Estos módulos proveen interoperabilidad con el sistema operativo y otros lenguajes. <code>ffi</code> permite llamar funciones C desde Forja, <code>proceso</code> ejecuta comandos externos, <code>env</code> maneja variables de entorno, <code>señales</code> maneja señales del SO, <code>ruta</code> manipula rutas de archivos, y <code>arg</code> accede a argumentos de línea de comandos.</p>
+
+  <h2>Módulo <code>ffi</code> — Foreign Function Interface</h2>
+  <p>Permite cargar librerías dinámicas (<code>.dll</code>, <code>.so</code>, <code>.dylib</code>) y llamar funciones C desde Forja:</p>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>ffi.cargar_biblioteca(ruta)</code></td><td>Carga una librería dinámica</td></tr>
+    <tr><td><code>ffi.obtener_funcion(lib, nombre)</code></td><td>Obtiene un puntero a función por nombre</td></tr>
+    <tr><td><code>ffi.llamar(funcion, args)</code></td><td>Llama una función FFI con argumentos</td></tr>
+    <tr><td><code>ffi.convertir_texto(texto)</code></td><td>Convierte string Forja a puntero C (char*)</td></tr>
+    <tr><td><code>ffi.liberar_biblioteca(lib)</code></td><td>Libera la librería cargada</td></tr>
+  </table>
+
+  <h2>Módulo <code>proceso</code> — Ejecución de Comandos</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>proceso.ejecutar(comando)</code></td><td>Ejecuta un comando y espera su finalización</td></tr>
+    <tr><td><code>proceso.ejecutar_con_args(comando, args)</code></td><td>Ejecuta un comando con argumentos separados</td></tr>
+    <tr><td><code>proceso.obtener_salida(comando)</code></td><td>Ejecuta y captura stdout como string</td></tr>
+    <tr><td><code>proceso.obtener_salida_error(comando)</code></td><td>Ejecuta y captura stdout y stderr</td></tr>
+    <tr><td><code>proceso.spawn(comando, args)</code></td><td>Inicia un proceso en segundo plano</td></tr>
+    <tr><td><code>proceso.esta_vivo(pid)</code></td><td>Verifica si un proceso sigue ejecutándose</td></tr>
+  </table>
+
+  <h2>Módulo <code>env</code> — Variables de Entorno</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>env.obtener(nombre)</code></td><td>Obtiene el valor de una variable de entorno (retorna Opcion)</td></tr>
+    <tr><td><code>env.asignar(nombre, valor)</code></td><td>Asigna una variable de entorno</td></tr>
+    <tr><td><code>env.eliminar(nombre)</code></td><td>Elimina una variable de entorno</td></tr>
+    <tr><td><code>env.listar()</code></td><td>Lista todas las variables de entorno como mapa</td></tr>
+  </table>
+
+  <h2>Módulo <code>señales</code> — Manejo de Señales del SO</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>señales.manejar(señal, manejador)</code></td><td>Registra un manejador para una señal</td></tr>
+    <tr><td><code>señales.enviar(pid, señal)</code></td><td>Envía una señal a un proceso</td></tr>
+    <tr><td><code>señales.SIGTERM</code></td><td>Constante: señal de terminación</td></tr>
+    <tr><td><code>señales.SIGINT</code></td><td>Constante: señal de interrupción (Ctrl+C)</td></tr>
+    <tr><td><code>señales.SIGKILL</code></td><td>Constante: señal de matar proceso</td></tr>
+  </table>
+
+  <h2>Módulo <code>ruta</code> — Manipulación de Rutas</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>ruta.unir(ruta1, ruta2)</code></td><td>Une dos componentes de ruta (path join)</td></tr>
+    <tr><td><code>ruta.directorio_padre(ruta)</code></td><td>Obtiene el directorio padre (dirname)</td></tr>
+    <tr><td><code>ruta.nombre_archivo(ruta)</code></td><td>Obtiene el nombre del archivo (basename)</td></tr>
+    <tr><td><code>ruta.extension(ruta)</code></td><td>Obtiene la extensión del archivo</td></tr>
+    <tr><td><code>ruta.absoluta(ruta)</code></td><td>Convierte a ruta absoluta</td></tr>
+  </table>
+
+  <h2>Módulo <code>arg</code> — Argumentos de Línea de Comandos</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>arg.obtener()</code></td><td>Retorna un arreglo con todos los argumentos</td></tr>
+    <tr><td><code>arg.cantidad()</code></td><td>Retorna la cantidad de argumentos</td></tr>
+    <tr><td><code>arg.obtener_si(indice)</code></td><td>Retorna un argumento por índice (Opcion)</td></tr>
+  </table>
+
+  <h2>Casos de uso</h2>
+  <ul>
+    <li><strong>FFI:</strong> Usar librerías C existentes desde Forja (OpenGL, SDL, etc.)</li>
+    <li><strong>Scripting:</strong> Ejecutar herramientas del sistema desde Forja</li>
+    <li><strong>CLI tools:</strong> Acceder a argumentos y entorno para programas de línea de comandos</li>
+    <li><strong>Daemons:</strong> Manejar señales para graceful shutdown</li>
+  </ul>
+
+  <div class="info"><strong>💡 Portabilidad:</strong> Los módulos <code>ruta</code> y <code>proceso</code> manejan automáticamente las diferencias entre Windows (\), Linux/macOS (/) para rutas y ejecutables.</div>
+</Layout>

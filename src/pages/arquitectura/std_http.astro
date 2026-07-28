@@ -1,0 +1,71 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Módulo cliente_http / servidor_web — HTTP/1.1 (stdlib) — Forja">
+  <h1>Módulos <code>cliente_http</code> y <code>servidor_web</code> — HTTP/1.1</h1>
+  <p><strong>Archivos:</strong> <code>stdlib/std/cliente_http.fa</code>, <code>stdlib/std/servidor_web.fa</code></p>
+
+  <h2>¿Por qué existen?</h2>
+  <p>Proveen funcionalidad HTTP/1.1 completa tanto para cliente como para servidor. Permiten hacer requests HTTP a APIs web, y también servir contenido web desde programas Forja.</p>
+
+  <h2>Módulo <code>cliente_http</code> — Cliente HTTP/1.1</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>http_get(url)</code></td><td>Realiza una petición GET</td></tr>
+    <tr><td><code>http_post(url, cuerpo, tipo)</code></td><td>Realiza una petición POST con cuerpo</td></tr>
+    <tr><td><code>http_put(url, cuerpo, tipo)</code></td><td>Realiza una petición PUT</td></tr>
+    <tr><td><code>http_delete(url)</code></td><td>Realiza una petición DELETE</td></tr>
+    <tr><td><code>http_patch(url, cuerpo, tipo)</code></td><td>Realiza una petición PATCH</td></tr>
+    <tr><td><code>http_personalizado(metodo, url, headers, cuerpo)</code></td><td>Request HTTP con método y headers personalizados</td></tr>
+  </table>
+
+  <p>Cada función retorna un mapa con las claves: <code>codigo</code> (código de estado HTTP), <code>cuerpo</code> (respuesta como texto), y <code>headers</code> (mapa de headers de respuesta).</p>
+
+  <h2>Módulo <code>servidor_web</code> — Servidor Web</h2>
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>servidor_iniciar(puerto, manejador)</code></td><td>Inicia un servidor web en el puerto especificado</td></tr>
+    <tr><td><code>servidor_detener(servidor)</code></td><td>Detiene el servidor web</td></tr>
+    <tr><td><code>respuesta_html(cuerpo, codigo)</code></td><td>Crea una respuesta HTTP con contenido HTML</td></tr>
+    <tr><td><code>respuesta_json(datos, codigo)</code></td><td>Crea una respuesta HTTP con contenido JSON</td></tr>
+    <tr><td><code>respuesta_texto(texto, codigo)</code></td><td>Crea una respuesta HTTP con texto plano</td></tr>
+    <tr><td><code>respuesta_redireccion(url)</code></td><td>Crea una respuesta de redirección (301/302)</td></tr>
+    <tr><td><code>archivo_estatico(ruta)</code></td><td>Sirve un archivo estático con el tipo MIME adecuado</td></tr>
+  </table>
+
+  <h2>Ejemplo: Cliente HTTP</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📄 api_cliente.fa</span></div>
+    <pre><code><span class="co">// Consultar una API REST</span>
+<span class="kw">importar</span> cliente_http
+
+<span class="kw">variable</span> respuesta = cliente_http.http_get(<span class="st">"https://api.github.com/users/gaucho"</span>)
+<span class="fn">escribir_linea</span>(<span class="st">"Código: "</span> + respuesta[<span class="st">"codigo"</span>])
+<span class="fn">escribir_linea</span>(<span class="st">"Cuerpo: "</span> + respuesta[<span class="st">"cuerpo"</span>])</code></pre>
+  </div>
+
+  <h2>Ejemplo: Servidor Web</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📄 servidor.fa</span></div>
+    <pre><code><span class="kw">importar</span> servidor_web
+
+<span class="kw">funcion</span> manejador(solicitud) &brace;
+    <span class="kw">variable</span> html = <span class="st">"<h1>Hola desde Forja!</h1>"</span>
+    <span class="kw">retornar</span> servidor_web.respuesta_html(html, 200)
+&rbrace;
+
+<span class="fn">escribir_linea</span>(<span class="st">"Servidor en http://localhost:8080"</span>)
+servidor_web.iniciar(8080, manejador)</code></pre>
+  </div>
+
+  <h2>Casos de uso</h2>
+  <ul>
+    <li><strong>Consumir APIs REST:</strong> GitHub API, OpenAI, servicios web externos</li>
+    <li><strong>Microservicios:</strong> Implementar APIs web simples en Forja</li>
+    <li><strong>Prototipado rápido:</strong> Servidores web para pruebas y MVPs</li>
+    <li><strong>Webhooks:</strong> Recibir notificaciones de servicios externos</li>
+  </ul>
+
+  <div class="info"><strong>💡 Alternativas:</strong> Para HTTP/2 usá <code>cliente_h2.fa</code> / <code>servidor_h2.fa</code>. Para HTTP/3 usá <code>cliente_h3.fa</code>. Estos ofrecen mejor rendimiento y multiplexación.</div>
+</Layout>

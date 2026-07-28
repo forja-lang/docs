@@ -147,46 +147,40 @@ flowchart TB
 
   <h2>Los 26+ módulos del proyecto</h2>
 
-  <pre class="mermaid">
-flowchart LR
-    subgraph MOD["MÓDULOS DEL PROYECTO"]
-        M1["🎯 main.rs · CLI · 15+ comandos"]
-        M2["📚 lib.rs · API pública"]
-        M3["🔤 token.rs · definición de tokens"]
-        M4["📖 lexer.rs · tokenizador"]
-        M5["🌳 ast.rs · nodos del AST"]
-        M6["🔧 parser.rs · parsing recursivo descendente"]
-        M7["🚫 error.rs · errores educativos + JSON"]
-        M8["🔍 semantics.rs · TC + Borrow Checker"]
-        M9["🦀 transpiler.rs · Forja → Rust"]
-        M10["⚡ compiler_asm.rs · Forja → Assembly"]
-        M11["⚡ compiler_llvm.rs · Forja → LLVM IR"]
-        M12["💾 bytecode.rs · opcodes (1206 líneas)"]
-        M13["🔬 uops.rs · micro-opcodes (463 líneas)"]
-        M14["⚙️ vm.rs v1 · stack-based (2040 líneas)"]
-        M15["⚡ vm_jit.rs v3 DT (649 líneas)"]
-        M16["🚀 vm_fast.rs v5 · producción (3610 líneas)"]
-        M17["🔥 jit.rs · NativeJIT x86-64"]
-        M18["🔀 jit_engine.rs · orquestador JIT"]
-        M19["📐 optimizer.rs · folding + DCE"]
-        M20["🎨 formatter.rs · formateador de código"]
-        M21["📊 diagrama.rs · diagramas HTML del AST"]
-        M22["💬 repl.rs · REPL interactivo"]
-        M23["📦 aot.rs · compilador AOT"]
-        M24["🏃 selfrun.rs · bytecode embed"]
-        M25["🧩 module.rs · resolvedor de módulos"]
-        M26["📋 prelude.rs · prelude del lenguaje"]
-        M27["📦 package_resolver.rs · resolución paquetes"]
-        M28["⚙️ package_config.rs · forja.json"]
-        M29["📈 fprofiler.rs · profiler integrado"]
-        M30["🖥️ forja_lsp.rs · servidor LSP + VSCode"]
-        M31["🌐 forja-wasm · bindings WASM"]
-        M32["🖼️ gui.rs · interfaz gráfica (Xilem)"]
-    end
-
-    classDef md fill:#1e1e2e,stroke:#4a4a7f,color:#e0e0e0
-    class MOD md
-  </pre>
+  <div class="feature-grid">
+    <div class="feature-card"><span class="icon">🎯</span><h4>main.rs</h4><p>CLI — 15+ comandos, punto de entrada</p></div>
+    <div class="feature-card"><span class="icon">📚</span><h4>lib.rs</h4><p>API pública: compilar(), ejecutar()</p></div>
+    <div class="feature-card"><span class="icon">🔤</span><h4>token.rs</h4><p>Definición de tokens del lenguaje</p></div>
+    <div class="feature-card"><span class="icon">📖</span><h4>lexer.rs</h4><p>Tokenizador (texto → tokens)</p></div>
+    <div class="feature-card"><span class="icon">🌳</span><h4>ast.rs</h4><p>AST definitions (nodos del árbol)</p></div>
+    <div class="feature-card"><span class="icon">🔧</span><h4>parser.rs</h4><p>Parsing recursivo descendente</p></div>
+    <div class="feature-card"><span class="icon">🚫</span><h4>error.rs</h4><p>Sistema de errores educativo + JSON</p></div>
+    <div class="feature-card"><span class="icon">🔍</span><h4>semantics.rs</h4><p>Type Checker + Borrow Checker</p></div>
+    <div class="feature-card"><span class="icon">🦀</span><h4>transpiler.rs</h4><p>Forja → Rust (código compilable)</p></div>
+    <div class="feature-card"><span class="icon">⚡</span><h4>compiler_asm.rs</h4><p>Forja → Assembly (2393 líneas)</p></div>
+    <div class="feature-card"><span class="icon">⚡</span><h4>compiler_llvm.rs</h4><p>Forja → LLVM IR</p></div>
+    <div class="feature-card"><span class="icon">💾</span><h4>bytecode.rs</h4><p>Generación bytecode (1206 líneas)</p></div>
+    <div class="feature-card"><span class="icon">🔬</span><h4>uops.rs</h4><p>Micro-opcodes (463 líneas)</p></div>
+    <div class="feature-card"><span class="icon">⚙️</span><h4>vm.rs v1</h4><p>VM stack-based (2040 líneas)</p></div>
+    <div class="feature-card"><span class="icon">⚡</span><h4>vm_jit.rs v3 DT</h4><p>Direct Threading (649 líneas)</p></div>
+    <div class="feature-card"><span class="icon">🚀</span><h4>vm_fast.rs v5 🏆</h4><p>NaN tagging, producción (3610 líneas)</p></div>
+    <div class="feature-card"><span class="icon">🔥</span><h4>jit.rs</h4><p>NativeJIT x86-64 (20+ opcodes)</p></div>
+    <div class="feature-card"><span class="icon">🔀</span><h4>jit_engine.rs</h4><p>Orquestador JIT + fallback</p></div>
+    <div class="feature-card"><span class="icon">📐</span><h4>optimizer.rs</h4><p>Constant folding + DCE</p></div>
+    <div class="feature-card"><span class="icon">🎨</span><h4>formatter.rs</h4><p>Formateador de código</p></div>
+    <div class="feature-card"><span class="icon">📊</span><h4>diagrama.rs</h4><p>Diagramas HTML del AST</p></div>
+    <div class="feature-card"><span class="icon">💬</span><h4>repl.rs</h4><p>REPL interactivo</p></div>
+    <div class="feature-card"><span class="icon">📦</span><h4>aot.rs</h4><p>Compilador AOT (.exe autónomo)</p></div>
+    <div class="feature-card"><span class="icon">🏃</span><h4>selfrun.rs</h4><p>Bytecode embed + auto-ejecución</p></div>
+    <div class="feature-card"><span class="icon">🧩</span><h4>module.rs</h4><p>Resolvedor módulos (+ anti path traversal)</p></div>
+    <div class="feature-card"><span class="icon">📋</span><h4>prelude.rs</h4><p>Prelude del lenguaje</p></div>
+    <div class="feature-card"><span class="icon">📦</span><h4>package_resolver.rs</h4><p>Resolución de paquetes</p></div>
+    <div class="feature-card"><span class="icon">⚙️</span><h4>package_config.rs</h4><p>Configuración forja.json</p></div>
+    <div class="feature-card"><span class="icon">📈</span><h4>fprofiler.rs</h4><p>Profiler integrado</p></div>
+    <div class="feature-card"><span class="icon">🖥️</span><h4>forja_lsp.rs</h4><p>Servidor LSP + VSCode</p></div>
+    <div class="feature-card"><span class="icon">🌐</span><h4>forja-wasm</h4><p>Bindings WASM para playground</p></div>
+    <div class="feature-card"><span class="icon">🖼️</span><h4>gui.rs</h4><p>Interfaz gráfica (Xilem)</p></div>
+  </div>
 
   <h2>API pública (lib.rs)</h2>
 
