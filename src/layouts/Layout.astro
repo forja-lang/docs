@@ -594,7 +594,8 @@ const { title, description } = Astro.props;
       .main-inner > *:nth-child(4) { animation-delay: 0.15s; }
       .main-inner > *:nth-child(5) { animation-delay: 0.2s; }
 
-      .main-inner.slide-transition > * {
+      .main-inner.slide-transition > *,
+      .main-inner.slide-done > * {
         animation: none !important;
       }
 
@@ -1024,6 +1025,7 @@ const { title, description } = Astro.props;
       mainInner.style.transform = '';
       mainInner.style.opacity = '';
       mainInner.classList.remove('slide-transition');
+      mainInner.classList.add('slide-done');
 
       const nl = pageLinks.find(l => l.getAttribute('href') === url);
       if (nl) setActive(nl);
