@@ -1,42 +1,61 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Concurrencia (hilos/canales) — Forja">
-  <h1>Concurrencia: hilos y canales</h1>
+<Layout title="Concurrencia (hilos/canales/async) — Forja">
+  <h1>Concurrencia: hilos, canales y async/await</h1>
 
-  <p>Forja tiene concurrencia inspirada en Go y Rust: <strong>hilos ligeros</strong>, <strong>canales de comunicación</strong>, <strong>envío/recepción</strong> y <strong>select</strong> para multiplexar canales.</p>
+  <p>Forja tiene tres modelos de concurrencia que se complementan:</p>
+  <ul>
+    <li><strong>CSP</strong> — hilos del SO + canales mpsc + select (como Go)</li>
+    <li><strong>Async/Await</strong> — funciones asincrónicas con thread pool (como Rust/JS)</li>
+    <li><strong>Reactivo</strong> — bloque <code>cuando</code> para observar cambios de variables</li>
+  </ul>
 
-  <h2>Crear un hilo</h2>
+  <h2>1. CSP: Hilos y Canales</h2>
+
+  <h3>Crear un hilo</h3>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🧵 Sintaxis</span></div>
     <pre><code><span class="kw">variable</span> h = <span class="kw">hilo</span> &lbrace;
-    <span class="co">// código que se ejecuta en otro hilo</span>
+    <span class="co">// se ejecuta en std::thread (Thread Pool)</span>
     <span class="kw">retornar</span> resultado
-&rbrace;</code></pre>
+&rbrace;
+
+<span class="co">// Esperar a que termine y obtener el resultado</span>
+<span class="kw">variable</span> r = h.<span class="fn">unir</span>()</code></pre>
   </div>
 
-  <h2>Canales</h2>
+  <p>Los hilos en Forja se ejecutan en hilos reales del sistema operativo a través de <code>std::thread::spawn</code>. Cada hilo tiene su propia pila y estado.</p>
+
+  <h3>Canales mpsc</h3>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>📡 canales</span></div>
-    <pre><code><span class="kw">variable</span> tx, rx = <span class="fn">canal</span>()
+    <pre><code><span class="kw">variable</span> e, r = <span class="fn">canal</span>()
 
 <span class="kw">hilo</span> &lbrace;
-    tx.<span class="fn">enviar</span>(<span class="st">"hola"</span>)
+    e.<span class="fn">enviar</span>(<span class="st">"hola"</span>)
 &rbrace;
 
-<span class="kw">variable</span> msg = rx.<span class="fn">recibir</span>()
-<span class="fn">escribir</span>(msg) <span class="co">// → hola</span></code></pre>
+<span class="kw">variable</span> msg = r.<span class="fn">recibir</span>()   <span class="co">// bloquea hasta recibir</span>
+<span class="kw">variable</span> msg2 = r.<span class="fn">try_recibir</span>() <span class="co">// no bloqueante, retorna nulo si vacío</span></code></pre>
   </div>
 
-  <h2>Select sobre múltiples canales</h2>
+  <p>Los canales son <strong>mpsc</strong> (multiple producer, single consumer): múltiples hilos pueden enviar (<code>enviar</code>), pero solo un receptor puede leer (<code>recibir</code>).</p>
+
+  <h3>Select sobre múltiples canales</h3>
+
+  <p>Usa <code>seleccionar</code> para multiplexar la recepción de múltiples canales:</p>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>📡 seleccionar</span></div>
     <pre><code><span class="kw">seleccionar</span> &lbrace;
-    <span class="kw">caso</span> rx -> dato -> &lbrace;
-        <span class="fn">escribir</span>(<span class="st">"Recibido: "</span> + dato)
+    <span class="kw">caso</span> rx1 -> dato -> &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Canal 1: "</span> + dato)
+    &rbrace;
+    <span class="kw">caso</span> rx2 -> dato -> &lbrace;
+        <span class="fn">escribir</span>(<span class="st">"Canal 2: "</span> + dato)
     &rbrace;
     <span class="kw">tiempo</span> 1000 -> &lbrace;
         <span class="fn">escribir</span>(<span class="st">"Timeout"</span>)
@@ -47,46 +66,195 @@ import Layout from '../../layouts/Layout.astro';
 &rbrace;</code></pre>
   </div>
 
-  <h2>Esperar y unir hilos</h2>
+  <p>El bloque <code>seleccionar</code> prueba cada canal con <code>try_recibir</code> no bloqueante y ejecuta el primero que tenga datos disponibles. El brazo <code>tiempo</code> ejecuta un timeout, y <code>otro</code> es el caso default si ningún canal tiene datos.</p>
+
+  <h2>2. Async/Await</h2>
+
+  <p>Las funciones asincrónicas se ejecutan en un <strong>Thread Pool</strong> (pool de hilos reutilizables). <code>await</code> es azúcar sintáctico para <code>.unir()</code>.</p>
+
+  <h3>Declaración de función asincrónica</h3>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>⏳ Espera</span></div>
-    <pre><code><span class="kw">variable</span> h = <span class="kw">hilo</span> &lbrace;
+    <div class="code-header"><span>⚡ función asincrónica</span></div>
+    <pre><code><span class="co">// Declaración con retorno</span>
+<span class="kw">funcion asincrona</span> tarea_lenta() -> Texto &lbrace;
     <span class="fn">esperar</span>(2)
-    <span class="kw">retornar</span> <span class="st">"listo"</span>
+    <span class="kw">retornar</span> <span class="st">"¡Listo!"</span>
 &rbrace;
 
-<span class="kw">variable</span> resultado = h.<span class="fn">unir</span>()
-<span class="fn">escribir</span>(resultado) <span class="co">// → listo</span></code></pre>
+<span class="co">// Declaración con parámetros</span>
+<span class="kw">funcion asincrona</span> suma(a: Entero, b: Entero) -> Entero &lbrace;
+    <span class="kw">retornar</span> a + b
+&rbrace;
+
+<span class="kw">funcion</span> main() &lbrace;
+    <span class="co">// Llamar a función async → retorna un Future/Hilo</span>
+    <span class="kw">variable</span> h = <span class="fn">tarea_lenta</span>()
+
+    <span class="co">// await = h.unir() (syntactic sugar)</span>
+    <span class="kw">variable</span> resultado = <span class="kw">await</span> h
+    <span class="fn">escribir</span>(resultado) <span class="co">// → ¡Listo!</span>
+
+    <span class="co">// También funciona con .unir()</span>
+    <span class="kw">variable</span> r2 = <span class="fn">suma</span>(3, 4).<span class="fn">unir</span>()
+    <span class="fn">escribir</span>(r2) <span class="co">// → 7</span>
+&rbrace;</code></pre>
   </div>
 
-  <h2>Bloque reactivo <code>cuando</code></h2>
+  <h3>Múltiples llamadas async</h3>
 
-  <p>El bloque <code><span class="kw">cuando</span></code> permite ejecutar código cuando una variable cambia (observer/reactivo):</p>
+  <p>Puedes lanzar varias funciones async y esperar sus resultados:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>⚡ múltiples async</span></div>
+    <pre><code><span class="kw">funcion asincrona</span> tarea(id: Entero) -> Texto &lbrace;
+    <span class="kw">retornar</span> <span class="st">"Tarea "</span> + id + <span class="st">" completada"</span>
+&rbrace;
+
+<span class="kw">funcion</span> main() &lbrace;
+    <span class="co">// Lanzar todas las tareas (se ejecutan en paralelo)</span>
+    <span class="kw">variable</span> t1 = <span class="fn">tarea</span>(1)
+    <span class="kw">variable</span> t2 = <span class="fn">tarea</span>(2)
+    <span class="kw">variable</span> t3 = <span class="fn">tarea</span>(3)
+
+    <span class="co">// Esperar resultados (en cualquier orden)</span>
+    <span class="fn">escribir</span>(t1.<span class="fn">unir</span>())
+    <span class="fn">escribir</span>(t2.<span class="fn">unir</span>())
+    <span class="fn">escribir</span>(t3.<span class="fn">unir</span>())
+&rbrace;</code></pre>
+  </div>
+
+  <p><strong>Nota:</strong> En el MVP actual, <code>await</code> es bloqueante (como <code>unir()</code>). El thread pool evita crear un hilo nuevo por cada llamada, reutilizando hilos del pool.</p>
+
+  <h3>Diferencia entre hilos clásicos y async/await</h3>
+
+  <table>
+    <tr><th>Hilos clásicos (<code>hilo</code>)</th><th>Async/Await (<code>funcion asincrona</code>)</th></tr>
+    <tr>
+      <td>Sintaxis de bloque: <code>hilo { ... }</code></td>
+      <td>Sintaxis de función: <code>funcion asincrona fn()</code></td>
+    </tr>
+    <tr>
+      <td>Se lanza inmediatamente</td>
+      <td>Se lanza al llamar la función</td>
+    </tr>
+    <tr>
+      <td>Siempre crea un nuevo hilo del SO</td>
+      <td>Usa un Thread Pool (reutiliza hilos)</td>
+    </tr>
+    <tr>
+      <td>No tiene tipo de retorno explícito</td>
+      <td>Tipo de retorno explícito (<code>-> Tipo</code>)</td>
+    </tr>
+    <tr>
+      <td>Útil para tareas independientes</td>
+      <td>Útil para tareas que esperan IO</td>
+    </tr>
+  </table>
+
+  <h2>3. Bloque reactivo <code>cuando</code></h2>
+
+  <p>El bloque <code>cuando</code> permite observar cambios en variables. Si la condición es una variable simple, <code>cuando</code> entra en un bucle que detecta cambios (polling cada 50ms). Si es una expresión compleja, se comporta como un <code>si</code> simple:</p>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>👀 Observador</span></div>
-    <pre><code><span class="kw">variable</span> contador = 0
-
+    <pre><code><span class="co">// Watch reactivo (variable simple)</span>
+<span class="kw">variable</span> contador = 0
 <span class="kw">cuando</span> (contador) &lbrace;
-    <span class="fn">escribir</span>(<span class="st">"Contador cambió a "</span> + contador)
+    <span class="fn">escribir</span>(<span class="st">"Contador cambió"</span>)
+&rbrace;
+
+<span class="co">// If simple (expresión compleja)</span>
+<span class="kw">cuando</span> (contador > 10) &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"Mayor a 10"</span>)
 &rbrace;</code></pre>
   </div>
+
+  <h2>4. stdlib de concurrencia</h2>
+
+  <p>La stdlib <code>std/concurrencia</code> proporciona patrones de alto nivel:</p>
+
+  <h3><code>pool_trabajadores(n, procesar)</code></h3>
+  <p>Crea un pool de N workers. Retorna <code>[tx_tareas, rx_resultados]</code>.</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🏭 Pool de Workers</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/concurrencia"</span>
+
+<span class="kw">variable</span> pool = <span class="fn">pool_trabajadores</span>(3, duplicar)
+<span class="kw">variable</span> e = pool[0]  <span class="co">// canal para enviar tareas</span>
+<span class="kw">variable</span> r = pool[1]  <span class="co">// canal para recibir resultados</span></code></pre>
+  </div>
+
+  <h3><code>paralelo_for(inicio, fin, num_workers, callback)</code></h3>
+  <p>Ejecuta iteraciones en paralelo usando M workers.</p>
+
+  <h3><code>mapa_paralelo(arr, num_workers, callback)</code></h3>
+  <p>Aplica una función a cada elemento del arreglo en paralelo.</p>
+
+  <h3><code>con_limite_tiempo(ms, callback)</code></h3>
+  <p>Ejecuta una función con límite de tiempo. Retorna <code>Ok(valor)</code> o <code>Error("Tiempo agotado")</code>.</p>
+
+  <h3><code>reintentar(max_intentos, callback)</code></h3>
+  <p>Reintenta una función hasta N veces. El callback debe retornar un <code>Resultado</code>.</p>
+
+  <h2>5. Funciones async en la stdlib</h2>
+
+  <p>La stdlib también incluye versiones async que usan hilos reales:</p>
+
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>mapa_async(arr, callback)</code></td><td>Map con un hilo real por elemento</td></tr>
+    <tr><td><code>paralelo_for_async(inicio, fin, cb)</code></td><td>Parallel for con hilos reales</td></tr>
+    <tr><td><code>pool_async(n, procesar)</code></td><td>Pool con workers en hilos reales</td></tr>
+    <tr><td><code>con_timeout_async(ms, cb)</code></td><td>Timeout con hilo y try_recibir</td></tr>
+  </table>
 
   <h2>Keywords de concurrencia</h2>
 
   <table>
     <tr><th>Keyword</th><th>Descripción</th></tr>
-    <tr><td><code>hilo</code></td><td>Lanza un hilo ligero</td></tr>
-    <tr><td><code>canal()</code></td><td>Crea un canal de comunicación</td></tr>
+    <tr><td><code>hilo</code></td><td>Lanza un hilo (despachado al Thread Pool)</td></tr>
+    <tr><td><code>canal()</code></td><td>Crea un canal de comunicación mpsc</td></tr>
     <tr><td><code>.enviar(valor)</code></td><td>Envía un dato por el canal</td></tr>
-    <tr><td><code>.recibir()</code></td><td>Recibe un dato del canal</td></tr>
-    <tr><td><code>.unir()</code></td><td>Espera a que el hilo termine</td></tr>
+    <tr><td><code>.recibir()</code></td><td>Recibe un dato del canal (bloqueante)</td></tr>
+    <tr><td><code>.try_recibir()</code></td><td>Recibe no bloqueante (retorna nulo si vacío)</td></tr>
+    <tr><td><code>.unir()</code></td><td>Espera a que el hilo/Future termine</td></tr>
+    <tr><td><code>funcion asincrona</code></td><td>Declara función asincrónica (ThreadSpawn)</td></tr>
+    <tr><td><code>await expr</code></td><td>Espera un Future/Hilo (equivale a <code>expr.unir()</code>)</td></tr>
     <tr><td><code>esperar(ms)</code></td><td>Pausa la ejecución en milisegundos</td></tr>
-    <tr><td><code>seleccionar</code></td><td>Select multiplexado sobre canales</td></tr>
+    <tr><td><code>seleccionar</code></td><td>Select multiplexado sobre canales (no bloqueante)</td></tr>
     <tr><td><code>caso</code></td><td>Brazo de recepción dentro de <code>seleccionar</code></td></tr>
     <tr><td><code>tiempo</code></td><td>Timeout en <code>seleccionar</code></td></tr>
     <tr><td><code>otro</code></td><td>Caso default en <code>seleccionar</code></td></tr>
-    <tr><td><code>cuando</code></td><td>Bloque observer/reactivo sobre cambios de variable</td></tr>
+    <tr><td><code>cuando</code></td><td>Bloque observer/reactivo (polling si variable simple)</td></tr>
   </table>
+
+  <h2>Ejemplo completo</h2>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 Ejemplo integrado</span></div>
+    <pre><code><span class="co">// Combinación de hilos, canales y async/await</span>
+<span class="kw">funcion asincrona</span> productor(canal_emisor) -> Texto &lbrace;
+    canal_emisor.<span class="fn">enviar</span>(<span class="st">"dato 1"</span>)
+    canal_emisor.<span class="fn">enviar</span>(<span class="st">"dato 2"</span>)
+    <span class="kw">retornar</span> <span class="st">"productor terminó"</span>
+&rbrace;
+
+<span class="kw">funcion</span> main() &lbrace;
+    <span class="kw">variable</span> e, r = <span class="fn">canal</span>()
+
+    <span class="co">// Lanzar productor en un hilo</span>
+    <span class="kw">hilo</span> &lbrace;
+        <span class="kw">variable</span> res = <span class="fn">productor</span>(e)
+        <span class="fn">escribir</span>(res)
+    &rbrace;
+
+    <span class="co">// Consumir datos del canal</span>
+    <span class="fn">escribir</span>(r.<span class="fn">recibir</span>())
+    <span class="fn">escribir</span>(r.<span class="fn">recibir</span>())
+&rbrace;
+
+<span class="fn">main</span>()</code></pre>
+  </div>
 </Layout>

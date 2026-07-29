@@ -1,13 +1,19 @@
-﻿---
+---
 import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout title="Condicionales — Forja">
-  <h1>Condicionales <code>si</code> / <code>sino</code></h1>
+  <h1>Condicionales <code>si</code> / <code>sino</code> / <code>retornar</code> / <code>o si</code></h1>
 
-  <p>Los condicionales en Forja usan <code><span class="kw">si</span></code> y <code><span class="kw">sino</span></code> — equivalentes a <code>if</code> / <code>else</code> en otros lenguajes.</p>
+  <p>
+    Los condicionales en Forja usan <code><span class="kw">si</span></code> y <code><span class="kw">sino</span></code> —
+    equivalentes a <code>if</code> / <code>else</code> en otros lenguajes.
+    Para <code>else if</code> podés usar <code><span class="kw">sino si</span></code> o <code><span class="kw">o si</span></code>.
+    Además, el operador <code><span class="op">||</span></code> tiene su equivalente en español <code><span class="kw">o</span></code>,
+    y podés usar <code><span class="kw">retornar</span></code> directamente como <code>sino</code> para acortar el código.
+  </p>
 
-  <h2>Sintaxis</h2>
+  <h2>Sintaxis básica</h2>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>📐 Estructura básica</span></div>
@@ -33,9 +39,39 @@ import Layout from '../../layouts/Layout.astro';
 <span class="co">// → x es mayor que y</span></code></pre>
   </div>
 
-  <h2>Si anidados</h2>
+  <h2><code>retornar</code> como <code>sino</code></h2>
 
-  <p>Podés anidar condicionales para evaluar múltiples condiciones:</p>
+  <p>Cuando un <code>si</code> está dentro de una función, podés usar <code><span class="kw">retornar</span></code> directamente como reemplazo de <code>sino</code>. Esto evita un bloque anidado y hace el código más compacto:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>↩️ <code>retornar</code> como else directo</span></div>
+    <pre><code><span class="kw">funcion</span> max(a: Entero, b: Entero) -> Entero &lbrace;
+    <span class="kw">si</span> (a > b) &lbrace;
+        <span class="kw">retornar</span> a
+    &rbrace; <span class="kw">retornar</span> b
+    <span class="co">// ↑ equivale a: sino { retornar b }</span>
+&rbrace;</code></pre>
+  </div>
+
+  <p>También funciona encadenado con <code>si</code>:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🔗 <code>retornar si</code> como else-if</span></div>
+    <pre><code><span class="kw">funcion</span> clasificar_nota(nota: Entero) -> Texto &lbrace;
+    <span class="kw">si</span> (nota >= 90) &lbrace;
+        <span class="kw">retornar</span> <span class="st">"Excelente"</span>
+    &rbrace; <span class="kw">retornar si</span> (nota >= 70) &lbrace;
+        <span class="kw">retornar</span> <span class="st">"Bueno"</span>
+    &rbrace; <span class="kw">retornar</span> <span class="st">"A mejorar"</span>
+    <span class="co">// ↑ encadena: sino si → sino { retornar }</span>
+&rbrace;</code></pre>
+  </div>
+
+  <p><strong>⚠️ Atención:</strong> <code>retornar</code> como <code>sino</code> solo tiene sentido dentro de funciones, ya que implica un retorno de la función.</p>
+
+  <h2>Múltiples condiciones: <code>sino si</code> / <code>o si</code></h2>
+
+  <p>En lugar de anidar <code>si</code> dentro de <code>sino</code>, podés usar <code><span class="kw">sino si</span></code> o <code><span class="kw">o si</span></code> para encadenar condiciones de forma más limpia:</p>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>📊 Evaluación de nota</span></div>
@@ -43,26 +79,40 @@ import Layout from '../../layouts/Layout.astro';
 
 <span class="kw">si</span> (nota >= 90) &lbrace;
     <span class="fn">escribir</span>(<span class="st">"¡Excelente!"</span>)
+&rbrace; <span class="kw">sino si</span> (nota >= 70) &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"Buen trabajo!"</span>)
 &rbrace; <span class="kw">sino</span> &lbrace;
-    <span class="kw">si</span> (nota >= 70) &lbrace;
-        <span class="fn">escribir</span>(<span class="st">"Buen trabajo!"</span>)
-    &rbrace; <span class="kw">sino</span> &lbrace;
-        <span class="fn">escribir</span>(<span class="st">"Sigue intentando!"</span>)
-    &rbrace;
+    <span class="fn">escribir</span>(<span class="st">"Sigue intentando!"</span>)
 &rbrace;
 <span class="co">// → Buen trabajo!</span></code></pre>
   </div>
 
-  <h2>Condiciones compuestas</h2>
-
-  <p>Usá operadores lógicos para combinar condiciones:</p>
+  <p>También podés usar <code><span class="kw">o si</span></code> como alternativa a <code>sino si</code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔗 Operadores lógicos</span></div>
+    <div class="code-header"><span>🔀 <code>o si</code> como alternativa</span></div>
+    <pre><code><span class="kw">variable</span> x = 2
+
+<span class="kw">si</span> x == 1 &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"uno"</span>)
+&rbrace; <span class="kw">o si</span> x == 2 &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"dos"</span>)
+&rbrace; <span class="kw">sino</span> &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"otro"</span>)
+&rbrace;
+<span class="co">// → dos</span></code></pre>
+  </div>
+
+  <h2>Condiciones compuestas</h2>
+
+  <p>Usá operadores lógicos para combinar condiciones. Podés usar tanto los operadores simbólicos como sus versiones en español:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🔗 Con <code>o</code> (OR en español)</span></div>
     <pre><code><span class="kw">variable</span> edad = 20
 <span class="kw">variable</span> tiene_permiso = verdadero
 
-<span class="kw">si</span> (edad >= 18 && tiene_permiso) &lbrace;
+<span class="kw">si</span> (edad >= 18 <span class="kw">o</span> tiene_permiso) &lbrace;
     <span class="fn">escribir</span>(<span class="st">"Acceso permitido"</span>)
 &rbrace; <span class="kw">sino</span> &lbrace;
     <span class="fn">escribir</span>(<span class="st">"Acceso denegado"</span>)
@@ -79,18 +129,22 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code><span class="op">&#x3C;</span></code></td><td>Menor que</td><td><code>x &#x3C; 20</code></td></tr>
     <tr><td><code><span class="op">>=</span></code></td><td>Mayor o igual</td><td><code>x >= 18</code></td></tr>
     <tr><td><code><span class="op">&#x3C;=</span></code></td><td>Menor o igual</td><td><code>x &#x3C;= 100</code></td></tr>
-    <tr><td><code><span class="op">&&</span></code></td><td>Y lógico</td><td><code>x > 0 && x &#x3C; 10</code></td></tr>
-    <tr><td><code><span class="op">||</span></code></td><td>O lógico</td><td><code>x == 0 || y == 0</code></td></tr>
+    <tr><td><code><span class="op">&&</span></code> / <code><span class="kw">y</span></code></td><td>Y lógico</td><td><code>x > 0 && x &#x3C; 10</code></td></tr>
+    <tr><td><code><span class="op">||</span></code> / <code><span class="kw">o</span></code></td><td>O lógico</td><td><code>x == 0 <span class="kw">o</span> y == 0</code></td></tr>
     <tr><td><code><span class="op">!</span></code> / <code><span class="kw">no</span></code></td><td>NO lógico</td><td><code>!activo</code> / <code>no activo</code></td></tr>
   </table>
 
-  <p>Además del operador <code>!</code>, podés usar la keyword <code><span class="kw">no</span></code> para negación lógica en español:</p>
+  <p>Además de los operadores simbólicos, podés usar keywords en español para escribir condiciones más naturales:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🇪🇸 NOT en español</span></div>
+    <div class="code-header"><span>🇪🇸 Lógica en español</span></div>
     <pre><code><span class="kw">variable</span> activo = falso
-<span class="kw">si</span> (<span class="kw">no</span> activo) &lbrace;
-    <span class="fn">escribir</span>(<span class="st">"No está activo"</span>)
+<span class="kw">variable</span> temporal = verdadero
+
+<span class="kw">si</span> (<span class="kw">no</span> activo <span class="kw">y</span> temporal) &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"Temporal inactivo"</span>)
+&rbrace; <span class="kw">o si</span> (activo <span class="kw">o</span> <span class="kw">no</span> temporal) &lbrace;
+    <span class="fn">escribir</span>(<span class="st">"Algo está activo"</span>)
 &rbrace;</code></pre>
   </div>
 
@@ -99,6 +153,11 @@ import Layout from '../../layouts/Layout.astro';
   <table>
     <tr><th>Forja</th><th>Rust</th></tr>
     <tr><td><code>si (cond) &lbrace; ... &rbrace; sino &lbrace; ... &rbrace;</code></td><td><code>if cond &lbrace; ... &rbrace; else &lbrace; ... &rbrace;</code></td></tr>
+    <tr><td><code>sino si (cond) &lbrace; ... &rbrace;</code></td><td><code>else if cond &lbrace; ... &rbrace;</code></td></tr>
+    <tr><td><code>o si (cond) &lbrace; ... &rbrace;</code></td><td><code>else if cond &lbrace; ... &rbrace;</code></td></tr>
+    <tr><td><code>&rbrace; retornar expr</code></td><td><code>&rbrace; else &lbrace; return expr; &rbrace;</code></td></tr>
+    <tr><td><code>&rbrace; retornar si (cond) &lbrace; ... &rbrace;</code></td><td><code>&rbrace; else if cond &lbrace; ... &rbrace;</code></td></tr>
+    <tr><td><code>cond1 <span class="kw">o</span> cond2</code></td><td><code>cond1 || cond2</code></td></tr>
     <tr><td><code>verdadero</code></td><td><code>true</code></td></tr>
     <tr><td><code>falso</code></td><td><code>false</code></td></tr>
   </table>

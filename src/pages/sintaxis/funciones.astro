@@ -60,11 +60,11 @@ saludo(<span class="st">"Forja"</span>)   <span class="co">// → Hola, Forja!</
 
   <h2>Funciones externas (FFI)</h2>
 
-  <p>Usá <code><span class="kw">externo</span></code> para declarar funciones definidas en otros lenguajes (C, Rust, etc.):</p>
+  <p>Usá <code><span class="kw">funcion</span> <span class="kw">externa</span></code> para declarar funciones definidas en otros lenguajes (C, Rust, etc.). Terminan con <code>;</code> en lugar de <code>{ ... }</code>:</p>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🔌 FFI</span></div>
-    <pre><code><span class="kw">externo</span> <span class="kw">funcion</span> <span class="fn">printf</span>(formato: <span class="ty">Texto</span>) -> <span class="ty">Entero</span></code></pre>
+    <pre><code><span class="kw">funcion</span> <span class="kw">externa</span> <span class="fn">printf</span>(formato: <span class="ty">Texto</span>) -> <span class="ty">Entero</span>;</code></pre>
   </div>
 
   <h2>Funciones genéricas</h2>

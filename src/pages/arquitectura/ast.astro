@@ -415,7 +415,8 @@ import Layout from '../../layouts/Layout.astro';
       <tr><th>Variante</th><th>Descripción</th><th>Ejemplo Forja</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>Importar(String)</code></td><td>Importación de módulo</td><td><code>importar "math"</code></td></tr>
+      <tr><td><code>Importar(String)</code></td><td>Importación de módulo</td><td><code>importar math</code> o <code>importar "/ruta/absoluta"</code></td></tr>
+      <tr><td><code>ImportarExterna(String)</code></td><td>Cargar librería externa (FFI)</td><td><code>importar externa "libreria.dll"</code></td></tr>
       <tr><td><code>LlamadaFuncion { nombre, argumentos }</code></td><td>Llamada a función como statement</td><td><code>escribir("hola")</code></td></tr>
       <tr><td><code>AccesoMiembro { objeto, miembro }</code></td><td>Acceso a miembro como statement</td><td><code>objeto.metodo()</code></td></tr>
       <tr><td><code>Expresion(Expresion)</code></td><td>Expresión usada como statement (ej: efecto secundario)</td><td><code>x + 1</code></td></tr>

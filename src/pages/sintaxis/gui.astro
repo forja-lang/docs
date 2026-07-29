@@ -1,10 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="GUI (importar 'gui') — Forja">
+<Layout title="GUI (importar gui) — Forja">
   <h1>GUI nativa con Xilem</h1>
 
-  <p>Forja puede abrir una <strong>ventana gráfica nativa</strong> usando <code>importar "gui"</code>. Internamente transpila tu código a Rust y usa el framework <strong>Xilem</strong> con GPU (<strong>Vello</strong>/<strong>wgpu</strong>) para renderizar widgets reactivos.</p>
+  <p>Forja puede abrir una <strong>ventana gráfica nativa</strong> usando <code>importar gui</code>. Internamente transpila tu código a Rust y usa el framework <strong>Xilem</strong> con GPU (<strong>Vello</strong>/<strong>wgpu</strong>) para renderizar widgets reactivos.</p>
 
   <div class="info">💡 Para ejecutar código GUI necesitás compilar Forja con <code>--features gui</code>. Si no lo hiciste, visitá <a href="/docs/instalacion">Instalación</a>.</div>
 
@@ -12,7 +12,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>📄 gui.fa</span></div>
-    <pre><code><span class="kw">importar</span> <span class="st">"gui"</span>
+    <pre><code><span class="kw">importar</span> gui
 
 <span class="kw">funcion</span> <span class="fn">al_saludar</span>() &lbrace;
     <span class="fn">escribir</span>(<span class="st">"¡Hola!"</span>)

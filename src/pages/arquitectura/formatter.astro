@@ -162,7 +162,7 @@ import Layout from '../../layouts/Layout.astro';
             <li><strong>AccesoMiembro:</strong> <code>obj.miembro</code></li>
             <li><strong>Retornar:</strong> <code>retornar expr</code></li>
             <li><strong>Romper / Continuar</strong></li>
-            <li><strong>Importar:</strong> <code>importar "ruta"</code></li>
+            <li><strong>Importar:</strong> <code>importar ruta</code> (con comillas si es ruta absoluta)</li>
             <li><strong>Enum:</strong> <code>tipo Nombre = Var1 | Var2(Tipo)</code></li>
             <li><strong>AsignacionMultiple:</strong> <code>variable a, b = expr</code></li>
             <li><strong>Rasgo:</strong> <code>rasgo Nombre { funcion metodo(...) -> Tipo ... }</code></li>
@@ -282,7 +282,7 @@ import Layout from '../../layouts/Layout.astro';
   </ol>
 
   <h2>Ejemplo de salida formateada</h2>
-  <pre><code>importar "math"
+  <pre><code>importar math
 
 clase Persona {
     nombre: Texto
