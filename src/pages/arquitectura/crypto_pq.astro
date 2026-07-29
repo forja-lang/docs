@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-
 <Layout title="Criptografía Post-Cuántica (crypto_pq.rs) — Forja">
   <h1>Criptografía Post-Cuántica</h1>
   <p><strong>Archivo:</strong> <code>src/crypto_pq.rs</code> (444 líneas)</p>
@@ -39,7 +38,7 @@ import Layout from '../../layouts/Layout.astro';
   <table>
     <tr><th>Función</th><th>Descripción</th></tr>
     <tr><td><code>kyber_keygen() -> KyberKeyPair</code></td><td>Genera un nuevo par de claves post-cuánticas</td></tr>
-    <tr><td><code>kyber_encaps(pk) -> (KyberCiphertext, Vec<u8>)</code></td><td>Encapsula una clave compartida</td></tr>
+    <tr><td><code>kyber_encaps(pk) -> (KyberCiphertext, Vec&lt;u8>)</code></td><td>Encapsula una clave compartida</td></tr>
     <tr><td><code>kyber_decaps(sk, ct)</code></td><td>Recupera la clave compartida</td></tr>
   </table>
 
