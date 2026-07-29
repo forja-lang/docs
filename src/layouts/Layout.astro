@@ -594,6 +594,62 @@ const { title, description } = Astro.props;
       .main-inner > *:nth-child(4) { animation-delay: 0.15s; }
       .main-inner > *:nth-child(5) { animation-delay: 0.2s; }
 
+      .main-inner.slide-transition > * {
+        animation: none !important;
+      }
+
+      /* ===== PAGE NAVIGATION (prev / next) ===== */
+      .page-nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 60px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+        opacity: 0.6;
+        transition: opacity 0.4s ease;
+      }
+      .page-nav.at-end { opacity: 1; }
+
+      .page-nav a {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 14px 22px;
+        border-radius: 10px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        text-decoration: none;
+        transition: all 0.25s ease;
+        max-width: 48%;
+        cursor: pointer;
+        flex: 1;
+      }
+      .page-nav a:only-child { max-width: 100%; }
+      .page-nav a:hover {
+        border-color: var(--fuego);
+        background: var(--fuego-bg);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(245, 158, 11, 0.1);
+      }
+      .page-nav a.nav-next { text-align: right; }
+      .page-nav a.nav-only { max-width: 100%; text-align: center; }
+
+      .page-nav .nav-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+      .page-nav .nav-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.4;
+      }
+      .page-nav a:hover .nav-title { color: var(--fuego-light); }
+
       /* ===== COPY BUTTON (CSS only, JS not needed) ===== */
       .code-block-wrapper {
         position: relative;
@@ -792,6 +848,7 @@ const { title, description } = Astro.props;
         <a href="/docs/arquitectura/native_registry/" class="sub"><span class="nav-dot"></span>Registro Nativo (native_registry.rs)</a>
         <a href="/docs/arquitectura/native_sqlite/" class="sub"><span class="nav-dot"></span>SQLite Nativo (native_sqlite.rs)</a>
         <a href="/docs/arquitectura/stdlib_embedded/" class="sub"><span class="nav-dot"></span>stdlib Incrustada (stdlib_embedded.rs)</a>
+        <a href="/docs/arquitectura/cambios_semanticos/" class="sub"><span class="nav-dot"></span>Cambios Semánticos y Léxico</a>
         <div class="section-title">Biblioteca Estándar (std)</div>
         <a href="/docs/arquitectura/biblioteca/" class="sub"><span class="nav-dot"></span>Visión General de std</a>
         <a href="/docs/arquitectura/std_io/" class="sub"><span class="nav-dot"></span>Módulo io — Entrada/Salida</a>
@@ -824,65 +881,203 @@ const { title, description } = Astro.props;
   const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
   const mainInner = document.querySelector('.main-inner');
 
+  const pageLinks = Array.from(sidebarLinks).filter(l => {
+    const h = l.getAttribute('href');
+    return h && h.startsWith('/docs/');
+  });
+
+  function currentIdx() {
+    const cur = location.pathname.replace(/\/+$/, '');
+    return pageLinks.findIndex(l => l.getAttribute('href').replace(/\/+$/, '') === cur);
+  }
+
   function setActive(link) {
     sidebarLinks.forEach(l => l.classList.remove('active'));
-    link.classList.add('active');
+    if (link) link.classList.add('active');
   }
 
-  async function loadPage(url, pushState = true) {
+  function renderPageNav() {
+    const idx = currentIdx();
+    const nav = document.createElement('div');
+    nav.className = 'page-nav';
+    if (idx < 0) return nav;
+
+    if (idx > 0) {
+      const prev = pageLinks[idx - 1];
+      const a = document.createElement('a');
+      a.href = prev.getAttribute('href');
+      a.innerHTML = '<span class="nav-label">← Anterior</span><span class="nav-title">' + prev.textContent.trim() + '</span>';
+      a.addEventListener('click', e => { e.preventDefault(); slideTo(a.getAttribute('href'), -1); });
+      nav.appendChild(a);
+    } else {
+      nav.appendChild(document.createElement('div'));
+    }
+
+    if (idx < pageLinks.length - 1) {
+      const next = pageLinks[idx + 1];
+      const a = document.createElement('a');
+      a.href = next.getAttribute('href');
+      a.className = 'nav-next';
+      a.innerHTML = '<span class="nav-label">Siguiente →</span><span class="nav-title">' + next.textContent.trim() + '</span>';
+      a.addEventListener('click', e => { e.preventDefault(); slideTo(a.getAttribute('href'), 1); });
+      nav.appendChild(a);
+    }
+
+    return nav;
+  }
+
+  function appendPageNav() {
+    const old = mainInner.querySelector('.page-nav');
+    if (old) old.remove();
+    mainInner.appendChild(renderPageNav());
+  }
+
+  let isTransitioning = false;
+
+  function waitTransition(el) {
+    return new Promise(r => {
+      const done = () => { el.removeEventListener('transitionend', done); r(); };
+      el.addEventListener('transitionend', done);
+      setTimeout(r, 450);
+    });
+  }
+
+  async function slideTo(url, dir) {
+    if (isTransitioning || !mainInner) return;
+    isTransitioning = true;
+    mainInner.classList.add('slide-transition');
+
     try {
+      mainInner.style.transition = 'transform 0.28s cubic-bezier(0.4,0,0.2,1), opacity 0.28s ease';
+      mainInner.style.transform = 'translateX(' + (dir * -40) + 'px)';
+      mainInner.style.opacity = '0';
+      await waitTransition(mainInner);
+
       const res = await fetch(url);
       const html = await res.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      const newContent = doc.querySelector('.main-inner');
-      if (newContent && mainInner) {
-        mainInner.innerHTML = newContent.innerHTML;
-      }
-      // Actualizar título de la página
-      const newTitle = doc.querySelector('title');
-      if (newTitle) document.title = newTitle.textContent;
-      // Marcar link activo
-      const newLink = Array.from(sidebarLinks).find(l => l.getAttribute('href') === url);
-      if (newLink) setActive(newLink);
-      if (pushState) history.pushState(null, '', url);
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const nc = doc.querySelector('.main-inner');
+      const nt = doc.querySelector('title');
+      if (nt) document.title = nt.textContent;
+
+      mainInner.innerHTML = nc ? nc.innerHTML : '';
+
+      mainInner.style.transition = 'none';
+      mainInner.style.transform = 'translateX(' + (dir * 40) + 'px)';
+      mainInner.style.opacity = '0';
+      void mainInner.offsetHeight;
+
+      mainInner.style.transition = 'transform 0.28s cubic-bezier(0.4,0,0.2,1), opacity 0.28s ease';
+      mainInner.style.transform = 'translateX(0)';
+      mainInner.style.opacity = '1';
+      await waitTransition(mainInner);
+
+      mainInner.style.transition = '';
+      mainInner.style.transform = '';
+      mainInner.style.opacity = '';
+      mainInner.classList.remove('slide-transition');
+
+      const nl = pageLinks.find(l => l.getAttribute('href') === url);
+      if (nl) setActive(nl);
+      history.pushState(null, '', url);
+
+      appendPageNav();
+      precarga();
     } catch (e) {
-      console.error('Navigation error', e);
+      console.error('Slide error', e);
+      mainInner.classList.remove('slide-transition');
+      mainInner.style.transition = '';
+      mainInner.style.transform = '';
+      mainInner.style.opacity = '';
     }
+    isTransitioning = false;
   }
 
-  sidebarLinks.forEach(link => {
-  const href = link.getAttribute('href');
-  if (!href || !href.startsWith('/docs/')) return;
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    loadPage(href);
-  });
-});
+  function precarga() {
+    const idx = currentIdx();
+    if (idx < 0) return;
+    if (idx > 0) fetch(pageLinks[idx - 1].getAttribute('href'));
+    if (idx < pageLinks.length - 1) fetch(pageLinks[idx + 1].getAttribute('href'));
+  }
 
-  window.addEventListener('popstate', () => {
-    loadPage(location.pathname, false);
+  /* ── Scroll: resalta navegación al final ── */
+  let scrollRaf;
+  function onScroll() {
+    if (scrollRaf) cancelAnimationFrame(scrollRaf);
+    scrollRaf = requestAnimationFrame(() => {
+      const nav = mainInner.querySelector('.page-nav');
+      if (!nav) return;
+      const bot = window.innerHeight + window.scrollY;
+      const h = document.documentElement.scrollHeight;
+      nav.classList.toggle('at-end', h - bot < 250);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ── Click en links del sidebar ── */
+  sidebarLinks.forEach(link => {
+    const h = link.getAttribute('href');
+    if (!h || !h.startsWith('/docs/')) return;
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const i = currentIdx();
+      const t = pageLinks.indexOf(link);
+      slideTo(h, t > i ? 1 : -1);
+    });
   });
 
-  /** Determina el link activo comparando el path actual contra los href del menú.
-   *  Con base='/docs', los href se transforman a /docs/... en el build */
-  let bestMatch = null;
-  let bestLen = 0;
-  const currentPath = location.pathname.replace(/\/+$/, '');
-  sidebarLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (!href) return;
-    const hrefClean = href.replace(/\/+$/, '');
-    // Coincidencia exacta o el menú que sea prefijo del path actual
-    if (hrefClean === currentPath) {
-      bestMatch = link;
-      bestLen = hrefClean.length;
-    } else if (hrefClean.length > bestLen && currentPath.startsWith(hrefClean)) {
-      bestMatch = link;
-      bestLen = hrefClean.length;
+  /* ── Teclado: flechas izq/der ── */
+  window.addEventListener('keydown', e => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    const i = currentIdx();
+    if (i < 0) return;
+    if (e.key === 'ArrowRight' && i < pageLinks.length - 1) {
+      e.preventDefault();
+      slideTo(pageLinks[i + 1].getAttribute('href'), 1);
+    }
+    if (e.key === 'ArrowLeft' && i > 0) {
+      e.preventDefault();
+      slideTo(pageLinks[i - 1].getAttribute('href'), -1);
     }
   });
-  if (bestMatch) setActive(bestMatch);
+
+  /* ── Navegación atrás/adelante del navegador ── */
+  window.addEventListener('popstate', () => {
+    if (!mainInner) return;
+    mainInner.classList.add('slide-transition');
+    (async () => {
+      const url = location.pathname;
+      try {
+        const res = await fetch(url);
+        const html = await res.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const nc = doc.querySelector('.main-inner');
+        const nt = doc.querySelector('title');
+        if (nt) document.title = nt.textContent;
+        mainInner.innerHTML = nc ? nc.innerHTML : '';
+        const nl = pageLinks.find(l => l.getAttribute('href') === url);
+        if (nl) setActive(nl);
+        appendPageNav();
+        precarga();
+      } catch (_) {}
+      mainInner.classList.remove('slide-transition');
+    })();
+  });
+
+  /* ── Inicialización ── */
+  let best = null, bestLen = 0;
+  const cur = location.pathname.replace(/\/+$/, '');
+  sidebarLinks.forEach(l => {
+    const h = l.getAttribute('href');
+    if (!h) return;
+    const hc = h.replace(/\/+$/, '');
+    if (hc === cur) { best = l; bestLen = hc.length; }
+    else if (hc.length > bestLen && cur.startsWith(hc)) { best = l; bestLen = hc.length; }
+  });
+  if (best) setActive(best);
+  appendPageNav();
+  precarga();
+  onScroll();
 })();
 </script>
   </body>
