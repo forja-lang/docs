@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from '../layouts/Layout.astro';
 ---
 
@@ -12,25 +12,25 @@ import Layout from '../layouts/Layout.astro';
     <pre><code>🔨 Forja (fa) — Lenguaje educativo con VM propia
 
 COMANDOS:
-  ejecutar <archivo>         Ejecutar .fa en la VM
+  ejecutar &lt;archivo>         Ejecutar .fa en la VM
   test [archivo]            Ejecutar tests (funciones con @test)
   repl                       Modo interactivo
-  diagrama <archivo>         Generar diagrama HTML del código
-  compilar <archivo>         Generar .exe autónomo
-  compilar-asm <archivo>     Compilar a assembly nativo [--target <arch>] [-o <salida>]
-  formatear <archivo>        Formatear código .fa
-  transpilar <archivo>       Exportar a proyecto Rust
-  nuevo <nombre>             Crear nuevo proyecto
+  diagrama &lt;archivo>         Generar diagrama HTML del código
+  compilar &lt;archivo>         Generar .exe autónomo
+  compilar-asm &lt;archivo>     Compilar a assembly nativo [--target &lt;arch>] [-o &lt;salida>]
+  formatear &lt;archivo>        Formatear código .fa
+  transpilar &lt;archivo>       Exportar a proyecto Rust
+  nuevo &lt;nombre>             Crear nuevo proyecto
   iniciar                    Inicializar proyecto aquí
-  add <paquete> [version]   Añadir dependencia
-  remove <paquete>           Eliminar dependencia
+  add &lt;paquete> [version]   Añadir dependencia
+  remove &lt;paquete>           Eliminar dependencia
   install                    Instalar todas las dependencias
-  medir <archivo>            Benchmark de VMs [--iters N] [--vm ...]
+  medir &lt;archivo>            Benchmark de VMs [--iters N] [--vm ...]
   aprender                   Tutorial interactivo
   palabras                   Lista de palabras clave
-  colorear <archivo>         Colorear código en terminal
-  explicar <palabra>         Explicar un concepto
-  documentar <archivo>       Generar documentación desde AST
+  colorear &lt;archivo>         Colorear código en terminal
+  explicar &lt;palabra>         Explicar un concepto
+  documentar &lt;archivo>       Generar documentación desde AST
   ayuda [tema]               Mostrar esta ayuda
 
 Los comandos también aceptan su nombre en inglés:
@@ -266,7 +266,7 @@ cargo build --features gui
    @test/@derive   Atributos</code></pre>
 </div>
 
-  <h2><code>explain|explicar <palabra></code> — Explicar concepto</h2>
+  <h2><code>explain|explicar &lt;palabra></code> — Explicar concepto</h2>
 
   <p>Muestra una explicación detallada con ejemplos de cualquier palabra clave:</p>
 
@@ -277,7 +277,7 @@ cargo build --features gui
    Ej: funcion suma(a, b) &lbrace; retornar a + b &rbrace;</code></pre>
 </div>
 
-  <h2><code>new|nuevo|crear <nombre></code> — Nuevo proyecto</h2>
+  <h2><code>new|nuevo|crear &lt;nombre></code> — Nuevo proyecto</h2>
 
   <p>Crea un proyecto Forja con la estructura de directorios estándar:</p>
 
@@ -352,7 +352,7 @@ forja test examples/mis_pruebas.fa
 forja test</code></pre>
   </div>
 
-  <h2><code>medir|bench|benchmark <archivo></code> — Benchmark de VMs</h2>
+  <h2><code>medir|bench|benchmark &lt;archivo></code> — Benchmark de VMs</h2>
 
   <p>Mide tiempos de ejecución en todas las VMs disponibles: creación, carga, ejecución en frío y en caliente.</p>
 
