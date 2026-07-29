@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from '../layouts/Layout.astro';
 ---
 
@@ -9,7 +9,7 @@ import Layout from '../layouts/Layout.astro';
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>⚡ Ejecutar un ejemplo</span></div>
-    <pre><code>cargo run --release --bin forja -- run examples/<ejemplo>.fa</code></pre>
+    <pre><code>cargo run --release --bin forja -- run examples/&lt;ejemplo>.fa</code></pre>
   </div>
 
   <h2>1. Hola Mundo</h2>
@@ -108,13 +108,13 @@ saludo(<span class="st">"Forja"</span>)</code></pre>
     <div class="code-header"><span>📄 examples/06_bucles.fa</span></div>
     <pre><code><span class="co">// Mientras</span>
 <span class="kw">variable</span> contador = 0
-<span class="kw">mientras</span> (contador {'<'} 5) &lbrace;
+<span class="kw">mientras</span> (contador {'&lt;'} 5) &lbrace;
     <span class="fn">escribir</span>(<span class="st">"Contador: "</span> + contador)
     contador = contador + 1
 &rbrace;
 
 <span class="co">// Para</span>
-<span class="kw">para</span> (<span class="kw">variable</span> i = 0; i {'<'} 3; i = i + 1) &lbrace;
+<span class="kw">para</span> (<span class="kw">variable</span> i = 0; i {'&lt;'} 3; i = i + 1) &lbrace;
     <span class="fn">escribir</span>(<span class="st">"i = "</span> + i)
 &rbrace;
 
@@ -293,7 +293,7 @@ persona[<span class="st">"edad"</span>] = 31
     <span class="kw">variable</span> guess = <span class="fn">leer</span>()
     intento = intento + 1
 
-    <span class="kw">si</span> (guess {'<'} secreto) &lbrace;
+    <span class="kw">si</span> (guess {'&lt;'} secreto) &lbrace;
         <span class="fn">escribir</span>(<span class="st">"📈 Más alto"</span>)
     &rbrace; <span class="kw">sino</span> <span class="kw">si</span> (guess {'>'} secreto) &lbrace;
         <span class="fn">escribir</span>(<span class="st">"📉 Más bajo"</span>)
