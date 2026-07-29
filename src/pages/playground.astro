@@ -477,4 +477,7 @@ import Layout from '../layouts/Layout.astro';
   }
 
   document.addEventListener('DOMContentLoaded', initPlayground);
+  window.addEventListener('page-loaded', () => {
+    if (document.getElementById('codigo')) initPlayground();
+  });
 </script>

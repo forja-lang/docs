@@ -997,6 +997,19 @@ const { title, description } = Astro.props;
 
       mainInner.innerHTML = nc ? nc.innerHTML : '';
 
+      // Load page-specific module scripts not already in the document
+      const scriptRe = /<script\s+type="module"\s+src="([^"]+)"[^>]*><\/script>/gi;
+      let m;
+      while ((m = scriptRe.exec(html)) !== null) {
+        const src = m[1];
+        if (!document.querySelector('script[src="' + src.replace(/"/g, '\\"') + '"]')) {
+          const s = document.createElement('script');
+          s.type = 'module';
+          s.src = src;
+          document.head.appendChild(s);
+        }
+      }
+
       mainInner.style.transition = 'none';
       mainInner.style.transform = 'translateX(' + (dir * 40) + 'px)';
       mainInner.style.opacity = '0';
@@ -1018,6 +1031,7 @@ const { title, description } = Astro.props;
 
       appendPageNav();
       precarga();
+      window.dispatchEvent(new CustomEvent('page-loaded', { detail: url }));
     } catch (e) {
       console.error('Slide error', e);
       mainInner.classList.remove('slide-transition');
