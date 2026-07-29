@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-
 <Layout title="VM Original (vm.rs) — Forja">
   <h1>Máquina Virtual Original (v1)</h1>
   <p><strong>Archivo:</strong> <code>src/vm.rs</code></p>
@@ -15,11 +14,11 @@ import Layout from '../../layouts/Layout.astro';
   <table>
     <tr><th>Campo</th><th>Descripci&oacute;n</th></tr>
     <tr><td><code>pc: usize</code></td><td>Contador de programa (puntero a la siguiente opcode)</td></tr>
-    <tr><td><code>stack: Vec<Valor></code></td><td>Pila de valores operandos (tipos din&aacute;micos v&iacute;a enum)</td></tr>
-    <tr><td><code>globals: HashMap<String, Valor></code></td><td>Variables globales accesibles por nombre</td></tr>
-    <tr><td><code>locals: Vec<Valor></code></td><td>Variables locales por &iacute;ndice (acceso O(1))</td></tr>
-    <tr><td><code>functions: HashMap<String, Vec<Opcode>></code></td><td>Tabla de funciones definidas por el usuario</td></tr>
-    <tr><td><code>builtins: HashMap<BuiltinKind, fn(&mut VM, usize)></code></td><td>Despacho de built-ins</td></tr>
+    <tr><td><code>stack: Vec&lt;Valor></code></td><td>Pila de valores operandos (tipos din&aacute;micos v&iacute;a enum)</td></tr>
+    <tr><td><code>globals: HashMap&lt;String, Valor></code></td><td>Variables globales accesibles por nombre</td></tr>
+    <tr><td><code>locals: Vec&lt;Valor></code></td><td>Variables locales por &iacute;ndice (acceso O(1))</td></tr>
+    <tr><td><code>functions: HashMap&lt;String, Vec&lt;Opcode>></code></td><td>Tabla de funciones definidas por el usuario</td></tr>
+    <tr><td><code>builtins: HashMap&lt;BuiltinKind, fn(&mut VM, usize)></code></td><td>Despacho de built-ins</td></tr>
     <tr><td><code>error_handler: Option<fn(&mut VM, ErrorForja)></code></td><td>Manejo de errores en tiempo de ejecuci&oacute;n</td></tr>
   </table>
 
