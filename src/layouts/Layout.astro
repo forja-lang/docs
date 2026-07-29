@@ -1010,6 +1010,17 @@ const { title, description } = Astro.props;
           document.head.appendChild(s);
         }
       }
+      // Load page-specific stylesheets not already in the document
+      const cssRe = /<link\s+rel="stylesheet"\s+href="([^"]+)"[^>]*>/gi;
+      while ((m = cssRe.exec(html)) !== null) {
+        const href = m[1];
+        if (!document.querySelector('link[rel="stylesheet"][href="' + href.replace(/"/g, '\\"') + '"]')) {
+          const l = document.createElement('link');
+          l.rel = 'stylesheet';
+          l.href = href;
+          document.head.appendChild(l);
+        }
+      }
 
       mainInner.style.transition = 'none';
       mainInner.style.transform = 'translateX(' + (dir * 40) + 'px)';
