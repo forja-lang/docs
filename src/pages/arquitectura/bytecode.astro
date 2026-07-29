@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-
 <Layout title="Bytecode (bytecode.rs) — Forja">
   <h1>Bytecode y Opcodes de la Máquina Virtual de Forja</h1>
   <p><strong>Archivo:</strong> <code>src/bytecode.rs</code> (4797 líneas)</p>
@@ -41,7 +40,7 @@ import Layout from '../../layouts/Layout.astro';
     <tr><th>Opcode</th><th>Descripción</th></tr>
     <tr><td><code>PushEntero(i64)</code></td><td>Empuja un entero al stack</td></tr>
     <tr><td><code>PushDecimal(f64)</code></td><td>Empuja un flotante al stack</td></tr>
-    <tr><td><code>PushTexto(Arc<str>)</code></td><td>Empuja un string (Arc-compildo) al stack</td></tr>
+    <tr><td><code>PushTexto(Arc&lt;str>)</code></td><td>Empuja un string (Arc-compildo) al stack</td></tr>
     <tr><td><code>PushBooleano(bool)</code></td><td>Empuja un booleano al stack</td></tr>
     <tr><td><code>PushNulo</code></td><td>Empuja <code>nulo</code> al stack</td></tr>
     <tr><td><code>Pop</code></td><td>Elimina el tope del stack</td></tr>
@@ -58,9 +57,9 @@ import Layout from '../../layouts/Layout.astro';
   <h4>Variables (por nombre — sistema original)</h4>
   <table>
     <tr><th>Opcode</th><th>Descripción</th></tr>
-    <tr><td><code>Load(Arc<str>)</code></td><td>Carga una variable por nombre al stack</td></tr>
-    <tr><td><code>Store(Arc<str>)</code></td><td>Almacena un valor del stack en una variable por nombre</td></tr>
-    <tr><td><code>Declare(Arc<str>, bool)</code></td><td>Declara una nueva variable (nombre, mutable)</td></tr>
+    <tr><td><code>Load(Arc&lt;str>)</code></td><td>Carga una variable por nombre al stack</td></tr>
+    <tr><td><code>Store(Arc&lt;str>)</code></td><td>Almacena un valor del stack en una variable por nombre</td></tr>
+    <tr><td><code>Declare(Arc&lt;str>, bool)</code></td><td>Declara una nueva variable (nombre, mutable)</td></tr>
   </table>
 
   <h4>Variables (por &iacute;ndice — ultra r&aacute;pido, O(1))</h4>
@@ -86,10 +85,10 @@ import Layout from '../../layouts/Layout.astro';
   <p><code>Y</code>, <code>O</code>, <code>No</code></p>
 
   <h4>Saltos y control de flujo</h4>
-  <p><code>Jump(usize)</code>, <code>JumpSiFalso(usize)</code>, <code>Halt</code>, <code>Return</code>, <code>Call(Arc<str>, usize)</code></p>
+  <p><code>Jump(usize)</code>, <code>JumpSiFalso(usize)</code>, <code>Halt</code>, <code>Return</code>, <code>Call(Arc&lt;str>, usize)</code></p>
 
   <h4>Funciones</h4>
-  <p><code>FunctionDef(Arc<str>, Vec<String>)</code> — Define una funci&oacute;n con nombre y lista de par&aacute;metros.</p>
+  <p><code>FunctionDef(Arc&lt;str>, Vec&lt;String>)</code> — Define una funci&oacute;n con nombre y lista de par&aacute;metros.</p>
 
   <h4>Fusionados (Superinstructions)</h4>
   <p>Opcodes compuestos que eliminan push/pop redundantes:</p>
@@ -108,16 +107,16 @@ import Layout from '../../layouts/Layout.astro';
   <p>El generador de bytecode recorre el AST y produce la secuencia de opcodes. Incluye:</p>
   <ul>
     <li><code>GeneradorBytecode</code>: Estructura principal que mantiene el estado durante la generaci&oacute;n</li>
-    <li><code>generar(&ast) -> Result<Vec<Opcode>></code>: Recorre el AST recursivamente generando opcodes</li>
-    <li><code>optimizar_indices(&bytecode) -> Vec<Opcode></code>: Asigna &iacute;ndices &uacute;nicos globales a variables para acceso O(1)</li>
-    <li><code>fusionar_opcodes(&bytecode) -> Vec<Opcode></code>: Fusiona patrones comunes (PushEntero + DeclareIdx --> DeclareEnteroOp)</li>
+    <li><code>generar(&ast) -> Result&lt;Vec&lt;Opcode>></code>: Recorre el AST recursivamente generando opcodes</li>
+    <li><code>optimizar_indices(&bytecode) -> Vec&lt;Opcode></code>: Asigna &iacute;ndices &uacute;nicos globales a variables para acceso O(1)</li>
+    <li><code>fusionar_opcodes(&bytecode) -> Vec&lt;Opcode></code>: Fusiona patrones comunes (PushEntero + DeclareIdx --> DeclareEnteroOp)</li>
   </ul>
 
   <h2>Interpretaci&oacute;n del bytecode</h2>
   <ol>
-    <li>Se crea un <code>Vec<Opcode></code> con el bytecode generado.</li>
-    <li>La VM ejecuta un bucle <code>while pc < bytecode.len()</code> que despacha cada opcode mediante <code>match</code>.</li>
-    <li>El stack es <code>Vec<ValorFast></code> (o <code>Vec<Valor></code> en VM original).</li>
+    <li>Se crea un <code>Vec&lt;Opcode></code> con el bytecode generado.</li>
+    <li>La VM ejecuta un bucle <code>while pc &lt; bytecode.len()</code> que despacha cada opcode mediante <code>match</code>.</li>
+    <li>El stack es <code>Vec&lt;ValorFast></code> (o <code>Vec&lt;Valor></code> en VM original).</li>
     <li>Variables por &iacute;ndice usan vectores pre‑alojados para acceso O(1).</li>
     <li>Llamadas a built‑ins o funciones se delegan al dispatcher correspondiente.</li>
     <li>Opcode‑fusion combina operaciones comunes para reducir sobrecarga.</li>
