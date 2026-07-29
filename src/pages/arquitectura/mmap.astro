@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-
 <Layout title="Memory-Mapped Files (mmap.rs) — Forja">
   <h1>Archivos Mapeados en Memoria (Memory-Mapped I/O)</h1>
   <p><strong>Archivo:</strong> <code>src/mmap.rs</code> (305 líneas)</p>
@@ -25,12 +24,12 @@ import Layout from '../../layouts/Layout.astro';
   <h2>API Pública</h2>
   <table>
     <tr><th>Función</th><th>Descripción</th></tr>
-    <tr><td><code>mmap_abrir(ruta, longitud, offset, escritura) -> Result<i64></code></td><td>Abre y mapea un archivo, retorna un handle numérico</td></tr>
+    <tr><td><code>mmap_abrir(ruta, longitud, offset, escritura) -> Result&lt;i64></code></td><td>Abre y mapea un archivo, retorna un handle numérico</td></tr>
     <tr><td><code>mmap_cerrar(handle) -> Result&lt;()&gt;</code></td><td>Desmapea y cierra el archivo</td></tr>
     <tr><td><code>mmap_leer(handle, offset, len) -> Result&lt;Vec&lt;u8&gt;&gt;</code></td><td>Lee bytes de la región mapeada</td></tr>
     <tr><td><code>mmap_escribir(handle, offset, datos) -> Result&lt;()&gt;</code></td><td>Escribe bytes en la región mapeada</td></tr>
     <tr><td><code>mmap_sincronizar(handle) -> Result&lt;()&gt;</code></td><td>Fuerza la sincronización (<code>msync</code>)</td></tr>
-    <tr><td><code>mmap_longitud(handle) -> Result<usize></code></td><td>Obtiene el tamaño del mapeo</td></tr>
+    <tr><td><code>mmap_longitud(handle) -> Result&lt;usize></code></td><td>Obtiene el tamaño del mapeo</td></tr>
   </table>
 
   <h2>Uso desde Forja</h2>
