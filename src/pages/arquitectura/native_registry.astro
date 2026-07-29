@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-
 <Layout title="Registro Nativo (native_registry.rs) — Forja">
   <h1>Registro de Funciones Nativas (FFI Bridge)</h1>
   <p><strong>Archivo:</strong> <code>src/native_registry.rs</code> (5110 líneas)</p>
@@ -53,7 +52,7 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code>obtener_texto(valor) -> String</code></td><td>Extrae un String de un ValorFast</td></tr>
     <tr><td><code>obtener_booleano(valor) -> bool</code></td><td>Extrae un booleano de un ValorFast</td></tr>
     <tr><td><code>obtener_decimal(valor) -> f64</code></td><td>Extrae un decimal f64 de un ValorFast</td></tr>
-    <tr><td><code>obtener_lista(valor) -> Vec<i64></code></td><td>Extrae una lista de handles desde un ValorFast</td></tr>
+    <tr><td><code>obtener_lista(valor) -> Vec&lt;i64></code></td><td>Extrae una lista de handles desde un ValorFast</td></tr>
     <tr><td><code>crear_valor(ValorFast::* )</code></td><td>Crea valores Forja desde Rust (entero, texto, decimal, booleano, nulo)</td></tr>
   </table>
 
