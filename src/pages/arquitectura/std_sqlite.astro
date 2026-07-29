@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-
 <Layout title="Módulo sqlite — Bases de Datos SQLite (stdlib) — Forja">
   <h1>Módulo <code>sqlite</code> — Bases de Datos SQLite</h1>
   <p><strong>Archivo:</strong> <code>stdlib/std/sqlite.fa</code></p>
@@ -45,7 +44,7 @@ sqlite.sqlite_ejecutar_params(db,
 
 <span class="co">// Consultar</span>
 <span class="kw">variable</span> resultados = sqlite.sqlite_consultar(db, <span class="st">"SELECT * FROM contactos"</span>)
-<span class="kw">para</span> (<span class="kw">variable</span> i = 0; i < colecciones.longitud(resultados); i = i + 1) &brace;
+<span class="kw">para</span> (<span class="kw">variable</span> i = 0; i &lt; colecciones.longitud(resultados); i = i + 1) &brace;
     <span class="fn">escribir_linea</span>(resultados[i][<span class="st">"nombre"</span>])
 &rbrace;
 
