@@ -1,0 +1,528 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Cambios Semánticos y de Léxico — Forja">
+  <h1>Cambios Semánticos y de Léxico</h1>
+
+  <p>
+    Forja ha evolucionado significativamente desde sus inicios. Este documento cataloga
+    <strong>todos los cambios semánticos y de léxico</strong> —traducciones de palabras clave,
+    renombres de constructores, cambios de sintaxis y evolución del sistema de tipos— que
+    han ocurrido durante el desarrollo del lenguaje.
+  </p>
+
+  <hr />
+
+  <h2>1. Léxico: Palabras Clave Traducidas al Español</h2>
+
+  <p>
+    Forja es un lenguaje en español. Todas las palabras clave del lenguaje están en español
+    (con algunas excepciones por compatibilidad). El mapeo completo se encuentra en
+    <a href="./lexer"><code>src/lexer.rs:132-191</code></a>.
+  </p>
+
+  <h3>1.1. Palabras Clave Principales</h3>
+
+  <table>
+    <thead>
+      <tr><th>Forja (Español)</th><th>Equivalente en otros lenguajes</th><th>Compatibilidad (inglés)</th><th>Descripción</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>variable</code> / <code>var</code></td><td><code>let</code>, <code>var</code></td><td>—</td><td>Declara una variable mutable</td></tr>
+      <tr><td><code>constante</code> / <code>const</code></td><td><code>const</code></td><td><code>const</code></td><td>Declara una constante inmutable</td></tr>
+      <tr><td><code>funcion</code> / <code>fun</code></td><td><code>function</code>, <code>fn</code></td><td><code>fun</code></td><td>Declara una función o método</td></tr>
+      <tr><td><code>si</code></td><td><code>if</code></td><td>—</td><td>Inicia un bloque condicional</td></tr>
+      <tr><td><code>sino</code></td><td><code>else</code></td><td>—</td><td>Rama alternativa de un condicional</td></tr>
+      <tr><td><code>mientras</code></td><td><code>while</code></td><td>—</td><td>Bucle controlado por condición</td></tr>
+      <tr><td><code>para</code></td><td><code>for</code></td><td>—</td><td>Bucle clásico de estilo C</td></tr>
+      <tr><td><code>repetir</code></td><td><code>loop</code>, <code>repeat</code></td><td>—</td><td>Bucle de repetición fija</td></tr>
+      <tr><td><code>romper</code> / <code>break</code></td><td><code>break</code></td><td><code>break</code> ✅</td><td>Sale del bucle activo</td></tr>
+      <tr><td><code>continuar</code> / <code>continue</code></td><td><code>continue</code></td><td><code>continue</code> ✅</td><td>Pasa a la siguiente iteración</td></tr>
+      <tr><td><code>retornar</code></td><td><code>return</code></td><td>—</td><td>Devuelve un valor desde una función</td></tr>
+      <tr><td><code>importar</code></td><td><code>import</code></td><td>—</td><td>Carga módulos externos</td></tr>
+      <tr><td><code>clase</code></td><td><code>class</code></td><td>—</td><td>Declara una clase</td></tr>
+      <tr><td><code>tipo</code></td><td><code>type</code>, <code>enum</code></td><td>—</td><td>Declara un tipo algebraico (enum)</td></tr>
+      <tr><td><code>coincidir</code></td><td><code>match</code></td><td>—</td><td>Pattern matching</td></tr>
+      <tr><td><code>caso</code></td><td><code>case</code></td><td>—</td><td>Brazo de pattern matching</td></tr>
+      <tr><td><code>rasgo</code></td><td><code>trait</code>, <code>interface</code></td><td>—</td><td>Define interfaces / traits</td></tr>
+      <tr><td><code>implementa</code></td><td><code>impl</code>, <code>implements</code></td><td>—</td><td>Implementa un rasgo para una clase</td></tr>
+      <tr><td><code>donde</code></td><td><code>where</code></td><td>—</td><td>Cláusula de restricciones de tipo</td></tr>
+      <tr><td><code>nuevo</code></td><td><code>new</code></td><td>—</td><td>Instancia una clase</td></tr>
+      <tr><td><code>este</code></td><td><code>this</code>, <code>self</code></td><td>—</td><td>Referencia a la instancia actual</td></tr>
+      <tr><td><code>constructor</code></td><td><code>constructor</code>, <code>init</code></td><td>—</td><td>Declara el constructor de una clase</td></tr>
+      <tr><td><code>prestado</code></td><td><code>ref</code>, <code>&</code></td><td>—</td><td>Referencia prestada (borrowing)</td></tr>
+      <tr><td><code>mut</code></td><td><code>mut</code></td><td><code>mut</code> ✅</td><td>Modificador de mutabilidad</td></tr>
+      <tr><td><code>verdadero</code></td><td><code>true</code></td><td>—</td><td>Literal booleano verdadero</td></tr>
+      <tr><td><code>falso</code></td><td><code>false</code></td><td>—</td><td>Literal booleano falso</td></tr>
+      <tr><td><code>nulo</code></td><td><code>null</code></td><td>—</td><td>Valor nulo / ausencia de valor</td></tr>
+    </tbody>
+  </table>
+
+  <h3>1.2. Concurrencia y Canales</h3>
+
+  <table>
+    <thead>
+      <tr><th>Forja (Español)</th><th>Equivalente</th><th>Descripción</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>hilo</code></td><td><code>thread</code></td><td>Lanza un hilo de ejecución</td></tr>
+      <tr><td><code>canal</code></td><td><code>channel</code></td><td>Crea un canal de comunicación</td></tr>
+      <tr><td><code>enviar</code></td><td><code>send</code></td><td>Envía un mensaje por un canal</td></tr>
+      <tr><td><code>recibir</code></td><td><code>recv</code>, <code>receive</code></td><td>Recibe un mensaje de un canal</td></tr>
+      <tr><td><code>unir</code></td><td><code>join</code></td><td>Espera la finalización de un hilo</td></tr>
+      <tr><td><code>seleccionar</code></td><td><code>select</code></td><td>Selección no bloqueante de canales</td></tr>
+      <tr><td><code>tiempo</code></td><td><code>timeout</code></td><td>Rama de timeout en seleccionar</td></tr>
+      <tr><td><code>otro</code></td><td><code>default</code></td><td>Rama por defecto en seleccionar</td></tr>
+    </tbody>
+  </table>
+
+  <h3>1.3. Design by Contract</h3>
+
+  <table>
+    <thead>
+      <tr><th>Forja (Español)</th><th>Equivalente (Eiffel)</th><th>Descripción</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>requiere</code></td><td><code>require</code></td><td>Precondición de función</td></tr>
+      <tr><td><code>asegura</code></td><td><code>ensure</code></td><td>Postcondición de función</td></tr>
+      <tr><td><code>siempre</code></td><td><code>invariant</code></td><td>Invariante de clase</td></tr>
+      <tr><td><code>resultado</code></td><td><code>Result</code></td><td>Valor de retorno en postcondiciones</td></tr>
+      <tr><td><code>anterior</code></td><td><code>old</code></td><td>Valor anterior en postcondiciones</td></tr>
+    </tbody>
+  </table>
+
+  <h3>1.4. Funciones Built-in y Misceláneas</h3>
+
+  <table>
+    <thead>
+      <tr><th>Forja</th><th>Equivalente</th><th>Descripción</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>escribir</code></td><td><code>print</code>, <code>println</code></td><td>Imprime en la terminal</td></tr>
+      <tr><td><code>leer</code></td><td><code>read</code>, <code>input</code></td><td>Lee entrada del usuario</td></tr>
+      <tr><td><code>BD</code></td><td><code>db</code></td><td>Palabra clave para operaciones de base de datos</td></tr>
+      <tr><td><code>externo</code> / <code>externa</code></td><td><code>extern</code></td><td>Firma de función externa (FFI)</td></tr>
+      <tr><td><code>cuando</code></td><td><code>when</code>, <code>onchange</code></td><td>Bloque reactivo / observer</td></tr>
+    </tbody>
+  </table>
+
+  <h3>1.5. Operadores Lógicos (cambio histórico)</h3>
+
+  <table>
+    <thead>
+      <tr><th>Forja actual</th><th>Anteriormente</th><th>Equivalente</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>y</code></td><td><code>and</code> / <code>&&</code></td><td><code>&&</code></td></tr>
+      <tr><td><code>o</code></td><td><code>or</code> / <code>||</code></td><td><code>||</code></td></tr>
+      <tr><td><code>no</code></td><td><code>not</code> / <code>!</code></td><td><code>!</code></td></tr>
+    </tbody>
+  </table>
+
+  <p class="info">
+    ⚠️ <strong>Nota:</strong> Los operadores <code>&&</code>, <code>||</code> y <code>!</code>
+    también son válidos. La versión textual en español es la recomendada.
+  </p>
+
+  <hr />
+
+  <h2>2. Constructores de Option y Resultado</h2>
+
+  <p>
+    Forja soporta tipos algebraicos <code>Opcion</code> (Option) y <code>Resultado</code> (Result)
+    directamente como variantes del AST (expresiones nativas), sin necesidad de un prelude.
+    Los constructores aceptan tanto su forma en español como su forma en inglés para
+    compatibilidad máxima.
+  </p>
+
+  <p><strong>Archivo fuente:</strong> <a href="./ast"><code>src/ast.rs</code></a>, <a href="./bytecode"><code>src/bytecode.rs:1689-1694</code></a></p>
+
+  <table>
+    <thead>
+      <tr><th>Tipo</th><th>Constructor</th><th>Variantes aceptadas</th><th>Tag interno</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>Opcion</code></td><td><code>Alguno(valor)</code></td><td><code>Alguno</code>, <code>Algo</code>, <code>Some</code></td><td><code>"some"</code></td></tr>
+      <tr><td><code>Opcion</code></td><td><code>Ninguno()</code></td><td><code>Ninguno</code>, <code>None</code></td><td><code>"none"</code></td></tr>
+      <tr><td><code>Resultado</code></td><td><code>Ok(valor)</code></td><td><code>Ok</code></td><td><code>"ok"</code></td></tr>
+      <tr><td><code>Resultado</code></td><td><code>Error(valor)</code></td><td><code>Error</code>, <code>Err</code></td><td><code>"error"</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.1. Uso en código</h3>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>Ejemplo: Option y Resultado en Forja</span></div>
+    <pre><code><span class="co">// Las tres formas son equivalentes:</span>
+<span class="kw">variable</span> a = Alguno(42)
+<span class="kw">variable</span> b = Algo(42)
+<span class="kw">variable</span> c = Some(42)
+
+<span class="co">// Pattern matching con constructores en español:</span>
+<span class="kw">coincidir</span> (a) {
+    <span class="kw">caso</span> Alguno(v) => escribir(<span class="st">"Tengo: "</span>, v)
+    <span class="kw">caso</span> Ninguno => escribir(<span class="st">"No hay valor"</span>)
+}
+
+<span class="co">// Resultado:</span>
+<span class="kw">variable</span> res = Ok(<span class="st">"exitoso"</span>)
+<span class="kw">variable</span> err = Error(<span class="st">"falló"</span>)
+
+<span class="co">// También funciona con inglés:</span>
+<span class="kw">variable</span> res2 = Ok(<span class="st">"ok"</span>)
+<span class="kw">variable</span> err2 = Err(<span class="st">"error"</span>)</code></pre>
+  </div>
+
+  <h3>2.2. Pattern matching interno</h3>
+
+  <p>
+    Cuando se usa <code>coincidir</code> con estos constructores, el compilador genera
+    bytecode que inspecciona el campo <code>"tipo"</code> del objeto (vía
+    <code>GetField("tipo")</code>) y lo compara con el tag interno. Si hay subpatrones
+    (ej: <code>Alguno(v)</code>), extrae el campo <code>"valor"</code> y lo asigna a la
+    variable.
+  </p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>Bytecode generado para <code>caso Alguno(v)</code></span></div>
+    <pre><code>Dup
+GetField("tipo")
+PushTexto("some")
+Igual
+JumpSiFalso(label_next)
+GetField("valor")
+Store("v")
+[ejecutar cuerpo]
+Label(label_next)</code></pre>
+  </div>
+
+  <p class="info">
+    ℹ️ Para más detalles sobre este proceso, ver
+    <a href="./bytecode"><code>src/bytecode.rs:1687-1784</code></a> y
+    <a href="./parser"><code>src/parser.rs:2139-2161</code></a>.
+  </p>
+
+  <hr />
+
+  <h2>3. Tipos de Datos Primitivos</h2>
+
+  <p>
+    Los nombres de tipos en Forja están en español y se manejan como <em>soft keywords</em>
+    (identificadores que el parser reconoce como tipos en contexto). Ver
+    <a href="./lexer"><code>src/lexer.rs:182-190</code></a>.
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>Forja</th><th>Rust</th><th>Descripción</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>Entero</code></td><td><code>i64</code></td><td>Entero con signo de 64 bits</td></tr>
+      <tr><td><code>Decimal</code></td><td><code>f64</code></td><td>Número de punto flotante de 64 bits</td></tr>
+      <tr><td><code>Texto</code></td><td><code>String</code></td><td>Cadena de caracteres</td></tr>
+      <tr><td><code>Booleano</code></td><td><code>bool</code></td><td>Valor booleano (verdadero/falso)</td></tr>
+      <tr><td><code>Exacto</code></td><td><code>(i128, u32)</code></td><td>Número decimal de precisión arbitraria (BigDecimal)</td></tr>
+      <tr><td><code>Nulo</code></td><td><code>()</code></td><td>Unidad / ausencia de valor</td></tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>4. Evolución del Sistema de Tipos (AST)</h2>
+
+  <p>
+    El AST de Forja (<a href="./ast"><code>src/ast.rs</code></a>) ha evolucionado para
+    incluir variantes específicas para los tipos algebraicos. Ver la tabla completa de
+    <code>Tipo</code> y <code>Expresion</code> en la página del AST.
+  </p>
+
+  <h3>4.1. Tipo enum</h3>
+
+  <p>Evolución del enum <code>Tipo</code>:</p>
+
+  <table>
+    <thead>
+      <tr><th>Variante</th><th>Significado</th><th>Cambio semántico</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>Entero</code></td><td>Entero i64</td><td>Originalmente era <code>Int</code> → renombrado a <code>Entero</code></td></tr>
+      <tr><td><code>Decimal</code></td><td>Flotante f64</td><td>Originalmente <code>Float</code> → renombrado</td></tr>
+      <tr><td><code>Texto</code></td><td>String</td><td>Originalmente <code>String</code> → renombrado</td></tr>
+      <tr><td><code>Booleano</code></td><td>Bool</td><td>Originalmente <code>Bool</code> → renombrado</td></tr>
+      <tr><td><code>Nulo</code></td><td>Unidad</td><td>Agregado posteriormente</td></tr>
+      <tr><td><code>Exacto</code></td><td>BigDecimal</td><td>Agregado para el sistema <code>Exacto</code> con precisión arbitraria</td></tr>
+      <tr><td><code>Clase(String, Vec&lt;Tipo>)</code></td><td>Clase/objeto</td><td>Evolucionó de un simple nombre a incluir parámetros genéricos</td></tr>
+      <tr><td><code>Arreglo(Box&lt;Tipo>)</code></td><td>Array</td><td>Agregado para listas tipadas</td></tr>
+      <tr><td><code>Funcion(Vec&lt;Tipo>, Box&lt;Tipo>)</code></td><td>Firma de función</td><td>Agregado para tipos función (params → retorno)</td></tr>
+      <tr><td><code>Resultado(Box&lt;Tipo>, Box&lt;Tipo>)</code></td><td>Result (ok, error)</td><td>Agregado para el tipo Resultado</td></tr>
+      <tr><td><code>Opcion(Box&lt;Tipo>)</code></td><td>Option</td><td>Agregado para el tipo Opcion</td></tr>
+      <tr><td><code>RasgoObjeto(String)</code></td><td>Trait object</td><td>Agregado para polimorfismo dinámico</td></tr>
+      <tr><td><code>Parametro(String)</code></td><td>Parámetro genérico</td><td>Agregado para genéricos</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4.2. Expresiones de Option y Resultado</h3>
+
+  <p>El enum <code>Expresion</code> incluye variantes específicas para tipos algebraicos:</p>
+
+  <table>
+    <thead>
+      <tr><th>Variante</th><th>Antes</th><th>Ahora</th><th>Descripción</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>Algo(Box&lt;Expresion>)</code></td><td><code>Some(expr)</code></td><td><code>Algo(expr)</code></td><td>Constructor de Opcion con valor</td></tr>
+      <tr><td><code>Ninguno</code></td><td><code>None</code></td><td><code>Ninguno</code></td><td>Constructor de Opcion vacío</td></tr>
+      <tr><td><code>Ok(Box&lt;Expresion>)</code></td><td><code>Ok(expr)</code></td><td><code>Ok(expr)</code></td><td>Constructor de Resultado exitoso</td></tr>
+      <tr><td><code>Error(Box&lt;Expresion>)</code></td><td><code>Err(expr)</code></td><td><code>Error(expr)</code></td><td>Constructor de Resultado fallido</td></tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>5. Nombres de Opcodes y Micro-Operaciones</h2>
+
+  <p>
+    Los opcodes del bytecode (<a href="./bytecode"><code>src/bytecode.rs</code></a>) y las
+    micro-operaciones (<a href="./uops"><code>src/uops.rs</code></a>) usan nombres en español
+    o spanglish técnico:
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>Uop / Opcode</th><th>Traducción</th><th>Descripción</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>PushEntero</code></td><td>Push Integer</td><td>Apila un entero</td></tr>
+      <tr><td><code>PushDecimal</code></td><td>Push Decimal</td><td>Apila un float</td></tr>
+      <tr><td><code>PushTexto</code></td><td>Push Text</td><td>Apila una cadena</td></tr>
+      <tr><td><code>PushBooleano</code></td><td>Push Boolean</td><td>Apila un booleano</td></tr>
+      <tr><td><code>PushNulo</code></td><td>Push Null</td><td>Apila el valor nulo</td></tr>
+      <tr><td><code>JumpSiFalso</code></td><td>Jump If False</td><td>Salto condicional si es falso</td></tr>
+      <tr><td><code>DeclareVar</code></td><td>Declare Variable</td><td>Declara una variable en el ámbito actual</td></tr>
+      <tr><td><code>IncrVar</code></td><td>Increment Variable</td><td>Optimización: incremento directo</td></tr>
+      <tr><td><code>ResolveMethod</code></td><td>Resolve Method</td><td>Resolución de método virtual</td></tr>
+      <tr><td><code>LoadSelf</code></td><td>Load Self</td><td>Carga <code>este</code> en el stack</td></tr>
+      <tr><td><code>CallNative</code></td><td>Call Native</td><td>Llama a función nativa registrada</td></tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>6. Cambios en la CLI</h2>
+
+  <p>Los comandos de la interfaz de línea de comandos aceptan tanto español como inglés:</p>
+
+  <table>
+    <thead>
+      <tr><th>Comando en español</th><th>Comando en inglés</th><th>Función</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>forja correr</code></td><td><code>forja run</code></td><td>Ejecutar un archivo</td></tr>
+      <tr><td><code>forja ejecutar</code></td><td><code>forja run</code></td><td>Ejecutar un archivo</td></tr>
+      <tr><td><code>forja compilar</code></td><td><code>forja build</code></td><td>Generar ejecutable</td></tr>
+      <tr><td><code>forja construir</code></td><td><code>forja build</code></td><td>Generar ejecutable</td></tr>
+      <tr><td><code>forja formatear</code></td><td><code>forja fmt</code></td><td>Formatear código</td></tr>
+      <tr><td><code>forja medir</code></td><td><code>forja bench</code></td><td>Medir rendimiento</td></tr>
+      <tr><td><code>forja diagrama</code></td><td><code>forja diagram</code></td><td>Generar diagrama del AST</td></tr>
+      <tr><td><code>forja grafico</code></td><td><code>forja graph</code></td><td>Generar diagrama del AST</td></tr>
+      <tr><td><code>forja nuevo</code></td><td><code>forja new</code></td><td>Crear nuevo proyecto</td></tr>
+      <tr><td><code>forja crear</code></td><td><code>forja new</code></td><td>Crear nuevo proyecto</td></tr>
+      <tr><td><code>forja ayuda</code></td><td><code>forja help</code></td><td>Mostrar ayuda</td></tr>
+      <tr><td><code>forja colorear</code></td><td><code>forja highlight</code></td><td>Colorear sintaxis</td></tr>
+      <tr><td><code>forja explicar</code></td><td><code>forja explain</code></td><td>Explicar un concepto</td></tr>
+      <tr><td><code>forja aprender</code></td><td><code>forja learn</code></td><td>Tutorial interactivo</td></tr>
+      <tr><td><code>forja transpilar</code></td><td><code>forja transpile</code></td><td>Transpilar a Rust</td></tr>
+      <tr><td><code>forja interactivo</code></td><td><code>forja repl</code></td><td>Modo interactivo REPL</td></tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>7. Convenciones de Nomenclatura en Código Rust</h2>
+
+  <p>
+    El código fuente del compilador de Forja (Rust) usa una mezcla de nomenclatura en español
+    e inglés. Las estructuras, funciones y tipos públicos tienden a usar spanglish técnico:
+  </p>
+
+  <h3>7.1. Estructuras y Tipos en Rust</h3>
+
+  <table>
+    <thead>
+      <tr><th>Nombre Rust</th><th>Traducción / Notas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>TokenKind</code></td><td>Mantiene el inglés, pero los valores del enum están en español: <code>Si</code>, <code>Sino</code>, <code>Funcion</code>, etc.</td></tr>
+      <tr><td><code>ValorFast</code></td><td>Spanglish: "Fast" por ForjaFast, "Valor" en español</td></tr>
+      <tr><td><code>ForjaFast</code></td><td>Nombre en español + "Fast" técnico</td></tr>
+      <tr><td><code>FrmFast</code></td><td>Contracción de "Frame Fast"</td></tr>
+      <tr><td><code>CompiledCode</code></td><td>Inglés, pero funciones asociadas pueden usar español</td></tr>
+      <tr><td><code>CodeBuf</code></td><td>Código + Buffer (inglés)</td></tr>
+      <tr><td><code>ClassDescriptor</code></td><td>Inglés técnico</td></tr>
+      <tr><td><code>TablaSimbolos</code></td><td>Español completo</td></tr>
+      <tr><td><code>BorrowChecker</code></td><td>Inglés (término técnico estándar)</td></tr>
+      <tr><td><code>TypeChecker</code></td><td>Inglés (término técnico estándar)</td></tr>
+      <tr><td><code>LlvmBackend</code></td><td>Spanglish</td></tr>
+      <tr><td><code>CompilerAsm</code></td><td>Spanglish</td></tr>
+      <tr><td><code>TargetArch</code></td><td>Inglés técnico</td></tr>
+      <tr><td><code>JitOrchestrator</code></td><td>Spanglish (Orquestador JIT)</td></tr>
+      <tr><td><code>StackCache</code></td><td>Inglés técnico (aunque <code>stack</code> se usa como préstamo)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>7.2. Funciones en Rust con nombres en español</h3>
+
+  <table>
+    <thead>
+      <tr><th>Función</th><th>Traducción</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>generar_prelude()</code></td><td>Generate prelude</td></tr>
+      <tr><td><code>expandir_a_uops()</code></td><td>Expand to uops</td></tr>
+      <tr><td><code>remapear_saltos_uops()</code></td><td>Remap jump uops</td></tr>
+      <tr><td><code>construir_mapeo_posiciones()</code></td><td>Build position map</td></tr>
+      <tr><td><code>fusionar_opcodes()</code></td><td>Fuse opcodes</td></tr>
+      <tr><td><code>sanitizar_para_serializacion()</code></td><td>Sanitize for serialization</td></tr>
+      <tr><td><code>obtener_tag_constructor()</code></td><td>Get constructor tag</td></tr>
+      <tr><td><code>emitir_subpatrones_constructor()</code></td><td>Emit constructor subpatterns</td></tr>
+      <tr><td><code>inferir_tipo_expresion()</code></td><td>Infer expression type</td></tr>
+      <tr><td><code>resolver_nombre_mangled()</code></td><td>Resolve mangled name</td></tr>
+      <tr><td><code>encontrar_variables_en_expr()</code></td><td>Find variables in expression</td></tr>
+      <tr><td><code>tiene_anterior()</code></td><td>Has predecessor</td></tr>
+      <tr><td><code>recolectar_clases()</code></td><td>Collect classes</td></tr>
+      <tr><td><code>compilar_expresion_asm()</code></td><td>Compile ASM expression</td></tr>
+      <tr><td><code>compilar_declaracion()</code></td><td>Compile declaration</td></tr>
+    </tbody>
+  </table>
+
+  <h3>7.3. Funciones con nombre mixto o en inglés</h3>
+
+  <table>
+    <thead>
+      <tr><th>Función</th><th>Notas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>peek()</code>, <code>advance()</code>, <code>match()</code></td><td>Métodos de parser/lexer — nombres técnicos universales</td></tr>
+      <tr><td><code>tokenize()</code>, <code>parse()</code>, <code>compile()</code></td><td>Nombres técnicos estándar de compiladores</td></tr>
+      <tr><td><code>intern()</code>, <code>intern_rc()</code>, <code>get()</code></td><td>Symbol table — API en inglés</td></tr>
+      <tr><td><code>ejecutar()</code>, <code>ejecutar_uops()</code></td><td>VM — español. Originalmente <code>execute()</code></td></tr>
+      <tr><td><code>cargar_bytecode()</code></td><td>Spanglish: "cargar" (español) + "bytecode" (inglés)</td></tr>
+      <tr><td><code>push_valor()</code>, <code>pop_valor()</code></td><td>Spanglish: "push/pop" (técnico) + "valor" (español)</td></tr>
+      <tr><td><code>alloc_obj()</code>, <code>alloc_str()</code></td><td>Spanglish: "alloc" (inglés) + "obj/str" (abreviaturas)</td></tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>8. Historial de Cambios Semánticos Relevantes</h2>
+
+  <h3>8.1. Eliminación de <code>mut</code> en variables locales</h3>
+  <p>
+    Inicialmente Forja requería <code>mut</code> en toda variable mutable (como Rust).
+    Se simplificó: ahora <code>variable</code> implica mutabilidad por defecto, y
+    <code>constante</code> implica inmutabilidad. <code>mut</code> se conserva solo
+    para parámetros de función y referencias prestadas.
+  </p>
+
+  <h3>8.2. De <code>String</code> a <code>Texto</code></h3>
+  <p>
+    El tipo de cadena de caracteres se renombró de <code>String</code> a <code>Texto</code>
+    para mantener coherencia con el idioma español. El cambio fue únicamente de nombre;
+    la representación interna sigue siendo un <code>String</code> de Rust.
+  </p>
+
+  <h3>8.3. De <code>Bool</code> a <code>Booleano</code></h3>
+  <p>
+    El tipo booleano se renombró de <code>Bool</code> a <code>Booleano</code> siguiendo
+    la misma filosofía de españolización.
+  </p>
+
+  <h3>8.4. De <code>None</code>/<code>Some</code> a <code>Ninguno</code>/<code>Alguno</code></h3>
+  <p>
+    Los constructores de Option se renombraron manteniendo compatibilidad hacia atrás.
+    Actualmente se aceptan: <code>Alguno</code>, <code>Algo</code>, <code>Some</code>
+    para el caso con valor; y <code>Ninguno</code>, <code>None</code> para el caso vacío.
+    Ver sección 2 arriba.
+  </p>
+
+  <h3>8.5. De <code>interface</code>/<code>trait</code> a <code>rasgo</code></h3>
+  <p>
+    Originalmente Forja usaba <code>trait</code> (como Rust) e <code>interface</code>
+    (como Java). Se unificó bajo <code>rasgo</code> para mantener el español.
+  </p>
+
+  <h3>8.6. Adición de Design by Contract</h3>
+  <p>
+    Forja incorporó posteriormente <code>requiere</code>, <code>asegura</code>,
+    <code>siempre</code>, <code>resultado</code> y <code>anterior</code> como keywords
+    para el sistema de contratos (inspirado en Eiffel). Estas palabras no existían
+    en versiones iniciales del lenguaje.
+  </p>
+
+  <h3>8.7. De <code>println</code>/<code>print</code> a <code>escribir</code></h3>
+  <p>
+    Las funciones de salida estándar se renombraron de <code>println</code>/<code>print</code>
+    a <code>escribir</code>. Sigue aceptando múltiples argumentos separados por coma.
+  </p>
+
+  <h3>8.8. Adición del tipo <code>Exacto</code></h3>
+  <p>
+    Se agregó posteriormente el tipo <code>Exacto</code> para aritmética de precisión
+    arbitraria (basado en <code>(i128, u32)</code> para coeficiente y escala),
+    incluyendo soporte completo en el bytecode (<code>Opcode::SumaExact</code>,
+    <code>Opcode::MulExact</code>, etc.) y en la VM ForjaFast.
+  </p>
+
+  <h3>8.9. De <code>self</code>/<code>this</code> a <code>este</code></h3>
+  <p>
+    La palabra clave para referirse a la instancia actual evolucionó de aceptar
+    <code>self</code> (como Rust/Python) y <code>this</code> (como Java/JS) a
+    la forma unificada <code>este</code> en español.
+  </p>
+
+  <hr />
+
+  <h2>9. Compatibilidad con Inglés</h2>
+
+  <p>
+    Forja mantiene compatibilidad selectiva con inglés para facilitar la migración
+    desde otros lenguajes. Las siguientes palabras clave aceptan su forma inglesa:
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>Español (recomendado)</th><th>Inglés (compatible)</th><th>Contexto</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>romper</code></td><td><code>break</code></td><td>Bucles</td></tr>
+      <tr><td><code>continuar</code></td><td><code>continue</code></td><td>Bucles</td></tr>
+      <tr><td><code>funcion</code></td><td><code>fun</code></td><td>Declaración de funciones</td></tr>
+      <tr><td><code>variable</code></td><td><code>var</code></td><td>Declaración de variables</td></tr>
+      <tr><td><code>constante</code></td><td><code>const</code></td><td>Declaración de constantes</td></tr>
+      <tr><td><code>externo</code></td><td><code>externa</code></td><td>FFI</td></tr>
+      <tr><td><code>Alguno</code></td><td><code>Some</code>, <code>Algo</code></td><td>Constructor Option</td></tr>
+      <tr><td><code>Ninguno</code></td><td><code>None</code></td><td>Constructor Option</td></tr>
+      <tr><td><code>Error</code></td><td><code>Err</code></td><td>Constructor Resultado</td></tr>
+      <tr><td><code>y</code></td><td><code>&&</code></td><td>Operador lógico</td></tr>
+      <tr><td><code>o</code></td><td><code>||</code></td><td>Operador lógico</td></tr>
+      <tr><td><code>no</code></td><td><code>!</code></td><td>Operador lógico</td></tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>10. Referencias en el Código Fuente</h2>
+
+  <p>Todas las referencias a los archivos fuente relevantes:</p>
+
+  <ul>
+    <li><strong>Lexer (keywords):</strong> <a href="./lexer"><code>src/lexer.rs:132-191</code></a> — mapeo completo de palabras clave</li>
+    <li><strong>Parser (constructores):</strong> <a href="./parser"><code>src/parser.rs:2139-2161</code></a> — detección de Ok/Error/Algo/Some/None</li>
+    <li><strong>Bytecode (tags):</strong> <a href="./bytecode"><code>src/bytecode.rs:1689-1694</code></a> — mapeo de constructores a tags internos</li>
+    <li><strong>AST (tipos):</strong> <a href="./ast"><code>src/ast.rs:38-60</code></a> — enum Tipo con todas las variantes</li>
+    <li><strong>AST (expresiones):</strong> <a href="./ast"><code>src/ast.rs:157-275</code></a> — enum Expresion con Algo/Ninguno/Ok/Error</li>
+    <li><strong>Token (enums):</strong> <a href="./token"><code>src/token.rs</code></a> — TokenKind con todas las keywords</li>
+    <li><strong>Transpiler (mapeo):</strong> <a href="./transpilador"><code>src/transpiler.rs:2782-2784</code></a> — Error → Err para Rust</li>
+    <li><strong>LSP (snippets):</strong> <a href="./forja_lsp"><code>src/lsp/snippets.rs</code></a> — snippets con palabras clave en español</li>
+  </ul>
+</Layout>
