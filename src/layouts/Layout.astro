@@ -829,7 +829,7 @@ const { title, description } = Astro.props;
         <a href="/docs/arquitectura/wasm/" class="sub"><span class="nav-dot"></span>Soporte Web/WASM (forja-wasm)</a>
         <a href="/docs/arquitectura/vscode/" class="sub"><span class="nav-dot"></span>Servidor LSP & VSCode (forja_lsp.rs)</a>
         <a href="/docs/arquitectura/biblioteca/" class="sub"><span class="nav-dot"></span>API de Biblioteca (lib.rs)</a>
-        <a href="/docs/arquitectura/gui/" class="sub"><span class="nav-dot"></span>Interfaz Gráfica UI (gui.rs)</a>
+        <a href="/docs/arquitectura/gui/" class="sub"><span class="nav-dot"></span>GUI Runtime (forja-gui-rt)</a>
         <a href="/docs/arquitectura/fprofiler/" class="sub"><span class="nav-dot"></span>Profiler integrado (fprofiler.rs)</a>
         <a href="/docs/arquitectura/cli/" class="sub"><span class="nav-dot"></span>CLI Punto de Entrada (main.rs)</a>
         <a href="/docs/arquitectura/debugger/" class="sub"><span class="nav-dot"></span>Debugger DAP (debugger.rs)</a>
@@ -850,20 +850,55 @@ const { title, description } = Astro.props;
         <a href="/docs/arquitectura/stdlib_embedded/" class="sub"><span class="nav-dot"></span>stdlib Incrustada (stdlib_embedded.rs)</a>
         <a href="/docs/arquitectura/cambios_semanticos/" class="sub"><span class="nav-dot"></span>Cambios Semánticos y Léxico</a>
         <div class="section-title">Biblioteca Estándar (std)</div>
-        <a href="/docs/arquitectura/biblioteca/" class="sub"><span class="nav-dot"></span>Visión General de std</a>
-        <a href="/docs/arquitectura/std_io/" class="sub"><span class="nav-dot"></span>Módulo io — Entrada/Salida</a>
-        <a href="/docs/arquitectura/std_texto/" class="sub"><span class="nav-dot"></span>Módulo texto — Cadenas</a>
-        <a href="/docs/arquitectura/std_colecciones/" class="sub"><span class="nav-dot"></span>Módulo colecciones</a>
-        <a href="/docs/arquitectura/std_matematica/" class="sub"><span class="nav-dot"></span>Módulo matematica</a>
-        <a href="/docs/arquitectura/std_resultado/" class="sub"><span class="nav-dot"></span>Módulo resultado — Option/Result</a>
-        <a href="/docs/arquitectura/std_archivo/" class="sub"><span class="nav-dot"></span>Módulo archivo / sistema</a>
-        <a href="/docs/arquitectura/std_red/" class="sub"><span class="nav-dot"></span>Módulo red / sockets</a>
-        <a href="/docs/arquitectura/std_http/" class="sub"><span class="nav-dot"></span>Módulo cliente_http / servidor_web</a>
-        <a href="/docs/arquitectura/std_crypto_hash/" class="sub"><span class="nav-dot"></span>Módulos crypto / hash</a>
-        <a href="/docs/arquitectura/std_concurrencia/" class="sub"><span class="nav-dot"></span>Módulo concurrencia / atomicos</a>
-        <a href="/docs/arquitectura/std_datos/" class="sub"><span class="nav-dot"></span>Módulos json / csv / toml / hex</a>
-        <a href="/docs/arquitectura/std_sqlite/" class="sub"><span class="nav-dot"></span>Módulo sqlite</a>
-        <a href="/docs/arquitectura/std_ffi_sistema/" class="sub"><span class="nav-dot"></span>Módulos ffi / proceso / env / señal</a>
+        <a href="/docs/arquitectura/std/" class="sub"><span class="nav-dot"></span>Visión General de std</a>
+        <a href="/docs/arquitectura/std/archivo/" class="sub"><span class="nav-dot"></span>Módulo archivo — Sistema de Archivos</a>
+        <a href="/docs/arquitectura/std/colecciones/" class="sub"><span class="nav-dot"></span>Módulo colecciones — Estructuras de Datos</a>
+        <a href="/docs/arquitectura/std/concurrencia/" class="sub"><span class="nav-dot"></span>Módulo concurrencia — Hilos y Canales</a>
+        <a href="/docs/arquitectura/std/crypto_hash/" class="sub"><span class="nav-dot"></span>Módulo crypto / hash — Criptografía y Hashing</a>
+        <a href="/docs/arquitectura/std/datos/" class="sub"><span class="nav-dot"></span>Módulo json / csv / toml / hex — Formatos de Datos</a>
+        <a href="/docs/arquitectura/std/ffi_sistema/" class="sub"><span class="nav-dot"></span>Módulo ffi / proceso / env / señal — Interoperabilidad</a>
+        <a href="/docs/arquitectura/std/http/" class="sub"><span class="nav-dot"></span>Módulo http — Cliente/Servidor HTTP</a>
+        <a href="/docs/arquitectura/std/io/" class="sub"><span class="nav-dot"></span>Módulo io — Entrada/Salida</a>
+        <a href="/docs/arquitectura/std/matematica/" class="sub"><span class="nav-dot"></span>Módulo matematica — Funciones Matemáticas</a>
+        <a href="/docs/arquitectura/std/red/" class="sub"><span class="nav-dot"></span>Módulo red — Utilidades de Red</a>
+        <a href="/docs/arquitectura/std/resultado/" class="sub"><span class="nav-dot"></span>Módulo resultado — Option/Result</a>
+        <a href="/docs/arquitectura/std/sqlite/" class="sub"><span class="nav-dot"></span>Módulo sqlite — SQLite</a>
+        <a href="/docs/arquitectura/std/texto/" class="sub"><span class="nav-dot"></span>Módulo texto — Cadenas</a>
+        <a href="/docs/arquitectura/std/aleatorio/" class="sub"><span class="nav-dot"></span>Módulo aleatorio — Números Aleatorios</a>
+        <a href="/docs/arquitectura/std/ansi/" class="sub"><span class="nav-dot"></span>Módulo ansi — Códigos ANSI</a>
+        <a href="/docs/arquitectura/std/arg/" class="sub"><span class="nav-dot"></span>Módulo arg — Argumentos CLI</a>
+        <a href="/docs/arquitectura/std/atomicos/" class="sub"><span class="nav-dot"></span>Módulo atomicos — Operaciones Atómicas</a>
+        <a href="/docs/arquitectura/std/binario/" class="sub"><span class="nav-dot"></span>Módulo binario — Datos Binarios</a>
+        <a href="/docs/arquitectura/std/cliente_h2/" class="sub"><span class="nav-dot"></span>Módulo cliente_h2 — Cliente HTTP/2</a>
+        <a href="/docs/arquitectura/std/cliente_h3/" class="sub"><span class="nav-dot"></span>Módulo cliente_h3 — Cliente HTTP/3</a>
+        <a href="/docs/arquitectura/std/cliente_http/" class="sub"><span class="nav-dot"></span>Módulo cliente_http — Cliente HTTP/1.1</a>
+        <a href="/docs/arquitectura/std/codificacion/" class="sub"><span class="nav-dot"></span>Módulo codificacion — Base64/UUID</a>
+        <a href="/docs/arquitectura/std/crypto/" class="sub"><span class="nav-dot"></span>Módulo crypto — Criptografía</a>
+        <a href="/docs/arquitectura/std/csv/" class="sub"><span class="nav-dot"></span>Módulo csv — CSV</a>
+        <a href="/docs/arquitectura/std/env/" class="sub"><span class="nav-dot"></span>Módulo env — Variables de Entorno</a>
+        <a href="/docs/arquitectura/std/fecha/" class="sub"><span class="nav-dot"></span>Módulo fecha — Fecha y Hora</a>
+        <a href="/docs/arquitectura/std/ffi/" class="sub"><span class="nav-dot"></span>Módulo ffi — Llamadas a C</a>
+        <a href="/docs/arquitectura/std/hash/" class="sub"><span class="nav-dot"></span>Módulo hash — Hashing</a>
+        <a href="/docs/arquitectura/std/hex/" class="sub"><span class="nav-dot"></span>Módulo hex — Hexadecimal</a>
+        <a href="/docs/arquitectura/std/json/" class="sub"><span class="nav-dot"></span>Módulo json — JSON</a>
+        <a href="/docs/arquitectura/std/log/" class="sub"><span class="nav-dot"></span>Módulo log — Logging</a>
+        <a href="/docs/arquitectura/std/mmap/" class="sub"><span class="nav-dot"></span>Módulo mmap — Archivos Mapeados</a>
+        <a href="/docs/arquitectura/std/perfilado/" class="sub"><span class="nav-dot"></span>Módulo perfilado — Perfilado</a>
+        <a href="/docs/arquitectura/std/proceso/" class="sub"><span class="nav-dot"></span>Módulo proceso — Comandos del SO</a>
+        <a href="/docs/arquitectura/std/prueba/" class="sub"><span class="nav-dot"></span>Módulo prueba — Testing</a>
+        <a href="/docs/arquitectura/std/quic/" class="sub"><span class="nav-dot"></span>Módulo quic — QUIC</a>
+        <a href="/docs/arquitectura/std/ruta/" class="sub"><span class="nav-dot"></span>Módulo ruta — Rutas de Archivos</a>
+        <a href="/docs/arquitectura/std/servidor_h2/" class="sub"><span class="nav-dot"></span>Módulo servidor_h2 — Servidor HTTP/2</a>
+        <a href="/docs/arquitectura/std/servidor_web/" class="sub"><span class="nav-dot"></span>Módulo servidor_web — Servidor Web</a>
+        <a href="/docs/arquitectura/std/señales/" class="sub"><span class="nav-dot"></span>Módulo señales — Señales del SO</a>
+        <a href="/docs/arquitectura/std/sistema/" class="sub"><span class="nav-dot"></span>Módulo sistema — Información del SO</a>
+        <a href="/docs/arquitectura/std/sockets/" class="sub"><span class="nav-dot"></span>Módulo sockets — Sockets TCP/UDP</a>
+        <a href="/docs/arquitectura/std/temporizador/" class="sub"><span class="nav-dot"></span>Módulo temporizador — Temporizadores</a>
+        <a href="/docs/arquitectura/std/tls/" class="sub"><span class="nav-dot"></span>Módulo tls — TLS/SSL</a>
+        <a href="/docs/arquitectura/std/toml/" class="sub"><span class="nav-dot"></span>Módulo toml — TOML</a>
+        <a href="/docs/arquitectura/std/tui/" class="sub"><span class="nav-dot"></span>Módulo tui — TUI</a>
+        <a href="/docs/arquitectura/std/url/" class="sub"><span class="nav-dot"></span>Módulo url — URL</a>
+        <a href="/docs/arquitectura/std/websocket/" class="sub"><span class="nav-dot"></span>Módulo websocket — WebSocket</a>
         <div class="section-title">Referencia</div>
         <a href="/docs/errores/">Sistema de errores</a>
         <a href="/docs/ejemplos/">Ejemplos</a>
