@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from '../../layouts/Layout.astro';
 ---
 
@@ -18,7 +18,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🧪 Ejemplo</span></div>
-    <pre><code><span class="kw">funcion</span> <span class="fn">primer_caracter</span>(texto: <span class="ty">Texto</span>) &rarr; <span class="ty">Opcion</span><<span class="ty">Texto</span>> &lbrace;
+    <pre><code><span class="kw">funcion</span> <span class="fn">primer_caracter</span>(texto: <span class="ty">Texto</span>) &rarr; <span class="ty">Opcion</span>&lt;<span class="ty">Texto</span>> &lbrace;
     <span class="kw">si</span> (texto == <span class="st">""</span>) &lbrace;
         <span class="kw">retornar</span> <span class="kw">Ninguno</span>
     &rbrace;
@@ -44,7 +44,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🧪 Ejemplo</span></div>
-    <pre><code><span class="kw">funcion</span> <span class="fn">dividir</span>(a: <span class="ty">Entero</span>, b: <span class="ty">Entero</span>) &rarr; <span class="ty">Resultado</span><<span class="ty">Entero</span>, <span class="ty">Texto</span>> &lbrace;
+    <pre><code><span class="kw">funcion</span> <span class="fn">dividir</span>(a: <span class="ty">Entero</span>, b: <span class="ty">Entero</span>) &rarr; <span class="ty">Resultado</span>&lt;<span class="ty">Entero</span>, <span class="ty">Texto</span>> &lbrace;
     <span class="kw">si</span> (b == 0) &lbrace;
         <span class="kw">retornar</span> <span class="kw">Error</span>(<span class="st">"División por cero"</span>)
     &rbrace;
