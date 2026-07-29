@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-
 <Layout title="Orquestador JIT (jit_engine.rs) — Forja">
   <h1>JIT Engine – Orquestador de Compilación en Tiempo Real</h1>
   <p><strong>Archivo:</strong> <code>src/jit_engine.rs</code> (833 líneas)</p>
@@ -20,7 +19,7 @@ import Layout from '../../layouts/Layout.astro';
   <h3>Especialización de tipos</h3>
   <table>
     <tr><th>Función</th><th>Descripción</th></tr>
-    <tr><td><code>especializar_bytecode(bytecode) -> Vec<Opcode></code></td><td>Convierte opcodes genéricos (Add/Sub/Mul/Div) en versiones tipadas (AddInt/AddFloat) según inferencia estática. También detecta patrones como XorSign (sub de cero) y fusiona operaciones</td></tr>
+    <tr><td><code>especializar_bytecode(bytecode) -> Vec&lt;Opcode></code></td><td>Convierte opcodes genéricos (Add/Sub/Mul/Div) en versiones tipadas (AddInt/AddFloat) según inferencia estática. También detecta patrones como XorSign (sub de cero) y fusiona operaciones</td></tr>
   </table>
 
   <h3>Pipeline de decisión JIT</h3>
