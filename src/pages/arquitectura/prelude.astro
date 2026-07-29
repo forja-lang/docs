@@ -1,24 +1,88 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-
 <Layout title="Prelude (prelude.rs) — Forja">
-  <h1>Prelude del Lenguaje (Prelude)</h1>
-  <p><strong>Archivo:</strong> <code>src/prelude.rs</code></p>
+  <h1>Prelude del Lenguaje</h1>
+  <p><strong>Archivo:</strong> <code>src/prelude.rs</code> — <strong>11 líneas</strong></p>
 
   <h2>¿Por qué existe?</h2>
-  <p>Define los símbolos y utilidades que están automáticamente disponibles en cada programa Forja sin necesidad de importarlos explícitamente, similar al prelude de Rust o Haskell.</p>
+  <p>
+    El prelude define los símbolos, tipos y funciones que están automáticamente disponibles
+    en cada programa Forja sin necesidad de importarlos explícitamente. Es similar al prelude
+    de Rust, Haskell o Elixir: un conjunto de herramientas básicas que forman parte del lenguaje
+    mismo.
+  </p>
 
-  <h2>¿Qué contiene?</h2>
+  <h2>Estado actual</h2>
+  <p>
+    Actualmente <code>prelude.rs</code> es un espacio reservado. La función
+    <code>generar_prelude()</code> retorna un <code>Vec&#60;Declaracion&#62;</code> vacío,
+    lo que significa que el prelude está aún en fase de diseño. No hay tipos algebraicos
+    (<code>Resultado</code>, <code>Opcion</code>) definidos como parte del prelude todavía,
+    aunque el lenguaje ya los soporta como construcciones nativas.
+  </p>
+
+  <h2>Estructura</h2>
+
+  <h3><code>generar_prelude()</code></h3>
+  <table>
+    <thead>
+      <tr><th>Firma</th><th>Descripción</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>pub fn generar_prelude() -> Vec&#60;Declaracion&#62;</code></td>
+        <td>
+          Genera las declaraciones del prelude que se insertan automáticamente al inicio
+          de cada módulo raíz. Actualmente retorna un vec vacío, pero está diseñado para
+          contener:
+          <ul>
+            <li>Definiciones de tipos algebraicos básicos (Resultado, Opcion)</li>
+            <li>Funciones de utilidad global (escribir, leer, etc.)</li>
+            <li>Re-exports de la stdlib más común</li>
+            <li>Macros de conveniencia</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>Diseño futuro del prelude</h2>
+
+  <h3>Tipos algebraicos planeados</h3>
+  <pre><code>// Opcion (Option)
+tipo Opcion = Algo(valor) | Ninguno
+
+// Resultado (Result)
+tipo Resultado = Ok(valor) | Error(valor)</code></pre>
+
+  <h3>Funciones de utilidad planeadas</h3>
+  <pre><code>funcion escribir(valor)
+funcion leer() -> Texto
+funcion tipo_de(valor) -> Texto</code></pre>
+
+  <h2>¿Por qué está vacío ahora?</h2>
+  <p>
+    El prelude se dejó intencionalmente vacío durante las fases iniciales de desarrollo
+    para mantener la flexibilidad. Los tipos algebraicos <code>Resultado</code> y
+    <code>Opcion</code> (con constructores <code>Ok</code>, <code>Error</code>,
+    <code>Algo</code>, <code>Ninguno</code>) ya existen como expresiones nativas en el
+    lenguaje (<code>Expresion::Ok</code>, <code>Expresion::Error</code>,
+    <code>Expresion::Algo</code> en <code>ast.rs</code>), y se resuelven mediante
+    <code>bytecode.rs</code> sin necesidad de declaraciones de prelude.
+  </p>
+  <p>
+    En el futuro, cuando se defina el prelude completo, estos tipos y funciones se generarán
+    como declaraciones AST que se prependen automáticamente a cada módulo antes de la
+    compilación, permitiendo su uso sin importación explícita.
+  </p>
+
+  <h2>Relación con el resto del compilador</h2>
   <ul>
-    <li>Re‑exports de tipos básicos (<code>i64</code>, <code>f64</code>, <code>String</code>, etc.).</li>
-    <li>Funciones estándar de la biblioteca (por ejemplo <code>println</code>, <code>read_line</code>, <code>len</code>).</li>
-    <li>Macros de conveniencia para manejo de errores y aserciones.</li>
+    <li>El prelude se inserta al inicio de cada módulo durante la fase de resolución de módulos</li>
+    <li>Complementa la stdlib (<code>stdlib/std/</code>) que sí requiere importación explícita</li>
+    <li>Trabaja junto con el ModuleResolver para proporcionar símbolos base</li>
   </ul>
-
-  <h2>Cómo se usa</h2>
-  <p>El compilador incluye automáticamente <code>prelude.rs</code> al comienzo de cada módulo raíz. Los usuarios pueden sobrescribirlo añadiendo su propio <code>prelude.rs</code> en el proyecto.</p>
-
-  <h2>Ejemplo de contenido</h2>
-  <p>Ejemplo: se re-exportan los tipos básicos y se define una macro de aserción simplificada.</p>
 </Layout>
