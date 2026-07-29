@@ -75,7 +75,7 @@ import Layout from '../../layouts/Layout.astro';
   <ul>
     <li><code>Arroba</code> (<code>@</code>): Usado para anotaciones y metadatos.</li>
     <li><code>Amp</code> (<code>&</code>): Referencias de préstamos (Borrowing).</li>
-    <li><code>LlaveAbrir</code> (<code>{</code>) y <code>LlaveCerrar</code> (<code>}</code>): Delimitan bloques de sentencias y ámbitos de scopes.</li>
+    <li><code>LlaveAbrir</code> (<code>&#123;</code>) y <code>LlaveCerrar</code> (<code>&#125;</code>): Delimitan bloques de sentencias y ámbitos de scopes.</li>
     <li><code>ParenAbrir</code> (<code>(</code>) y <code>ParenCerrar</code> (<code>)</code>): Parámetros, argumentos y precedencia aritmética.</li>
     <li><code>CorcheteAbrir</code> (<code>[</code>) y <code>CorcheteCerrar</code> (<code>]</code>): Declaraciones de arreglos, indexaciones y mapas.</li>
     <li><code>Coma</code> (<code>,</code>): Separador de parámetros, argumentos, elementos de arreglos y variantes.</li>
@@ -131,7 +131,7 @@ import Layout from '../../layouts/Layout.astro';
   <ul>
     <li><strong>¿Por qué?:</strong> Permite imprimir una representación textual amigable y comprensible del token en consola.</li>
     <li><strong>¿Cómo?:</strong> Realiza un match exhaustivo sobre <code>self</code> para devolver el lexema textual representativo de cada variante (por ejemplo, escribe <code>"+"</code> para <code>TokenKind::Mas</code> o <code>"variable"</code> para <code>TokenKind::Variable</code>).</li>
-    <li><strong>¿Para qué?:</strong> Utilizado para mensajes de error del parser (ej: "se esperaba '}', se obtuvo 'identificador'").</li>
+    <li><strong>¿Para qué?:</strong> Utilizado para mensajes de error del parser (ej: "se esperaba '&#125;', se obtuvo 'identificador'").</li>
   </ul>
 
   <h3><code>impl fmt::Display for Token</code></h3>

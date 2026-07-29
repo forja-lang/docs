@@ -90,7 +90,7 @@ import Layout from '../../layouts/Layout.astro';
       <tr><td><code>Resultado(Box&#60;Tipo&#62;, Box&#60;Tipo&#62;)</code></td><td>Resultado con Ok(T) y Error(E)</td><td><code>variable r: Resultado&#60;Entero, Texto&#62;</code></td></tr>
       <tr><td><code>Opcion(Box&#60;Tipo&#62;)</code></td><td>Valor opcional Option(T)</td><td><code>variable o: Opcion&#60;Entero&#62;</code></td></tr>
       <tr><td><code>RasgoObjeto(String)</code></td><td>Un rasgo usado como tipo base (polimorfismo)</td><td><code>variable r: Mostrable</code></td></tr>
-      <tr><td><code>Parametro(String)</code></td><td>Parámetro de tipo genérico (T, U, etc.)</td><td><code>funcion id&#60;T&#62;(x: T) → T { x }</code></td></tr>
+      <tr><td><code>Parametro(String)</code></td><td>Parámetro de tipo genérico (T, U, etc.)</td><td><code>funcion id&#60;T&#62;(x: T) → T &#123; x &#125;</code></td></tr>
     </tbody>
   </table>
 
@@ -265,11 +265,11 @@ import Layout from '../../layouts/Layout.astro';
       <tr><th>Variante</th><th>Descripción</th><th>Ejemplo Forja</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>Identificador { nombre, linea, columna }</code></td><td>Referencia a variable, función o miembro</td><td><code>x</code>, <code>PI</code></td></tr>
-      <tr><td><code>AccesoMiembro { objeto, miembro }</code></td><td>Acceso a miembro de objeto</td><td><code>persona.nombre</code></td></tr>
-      <tr><td><code>Index { objeto, indice }</code></td><td>Acceso por índice a arreglo</td><td><code>arr[0]</code></td></tr>
+      <tr><td><code>Identificador &#123; nombre, linea, columna &#125;</code></td><td>Referencia a variable, función o miembro</td><td><code>x</code>, <code>PI</code></td></tr>
+      <tr><td><code>AccesoMiembro &#123; objeto, miembro &#125;</code></td><td>Acceso a miembro de objeto</td><td><code>persona.nombre</code></td></tr>
+      <tr><td><code>Index &#123; objeto, indice &#125;</code></td><td>Acceso por índice a arreglo</td><td><code>arr[0]</code></td></tr>
       <tr><td><code>Grupo(Box&#60;Expresion&#62;)</code></td><td>Expresión agrupada entre paréntesis</td><td><code>(a + b) * c</code></td></tr>
-      <tr><td><code>Referencia { expr, mutable }</code></td><td>Referencia (préstamo) a una expresión</td><td><code>&#38;x</code>, <code>&#38;mut x</code></td></tr>
+      <tr><td><code>Referencia &#123; expr, mutable &#125;</code></td><td>Referencia (préstamo) a una expresión</td><td><code>&#38;x</code>, <code>&#38;mut x</code></td></tr>
     </tbody>
   </table>
 
@@ -279,9 +279,9 @@ import Layout from '../../layouts/Layout.astro';
       <tr><th>Variante</th><th>Descripción</th><th>Ejemplo Forja</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>Binaria { izq, op, der }</code></td><td>Operación binaria entre dos expresiones</td><td><code>a + b</code>, <code>x &#62; 5</code></td></tr>
-      <tr><td><code>Unaria { op, expr }</code></td><td>Operación unaria sobre una expresión</td><td><code>-x</code>, <code>!cond</code></td></tr>
-      <tr><td><code>Ternario { cond, si_verdadero, si_falso }</code></td><td>Operador ternario condicional</td><td><code>cond ? cierto : falso</code></td></tr>
+      <tr><td><code>Binaria &#123; izq, op, der &#125;</code></td><td>Operación binaria entre dos expresiones</td><td><code>a + b</code>, <code>x &#62; 5</code></td></tr>
+      <tr><td><code>Unaria &#123; op, expr &#125;</code></td><td>Operación unaria sobre una expresión</td><td><code>-x</code>, <code>!cond</code></td></tr>
+      <tr><td><code>Ternario &#123; cond, si_verdadero, si_falso &#125;</code></td><td>Operador ternario condicional</td><td><code>cond ? cierto : falso</code></td></tr>
       <tr><td><code>Try(Box&#60;Expresion&#62;)</code></td><td>Operador de propagación de errores</td><td><code>expresion?</code></td></tr>
     </tbody>
   </table>
@@ -292,10 +292,10 @@ import Layout from '../../layouts/Layout.astro';
       <tr><th>Variante</th><th>Descripción</th><th>Ejemplo Forja</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>LlamadaFuncion { nombre, argumentos }</code></td><td>Llamada a función por nombre</td><td><code>escribir("hola")</code></td></tr>
-      <tr><td><code>LlamadaMetodo { objeto, metodo, argumentos }</code></td><td>Llamada a método sobre objeto</td><td><code>lista.agregar(5)</code></td></tr>
-      <tr><td><code>Instanciacion { clase, argumentos }</code></td><td>Instanciación de clase</td><td><code>nuevo Persona("Ana")</code></td></tr>
-      <tr><td><code>Closure { parametros, cuerpo }</code></td><td>Función anónima (closure)</td><td><code>func(x) { x + 1 }</code></td></tr>
+      <tr><td><code>LlamadaFuncion &#123; nombre, argumentos &#125;</code></td><td>Llamada a función por nombre</td><td><code>escribir("hola")</code></td></tr>
+      <tr><td><code>LlamadaMetodo &#123; objeto, metodo, argumentos &#125;</code></td><td>Llamada a método sobre objeto</td><td><code>lista.agregar(5)</code></td></tr>
+      <tr><td><code>Instanciacion &#123; clase, argumentos &#125;</code></td><td>Instanciación de clase</td><td><code>nuevo Persona("Ana")</code></td></tr>
+      <tr><td><code>Closure &#123; parametros, cuerpo &#125;</code></td><td>Función anónima (closure)</td><td><code>func(x) &#123; x + 1 &#125;</code></td></tr>
     </tbody>
   </table>
 
@@ -306,7 +306,7 @@ import Layout from '../../layouts/Layout.astro';
     </thead>
     <tbody>
       <tr><td><code>Arreglo(Vec&#60;Expresion&#62;)</code></td><td>Arreglo literal</td><td><code>[1, 2, 3]</code></td></tr>
-      <tr><td><code>Mapa(Vec&#60;(Expresion, Expresion)&#62;)</code></td><td>Mapa literal (clave → valor)</td><td><code>#{"clave": valor}</code></td></tr>
+      <tr><td><code>Mapa(Vec&#60;(Expresion, Expresion)&#62;)</code></td><td>Mapa literal (clave → valor)</td><td><code>#&#123;"clave": valor&#125;</code></td></tr>
     </tbody>
   </table>
 
@@ -330,9 +330,9 @@ import Layout from '../../layouts/Layout.astro';
       <tr><th>Variante</th><th>Descripción</th><th>Ejemplo Forja</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>Asignacion { variable, valor }</code></td><td>Asignación como expresión (retorna el valor)</td><td><code>x = 5</code></td></tr>
-      <tr><td><code>AsignacionCampo { objeto, campo, valor }</code></td><td>Asignación a campo como expresión</td><td><code>obj.campo = valor</code></td></tr>
-      <tr><td><code>ArraySet { array, valor }</code></td><td>Asignación por índice como expresión</td><td><code>arr[i] = valor</code></td></tr>
+      <tr><td><code>Asignacion &#123; variable, valor &#125;</code></td><td>Asignación como expresión (retorna el valor)</td><td><code>x = 5</code></td></tr>
+      <tr><td><code>AsignacionCampo &#123; objeto, campo, valor &#125;</code></td><td>Asignación a campo como expresión</td><td><code>obj.campo = valor</code></td></tr>
+      <tr><td><code>ArraySet &#123; array, valor &#125;</code></td><td>Asignación por índice como expresión</td><td><code>arr[i] = valor</code></td></tr>
     </tbody>
   </table>
 
@@ -342,10 +342,10 @@ import Layout from '../../layouts/Layout.astro';
       <tr><th>Variante</th><th>Descripción</th><th>Ejemplo Forja</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>Hilo { cuerpo }</code></td><td>Creación de hilo ligero</td><td><code>hilo { ... }</code></td></tr>
+      <tr><td><code>Hilo &#123; cuerpo &#125;</code></td><td>Creación de hilo ligero</td><td><code>hilo &#123; ... &#125;</code></td></tr>
       <tr><td><code>CanalNuevo</code></td><td>Creación de canal de comunicación</td><td><code>canal()</code></td></tr>
-      <tr><td><code>Seleccionar { brazos }</code></td><td>Selección entre múltiples canales (select)</td><td><code>seleccionar { ... }</code></td></tr>
-      <tr><td><code>Coincidir { expr, brazos }</code></td><td>Pattern matching sobre una expresión</td><td><code>coincidir expr { ... }</code></td></tr>
+      <tr><td><code>Seleccionar &#123; brazos &#125;</code></td><td>Selección entre múltiples canales (select)</td><td><code>seleccionar &#123; ... &#125;</code></td></tr>
+      <tr><td><code>Coincidir &#123; expr, brazos &#125;</code></td><td>Pattern matching sobre una expresión</td><td><code>coincidir expr &#123; ... &#125;</code></td></tr>
     </tbody>
   </table>
 
@@ -361,11 +361,11 @@ import Layout from '../../layouts/Layout.astro';
       <tr><th>Variante</th><th>Descripción</th><th>Ejemplo Forja</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>Variable { mutable, nombre, tipo, valor, linea, columna }</code></td><td>Declaración de variable (inmutable o mutable)</td><td><code>variable x = 5</code> / <code>variable mutable y = 10</code></td></tr>
-      <tr><td><code>Asignacion { nombre, valor, linea, columna }</code></td><td>Asignación a variable existente</td><td><code>x = 10</code></td></tr>
-      <tr><td><code>AsignacionMiembro { objeto, miembro, valor, linea, columna }</code></td><td>Asignación a campo de objeto</td><td><code>este.nombre = "Ana"</code></td></tr>
-      <tr><td><code>AsignacionIndex { nombre, indice, valor, linea, columna }</code></td><td>Asignación por índice</td><td><code>arr[0] = 10</code></td></tr>
-      <tr><td><code>AsignacionMultiple { variables, mutable, valor }</code></td><td>Asignación múltiple (ej: canal tx, rx)</td><td><code>variable tx, rx = canal()</code></td></tr>
+      <tr><td><code>Variable &#123; mutable, nombre, tipo, valor, linea, columna &#125;</code></td><td>Declaración de variable (inmutable o mutable)</td><td><code>variable x = 5</code> / <code>variable mutable y = 10</code></td></tr>
+      <tr><td><code>Asignacion &#123; nombre, valor, linea, columna &#125;</code></td><td>Asignación a variable existente</td><td><code>x = 10</code></td></tr>
+      <tr><td><code>AsignacionMiembro &#123; objeto, miembro, valor, linea, columna &#125;</code></td><td>Asignación a campo de objeto</td><td><code>este.nombre = "Ana"</code></td></tr>
+      <tr><td><code>AsignacionIndex &#123; nombre, indice, valor, linea, columna &#125;</code></td><td>Asignación por índice</td><td><code>arr[0] = 10</code></td></tr>
+      <tr><td><code>AsignacionMultiple &#123; variables, mutable, valor &#125;</code></td><td>Asignación múltiple (ej: canal tx, rx)</td><td><code>variable tx, rx = canal()</code></td></tr>
     </tbody>
   </table>
 
@@ -375,7 +375,7 @@ import Layout from '../../layouts/Layout.astro';
       <tr><th>Variante</th><th>Descripción</th><th>Ejemplo Forja</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>Funcion { nombre, parametros_tipo, parametros, tipo_retorno, cuerpo, externa, enlace_nombre, atributos, doc, precondiciones, postcondiciones }</code></td><td>Declaración de función completa con soporte para genéricos, FFI, atributos, documentación y contratos</td><td><code>funcion sumar(a: Entero, b: Entero) → Entero { a + b }</code></td></tr>
+      <tr><td><code>Funcion &#123; nombre, parametros_tipo, parametros, tipo_retorno, cuerpo, externa, enlace_nombre, atributos, doc, precondiciones, postcondiciones &#125;</code></td><td>Declaración de función completa con soporte para genéricos, FFI, atributos, documentación y contratos</td><td><code>funcion sumar(a: Entero, b: Entero) → Entero &#123; a + b &#125;</code></td></tr>
     </tbody>
   </table>
 
@@ -385,10 +385,10 @@ import Layout from '../../layouts/Layout.astro';
       <tr><th>Variante</th><th>Descripción</th><th>Ejemplo Forja</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>Clase { nombre, parametros_tipo, campos, metodos, atributos, invariantes }</code></td><td>Declaración de clase con campos, métodos, genéricos, atributos e invariantes</td><td><code>clase Persona { ... }</code></td></tr>
-      <tr><td><code>Enum { nombre, variantes, atributos }</code></td><td>Declaración de tipo enum algebraico</td><td><code>tipo Opcion = Alguno(Entero) | Ninguno</code></td></tr>
-      <tr><td><code>Rasgo { nombre, metodos }</code></td><td>Declaración de rasgo (interfaz)</td><td><code>rasgo Mostrable { ... }</code></td></tr>
-      <tr><td><code>Implementacion { rasgo_nombre, clase_nombre, metodos }</code></td><td>Implementación de rasgo para una clase</td><td><code>implementar Mostrable para Persona { ... }</code></td></tr>
+      <tr><td><code>Clase &#123; nombre, parametros_tipo, campos, metodos, atributos, invariantes &#125;</code></td><td>Declaración de clase con campos, métodos, genéricos, atributos e invariantes</td><td><code>clase Persona &#123; ... &#125;</code></td></tr>
+      <tr><td><code>Enum &#123; nombre, variantes, atributos &#125;</code></td><td>Declaración de tipo enum algebraico</td><td><code>tipo Opcion = Alguno(Entero) | Ninguno</code></td></tr>
+      <tr><td><code>Rasgo &#123; nombre, metodos &#125;</code></td><td>Declaración de rasgo (interfaz)</td><td><code>rasgo Mostrable &#123; ... &#125;</code></td></tr>
+      <tr><td><code>Implementacion &#123; rasgo_nombre, clase_nombre, metodos &#125;</code></td><td>Implementación de rasgo para una clase</td><td><code>implementar Mostrable para Persona &#123; ... &#125;</code></td></tr>
     </tbody>
   </table>
 
@@ -398,12 +398,12 @@ import Layout from '../../layouts/Layout.astro';
       <tr><th>Variante</th><th>Descripción</th><th>Ejemplo Forja</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>Si { condicion, bloque_verdadero, bloque_falso }</code></td><td>Condicional con rama opcional sino</td><td><code>si cond { ... } sino { ... }</code></td></tr>
-      <tr><td><code>Mientras { condicion, bloque }</code></td><td>Bucle mientras condicional</td><td><code>mientras cond { ... }</code></td></tr>
-      <tr><td><code>Para { inicializacion, condicion, incremento, bloque }</code></td><td>Bucle para estilo C</td><td><code>para (variable i = 0; i &#60; 10; i = i + 1) { ... }</code></td></tr>
-      <tr><td><code>Repetir { cantidad, bloque }</code></td><td>Bucle con cantidad fija de repeticiones</td><td><code>repetir 5 { ... }</code></td></tr>
-      <tr><td><code>Cuando { condicion, cuerpo, linea, columna }</code></td><td>Bloque reactivo/observador (cuando una condición cambia)</td><td><code>cuando x &#62; 10 { ... }</code></td></tr>
-      <tr><td><code>Retornar { valor }</code></td><td>Retorno de valor de función</td><td><code>retornar 42</code></td></tr>
+      <tr><td><code>Si &#123; condicion, bloque_verdadero, bloque_falso &#125;</code></td><td>Condicional con rama opcional sino</td><td><code>si cond &#123; ... &#125; sino &#123; ... &#125;</code></td></tr>
+      <tr><td><code>Mientras &#123; condicion, bloque &#125;</code></td><td>Bucle mientras condicional</td><td><code>mientras cond &#123; ... &#125;</code></td></tr>
+      <tr><td><code>Para &#123; inicializacion, condicion, incremento, bloque &#125;</code></td><td>Bucle para estilo C</td><td><code>para (variable i = 0; i &#60; 10; i = i + 1) &#123; ... &#125;</code></td></tr>
+      <tr><td><code>Repetir &#123; cantidad, bloque &#125;</code></td><td>Bucle con cantidad fija de repeticiones</td><td><code>repetir 5 &#123; ... &#125;</code></td></tr>
+      <tr><td><code>Cuando &#123; condicion, cuerpo, linea, columna &#125;</code></td><td>Bloque reactivo/observador (cuando una condición cambia)</td><td><code>cuando x &#62; 10 &#123; ... &#125;</code></td></tr>
+      <tr><td><code>Retornar &#123; valor &#125;</code></td><td>Retorno de valor de función</td><td><code>retornar 42</code></td></tr>
       <tr><td><code>Romper</code></td><td>Rompe el bucle actual</td><td><code>romper</code></td></tr>
       <tr><td><code>Continuar</code></td><td>Continua con la siguiente iteración del bucle</td><td><code>continuar</code></td></tr>
     </tbody>
@@ -417,8 +417,8 @@ import Layout from '../../layouts/Layout.astro';
     <tbody>
       <tr><td><code>Importar(String)</code></td><td>Importación de módulo</td><td><code>importar math</code> o <code>importar "/ruta/absoluta"</code></td></tr>
       <tr><td><code>ImportarExterna(String)</code></td><td>Cargar librería externa (FFI)</td><td><code>importar externa "libreria.dll"</code></td></tr>
-      <tr><td><code>LlamadaFuncion { nombre, argumentos }</code></td><td>Llamada a función como statement</td><td><code>escribir("hola")</code></td></tr>
-      <tr><td><code>AccesoMiembro { objeto, miembro }</code></td><td>Acceso a miembro como statement</td><td><code>objeto.metodo()</code></td></tr>
+      <tr><td><code>LlamadaFuncion &#123; nombre, argumentos &#125;</code></td><td>Llamada a función como statement</td><td><code>escribir("hola")</code></td></tr>
+      <tr><td><code>AccesoMiembro &#123; objeto, miembro &#125;</code></td><td>Acceso a miembro como statement</td><td><code>objeto.metodo()</code></td></tr>
       <tr><td><code>Expresion(Expresion)</code></td><td>Expresión usada como statement (ej: efecto secundario)</td><td><code>x + 1</code></td></tr>
     </tbody>
   </table>
@@ -433,7 +433,7 @@ import Layout from '../../layouts/Layout.astro';
       <tr><th>Firma</th><th>Descripción</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>pub fn es_externa(&#38;self) -> bool</code></td><td>Retorna <code>cierto</code> si la declaración es una función externa (FFI), es decir, <code>Declaracion::Funcion { externa: true, .. }</code></td></tr>
+      <tr><td><code>pub fn es_externa(&#38;self) -> bool</code></td><td>Retorna <code>cierto</code> si la declaración es una función externa (FFI), es decir, <code>Declaracion::Funcion &#123; externa: true, .. &#125;</code></td></tr>
     </tbody>
   </table>
 

@@ -13,11 +13,11 @@ import Layout from '../../layouts/Layout.astro';
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>Enum TargetArch</span></div>
-    <pre><code><span class="kw">pub enum</span> TargetArch {
+    <pre><code><span class="kw">pub enum</span> TargetArch &#123;
     X86_64Windows,
     X86_64Linux,
     AArch64,
-}</code></pre>
+&#125;</code></pre>
   </div>
 
   <h3>Métodos de TargetArch</h3>
@@ -92,7 +92,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>Estructura CompilerAsm</span></div>
-    <pre><code><span class="kw">pub struct</span> CompilerAsm {
+    <pre><code><span class="kw">pub struct</span> CompilerAsm &#123;
     arch: TargetArch,
     output: Vec&lt;String>,
     labels: HashMap&lt;String, String>,
@@ -103,7 +103,7 @@ import Layout from '../../layouts/Layout.astro';
     funciones_declaraciones: HashMap&lt;String, Declaracion>,
     string_literals: Vec&lt;String>,
     label_counter: usize,
-}</code></pre>
+&#125;</code></pre>
   </div>
 
   <h3>Desglose completo de funciones</h3>

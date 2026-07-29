@@ -13,10 +13,10 @@ import Layout from '../../layouts/Layout.astro';
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>Estructura Shape</span></div>
-    <pre><code><span class="kw">pub struct</span> Shape {
+    <pre><code><span class="kw">pub struct</span> Shape &#123;
     <span class="kw">pub</span> campo_a_indice: HashMap&lt;SymId, usize>,
     <span class="kw">pub</span> indice_a_campo: Vec&lt;SymId>,
-}</code></pre>
+&#125;</code></pre>
   </div>
 
   <p><code>Shape</code> define la estructura de campos compartida por <strong>todas las instancias</strong> de una misma clase. Esto permite que los objetos sean livianos: cada instancia solo almacena valores; la información de qué campos existen y en qué orden está centralizada en el <code>Shape</code>.</p>
@@ -37,13 +37,13 @@ import Layout from '../../layouts/Layout.astro';
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>Estructura ClassDescriptor</span></div>
-    <pre><code><span class="kw">pub struct</span> ClassDescriptor {
+    <pre><code><span class="kw">pub struct</span> ClassDescriptor &#123;
     <span class="kw">pub</span> nombre: SymId,
     <span class="kw">pub</span> shape: Shape,
     <span class="kw">pub</span> mro: Vec&lt;SymId>,
     <span class="kw">pub</span> metodos: HashMap&lt;SymId, SymId>,
     <span class="kw">pub</span> rasgos: Vec&lt;SymId>,
-}</code></pre>
+&#125;</code></pre>
   </div>
 
   <h3>Campos</h3>
@@ -60,7 +60,7 @@ import Layout from '../../layouts/Layout.astro';
   <h3>Ciclo de vida del ClassDescriptor</h3>
 
   <ol>
-    <li><strong>Parsing:</strong> El Parser detecta la declaración <code>clase Nombre { ... }</code> y construye un <code>ClassDescriptor</code> con su shape (campos) y métodos.</li>
+    <li><strong>Parsing:</strong> El Parser detecta la declaración <code>clase Nombre &#123; ... &#125;</code> y construye un <code>ClassDescriptor</code> con su shape (campos) y métodos.</li>
     <li><strong>Semántica:</strong> El TypeChecker valida tipos de campos y firmas de métodos. El BorrowChecker verifica accesos a <code>este</code>. Se resuelve el MRO.</li>
     <li><strong>Bytecode:</strong> <code>BytecodeGenerator</code> usa el descriptor para emitir opcodes de instanciación, acceso a campos y llamadas a métodos.</li>
     <li><strong>VM:</strong> <code>ForjaFast</code> almacena los descriptores en <code>class_descriptors</code> y los usa en ejecución para <code>GetField</code>, <code>SetField</code>, <code>CallMethod</code> y las inline caches.</li>

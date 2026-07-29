@@ -128,7 +128,7 @@ import Layout from '../../layouts/Layout.astro';
     <li><strong>¿Por qué?:</strong> Procesar cadenas de texto entre comillas dobles y expandir la interpolación de variables al vuelo.</li>
     <li><strong>¿Cómo?:</strong> 
       <ol>
-        <li>Si encuentra <code>$</code> seguido de <code>{</code>, interrumpe el buffer del fragmento de texto actual.</li>
+        <li>Si encuentra <code>$</code> seguido de <code>&#123;</code>, interrumpe el buffer del fragmento de texto actual.</li>
         <li>Si encuentra un delimitador de interpolación, interrumpe el buffer del fragmento de texto actual.</li>
         <li>Añade el fragmento actual como token de texto en la cola de tokens pendientes.</li>
         <li>Llama a <code>escanear_expresion_interpolada()</code> para tokenizar todo lo que esté dentro de las llaves.</li>
@@ -142,6 +142,6 @@ import Layout from '../../layouts/Layout.astro';
   <h3><code>fn escanear_expresion_interpolada(&mut self) -> Result&lt;(), ErrorForja&gt;</code></h3>
   <ul>
     <li><strong>¿Por qué?:</strong> Tokenizar el código fuente embebido dentro de la interpolación de una cadena.</li>
-    <li><strong>¿Para qué?:</strong> Permitir expresiones arbitrarias dentro de <code>${}</code> de forma segura.</li>
+    <li><strong>¿Para qué?:</strong> Permitir expresiones arbitrarias dentro de <code>$&#123;&#125;</code> de forma segura.</li>
   </ul>
 </Layout>

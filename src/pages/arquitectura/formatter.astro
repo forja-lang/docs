@@ -152,11 +152,11 @@ import Layout from '../../layouts/Layout.astro';
             <li><strong>Asignacion:</strong> <code>nombre = expr</code></li>
             <li><strong>AsignacionMiembro:</strong> <code>objeto.miembro = valor</code></li>
             <li><strong>AsignacionIndex:</strong> <code>nombre[indice] = valor</code></li>
-            <li><strong>Si:</strong> <code>si (cond) { ... }</code> con <code>sino { ... }</code> opcional</li>
-            <li><strong>Mientras:</strong> <code>mientras (cond) { ... }</code></li>
-            <li><strong>Para:</strong> <code>para (init; cond; inc) { ... }</code></li>
-            <li><strong>Repetir:</strong> <code>repetir (cant) { ... }</code></li>
-            <li><strong>Cuando:</strong> <code>cuando (cond) { ... }</code></li>
+            <li><strong>Si:</strong> <code>si (cond) &#123; ... &#125;</code> con <code>sino &#123; ... &#125;</code> opcional</li>
+            <li><strong>Mientras:</strong> <code>mientras (cond) &#123; ... &#125;</code></li>
+            <li><strong>Para:</strong> <code>para (init; cond; inc) &#123; ... &#125;</code></li>
+            <li><strong>Repetir:</strong> <code>repetir (cant) &#123; ... &#125;</code></li>
+            <li><strong>Cuando:</strong> <code>cuando (cond) &#123; ... &#125;</code></li>
             <li><strong>Funcion:</strong> formato completo con doc comments, atributos, genéricos, parámetros, retorno, pre/postcondiciones, cuerpo</li>
             <li><strong>LlamadaFuncion:</strong> <code>nombre(args)</code></li>
             <li><strong>AccesoMiembro:</strong> <code>obj.miembro</code></li>
@@ -165,8 +165,8 @@ import Layout from '../../layouts/Layout.astro';
             <li><strong>Importar:</strong> <code>importar ruta</code> (con comillas si es ruta absoluta)</li>
             <li><strong>Enum:</strong> <code>tipo Nombre = Var1 | Var2(Tipo)</code></li>
             <li><strong>AsignacionMultiple:</strong> <code>variable a, b = expr</code></li>
-            <li><strong>Rasgo:</strong> <code>rasgo Nombre { funcion metodo(...) -> Tipo ... }</code></li>
-            <li><strong>Implementacion:</strong> <code>implementa Rasgo para Clase { ... }</code></li>
+            <li><strong>Rasgo:</strong> <code>rasgo Nombre &#123; funcion metodo(...) -> Tipo ... &#125;</code></li>
+            <li><strong>Implementacion:</strong> <code>implementa Rasgo para Clase &#123; ... &#125;</code></li>
             <li><strong>Clase:</strong> formato completo con atributos, genéricos, invariantes, campos, métodos</li>
             <li><strong>Expresion(expr):</strong> expresión usada como statement</li>
           </ul>
@@ -216,15 +216,15 @@ import Layout from '../../layouts/Layout.astro';
             <li>Instanciacion: <code>nuevo Clase(args)</code></li>
             <li>Referencia: <code>&#38;expr</code>, <code>&#38;mut expr</code></li>
             <li>Arreglo: <code>[elem1, elem2]</code></li>
-            <li>Mapa: <code>{clave: valor}</code></li>
-            <li>Coincidir: <code>coincidir (expr) { caso ... }</code> con indentación</li>
+            <li>Mapa: <code>&#123;clave: valor&#125;</code></li>
+            <li>Coincidir: <code>coincidir (expr) &#123; caso ... &#125;</code> con indentación</li>
             <li>Index: <code>obj[indice]</code></li>
-            <li>Closure: <code>func(params) { ... }</code></li>
+            <li>Closure: <code>func(params) &#123; ... &#125;</code></li>
             <li>Grupo: <code>(expr)</code></li>
-            <li>Hilo: <code>hilo { ... }</code></li>
+            <li>Hilo: <code>hilo &#123; ... &#125;</code></li>
             <li>CanalNuevo: <code>canal()</code></li>
             <li>Try: <code>expr?</code></li>
-            <li>Seleccionar: <code>seleccionar { caso var = canal { ... } }</code></li>
+            <li>Seleccionar: <code>seleccionar &#123; caso var = canal &#123; ... &#125; &#125;</code></li>
             <li>Asignacion: <code>var = expr</code></li>
             <li>AsignacionCampo: <code>obj.campo = val</code></li>
             <li>ArraySet: <code>arr = val</code></li>
@@ -284,26 +284,26 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Ejemplo de salida formateada</h2>
   <pre><code>importar math
 
-clase Persona {
+clase Persona &#123;
     nombre: Texto
     edad: Entero
 
     constructor(nombre: Texto, edad: Entero)
         requiere edad >= 0, "La edad no puede ser negativa"
-    {
+    &#123;
         este.nombre = nombre
         este.edad = edad
-    }
+    &#125;
 
-    funcion es_mayor_de_edad() -> Booleano {
+    funcion es_mayor_de_edad() -> Booleano &#123;
         retornar este.edad >= 18
-    }
-}
+    &#125;
+&#125;
 
-funcion main() {
+funcion main() &#123;
     variable p = nuevo Persona("Ana", 25)
     escribir(p.es_mayor_de_edad())
-}</code></pre>
+&#125;</code></pre>
 
   <h2>Relación con el resto del compilador</h2>
   <ul>

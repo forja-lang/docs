@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from '../layouts/Layout.astro';
 ---
 
@@ -58,10 +58,10 @@ import Layout from '../layouts/Layout.astro';
   <div class="example-buttons">
     <button class="example-btn" data-code='escribir("¡Hola, mundo desde Forja!")'>Hola Mundo</button>
     <button class="example-btn" data-code='variable nombre = "Gaucho"\nvariable edad = 30\nescribir("Nombre: " + nombre)\nescribir("Edad: " + edad)'>Variables</button>
-    <button class="example-btn" data-code='funcion suma(a, b) {\n    retornar a + b\n}\nescribir("2 + 3 = " + suma(2, 3))'>Función</button>
-    <button class="example-btn" data-code='clase P {\n    nombre\n    constructor(n) {\n        este.nombre = n\n    }\n    funcion sal() {\n        escribir(este.nombre)\n    }\n}\nvariable p = nuevo P("Ana")\np.sal()'>Clase</button>
-    <button class="example-btn" data-code='variable i = 0\nmientras (i < 5) {\n    escribir("i = " + i)\n    i = i + 1\n}'>Bucle</button>
-    <button class="example-btn" data-code='funcion fib(n) {\n    si (n <= 1) {\n        retornar n\n    }\n    retornar fib(n-1) + fib(n-2)\n}\nescribir("fib(10) = " + fib(10))'>Fibonacci</button>
+    <button class="example-btn" data-code='funcion suma(a, b) &#123;\n    retornar a + b\n&#125;\nescribir("2 + 3 = " + suma(2, 3))'>Función</button>
+    <button class="example-btn" data-code='clase P &#123;\n    nombre\n    constructor(n) &#123;\n        este.nombre = n\n    &#125;\n    funcion sal() &#123;\n        escribir(este.nombre)\n    &#125;\n&#125;\nvariable p = nuevo P("Ana")\np.sal()'>Clase</button>
+    <button class="example-btn" data-code='variable i = 0\nmientras (i < 5) &#123;\n    escribir("i = " + i)\n    i = i + 1\n&#125;'>Bucle</button>
+    <button class="example-btn" data-code='funcion fib(n) &#123;\n    si (n <= 1) &#123;\n        retornar n\n    &#125;\n    retornar fib(n-1) + fib(n-2)\n&#125;\nescribir("fib(10) = " + fib(10))'>Fibonacci</button>
   </div>
 </Layout>
 

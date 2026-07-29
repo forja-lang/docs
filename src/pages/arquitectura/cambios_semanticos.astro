@@ -159,10 +159,10 @@ import Layout from '../../layouts/Layout.astro';
 <span class="kw">variable</span> c = Some(42)
 
 <span class="co">// Pattern matching con constructores en español:</span>
-<span class="kw">coincidir</span> (a) {
+<span class="kw">coincidir</span> (a) &#123;
     <span class="kw">caso</span> Alguno(v) => escribir(<span class="st">"Tengo: "</span>, v)
     <span class="kw">caso</span> Ninguno => escribir(<span class="st">"No hay valor"</span>)
-}
+&#125;
 
 <span class="co">// Resultado:</span>
 <span class="kw">variable</span> res = Ok(<span class="st">"exitoso"</span>)

@@ -61,16 +61,16 @@ import Layout from '../../layouts/Layout.astro';
 
   <pre><code><span class="kw">importar</span> <span class="st">"gui"</span>
 
-<span class="kw">funcion</span> <span class="fn">al_click</span>() {
+<span class="kw">funcion</span> <span class="fn">al_click</span>() &#123;
     <span class="fn">escribir</span>(<span class="st">"¡Hiciste clic!"</span>)
-}
+&#125;
 
-<span class="kw">funcion</span> <span class="fn">main</span>() {
+<span class="kw">funcion</span> <span class="fn">main</span>() &#123;
     <span class="fn">columna</span>(
         <span class="fn">texto_grande</span>(<span class="st">"Mi App"</span>),
         <span class="fn">boton</span>(<span class="st">"Saludar"</span>, &amp;<span class="fn">al_click</span>)
     )
-}</code></pre>
+&#125;</code></pre>
 
   <p>Ejecutar:</p>
   <pre><code class="language-bash">forja ejecutar --native app.fa</code></pre>
@@ -283,11 +283,11 @@ import Layout from '../../layouts/Layout.astro';
   <h3>Navigator (gestor de pantallas)</h3>
   <pre><code><span class="kw">variable</span> pantalla_actual = <span class="st">"inicio"</span>
 
-<span class="kw">funcion</span> <span class="fn">cambiar</span>(id) {
+<span class="kw">funcion</span> <span class="fn">cambiar</span>(id) &#123;
     pantalla_actual = id
-}
+&#125;
 
-<span class="kw">funcion</span> <span class="fn">main</span>() {
+<span class="kw">funcion</span> <span class="fn">main</span>() &#123;
     <span class="fn">navegador</span>(
         <span class="fn">navegador_pantallas</span>(
             <span class="fn">pantalla</span>(<span class="st">"Inicio"</span>, <span class="fn">columna</span>(<span class="fn">etiqueta</span>(<span class="st">"Home"</span>))),
@@ -298,7 +298,7 @@ import Layout from '../../layouts/Layout.astro';
         &amp;<span class="fn">cambiar</span>,
         <span class="st">"fade"</span>      <span class="co">// animación opcional</span>
     )
-}</code></pre>
+&#125;</code></pre>
 
   <p><strong>Tipos de navegación:</strong></p>
   <table>
@@ -399,16 +399,16 @@ import Layout from '../../layouts/Layout.astro';
 
   <pre><code><span class="kw">variable</span> comandos = <span class="st">'[]'</span>
 
-<span class="kw">funcion</span> <span class="fn">dibujar</span>() {
-    comandos = <span class="st">'[{"FillCircle": {"x":100,"y":100,"radius":50,"color":"#f59e0b"}}]'</span>
-}
+<span class="kw">funcion</span> <span class="fn">dibujar</span>() &#123;
+    comandos = <span class="st">'[&#123;"FillCircle": &#123;"x":100,"y":100,"radius":50,"color":"#f59e0b"&#125;&#125;]'</span>
+&#125;
 
-<span class="kw">funcion</span> <span class="fn">main</span>() {
+<span class="kw">funcion</span> <span class="fn">main</span>() &#123;
     <span class="fn">columna</span>(
         <span class="fn">lienzo</span>(<span class="st">"comandos"</span>, 400, 300),
         <span class="fn">boton</span>(<span class="st">"Dibujar"</span>, &amp;<span class="fn">dibujar</span>)
     )
-}</code></pre>
+&#125;</code></pre>
 
   <p><strong>Comandos de canvas:</strong> <code>FillCircle</code>, <code>StrokeCircle</code>, <code>FillRect</code>, <code>StrokeRect</code>, <code>FillLine</code>, <code>StrokeLine</code>, <code>FillPath</code>, <code>StrokePath</code>, <code>FillText</code>, <code>ClearCanvas</code>, <code>FillPolygon</code>, <code>StrokePolygon</code>, <code>FillRoundedRect</code>, <code>StrokeRoundedRect</code>, <code>DrawEllipse</code>, <code>DrawArc</code>, <code>DrawBezier</code>, <code>DrawImage</code>, <code>DrawLinearGradient</code></p>
 
@@ -461,25 +461,25 @@ import Layout from '../../layouts/Layout.astro';
 
   <pre><code><span class="kw">variable</span> nombre = <span class="st">"Invitado"</span>
 
-<span class="kw">funcion</span> <span class="fn">saludar</span>() {
+<span class="kw">funcion</span> <span class="fn">saludar</span>() &#123;
     <span class="fn">escribir</span>(<span class="st">"Hola, "</span> + nombre)
-}
+&#125;
 
-<span class="kw">funcion</span> <span class="fn">main</span>() {
+<span class="kw">funcion</span> <span class="fn">main</span>() &#123;
     <span class="fn">columna</span>(
         <span class="fn">campo_texto</span>(<span class="st">"nombre"</span>, <span class="st">"Nombre"</span>),
         <span class="fn">boton</span>(<span class="st">"Saludar"</span>, &amp;<span class="fn">saludar</span>)
     )
-}</code></pre>
+&#125;</code></pre>
 
   <hr />
 
   <h2>Callbacks y Funciones Nativas</h2>
 
   <h3>Callbacks</h3>
-  <pre><code><span class="kw">funcion</span> <span class="fn">mi_callback</span>() {
+  <pre><code><span class="kw">funcion</span> <span class="fn">mi_callback</span>() &#123;
     <span class="co">// ...</span>
-}
+&#125;
 
 <span class="co">// Conectar con &nombre_funcion:</span>
 <span class="fn">boton</span>(<span class="st">"Click"</span>, &amp;<span class="fn">mi_callback</span>)
@@ -555,15 +555,15 @@ AnimationPresets::spinner_loop()     // 800ms</code></pre>
 <span class="kw">variable</span> email = <span class="st">""</span>
 <span class="kw">variable</span> acepta = <span class="cn">falso</span>
 
-<span class="kw">funcion</span> <span class="fn">enviar</span>() {
-    <span class="kw">si</span> (nombre != <span class="st">""</span> &amp;&amp; email != <span class="st">""</span> &amp;&amp; acepta) {
+<span class="kw">funcion</span> <span class="fn">enviar</span>() &#123;
+    <span class="kw">si</span> (nombre != <span class="st">""</span> &amp;&amp; email != <span class="st">""</span> &amp;&amp; acepta) &#123;
         <span class="fn">notificación</span>(<span class="st">"Formulario enviado"</span>)
-    } <span class="kw">sino</span> {
+    &#125; <span class="kw">sino</span> &#123;
         <span class="fn">notificación</span>(<span class="st">"Completa todos los campos"</span>)
-    }
-}
+    &#125;
+&#125;
 
-<span class="kw">funcion</span> <span class="fn">main</span>() {
+<span class="kw">funcion</span> <span class="fn">main</span>() &#123;
     <span class="fn">tema_material</span>(<span class="fn">columna</span>(
         <span class="fn">titulo</span>(<span class="st">"Registro"</span>),
         <span class="fn">campo_texto</span>(<span class="st">"nombre"</span>, <span class="st">"Nombre"</span>, <span class="st">"Tu nombre"</span>),
@@ -571,6 +571,6 @@ AnimationPresets::spinner_loop()     // 800ms</code></pre>
         <span class="fn">casilla</span>(<span class="st">"Acepto términos"</span>, <span class="st">"acepta"</span>),
         <span class="fn">boton</span>(<span class="st">"Enviar"</span>, &amp;<span class="fn">enviar</span>, <span class="st">"send"</span>)
     ), <span class="st">"#6366f1"</span>)
-}</code></pre>
+&#125;</code></pre>
 
 </Layout>
