@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-
 <Layout title="Hash (hash.rs) — Forja">
   <h1>Módulo de Hashing Criptográfico</h1>
   <p><strong>Archivo:</strong> <code>src/hash.rs</code> (519 líneas)</p>
@@ -37,7 +36,7 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code>blake3(datos) -> [u8; 32]</code></td><td>Hash BLAKE3 de un solo paso</td></tr>
     <tr><td><code>hmac_sha256(clave, datos) -> [u8; 32]</code></td><td>HMAC usando SHA-256</td></tr>
     <tr><td><code>hex_encode(bytes) -> String</code></td><td>Convierte bytes a representación hexadecimal</td></tr>
-    <tr><td><code>hex_decode(s) -> Result<Vec<u8>></code></td><td>Decodifica hexadecimal a bytes</td></tr>
+    <tr><td><code>hex_decode(s) -> Result&lt;Vec&lt;u8>></code></td><td>Decodifica hexadecimal a bytes</td></tr>
   </table>
 
   <h2>Uso desde Forja</h2>
