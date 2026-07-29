@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-
 <Layout title="Módulo concurrencia / atomicos — Hilos y Atómicos (stdlib) — Forja">
   <h1>Módulos <code>concurrencia</code> y <code>atomicos</code> — Programación Concurrente</h1>
   <p><strong>Archivos:</strong> <code>stdlib/std/concurrencia.fa</code>, <code>stdlib/std/atomicos.fa</code></p>
@@ -42,14 +41,14 @@ import Layout from '../../layouts/Layout.astro';
 <span class="kw">variable</span> (tx, rx) = concurrencia.canal_crear()
 
 <span class="kw">funcion</span> productor() &brace;
-    <span class="kw">para</span> (<span class="kw">variable</span> i = 0; i < 5; i = i + 1) &brace;
+    <span class="kw">para</span> (<span class="kw">variable</span> i = 0; i &lt; 5; i = i + 1) &brace;
         concurrencia.canal_enviar(tx, i)
         concurrencia.hilo_dormir(100)
     &rbrace;
 &rbrace;
 
 <span class="kw">funcion</span> consumidor() &brace;
-    <span class="kw">para</span> (<span class="kw">variable</span> i = 0; i < 5; i = i + 1) &brace;
+    <span class="kw">para</span> (<span class="kw">variable</span> i = 0; i &lt; 5; i = i + 1) &brace;
         <span class="kw">variable</span> msg = concurrencia.canal_recibir(rx)
         <span class="fn">escribir_linea</span>(<span class="st">"Recibido: "</span> + msg)
     &rbrace;
