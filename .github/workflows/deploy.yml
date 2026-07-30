@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build
+    name: Compilación
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,7 +26,7 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Download WASM playground from latest release
+      - name: Descargar WASM playground de la última versión
         continue-on-error: true
         run: |
           curl -sL \

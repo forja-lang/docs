@@ -7,7 +7,7 @@ Sitio de documentación del lenguaje de programación **Forja**, construido con 
 ```bash
 npm install
 npm run dev      # Servidor local en http://localhost:4321
-npm run build    # Build estático en dist/
+npm run build    # Compilación estática en dist/
 npm run preview  # Previsualizar build
 ```
 
