@@ -32,5 +32,5 @@ El playground interactivo requiere el binario WASM del compilador, que se genera
 
 - [forja-lang/forja](https://github.com/forja-lang/forja) — Núcleo del lenguaje
 - [forja-lang/vscode](https://github.com/forja-lang/vscode) — Extensión de VS Code
-- [forja-lang/examples](https://github.com/forja-lang/examples) — Ejemplos
+- [forja-lang/ejemplos](https://github.com/forja-lang/ejemplos) — Ejemplos
 - [forja-lang/patches](https://github.com/forja-lang/patches) — Parches a dependencias

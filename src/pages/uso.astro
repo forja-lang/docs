@@ -38,14 +38,14 @@ Los comandos también aceptan su nombre en inglés:
   learn, keywords, highlight, explain, help, fmt, format, doc, test, bench
 
 EJEMPLOS:
-   forja ejecutar examples/01_hola.fa
-   forja compilar examples/01_hola.fa -o programa.exe
-   forja compilar-asm examples/01_hola.fa
-   forja compilar-asm examples/01_hola.fa --target arm64 -o programa
+   forja ejecutar ejemplos/01_hola.fa
+   forja compilar ejemplos/01_hola.fa -o programa.exe
+   forja compilar-asm ejemplos/01_hola.fa
+   forja compilar-asm ejemplos/01_hola.fa --target arm64 -o programa
    forja repl
-    forja formatear examples/01_hola.fa
-    forja colorear examples/01_hola.fa
-    forja test examples/mis_pruebas.fa
+    forja formatear ejemplos/01_hola.fa
+    forja colorear ejemplos/01_hola.fa
+    forja test ejemplos/mis_pruebas.fa
     forja nuevo mi_programa</code></pre>
   </div>
 
@@ -58,16 +58,16 @@ EJEMPLOS:
   <div class="code-block-wrapper">
     <div class="code-header"><span>📄 Ejemplos de transpilación</span></div>
     <pre><code><span class="co"># Automático (default si el arg termina en .fa)</span>
-forja examples/01_hola.fa
+forja ejemplos/01_hola.fa
 
 <span class="co"># Con salida personalizada</span>
-forja transpile examples/01_hola.fa -o salida.rs
+forja transpile ejemplos/01_hola.fa -o salida.rs
 
 <span class="co"># Atajo 't'</span>
-forja t examples/10_clases.fa
+forja t ejemplos/10_clases.fa
 
 <span class="co"># Errores en JSON (ideal para IDEs)</span>
-forja transpile examples/10_clases.fa --json-errors</code></pre>
+forja transpile ejemplos/10_clases.fa --json-errors</code></pre>
   </div>
 
   <h2><code>run|ejecutar|correr</code> — Ejecutar en VM</h2>
@@ -76,14 +76,14 @@ forja transpile examples/10_clases.fa --json-errors</code></pre>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>⚡ Ejemplos de ejecución</span></div>
-    <pre><code>forja run examples/01_hola.fa
+    <pre><code>forja run ejemplos/01_hola.fa
 <span class="co">// → ¡Hola, mundo desde Forja!</span>
 
-forja run examples/10_clases.fa
+forja run ejemplos/10_clases.fa
 <span class="co">// → Hola, soy Ana y tengo 20 años</span>
 <span class="co">// → Es mayor de edad</span>
 
-forja run examples/14_adivina.fa
+forja run ejemplos/14_adivina.fa
 <span class="co">// → Juego: adivina el número</span></code></pre>
   </div>
 
@@ -115,7 +115,7 @@ Hola Gaucho
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>📦 Ejemplo de build</span></div>
-    <pre><code>forja build examples/01_hola.fa -o hola.exe
+    <pre><code>forja build ejemplos/01_hola.fa -o hola.exe
 <span class="co">// → ✅ Ejecutable generado: hola.exe (1234 bytes)</span>
 
 <span class="co">// Ahora cualquiera puede ejecutarlo, sin Rust:</span>
@@ -132,19 +132,19 @@ Hola Gaucho
   <div class="code-block-wrapper">
     <div class="code-header"><span>🛠️ Ejemplos de build-asm</span></div>
     <pre><code><span class="co"># Mínimo: genera el ejecutable automáticamente (target = plataforma actual)</span>
-forja build-asm examples/01_hola.fa
+forja build-asm ejemplos/01_hola.fa
 
 <span class="co"># Con nombre de salida personalizado</span>
-forja build-asm examples/01_hola.fa -o programa.exe
+forja build-asm ejemplos/01_hola.fa -o programa.exe
 
 <span class="co"># Especificar arquitectura destino</span>
-forja build-asm examples/01_hola.fa --target arm64 -o programa
+forja build-asm ejemplos/01_hola.fa --target arm64 -o programa
 
 <span class="co"># Especificar Linux x86-64</span>
-forja build-asm examples/01_hola.fa --target x86_64-linux -o prog
+forja build-asm ejemplos/01_hola.fa --target x86_64-linux -o prog
 
 <span class="co"># El assembly generado se puede compilar manualmente</span>
-forja build-asm examples/01_hola.fa --target x86_64-windows -o prog
+forja build-asm ejemplos/01_hola.fa --target x86_64-windows -o prog
 gcc -O2 -o prog.exe prog.s</code></pre>
   </div>
 
@@ -186,7 +186,7 @@ gcc -O2 -o prog.exe prog.s</code></pre>
   <div class="code-block-wrapper">
     <div class="code-header"><span>🎨 Ejemplo</span></div>
     <pre><code><span class="co"># Antes (desordenado)</span>
-forja fmt examples/01_hola.fa
+forja fmt ejemplos/01_hola.fa
 
 <span class="co"># Después: código formateado con estilo consistente</span></code></pre>
   </div>
@@ -198,15 +198,15 @@ forja fmt examples/01_hola.fa
   <div class="code-block-wrapper">
     <div class="code-header"><span>🖼️ Ejemplo</span></div>
     <pre><code><span class="co"># Native runner (AST directo a Xilem, sin compilar Rust)</span>
-cargo run --features gui --bin forja -- run --native examples/204_login_final.fa
+cargo run --features gui --bin forja -- run --native ejemplos/204_login_final.fa
 
 <span class="co"># Transpilado a Rust (genera .exe autónomo)</span>
-cargo run --features gui --bin forja -- transpile examples/204_login_final.fa
+cargo run --features gui --bin forja -- transpile ejemplos/204_login_final.fa
 cd .forja_gui_cache && cargo run --release
 
 <span class="co"># GUI Launcher directo</span>
 cargo build --features gui
-.\target\debug\forja-gui.exe examples/204_login_final.fa</code></pre>
+.\target\debug\forja-gui.exe ejemplos/204_login_final.fa</code></pre>
   </div>
 
   <h2><code>highlight|colorear|color</code> — Colorear código en terminal</h2>
@@ -215,7 +215,7 @@ cargo build --features gui
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🌈 Ejemplo</span></div>
-    <pre><code>forja highlight examples/01_hola.fa
+    <pre><code>forja highlight ejemplos/01_hola.fa
 <span class="co">// Muestra el código con keywords en amarillo,</span>
 <span class="co">// funciones en verde, tipos en cian, strings en brillante</span></code></pre>
   </div>
@@ -325,8 +325,8 @@ Para mostrar algo en pantalla, usamos:
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🌳 Ejemplo</span></div>
-    <pre><code>forja diagrama examples/07_funciones.fa
-<span class="co">// Genera: examples/funciones.html</span>
+    <pre><code>forja diagrama ejemplos/07_funciones.fa
+<span class="co">// Genera: ejemplos/funciones.html</span>
 <span class="co">// Abrí el HTML en el navegador para ver el árbol</span></code></pre>
   </div>
 
@@ -336,19 +336,19 @@ Para mostrar algo en pantalla, usamos:
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>📄 Ejemplo</span></div>
-    <pre><code>forja doc examples/10_clases.fa</code></pre>
+    <pre><code>forja doc ejemplos/10_clases.fa</code></pre>
   </div>
 
   <h2><code>test|tests|probar [archivo]</code> — Ejecutar tests</h2>
 
-  <p>Ejecuta funciones marcadas con <code>@test</code> en archivos <code>.fa</code>. Sin argumento, busca y ejecuta todos los tests en <code>examples/</code>.</p>
+  <p>Ejecuta funciones marcadas con <code>@test</code> en archivos <code>.fa</code>. Sin argumento, busca y ejecuta todos los tests en <code>ejemplos/</code>.</p>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🧪 Ejemplos</span></div>
     <pre><code><span class="co"># Ejecutar tests de un archivo específico</span>
-forja test examples/mis_pruebas.fa
+forja test ejemplos/mis_pruebas.fa
 
-<span class="co"># Ejecutar todos los tests en examples/</span>
+<span class="co"># Ejecutar todos los tests en ejemplos/</span>
 forja test</code></pre>
   </div>
 
@@ -359,16 +359,16 @@ forja test</code></pre>
   <div class="code-block-wrapper">
     <div class="code-header"><span>⏱️ Ejemplos</span></div>
     <pre><code><span class="co"># Medir en todas las VMs</span>
-forja medir examples/bench_fib.fa
+forja medir ejemplos/bench_fib.fa
 
 <span class="co"># Medir en una VM específica</span>
-forja medir examples/bench_fib.fa --vm fast
+forja medir ejemplos/bench_fib.fa --vm fast
 
 <span class="co"># Con iteraciones personalizadas</span>
-forja medir examples/bench_fib.fa --iters 10
+forja medir ejemplos/bench_fib.fa --iters 10
 
 <span class="co"># Modo ASM nativo</span>
-forja medir examples/bench_fib.fa --asm</code></pre>
+forja medir ejemplos/bench_fib.fa --asm</code></pre>
   </div>
 
   <h2><code>add|agregar|remove|remover|install|instalar</code> — Gestión de paquetes</h2>
@@ -407,7 +407,7 @@ forja --help</code></pre>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🦀 Compilar con rustc</span></div>
-    <pre><code>rustc examples/hola_mundo.rs
+    <pre><code>rustc ejemplos/hola_mundo.rs
 ./hola_mundo</code></pre>
   </div>
 

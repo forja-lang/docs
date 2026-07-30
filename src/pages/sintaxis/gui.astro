@@ -67,14 +67,14 @@ import Layout from '../../layouts/Layout.astro';
   <div class="code-block-wrapper">
     <div class="code-header"><span>🖼️ Comandos</span></div>
     <pre><code><span class="co"># Native runner (AST directo a Xilem, sin compilar Rust)</span>
-cargo run --features gui --bin forja -- run --native examples/204_login_final.fa
+cargo run --features gui --bin forja -- run --native ejemplos/204_login_final.fa
 
 <span class="co"># Transpilado a Rust (genera .exe autónomo)</span>
-cargo run --features gui --bin forja -- transpile examples/204_login_final.fa
+cargo run --features gui --bin forja -- transpile ejemplos/204_login_final.fa
 cd .forja_gui_cache && cargo run --release
 
 <span class="co"># GUI Launcher directo</span>
 cargo build --features gui
-.\target\debug\forja-gui.exe examples/204_login_final.fa</code></pre>
+.\target\debug\forja-gui.exe ejemplos/204_login_final.fa</code></pre>
   </div>
 </Layout>

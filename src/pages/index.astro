@@ -208,22 +208,22 @@ import Layout from '../layouts/Layout.astro';
   <div class="code-block-wrapper">
     <div class="code-header"><span>⚡ Modos de ejecución</span></div>
     <pre><code><span class="co"># Assembly nativo (MÁS RÁPIDO ⚡) — x86-64 o ARM64</span>
-forja build-asm examples/01_hola.fa -o programa
+forja build-asm ejemplos/01_hola.fa -o programa
 
 <span class="co"># Transpilar a Rust</span>
-forja transpile examples/01_hola.fa -o programa.rs
+forja transpile ejemplos/01_hola.fa -o programa.rs
 
 <span class="co"># Ejecutar en VM (4 versiones disponibles)</span>
-forja run examples/01_hola.fa
+forja run ejemplos/01_hola.fa
 
 <span class="co"># GUI interactiva (requiere --features gui)</span>
-cargo run --features gui --bin forja -- run --native examples/204_login_final.fa
+cargo run --features gui --bin forja -- run --native ejemplos/204_login_final.fa
 
 <span class="co"># Modo interactivo</span>
 forja repl
 
 <span class="co"># Ejecutable autónomo (VM + bytecode)</span>
-forja build examples/01_hola.fa -o programa.exe
+forja build ejemplos/01_hola.fa -o programa.exe
 
 <span class="co"># En el navegador (WASM)</span>
 <span class="co"># Abrí la página de Playground</span></code></pre>
