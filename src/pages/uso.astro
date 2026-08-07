@@ -77,7 +77,7 @@ forja transpile ejemplos/10_clases.fa --json-errors</code></pre>
 
   <h2><code>run|ejecutar|correr</code> — Ejecutar en VM</h2>
 
-  <p>Compila y ejecuta el <strong>bytecode</strong> directamente en la Máquina Virtual. No necesitás Rust instalado para ejecutar programas. La VM usada es <strong>ForjaFast v5</strong> (la más rápida de las 3 VMs).</p>
+  <p>Compila y ejecuta el <strong>bytecode</strong> directamente en la Máquina Virtual. No necesitás Rust instalado para ejecutar programas. La VM usada es <strong>ForjaFast v5</strong> (la más rápida de las VMs).</p>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>⚡ Ejemplos de ejecución</span></div>
@@ -91,9 +91,8 @@ forja run ejemplos/10_clases.fa
 forja run ejemplos/14_adivina.fa
 <span class="co">// → Juego: adivina el número</span>
 
-<span class="co"># Seleccionar VM (fast | vm | jit)</span>
+<span class="co"># Seleccionar VM (fast | jit)</span>
 forja run ejemplos/01_hola.fa --vm fast
-forja run ejemplos/01_hola.fa --vm vm
 forja run ejemplos/01_hola.fa --vm jit
 
 <span class="co"># Compilar a assembly y ejecutar con gcc -O2</span>
@@ -106,7 +105,7 @@ forja run ejemplos/01_hola.fa --fast-math</code></pre>
   <h3>Flags de <code>run</code></h3>
   <table>
     <tr><th>Flag</th><th>Descripción</th></tr>
-    <tr><td><code>--vm fast|vm|jit</code></td><td>Elige la VM a usar (default: fast)</td></tr>
+    <tr><td><code>--vm fast|jit</code></td><td>Elige la VM a usar (default: fast)</td></tr>
     <tr><td><code>--asm</code></td><td>Compila a assembly nativo y ejecuta (gcc -O2)</td></tr>
     <tr><td><code>--native</code></td><td>GUI nativa con Xilem (requiere <code>--features gui</code>)</td></tr>
     <tr><td><code>--fast-math</code></td><td>Aritmética flotante optimizada</td></tr>
@@ -206,7 +205,6 @@ gcc -O2 -o prog.exe prog.s</code></pre>
         <tr><td><code>build-asm</code> (gcc -O2)</td><td>~51 μs</td><td><strong>~80x más rápido que Python</strong></td></tr>
         <tr><td><code>run --vm fast</code> (ForjaFast v5 🏆)</td><td>~9,544 μs</td><td>~2.3x más lento que Python</td></tr>
         <tr><td>Python (CPython 3.11)</td><td>~4,117 μs</td><td>— referencia</td></tr>
-        <tr><td><code>run --vm vm</code> (VM v1 Original)</td><td>~91,795 μs</td><td>~22x más lento que Python</td></tr>
         <tr><td><code>run --vm jit</code> (VM v3 Direct Threading)</td><td>~34,864 μs</td><td>~8.5x más lento que Python</td></tr>
       </tbody>
     </table>
@@ -465,7 +463,7 @@ forja --help</code></pre>
     <div class="code-header"><span>📊 Benchmarks disponibles</span></div>
     <pre><code>cargo run --release --bin bench-jit          # JIT Nativo vs ForjaFast vs Rust
 cargo run --release --bin bench-jit-100k     # JIT con 100k iteraciones
-cargo run --release --bin bench-vms          # VM Original vs JIT(DT) vs ForjaFast
+cargo run --release --bin bench-vms          # JIT(DT) vs ForjaFast
 cargo run --release --bin bench-forjafast    # Todas las VMs (cold + hot)
 cargo run --release --bin bench-rust-native  # Rust nativo (baseline)
 cargo run --release --bin bench-clean        # ForjaFast vs Python

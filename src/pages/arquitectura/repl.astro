@@ -21,7 +21,7 @@ import Layout from '../../layouts/Layout.astro';
       <tr><th>Campo</th><th>Tipo</th><th>Descripción</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>vm_mode</code></td><td><code>String</code></td><td>Modo de VM a utilizar: <code>"original"</code> (VM clásica) o <code>"fast"</code> (ForjaFast con NaN tagging)</td></tr>
+      <tr><td><code>vm_mode</code></td><td><code>String</code></td><td>Modo de VM a utilizar: <code>"fast"</code> (ForjaFast con NaN tagging, default) o <code>"jit"</code></td></tr>
       <tr><td><code>buffer</code></td><td><code>String</code></td><td>Buffer de entrada acumulada para expresiones multi-línea</td></tr>
       <tr><td><code>show_bytecode</code></td><td><code>bool</code></td><td>Si es cierto, muestra el bytecode generado antes de ejecutar</td></tr>
       <tr><td><code>source_acumulado</code></td><td><code>String</code></td><td>Código fuente completo acumulado desde el inicio de la sesión</td></tr>
@@ -44,7 +44,7 @@ import Layout from '../../layouts/Layout.astro';
         <td><code>pub fn new(modo: &#38;str) -> Self</code></td>
         <td>
           Crea una nueva instancia del REPL. Inicializa rustyline con historial, configura el
-          modo de VM según el string recibido (<code>"original"</code>, <code>"fast"</code>, etc.),
+          modo de VM según el string recibido (<code>"fast"</code>, <code>"jit"</code>, etc.),
           y prepara los buffers de código fuente.
         </td>
       </tr>
@@ -118,8 +118,7 @@ import Layout from '../../layouts/Layout.astro';
             <li>Parsea los tokens a AST</li>
             <li>Genera bytecode a partir del AST</li>
             <li>Si show_bytecode está activo, muestra los opcodes generados</li>
-            <li>Si el modo es <code>"fast"</code>: carga el bytecode en ForjaFast y ejecuta con <code>ejecutar()</code></li>
-            <li>Si es modo <code>"original"</code>: ejecuta con la VM clásica</li>
+            <li>Si el modo es <code>"fast"</code> (o cualquier otro): carga el bytecode en ForjaFast y ejecuta con <code>ejecutar()</code></li>
             <li>Retorna el resultado formateado como String</li>
           </ol>
           En caso de error (léxico, sintáctico, semántico o de runtime), retorna el mensaje de error.
@@ -150,7 +149,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Pipeline del REPL</h2>
   <pre><code>┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────────┐   ┌─────────────┐
 │ Entrada  │──▶│ Lexer    │──▶│ Parser   │──▶│ Bytecode Gen │──▶│ VM (fast/   │
-│ usuario  │   │ tokens   │   │ AST      │   │ opcodes       │   │  original)   │
+│ usuario  │   │ tokens   │   │ AST      │   │ opcodes       │   │  jit)        │
 └──────────┘   └──────────┘   └──────────┘   └──────────────┘   └──────┬──────┘
                                                                        │
                                                                        ▼
@@ -174,7 +173,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Relación con el resto del compilador</h2>
   <ul>
     <li>Depende de <code>lexer.rs</code>, <code>parser.rs</code>, <code>bytecode.rs</code> para el pipeline de compilación</li>
-    <li>Ejecuta el código en <code>vm_fast.rs</code> (ForjaFast) o en la VM original</li>
+    <li>Ejecuta el código en <code>vm_fast.rs</code> (ForjaFast)</li>
     <li>Utiliza <code>module.rs</code> (ModuleResolver) para recarga de módulos</li>
     <li>Se invoca desde la CLI (<code>main.rs</code>) con el flag <code>--repl</code></li>
   </ul>

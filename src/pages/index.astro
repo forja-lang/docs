@@ -8,7 +8,7 @@ import Layout from '../layouts/Layout.astro';
     <h1>Forja</h1>
     <div class="subtitle">Un lenguaje de programación en <strong>español</strong> con <strong>VM propia</strong>, <strong>JIT</strong>, <strong>compilador ASM</strong> (x86-64 / ARM64) y <strong>playground WASM</strong></div>
     <div class="badge-row">
-      <span class="badge dot">⎔ 3 VMs + JIT Nativo</span>
+      <span class="badge dot">⎔ 2 VMs + JIT Nativo</span>
       <span class="badge">🦀 Rust backend</span>
       <span class="badge">⚡ Assembly nativo</span>
       <span class="badge">🎯 Educativo</span>
@@ -55,7 +55,6 @@ import Layout from '../layouts/Layout.astro';
       <tr><td><strong>Backend de Registros</strong></td><td>Stack→Reg, live intervals, linear scan, x86-64</td><td><code>src/stack_to_reg.rs</code>, <code>src/register_ir.rs</code>, <code>src/register_alloc.rs</code>, <code>src/codegen_reg.rs</code></td></tr>
       <tr><td><strong>Bytecode</strong></td><td>60+ opcodes stack-based</td><td><code>src/bytecode.rs</code> (5107 líneas)</td></tr>
       <tr><td><strong>Micro-opcodes</strong></td><td>Expansión + optimización de opcodes</td><td><code>src/uops.rs</code> (832 líneas)</td></tr>
-      <tr><td><strong>VM v1</strong></td><td>Stack-based original</td><td><code>src/vm.rs</code> (4302 líneas)</td></tr>
       <tr><td><strong>VM v3 DT</strong></td><td>Direct Threading (u8 planos)</td><td><code>src/vm_jit.rs</code> (1570 líneas)</td></tr>
       <tr><td><strong>VM v5 Fast 🏆</strong></td><td>NaN tagging, stack caching, producción</td><td><code>src/vm_fast.rs</code> (8694 líneas)</td></tr>
       <tr><td><strong>GC Generacional</strong></td><td>Young bump + old mark-sweep, write barriers</td><td><code>src/gc.rs</code>, <code>src/gc_intrinsics.rs</code></td></tr>
@@ -133,8 +132,8 @@ import Layout from '../layouts/Layout.astro';
     </div>
     <div class="feature-card">
       <span class="icon">⎔</span>
-      <h4>3 generaciones de VM + JIT</h4>
-      <p>Desde la VM original hasta la v5 con NaN tagging y stack caching. JIT nativo x86-64. Cada versión es una lección de optimización.</p>
+      <h4>VMs + JIT</h4>
+      <p>ForjaFast (v5) con NaN tagging y stack caching como VM de interpretación, más la VM Direct Threading (v3) y el JIT nativo x86-64.</p>
     </div>
     <div class="feature-card">
       <span class="icon">⚡</span>
@@ -288,7 +287,6 @@ forja build ejemplos/01_hola.fa -o programa.exe
         <tr><td>🐍 Python (CPython 3.12)</td><td>77.15 ms</td><td>320 ms</td><td>3.62 ms</td><td><strong>~40–140x</strong></td></tr>
         <tr><td><code>run</code> (ForjaFast v5 🏆)</td><td>113.99 μs</td><td>9,544 μs</td><td>—</td><td><strong>~437x</strong></td></tr>
         <tr><td><code>run --vm jit</code> (VM v3 DT)</td><td>28.59 μs</td><td>34,864 μs</td><td>—</td><td>~1,597x</td></tr>
-        <tr><td><code>run --vm vm</code> (VM v1 Original)</td><td>20.84 μs</td><td>91,795 μs</td><td>—</td><td>~4,206x</td></tr>
       </tbody>
     </table>
     <p><em>Benchmarks actualizados al 9 Jul 2026. Forja AOT <code>transpile</code> + <code>rustc -O</code> rinde igual que Rust nativo (mismo backend LLVM). Los benchmarks de VM varían según el hardware.</em></p>
@@ -353,7 +351,7 @@ p.saludar()
 
   <h2>Pipeline de compilación</h2>
 
-  <p>Forja transforma tu código a través de 5+ fases, pudiendo generar Rust, bytecode (para 3 VMs), assembly nativo, LLVM IR, o ejecutarse en el navegador via WASM:</p>
+  <p>Forja transforma tu código a través de 5+ fases, pudiendo generar Rust, bytecode (para 2 VMs), assembly nativo, LLVM IR, o ejecutarse en el navegador via WASM:</p>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🔀 Arquitectura completa</span></div>
@@ -383,8 +381,8 @@ p.saludar()
         ┌─────────────────────────────────────┼───────────────────────────────┐
         ▼                                     ▼                               ▼
 ┌──────────────┐   ┌──────────────┐   ┌──────────────┐   ┌────────────────┐   ┌──────────────┐
-│ Compilador   │   │ 3 VMs        │   │ JIT Tiered   │   │ Backend LLVM   │   │ AOT + Self   │
-│ ASM → .exe   │   │ vm/vm_jit/   │   │ interpret →  │   │ (backend_llvm) │   │ Run → .exe   │
+│ Compilador   │   │ 2 VMs        │   │ JIT Tiered   │   │ Backend LLVM   │   │ AOT + Self   │
+│ ASM → .exe   │   │ vm_jit/      │   │ interpret →  │   │ (backend_llvm) │   │ Run → .exe   │
 │ (gcc -O2)    │   │ vm_fast 🏆    │   │ jit → opt    │   └────────────────┘   │ autónomo     │
 └──────────────┘   └──────────────┘   └──────────────┘                        └──────────────┘
                                                      │
@@ -406,7 +404,7 @@ p.saludar()
       <tr><td>3</td><td><strong>Backend de Registros</strong></td><td><code>codegen_reg.rs</code></td><td>⚡⚡⚡⚡</td><td>IR SSA → register IR → linear scan → x86-64 con encoding REX.</td></tr>
       <tr><td>4</td><td><strong>JIT Nativo / Tiered (x86-64)</strong></td><td><code>jit.rs</code>, <code>jit_tiered.rs</code></td><td>⚡⚡⚡</td><td>Código máquina generado en memoria con tiers y OSR.</td></tr>
       <tr><td>5</td><td><strong>ForjaFast (VM v5)</strong></td><td><code>vm_fast.rs</code></td><td>⚡⚡</td><td>VM con NaN tagging + stack caching + superinstrucciones + GC.</td></tr>
-      <tr><td>6</td><td><strong>VM Original / JIT-DT</strong></td><td><code>vm.rs</code> / <code>vm_jit.rs</code></td><td>⚡</td><td>VMs educativas para referencia y benchmarks.</td></tr>
+      <tr><td>6</td><td><strong>VM v3 Direct Threading</strong></td><td><code>vm_jit.rs</code></td><td>⚡</td><td>VM educativa para referencia y benchmarks.</td></tr>
     </tbody>
   </table>
 

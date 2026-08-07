@@ -5,7 +5,7 @@ import Layout from '../../layouts/Layout.astro';
 <Layout title="Pipeline de compilación — Forja">
   <h1>Pipeline de compilación</h1>
 
-  <p>Forja tiene un pipeline de <strong>10+ fases</strong> que transforma código fuente <code>.fa</code> en código Rust, bytecode ejecutable (para 3 VMs), assembly nativo, LLVM IR, o ejecutables autónomos.</p>
+  <p>Forja tiene un pipeline de <strong>10+ fases</strong> que transforma código fuente <code>.fa</code> en código Rust, bytecode ejecutable (para 2 VMs), assembly nativo, LLVM IR, o ejecutables autónomos.</p>
 
   <div class="code-header"><span>🔀 Flujo completo del pipeline</span></div>
   <pre class="mermaid">
@@ -50,9 +50,6 @@ flowchart TB
             Forja → Assembly`"])
     end
     subgraph VM["FASE 6 · Ejecución"]
-        V1(["`**VM v1**
-            vm.rs
-            stack-based`"])
         V3(["`**VM v3 DT**
             vm_jit.rs
             direct threading`"])
@@ -76,7 +73,7 @@ flowchart TB
     S --> L --> P --> TC --> BC --> O
     O --> TR & BG & AS
     BG --> UO
-    UO --> V1 & V3 & V5
+    UO --> V3 & V5
     V5 --> J
     AS --> G --> A
     J --> A --> W
@@ -98,7 +95,7 @@ flowchart TB
     classDef ot fill:#333,stroke:#666,color:#999,stroke-dasharray:4 4
 
     class S src; class L lx; class P pr; class TC,BC sm; class O op
-    class TR,BG,UO,AS gn; class V1,V3,V5,J,G vm; class A,W ds
+    class TR,BG,UO,AS gn; class V3,V5,J,G vm; class A,W ds
     class R,B,Sa,E,Pg ot
   </pre>
 
@@ -132,7 +129,7 @@ flowchart TB
     F5A["5a · Transpilador · transpiler.rs · AST → Rust (.rs)"]
     F5B["5b · Bytecode · bytecode.rs + uops.rs · AST → Opcodes → Uops"]
     F5D["5d · Assembly · compiler_asm.rs · AST → .s (x86-64 / ARM64)"]
-    F6A["6a · VMs · vm.rs / vm_jit.rs / vm_fast.rs · bytecode → Output"]
+    F6A["6a · VMs · vm_jit.rs / vm_fast.rs · bytecode → Output"]
     F6B["6b · JIT Engine · jit_engine.rs + jit.rs · código máquina"]
     F7["7 · AOT + Selfrun · aot.rs + selfrun.rs · .exe autónomo"]
 
@@ -169,7 +166,6 @@ flowchart TB
     <div class="feature-card"><span class="icon">🪟</span><h4>codegen_reg.rs</h4><p>Generación x86-64 con REX</p></div>
     <div class="feature-card"><span class="icon">💾</span><h4>bytecode.rs</h4><p>Generación bytecode (5107 líneas)</p></div>
     <div class="feature-card"><span class="icon">🔬</span><h4>uops.rs</h4><p>Micro-opcodes (832 líneas)</p></div>
-    <div class="feature-card"><span class="icon">⚙️</span><h4>vm.rs v1</h4><p>VM stack-based (4302 líneas)</p></div>
     <div class="feature-card"><span class="icon">⚡</span><h4>vm_jit.rs v3 DT</h4><p>Direct Threading (1570 líneas)</p></div>
     <div class="feature-card"><span class="icon">🚀</span><h4>vm_fast.rs v5 🏆</h4><p>NaN tagging, producción (8694 líneas)</p></div>
     <div class="feature-card"><span class="icon">🌀</span><h4>gc.rs / gc_intrinsics.rs</h4><p>GC generacional + safe points</p></div>

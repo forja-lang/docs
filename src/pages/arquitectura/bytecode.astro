@@ -8,7 +8,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>¿Por qué existe?</h2>
   <p>Define el <strong>lenguaje intermedio (IR)</strong> entre el compilador y la máquina virtual. El bytecode es una secuencia de opcodes stack-based que la VM interpreta para ejecutar programas Forja. Separar el bytecode de la VM permite:</p>
   <ul>
-    <li>Múltiples backends de ejecución (VM original, VM Fast, JIT nativo, compilador AOT)</li>
+    <li>Múltiples backends de ejecución (VM Fast, VM Direct Threading, JIT nativo, compilador AOT)</li>
     <li>Optimizaciones en el bytecode independientes de la VM (fusionado de opcodes, especialización adaptativa)</li>
     <li>Portabilidad: el mismo bytecode puede ejecutarse en distintas arquitecturas</li>
   </ul>
@@ -116,7 +116,7 @@ import Layout from '../../layouts/Layout.astro';
   <ol>
     <li>Se crea un <code>Vec&lt;Opcode></code> con el bytecode generado.</li>
     <li>La VM ejecuta un bucle <code>while pc &lt; bytecode.len()</code> que despacha cada opcode mediante <code>match</code>.</li>
-    <li>El stack es <code>Vec&lt;ValorFast></code> (o <code>Vec&lt;Valor></code> en VM original).</li>
+    <li>El stack es <code>Vec&lt;ValorFast></code> en ForjaFast (y <code>ValorDT</code> en la VM Direct Threading).</li>
     <li>Variables por &iacute;ndice usan vectores pre‑alojados para acceso O(1).</li>
     <li>Llamadas a built‑ins o funciones se delegan al dispatcher correspondiente.</li>
     <li>Opcode‑fusion combina operaciones comunes para reducir sobrecarga.</li>

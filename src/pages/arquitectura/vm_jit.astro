@@ -6,14 +6,14 @@ import Layout from '../../layouts/Layout.astro';
   <p><strong>Archivo:</strong> <code>src/vm_jit.rs</code></p>
 
   <h2>¿Por qué existe?</h2>
-  <p>La VM JIT (v3) fue la <strong>segunda generación</strong> de máquina virtual de Forja, diseñada para mejorar el rendimiento de la VM original (v1) mediante compilación en tiempo de ejecución. Es la predecesora de la VM Fast (v6) y actualmente está en proceso de ser reemplazada por completo.</p>
+  <p>La VM JIT (v3) fue la <strong>segunda generación</strong> de máquina virtual de Forja, diseñada para mejorar el rendimiento de la VM original (v1, removida en 9.0.0) mediante compilación en tiempo de ejecución. Es la predecesora de la VM Fast (v6).</p>
 
   <h2>Cómo funciona</h2>
   <ul>
     <li>Recibe la lista de <code>Uop</code> generada por el proceso de compilación.</li>
     <li>El <em>emitter JIT</em> traduce cada <code>Uop</code> a código máquina usando <code>dynasmrt</code> (o similar) y lo coloca en memoria ejecutable.</li>
     <li>Mantiene un cache de funciones JIT para reutilizar código generado entre llamadas.</li>
-    <li>En caso de error de compilación JIT, hace fallback a la VM interpretada original.</li>
+    <li>En caso de error de compilación JIT, hace fallback a la VM interpretada (ForjaFast).</li>
   </ul>
 
   <h2>API Pública</h2>
