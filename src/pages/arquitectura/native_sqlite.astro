@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="SQLite Nativo (native_sqlite.rs) — Forja">
   <h1>SQLite Nativo — Bindings a Base de Datos</h1>
-  <p><strong>Archivo:</strong> <code>src/native_sqlite.rs</code> (558 líneas)</p>
+  <p><strong>Archivo:</strong> <code>src/native_sqlite.rs</code> (543 líneas)</p>
 
   <h2>¿Por qué existe?</h2>
   <p>Proporciona acceso a bases de datos <strong>SQLite</strong> desde programas Forja mediante bindings directos a <code>rusqlite</code>. Almacena las conexiones en un heap global con bloqueo <code>Mutex</code> (la VM Forja es single-threaded, por lo que el Mutex nunca tiene contención real).</p>

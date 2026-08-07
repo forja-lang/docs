@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="VM Fast (vm_fast.rs) — Forja">
   <h1>VM Fast – Variante Optimizada (v6, NaN Tagging)</h1>
-  <p><strong>Archivo:</strong> <code>src/vm_fast.rs</code> (7652 líneas)</p>
+  <p><strong>Archivo:</strong> <code>src/vm_fast.rs</code> (8694 líneas)</p>
 
   <h2>¿Por qué existe?</h2>
   <p>La VM Fast (v6) es la <strong>tercera generación de máquinas virtuales</strong> de Forja, diseñada para ofrecer el máximo rendimiento en la interpretación de bytecode. Reemplaza a la VM original (<code>vm.rs</code>) y a la VM JIT (<code>vm_jit.rs</code>) como el motor de ejecución por defecto. Utiliza técnicas avanzadas como <strong>NaN Tagging</strong>, <strong>Stack Caching</strong>, <strong>Flat Var Stack</strong>, <strong>Quickening adaptativo</strong> (PEP 659), y <strong>GC generacional stop-the-world</strong> para lograr ejecución de alto rendimiento sin perder la seguridad del tipado dinámico.</p>

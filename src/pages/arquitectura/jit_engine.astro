@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="Orquestador JIT (jit_engine.rs) — Forja">
   <h1>JIT Engine – Orquestador de Compilación en Tiempo Real</h1>
-  <p><strong>Archivo:</strong> <code>src/jit_engine.rs</code> (833 líneas)</p>
+  <p><strong>Archivo:</strong> <code>src/jit_engine.rs</code> (935 líneas)</p>
 
   <h2>¿Por qué existe?</h2>
   <p>Actúa como <strong>orquestador</strong> entre la VM Fast y el compilador JIT nativo (<code>jit.rs</code>). Decide qué bloques de bytecode son candidatos a compilación JIT, especializa tipos estáticamente, y gestiona el fallback a la VM interpretada cuando el JIT no puede compilar.</p>

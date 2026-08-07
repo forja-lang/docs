@@ -25,12 +25,13 @@ COMANDOS:
   add &lt;paquete> [version]   Añadir dependencia
   remove &lt;paquete>           Eliminar dependencia
   install                    Instalar todas las dependencias
-  medir &lt;archivo>            Benchmark de VMs [--iters N] [--vm ...]
+  medir &lt;archivo>            Benchmark de VMs [--iters N] [--vm ...] [--asm]
   aprender                   Tutorial interactivo
   palabras                   Lista de palabras clave
   colorear &lt;archivo>         Colorear código en terminal
   explicar &lt;palabra>         Explicar un concepto
   documentar &lt;archivo>       Generar documentación desde AST
+  version                    Mostrar la versión de Forja
   ayuda [tema]               Mostrar esta ayuda
 
 Los comandos también aceptan su nombre en inglés:
@@ -46,7 +47,11 @@ EJEMPLOS:
     forja formatear ejemplos/01_hola.fa
     forja colorear ejemplos/01_hola.fa
     forja test ejemplos/mis_pruebas.fa
-    forja nuevo mi_programa</code></pre>
+    forja nuevo mi_programa
+
+PGO (Profile-Guided Optimization):
+   forja ejecutar programa.fa --pgo            Recolectar perfil (.forjaprof)
+   forja ejecutar programa.fa --pgo=usar       Aplicar perfil existente</code></pre>
   </div>
 
   <h2><code>transpile|t|transpilar</code> — Forja → Rust</h2>
@@ -84,8 +89,36 @@ forja run ejemplos/10_clases.fa
 <span class="co">// → Es mayor de edad</span>
 
 forja run ejemplos/14_adivina.fa
-<span class="co">// → Juego: adivina el número</span></code></pre>
+<span class="co">// → Juego: adivina el número</span>
+
+<span class="co"># Seleccionar VM (fast | vm | jit)</span>
+forja run ejemplos/01_hola.fa --vm fast
+forja run ejemplos/01_hola.fa --vm vm
+forja run ejemplos/01_hola.fa --vm jit
+
+<span class="co"># Compilar a assembly y ejecutar con gcc -O2</span>
+forja run ejemplos/01_hola.fa --asm
+
+<span class="co"># Fast math (arritmética flotante optimizada)</span>
+forja run ejemplos/01_hola.fa --fast-math</code></pre>
   </div>
+
+  <h3>Flags de <code>run</code></h3>
+  <table>
+    <tr><th>Flag</th><th>Descripción</th></tr>
+    <tr><td><code>--vm fast|vm|jit</code></td><td>Elige la VM a usar (default: fast)</td></tr>
+    <tr><td><code>--asm</code></td><td>Compila a assembly nativo y ejecuta (gcc -O2)</td></tr>
+    <tr><td><code>--native</code></td><td>GUI nativa con Xilem (requiere <code>--features gui</code>)</td></tr>
+    <tr><td><code>--fast-math</code></td><td>Aritmética flotante optimizada</td></tr>
+    <tr><td><code>--pgo</code> / <code>--pgo=recoger</code></td><td>Recolecta un perfil de ejecución (<code>.forjaprof</code>)</td></tr>
+    <tr><td><code>--pgo=usar</code></td><td>Aplica un perfil PGO existente</td></tr>
+    <tr><td><code>--hot-reload</code> / <code>--hot</code></td><td>Recarga módulos en caliente</td></tr>
+    <tr><td><code>--contratos</code> / <code>--no-contratos</code></td><td>Activa/desactiva verificación de design by contract</td></tr>
+    <tr><td><code>--allow-net &lt;hosts></code></td><td>Permite hosts de red en el sandbox</td></tr>
+    <tr><td><code>--allow-port &lt;puertos></code></td><td>Permite puertos de red en el sandbox</td></tr>
+    <tr><td><code>--max-archivo &lt;MB></code></td><td>Límite de tamaño de archivo</td></tr>
+    <tr><td><code>--debug</code> / <code>--no-debug</code></td><td>Habilita/deshabilita modo debug</td></tr>
+  </table>
 
   <h2><code>repl</code> — Modo interactivo</h2>
 
@@ -369,6 +402,19 @@ forja medir ejemplos/bench_fib.fa --iters 10
 
 <span class="co"># Modo ASM nativo</span>
 forja medir ejemplos/bench_fib.fa --asm</code></pre>
+  </div>
+
+  <h2><code>PGO — Profile-Guided Optimization</code></h2>
+
+  <p>Forja puede recolectar perfiles de ejecución y recompilar el programa guiado por ese perfil. La recolección genera un archivo <code>.forjaprof</code> con conteos de llamadas por función, branches, tipos y iteraciones de loops.</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📈 Ejemplos de PGO</span></div>
+    <pre><code><span class="co"># Recolectar perfil (genera .forjaprof)</span>
+forja ejecutar programa.fa --pgo
+
+<span class="co"># Aplicar un perfil existente</span>
+forja ejecutar programa.fa --pgo=usar</code></pre>
   </div>
 
   <h2><code>add|agregar|remove|remover|install|instalar</code> — Gestión de paquetes</h2>

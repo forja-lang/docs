@@ -1,0 +1,40 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+---
+<Layout title="Módulo sandbox — Aislamiento de Red (stdlib) — Forja">
+  <h1>Módulo <code>sandbox</code> — Aislamiento de Red</h1>
+  <p><strong>Archivo:</strong> <code>stdlib/std/sandbox.fa</code></p>
+
+  <h2>¿Por qué existe?</h2>
+  <p>Controla el <strong>acceso a recursos del sistema</strong> (red, archivos y procesos) desde código Forja. Por defecto <strong>todo está habilitado</strong>; este módulo permite <em>restringir</em> el acceso cuando sea necesario. La política es de <strong>whitelist</strong>: una vez que se restringe un host, puerto, directorio o comando, <strong>solo los elementos restringidos quedan permitidos</strong>.</p>
+
+  <p>Se usa con <code>importar std/sandbox</code> y es la capa Forja sobre las funciones nativas <code>_sandbox_*</code> implementadas en Rust en <code>src/sandbox.rs</code> (ver la página <a href="../sandbox.astro">Sandbox (sandbox.rs)</a>).</p>
+
+  <h2>Funciones que expone</h2>
+  <table>
+    <tr><th>Función</th><th>Nativa que llama</th><th>Descripción</th></tr>
+    <tr><td><code>restringir_host(host: Texto)</code></td><td><code>_sandbox_restringir_host</code></td><td>Restringe un host de red. Luego de restringir uno, solo los hosts restringidos están permitidos</td></tr>
+    <tr><td><code>restringir_puerto(puerto: Entero)</code></td><td><code>_sandbox_restringir_puerto</code></td><td>Restringe un puerto de red. Solo los puertos restringidos quedan accesibles</td></tr>
+    <tr><td><code>restringir_directorio(dir: Texto)</code></td><td><code>_sandbox_restringir_directorio</code></td><td>Restringe el acceso a un directorio. Solo los directorios restringidos están permitidos</td></tr>
+    <tr><td><code>restringir_comando(comando: Texto)</code></td><td><code>_sandbox_restringir_comando</code></td><td>Restringe la ejecución de un comando. Solo los comandos restringidos se pueden ejecutar</td></tr>
+    <tr><td><code>estado()</code></td><td><code>_sandbox_estado</code></td><td>Retorna el estado actual del sandbox como un mapa, p. ej. <code>&#123;red: "abierto", archivos: "abierto", procesos: "abierto"&#125;</code></td></tr>
+  </table>
+
+  <h2>Ejemplo</h2>
+  <pre><code>importar std/sandbox
+
+# Restringir host de red
+sandbox.restringir_host("google.com")
+
+# Restringir directorio de archivos
+sandbox.restringir_directorio("/etc")
+
+# Restringir comando de procesos
+sandbox.restringir_comando("rm")
+
+# Consultar estado
+variable estado = sandbox.estado()
+escribir(estado)  # &#123;red: "restringido", archivos: "restringido", procesos: "restringido"&#125;</code></pre>
+
+  <div class="warning"><strong>Modelo de permisos:</strong> restringir un elemento no suma a una lista de bloqueo, sino que cambia la política a permitir <em>solo</em> los elementos restringidos. Pensá cada llamada como "habilitar únicamente este elemento".</div>
+</Layout>

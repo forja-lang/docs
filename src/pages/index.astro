@@ -22,6 +22,13 @@ import Layout from '../layouts/Layout.astro';
       <span class="badge">🧵 Hilos / Canales</span>
       <span class="badge">🏷️ Atributos / derive</span>
       <span class="badge">📖 Doc comments</span>
+      <span class="badge">🌀 GC Generacional</span>
+      <span class="badge">🔀 IR SSA</span>
+      <span class="badge">⚙️ Monomorfización</span>
+      <span class="badge">📈 PGO</span>
+      <span class="badge">📶 JIT Tiered</span>
+      <span class="badge">🪟 Registros / REX</span>
+      <span class="badge">🤖 Android (JNI)</span>
     </div>
   </div>
 
@@ -35,56 +42,69 @@ import Layout from '../layouts/Layout.astro';
     </thead>
     <tbody>
       <tr><td><strong>Lenguaje</strong></td><td>Rust (edition 2021)</td><td><code>src/main.rs</code>, <code>src/lib.rs</code></td></tr>
-      <tr><td><strong>CLI</strong></td><td>20+ comandos en español/inglés</td><td><code>src/main.rs</code> (1818 líneas)</td></tr>
+      <tr><td><strong>CLI</strong></td><td>20+ comandos en español/inglés</td><td><code>src/main.rs</code> (2262 líneas)</td></tr>
       <tr><td><strong>Lexer + Parser</strong></td><td>Recursive Descent</td><td><code>src/lexer.rs</code>, <code>src/parser.rs</code></td></tr>
       <tr><td><strong>Tokens</strong></td><td>Definición de tokens del lenguaje</td><td><code>src/token.rs</code></td></tr>
       <tr><td><strong>AST</strong></td><td>Árbol de Sintaxis Abstracta</td><td><code>src/ast.rs</code></td></tr>
-      <tr><td><strong>Semántica</strong></td><td>Type Checker + Borrow Checker</td><td><code>src/semantics.rs</code></td></tr>
+      <tr><td><strong>Semántica</strong></td><td>Type Checker + Borrow Checker</td><td><code>src/semantics.rs</code> (2345 líneas)</td></tr>
       <tr><td><strong>Tabla de Símbolos</strong></td><td>Resolución de nombres y ámbitos</td><td><code>src/symbol_table.rs</code></td></tr>
       <tr><td><strong>Descriptores de Clase</strong></td><td>Metadatos de clases y herencia</td><td><code>src/class_descriptor.rs</code></td></tr>
-      <tr><td><strong>Bytecode</strong></td><td>60+ opcodes stack-based</td><td><code>src/bytecode.rs</code> (3212 líneas)</td></tr>
-      <tr><td><strong>Micro-opcodes</strong></td><td>Expansión + optimización de opcodes</td><td><code>src/uops.rs</code> (798 líneas)</td></tr>
-      <tr><td><strong>VM v1</strong></td><td>Stack-based original</td><td><code>src/vm.rs</code> (2935 líneas)</td></tr>
-      <tr><td><strong>VM v3 DT</strong></td><td>Direct Threading (u8 planos)</td><td><code>src/vm_jit.rs</code> (799 líneas)</td></tr>
-      <tr><td><strong>VM v5 Fast 🏆</strong></td><td>NaN tagging, stack caching, producción</td><td><code>src/vm_fast.rs</code> (5341 líneas)</td></tr>
+      <tr><td><strong>Monomorfización</strong></td><td>Instanciación de genéricos + inferencia</td><td><code>src/monomorph.rs</code> (605 líneas)</td></tr>
+      <tr><td><strong>IR SSA</strong></td><td>Mid-level IR en Static Single Assignment</td><td><code>src/ir.rs</code>, <code>src/ir_constructor.rs</code>, <code>src/ir_ssa.rs</code></td></tr>
+      <tr><td><strong>IR → Bytecode</strong></td><td>Traducción de IR SSA a opcodes</td><td><code>src/ir_to_bytecode.rs</code></td></tr>
+      <tr><td><strong>Backend de Registros</strong></td><td>Stack→Reg, live intervals, linear scan, x86-64</td><td><code>src/stack_to_reg.rs</code>, <code>src/register_ir.rs</code>, <code>src/register_alloc.rs</code>, <code>src/codegen_reg.rs</code></td></tr>
+      <tr><td><strong>Bytecode</strong></td><td>60+ opcodes stack-based</td><td><code>src/bytecode.rs</code> (5107 líneas)</td></tr>
+      <tr><td><strong>Micro-opcodes</strong></td><td>Expansión + optimización de opcodes</td><td><code>src/uops.rs</code> (832 líneas)</td></tr>
+      <tr><td><strong>VM v1</strong></td><td>Stack-based original</td><td><code>src/vm.rs</code> (4302 líneas)</td></tr>
+      <tr><td><strong>VM v3 DT</strong></td><td>Direct Threading (u8 planos)</td><td><code>src/vm_jit.rs</code> (1570 líneas)</td></tr>
+      <tr><td><strong>VM v5 Fast 🏆</strong></td><td>NaN tagging, stack caching, producción</td><td><code>src/vm_fast.rs</code> (8694 líneas)</td></tr>
+      <tr><td><strong>GC Generacional</strong></td><td>Young bump + old mark-sweep, write barriers</td><td><code>src/gc.rs</code>, <code>src/gc_intrinsics.rs</code></td></tr>
+      <tr><td><strong>Arena / Shapes</strong></td><td>Alocación por arenas y shapes de objetos</td><td><code>src/arena.rs</code>, <code>src/shape.rs</code></td></tr>
       <tr><td><strong>JIT Nativo ⚡</strong></td><td>Generación de código x86-64 en memoria</td><td><code>src/jit.rs</code>, <code>src/jit_engine.rs</code></td></tr>
-      <tr><td><strong>Compilador ASM</strong></td><td>x86-64 Win/Linux, ARM64 + gcc -O2</td><td><code>src/compiler_asm.rs</code> (3015 líneas)</td></tr>
+      <tr><td><strong>JIT Tiered</strong></td><td>Interpret → JitSimple → JitOptimized + OSR</td><td><code>src/jit_tiered.rs</code></td></tr>
+      <tr><td><strong>PGO</strong></td><td>Optimización guiada por perfiles</td><td><code>src/pgo.rs</code></td></tr>
+      <tr><td><strong>Compilador ASM</strong></td><td>x86-64 Win/Linux, ARM64 + gcc -O2</td><td><code>src/compiler_asm.rs</code> (3413 líneas)</td></tr>
+      <tr><td><strong>Backend LLVM</strong></td><td>Generación de LLVM IR + optimización</td><td><code>src/compiler_llvm.rs</code>, <code>src/backend_llvm.rs</code></td></tr>
       <tr><td><strong>Compilador AOT</strong></td><td>.exe autónomo con bytecode incrustado</td><td><code>src/aot.rs</code>, <code>src/selfrun.rs</code></td></tr>
-      <tr><td><strong>Optimizador</strong></td><td>Constant folding + Dead Code Elimination</td><td><code>src/optimizer.rs</code></td></tr>
+      <tr><td><strong>Optimizador</strong></td><td>Constant folding + Dead Code Elimination</td><td><code>src/optimizer.rs</code> (2743 líneas)</td></tr>
+      <tr><td><strong>Cache Incremental</strong></td><td>Compilación incremental persistente</td><td><code>src/incremental_cache.rs</code></td></tr>
       <tr><td><strong>Módulos</strong></td><td>Importación con seguridad anti path traversal</td><td><code>src/module.rs</code></td></tr>
-      <tr><td><strong>Transpilador Rust</strong></td><td>Forja → código Rust</td><td><code>src/transpiler.rs</code></td></tr>
-      <tr><td><strong>Compilador LLVM</strong></td><td>Generación de IR + optimización LLVM</td><td><code>src/compiler_llvm.rs</code> (911 líneas)</td></tr>
-      <tr><td><strong>Preludio</strong></td><td>Funciones intrínsecas del lenguaje</td><td><code>src/prelude.rs</code> (10 líneas)</td></tr>
-      <tr><td><strong>WASM</strong></td><td>wasm-bindgen → playground en navegador</td><td><code>crates/forja-wasm/</code></td></tr>
+      <tr><td><strong>Transpilador Rust</strong></td><td>Forja → código Rust</td><td><code>src/transpiler.rs</code> (3484 líneas)</td></tr>
+      <tr><td><strong>Preludio</strong></td><td>Funciones intrínsecas del lenguaje</td><td><code>src/prelude.rs</code></td></tr>
+      <tr><td><strong>WASM</strong></td><td>wasm-bindgen → playground en navegador</td><td><code>crates/forja-wasm/</code>, <code>crates/forja-wasm-gui/</code></td></tr>
       <tr><td><strong>REPL</strong></td><td>rustyline, variables persistentes</td><td><code>src/repl.rs</code></td></tr>
       <tr><td><strong>Formatter</strong></td><td>Formateo automático de código</td><td><code>src/formatter.rs</code></td></tr>
       <tr><td><strong>Diagrama</strong></td><td>HTML interactivo del AST</td><td><code>src/diagrama.rs</code></td></tr>
+      <tr><td><strong>FFI</strong></td><td>Llamadas a librerías nativas (C)</td><td><code>src/ffi.rs</code></td></tr>
       <tr><td><strong>Extensión VSCode</strong></td><td>TextMate grammar + snippets</td><td><code>vscode/forja-syntax/</code></td></tr>
       <tr><td><strong>Design by Contract</strong></td><td>pre/post condiciones, invariantes</td><td><code>src/ast.rs</code>, <code>src/bytecode.rs</code></td></tr>
       <tr><td><strong>Hot Reload</strong></td><td>Recargar módulos en caliente</td><td><code>src/module.rs</code>, <code>src/vm_fast.rs</code></td></tr>
-      <tr><td><strong>Profiler integrado</strong></td><td>Perfilado de funciones y VMs</td><td><code>src/fprofiler.rs</code> (164 líneas)</td></tr>
+      <tr><td><strong>Profiler integrado</strong></td><td>Perfilado de funciones y VMs</td><td><code>src/fprofiler.rs</code></td></tr>
       <tr><td><strong>Package Manager</strong></td><td>add, remove, install, forja.json</td><td><code>src/package_config.rs</code>, <code>src/package_resolver.rs</code></td></tr>
-      <tr><td><strong>Debugger DAP</strong></td><td>Depurador integrado (DAP) + servidor</td><td><code>src/debugger.rs</code> (789 líneas), <code>src/bin/forja_dap.rs</code> (818 líneas)</td></tr>
-      <tr><td><strong>Servidor LSP</strong></td><td>Language Server Protocol para IDE</td><td><code>src/bin/forja_lsp.rs</code> (1538 líneas)</td></tr>
-      <tr><td><strong>GUI Nativa</strong></td><td>Xilem runtime, ventanas nativas</td><td><code>src/gui_nativa.rs</code> (5942 líneas)</td></tr>
-      <tr><td><strong>Sistema de Errores</strong></td><td>Mensajes de error educativos en español</td><td><code>src/error.rs</code> (316 líneas)</td></tr>
-      <tr><td><strong>Base64</strong></td><td>Codificación/decodificación Base64</td><td><code>src/base64.rs</code> (152 líneas)</td></tr>
-      <tr><td><strong>Criptografía</strong></td><td>AES-GCM, ChaCha20-Poly1305, cifrado simétrico</td><td><code>src/crypto.rs</code> (1127 líneas)</td></tr>
-      <tr><td><strong>Criptografía Post-Cuántica</strong></td><td>ML-KEM, ML-DSA, SLH-DSA (FIPS 205/206)</td><td><code>src/crypto_pq.rs</code> (444 líneas)</td></tr>
-      <tr><td><strong>Hash</strong></td><td>BLAKE3, SHA-2, SHA-3 familia completa</td><td><code>src/hash.rs</code> (519 líneas)</td></tr>
-      <tr><td><strong>Memory-Mapped Files</strong></td><td>E/S de archivos mapeados en memoria</td><td><code>src/mmap.rs</code> (305 líneas)</td></tr>
-      <tr><td><strong>HTTP/2 Nativo (Core)</strong></td><td>Implementación HTTP/2 sobre h2 crate</td><td><code>src/native_h2_core.rs</code> (1495 líneas)</td></tr>
-      <tr><td><strong>HTTP/2 Nativo (TLS)</strong></td><td>Soporte TLS para HTTP/2 nativo</td><td><code>src/native_h2_tls.rs</code> (178 líneas)</td></tr>
-      <tr><td><strong>Registro Nativo</strong></td><td>Función FFI masiva: 5000+ líneas de bindings</td><td><code>src/native_registry.rs</code> (5110 líneas)</td></tr>
-      <tr><td><strong>SQLite Nativo</strong></td><td>Bindings directos a libsqlite3</td><td><code>src/native_sqlite.rs</code> (558 líneas)</td></tr>
-      <tr><td><strong>Sandbox</strong></td><td>Aislamiento de ejecución de código</td><td><code>src/sandbox.rs</code> (204 líneas)</td></tr>
-      <tr><td><strong>Terminal</strong></td><td>Utilidades de terminal (colores, cursor)</td><td><code>src/terminal.rs</code> (257 líneas)</td></tr>
-      <tr><td><strong>stdlib Incrustada</strong></td><td>Módulos de std empaquetados en el binario</td><td><code>src/stdlib_embedded.rs</code> (139 líneas)</td></tr>
-      <tr><td><strong>API Pública</strong></td><td>Biblioteca pública para integración (lib)</td><td><code>src/lib.rs</code></td></tr>
-      <tr><td><strong>LSP Completado</strong></td><td>Completado inteligente para IDE</td><td><code>lsp/completado.rs</code></td></tr>
-      <tr><td><strong>LSP Firma</strong></td><td>Firma de funciones en hover</td><td><code>lsp/firma.rs</code></td></tr>
-      <tr><td><strong>LSP Índice stdlib</strong></td><td>Índice de módulos stdlib para LSP</td><td><code>lsp/index_stdlib.rs</code></td></tr>
-      <tr><td><strong>LSP Snippets</strong></td><td>Snippets de código para IDE</td><td><code>lsp/snippets.rs</code></td></tr>
+      <tr><td><strong>Debugger DAP</strong></td><td>Depurador integrado (DAP) + servidor</td><td><code>src/debugger.rs</code>, <code>src/bin/forja_dap.rs</code></td></tr>
+      <tr><td><strong>Servidor LSP</strong></td><td>Language Server Protocol para IDE</td><td><code>src/bin/forja_lsp.rs</code>, <code>src/lsp/</code></td></tr>
+      <tr><td><strong>GUI Nativa</strong></td><td>Xilem runtime, ventanas nativas</td><td><code>crates/forja-gui-rt/</code> (gui_nativa.rs 6905 líneas)</td></tr>
+      <tr><td><strong>GUI WASM</strong></td><td>GUI Forja en Canvas 2D para navegador</td><td><code>crates/forja-wasm-gui/</code></td></tr>
+      <tr><td><strong>Android Runtime</strong></td><td>VM Forja en Android vía JNI (Rust ↔ Kotlin)</td><td><code>crates/forja-android-rt/</code></td></tr>
+      <tr><td><strong>Procesos Win</strong></td><td>Procesos nativos de Windows</td><td><code>src/native_proceso_win.rs</code></td></tr>
+      <tr><td><strong>Sistema de Errores</strong></td><td>Mensajes de error educativos en español</td><td><code>src/error.rs</code></td></tr>
+      <tr><td><strong>Base64</strong></td><td>Codificación/decodificación Base64</td><td><code>src/base64.rs</code></td></tr>
+      <tr><td><strong>Criptografía</strong></td><td>AES-GCM, ChaCha20-Poly1305, cifrado simétrico</td><td><code>src/crypto.rs</code> (1004 líneas)</td></tr>
+      <tr><td><strong>Criptografía Post-Cuántica</strong></td><td>ML-KEM, ML-DSA, SLH-DSA (FIPS 205/206)</td><td><code>src/crypto_pq.rs</code></td></tr>
+      <tr><td><strong>Hash</strong></td><td>BLAKE3, SHA-2, SHA-3 familia completa</td><td><code>src/hash.rs</code></td></tr>
+      <tr><td><strong>Memory-Mapped Files</strong></td><td>E/S de archivos mapeados en memoria</td><td><code>src/mmap.rs</code></td></tr>
+      <tr><td><strong>HTTP/2 Nativo (Core)</strong></td><td>Implementación HTTP/2 sobre h2 crate</td><td><code>src/native_h2_core.rs</code> (1370 líneas)</td></tr>
+      <tr><td><strong>HTTP/2 Nativo (TLS)</strong></td><td>Soporte TLS para HTTP/2 nativo</td><td><code>src/native_h2_tls.rs</code></td></tr>
+      <tr><td><strong>Registro Nativo</strong></td><td>Función FFI masiva: 4700+ líneas de bindings</td><td><code>src/native_registry.rs</code> (4707 líneas)</td></tr>
+      <tr><td><strong>SQLite Nativo</strong></td><td>Bindings directos a libsqlite3</td><td><code>src/native_sqlite.rs</code></td></tr>
+      <tr><td><strong>Sandbox</strong></td><td>Aislamiento de red/archivos/procesos</td><td><code>src/sandbox.rs</code>, <code>stdlib/std/sandbox.fa</code></td></tr>
+      <tr><td><strong>Terminal</strong></td><td>Utilidades de terminal (colores, cursor)</td><td><code>src/terminal.rs</code></td></tr>
+      <tr><td><strong>stdlib Incrustada</strong></td><td>Módulos de std empaquetados en el binario</td><td><code>src/stdlib_embedded.rs</code></td></tr>
+      <tr><td><strong>API Pública</strong></td><td>Biblioteca pública para integración (lib)</td><td><code>src/lib.rs</code> (814 líneas)</td></tr>
+      <tr><td><strong>LSP Completado</strong></td><td>Completado inteligente para IDE</td><td><code>src/lsp/completado.rs</code></td></tr>
+      <tr><td><strong>LSP Firma</strong></td><td>Firma de funciones en hover</td><td><code>src/lsp/firma.rs</code></td></tr>
+      <tr><td><strong>LSP Índice stdlib</strong></td><td>Índice de módulos stdlib para LSP</td><td><code>src/lsp/index_stdlib.rs</code></td></tr>
+      <tr><td><strong>LSP Snippets</strong></td><td>Snippets de código para IDE</td><td><code>src/lsp/snippets.rs</code></td></tr>
     </tbody>
   </table>
 
@@ -109,7 +129,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="feature-card">
       <span class="icon">🦀</span>
       <h4>Escrito en Rust</h4>
-      <p>36+ módulos de Rust puro (~42,000+ líneas). Sin dependencias externas para el núcleo del compilador (ni serde, ni JSON, ni runtime pesado).</p>
+      <p>70+ módulos de Rust puro (~94,000+ líneas de Rust, ~6,800 líneas de stdlib en Forja). Sin dependencias externas para el núcleo del compilador (ni serde, ni JSON, ni runtime pesado).</p>
     </div>
     <div class="feature-card">
       <span class="icon">⎔</span>
@@ -177,9 +197,34 @@ import Layout from '../layouts/Layout.astro';
       <p>Perfilá tiempos de ejecución por función. Descubrí cuellos de botella sin herramientas externas.</p>
     </div>
     <div class="feature-card">
+      <span class="icon">🔀</span>
+      <h4>IR SSA + Backend de Registros</h4>
+      <p>Mid-level IR en Static Single Assignment con φ-nodes y dominator tree, más un backend register-based completo: stack→registros, live intervals, linear scan y generación x86-64 con encoding REX.</p>
+    </div>
+    <div class="feature-card">
+      <span class="icon">🌀</span>
+      <h4>GC Generacional</h4>
+      <p>Garbage collector generacional: young generation con bump allocation y old generation con mark-sweep. Write barriers, remembered sets y promoción por edad para reemplazar <code>Arc</code> en ForjaFast.</p>
+    </div>
+    <div class="feature-card">
+      <span class="icon">⚙️</span>
+      <h4>Monomorfización de Genéricos</h4>
+      <p>Instanciación de funciones y clases genéricas por tipo concreto (<code>obtener_Entero</code>), con inferencia de tipos desde los argumentos. Elimina el dispatch dinámico.</p>
+    </div>
+    <div class="feature-card">
+      <span class="icon">📈</span>
+      <h4>PGO + JIT Tiered</h4>
+      <p>Optimización guiada por perfiles (<code>--pgo=recoger</code>/<code>usar</code>) y compilación en niveles con contadores de hotness, OSR y deoptimización.</p>
+    </div>
+    <div class="feature-card">
       <span class="icon">🔷</span>
       <h4>Compilador LLVM</h4>
       <p>Backend alternativo que genera LLVM IR. Optimizaciones avanzadas y potencial multi-plataforma con el pipeline LLVM.</p>
+    </div>
+    <div class="feature-card">
+      <span class="icon">🤖</span>
+      <h4>Android Runtime</h4>
+      <p>La VM de Forja corre en Android vía JNI con clases Kotlin (<code>ForjaRuntime</code>, <code>ForjaSession</code>) y Native Activity para la GUI. Compilá tu app con <code>forja construir-apk</code>.</p>
     </div>
   </div>
 
@@ -308,7 +353,7 @@ p.saludar()
 
   <h2>Pipeline de compilación</h2>
 
-  <p>Forja transforma tu código a través de 5+ fases, pudiendo generar Rust, bytecode (para 3 VMs), assembly nativo, o ejecutarse en el navegador via WASM:</p>
+  <p>Forja transforma tu código a través de 5+ fases, pudiendo generar Rust, bytecode (para 3 VMs), assembly nativo, LLVM IR, o ejecutarse en el navegador via WASM:</p>
 
   <div class="code-block-wrapper">
     <div class="code-header"><span>🔀 Arquitectura completa</span></div>
@@ -316,30 +361,36 @@ p.saludar()
 │ Source  │ → │ Lexer │ → │Parser│ → │Type + Borrow │ → │Optimizer │ → │ Transpiler  │ → Rust .rs
 │  .fa    │   │       │   │     │   │   Checker    │   │(fold+DCE) │   │             │
 └─────────┘   └───────┘   └─────┘   └──────────────┘   └──────────┘   └─────────────┘
-                                               ════════════════════════════════════════
-                                               ‖  Rutas alternativas:                  ‖
-                                               ════════════════════════════════════════
-                                        ┌──────────────────┐
-                                        │ Compilador ASM   │ → .s → gcc -O2 → .exe (⚡ nativo)
-                                        │ (compiler_asm)   │    x86-64 / ARM64
-                                        └──────────────────┘
-                                        ┌──────────────┐   ┌──────────────────────┐
-                                        │ Bytecode Gen │ → │ 3 VMs disponibles:   │
-                                        │  (bytecode)  │   │   vm (v1 original)   │
-                                        │       ↓      │   │   vm_jit (v3 DT)     │
-                                        │    Uops      │   │   vm_fast (v5 prod) 🏆│
-                                        │ (expansión)  │   │                      │
-                                        └──────┬───────┘   │ JIT Nativo x86-64    │
-                                               │           │ + fallback a VM      │
-                                               │           └──────────────────────┘
-                                               │
-                                         ┌─────▼──────┐
-                                         │ AOT + Self │ → .exe autónomo
-                                         │    Run     │
-                                         └────────────┘
-                                        ┌──────────────────┐
-                                        │ WASM (navegador) │ → Playground web
-                                        └──────────────────┘</code></pre>
+                                                │  Monomorfización (monomorph.rs)
+                                                ▼
+                                       ┌──────────────┐   ┌──────────────────────┐
+                                       │   IR SSA     │   │ Backend de Registros │
+                                       │ (ir_constructor│  │ stack_to_reg → reg IR│
+                                       │  → ir_ssa)   │   │ → register_alloc     │
+                                       └──────┬───────┘   │ → codegen_reg (x86)  │
+                                              │            └──────────────────────┘
+                                       ┌──────▼───────┐
+                                       │ IrToBytecode │
+                                       └──────┬───────┘
+                                       ┌──────▼───────┐
+                                       │ Bytecode Gen │
+                                       │  (bytecode)  │
+                                       │       ↓      │
+                                       │    Uops      │
+                                       │ (expansión)  │
+                                       └──────┬───────┘
+                                              │
+        ┌─────────────────────────────────────┼───────────────────────────────┐
+        ▼                                     ▼                               ▼
+┌──────────────┐   ┌──────────────┐   ┌──────────────┐   ┌────────────────┐   ┌──────────────┐
+│ Compilador   │   │ 3 VMs        │   │ JIT Tiered   │   │ Backend LLVM   │   │ AOT + Self   │
+│ ASM → .exe   │   │ vm/vm_jit/   │   │ interpret →  │   │ (backend_llvm) │   │ Run → .exe   │
+│ (gcc -O2)    │   │ vm_fast 🏆    │   │ jit → opt    │   └────────────────┘   │ autónomo     │
+└──────────────┘   └──────────────┘   └──────────────┘                        └──────────────┘
+                                                     │
+                                              ┌──────▼──────┐
+                                              │ WASM (web)  │ → Playground + GUI WASM
+                                              └─────────────┘</code></pre>
   </div>
   <h2>Arquitectura de ejecución</h2>
 
@@ -352,9 +403,10 @@ p.saludar()
     <tbody>
       <tr><td>1</td><td><strong>Assembly nativo</strong></td><td><code>compiler_asm.rs</code></td><td>⚡⚡⚡⚡⚡</td><td>Forja → .s + gcc -O2. Velocidad C/Rust. Multi-arquitectura.</td></tr>
       <tr><td>2</td><td><strong>Transpilación a Rust</strong></td><td><code>transpiler.rs</code></td><td>⚡⚡⚡⚡⚡</td><td>Forja → .rs + rustc. Código compilado nativo.</td></tr>
-      <tr><td>3</td><td><strong>JIT Nativo (x86-64)</strong></td><td><code>jit.rs</code></td><td>⚡⚡⚡</td><td>Código máquina generado en memoria. 7x más lento que Rust.</td></tr>
-      <tr><td>4</td><td><strong>ForjaFast (VM v5)</strong></td><td><code>vm_fast.rs</code></td><td>⚡⚡</td><td>VM con NaN tagging + stack caching + superinstrucciones. 4.8x vs Original.</td></tr>
-      <tr><td>5</td><td><strong>VM Original / JIT-DT</strong></td><td><code>vm.rs</code> / <code>vm_jit.rs</code></td><td>⚡</td><td>VMs educativas para referencia y benchmarks.</td></tr>
+      <tr><td>3</td><td><strong>Backend de Registros</strong></td><td><code>codegen_reg.rs</code></td><td>⚡⚡⚡⚡</td><td>IR SSA → register IR → linear scan → x86-64 con encoding REX.</td></tr>
+      <tr><td>4</td><td><strong>JIT Nativo / Tiered (x86-64)</strong></td><td><code>jit.rs</code>, <code>jit_tiered.rs</code></td><td>⚡⚡⚡</td><td>Código máquina generado en memoria con tiers y OSR.</td></tr>
+      <tr><td>5</td><td><strong>ForjaFast (VM v5)</strong></td><td><code>vm_fast.rs</code></td><td>⚡⚡</td><td>VM con NaN tagging + stack caching + superinstrucciones + GC.</td></tr>
+      <tr><td>6</td><td><strong>VM Original / JIT-DT</strong></td><td><code>vm.rs</code> / <code>vm_jit.rs</code></td><td>⚡</td><td>VMs educativas para referencia y benchmarks.</td></tr>
     </tbody>
   </table>
 
@@ -374,7 +426,7 @@ p.saludar()
     <div class="feature-card">
       <span class="icon">📝</span>
       <h4><a href="/docs/ejemplos">Ejemplos</a></h4>
-      <p>15 ejemplos comentados, desde hola mundo hasta juegos completos.</p>
+      <p>200+ ejemplos comentados, desde hola mundo hasta juegos completos, algoritmos y GUI.</p>
     </div>
     <div class="feature-card">
       <span class="icon">🔧</span>

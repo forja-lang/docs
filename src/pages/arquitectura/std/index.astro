@@ -1,0 +1,102 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+---
+
+<Layout title="Biblioteca Estándar (std) — Visión General — Forja">
+  <h1>Biblioteca Estándar (<code>std</code>)</h1>
+  <p><strong>Directorio:</strong> <code>stdlib/std/</code> — más de <strong>40 módulos</strong> escritos en Forja, incrustados en el binario via <code>src/stdlib_embedded.rs</code>.</p>
+
+  <div class="info"><strong>💡 ¿Cómo importar?</strong> Los módulos se importan con <code>importar std/nombre_modulo</code> (o <code>importar nombre_modulo</code> según la configuración de proyecto).</div>
+
+  <h2>Módulos por categoría</h2>
+
+  <h3>E/S y Sistema de Archivos</h3>
+  <table>
+    <tr><th>Módulo</th><th>Descripción</th></tr>
+    <tr><td><a href="archivo/">archivo</a></td><td>Sistema de archivos: leer, escribir, eliminar, directorios</td></tr>
+    <tr><td><a href="ruta/">ruta</a></td><td>Manipulación de rutas de archivos</td></tr>
+    <tr><td><a href="io/">io</a></td><td>Entrada/salida: consola, escritura formateada</td></tr>
+    <tr><td><a href="mmap/">mmap</a></td><td>Archivos mapeados en memoria</td></tr>
+    <tr><td><a href="binario/">binario</a></td><td>Datos binarios y bytes</td></tr>
+    <tr><td><a href="ansi/">ansi</a></td><td>Códigos de escape ANSI para terminal</td></tr>
+  </table>
+
+  <h3>Datos y Formatos</h3>
+  <table>
+    <tr><th>Módulo</th><th>Descripción</th></tr>
+    <tr><td><a href="json/">json</a></td><td>Serialización/deserialización JSON</td></tr>
+    <tr><td><a href="csv/">csv</a></td><td>Parseo y generación de CSV</td></tr>
+    <tr><td><a href="toml/">toml</a></td><td>Parseo y generación de TOML</td></tr>
+    <tr><td><a href="hex/">hex</a></td><td>Codificación/decodificación hexadecimal</td></tr>
+    <tr><td><a href="codificacion/">codificacion</a></td><td>Base64, UUID y otros formatos</td></tr>
+    <tr><td><a href="colecciones/">colecciones</a></td><td>Estructuras de datos (pilas, colas, listas)</td></tr>
+    <tr><td><a href="texto/">texto</a></td><td>Operaciones con cadenas de texto</td></tr>
+  </table>
+
+  <h3>Matemáticas y Fecha</h3>
+  <table>
+    <tr><th>Módulo</th><th>Descripción</th></tr>
+    <tr><td><a href="matematica/">matematica</a></td><td>Funciones matemáticas y trigonométricas</td></tr>
+    <tr><td><a href="aleatorio/">aleatorio</a></td><td>Números aleatorios</td></tr>
+    <tr><td><a href="fecha/">fecha</a></td><td>Fecha y hora</td></tr>
+  </table>
+
+  <h3>Concurrencia y Red</h3>
+  <table>
+    <tr><th>Módulo</th><th>Descripción</th></tr>
+    <tr><td><a href="concurrencia/">concurrencia</a></td><td>Hilos, canales y select</td></tr>
+    <tr><td><a href="atomicos/">atomicos</a></td><td>Operaciones atómicas</td></tr>
+    <tr><td><a href="temporizador/">temporizador</a></td><td>Temporizadores y sleep</td></tr>
+    <tr><td><a href="sockets/">sockets</a></td><td>Sockets TCP/UDP</td></tr>
+    <tr><td><a href="red/">red</a></td><td>Utilidades de red</td></tr>
+    <tr><td><a href="cliente_http/">cliente_http</a></td><td>Cliente HTTP/1.1</td></tr>
+    <tr><td><a href="cliente_h2/">cliente_h2</a></td><td>Cliente HTTP/2</td></tr>
+    <tr><td><a href="cliente_h3/">cliente_h3</a></td><td>Cliente HTTP/3 (QUIC)</td></tr>
+    <tr><td><a href="servidor_web/">servidor_web</a></td><td>Servidor web</td></tr>
+    <tr><td><a href="servidor_h2/">servidor_h2</a></td><td>Servidor HTTP/2</td></tr>
+    <tr><td><a href="websocket/">websocket</a></td><td>Clientes/servidores WebSocket</td></tr>
+    <tr><td><a href="tls/">tls</a></td><td>Seguridad TLS/SSL</td></tr>
+    <tr><td><a href="quic/">quic</a></td><td>Protocolo QUIC</td></tr>
+    <tr><td><a href="url/">url</a></td><td>Parseo y construcción de URLs</td></tr>
+  </table>
+
+  <h3>Sistema y Procesos</h3>
+  <table>
+    <tr><th>Módulo</th><th>Descripción</th></tr>
+    <tr><td><a href="sistema/">sistema</a></td><td>Información del sistema operativo</td></tr>
+    <tr><td><a href="proceso/">proceso</a></td><td>Ejecución de comandos del SO</td></tr>
+    <tr><td><a href="env/">env</a></td><td>Variables de entorno</td></tr>
+    <tr><td><a href="señales/">señales</a></td><td>Señales del sistema operativo</td></tr>
+    <tr><td><a href="arg/">arg</a></td><td>Argumentos de línea de comandos</td></tr>
+    <tr><td><a href="sandbox/">sandbox</a></td><td>Aislamiento de red/archivos/procesos</td></tr>
+  </table>
+
+  <h3>Criptografía y Hash</h3>
+  <table>
+    <tr><th>Módulo</th><th>Descripción</th></tr>
+    <tr><td><a href="crypto/">crypto</a></td><td>Cifrado simétrico y cripto post-cuántica</td></tr>
+    <tr><td><a href="hash/">hash</a></td><td>Funciones hash (SHA-2, SHA-3, BLAKE3)</td></tr>
+  </table>
+
+  <h3>Interoperabilidad y Otros</h3>
+  <table>
+    <tr><th>Módulo</th><th>Descripción</th></tr>
+    <tr><td><a href="ffi/">ffi</a></td><td>Llamadas a librerías nativas (C)</td></tr>
+    <tr><td><a href="sqlite/">sqlite</a></td><td>Base de datos SQLite</td></tr>
+    <tr><td><a href="resultado/">resultado</a></td><td>Tipos <code>Opcion</code> y <code>Resultado</code></td></tr>
+    <tr><td><a href="prueba/">prueba</a></td><td>Framework de testing</td></tr>
+    <tr><td><a href="log/">log</a></td><td>Registro de eventos (logging)</td></tr>
+    <tr><td><a href="perfilado/">perfilado</a></td><td>Perfilado de rendimiento</td></tr>
+    <tr><td><a href="tui/">tui</a></td><td>Interfaces de terminal (TUI)</td></tr>
+  </table>
+
+  <h2>Visiones combinadas</h2>
+  <ul>
+    <li><a href="datos/">Formatos de datos</a> — json / csv / toml / hex</li>
+    <li><a href="crypto_hash/">Criptografía y hashing</a> — crypto / hash</li>
+    <li><a href="ffi_sistema/">Interoperabilidad</a> — ffi / proceso / env / señales</li>
+    <li><a href="http/">Cliente/servidor HTTP</a> — cliente_http / cliente_h2 / servidor_web / servidor_h2</li>
+  </ul>
+
+  <div class="tip"><strong>¿Cómo se implementa?</strong> Cada módulo <code>.fa</code> es una capa fina sobre las funciones nativas en Rust expuestas por <code>src/native_registry.rs</code>. Ver la página de <a href="../stdlib_embedded/">stdlib Incrustada</a> para entender cómo se empaquetan en el binario.</div>
+</Layout>

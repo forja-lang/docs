@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="Memory-Mapped Files (mmap.rs) — Forja">
   <h1>Archivos Mapeados en Memoria (Memory-Mapped I/O)</h1>
-  <p><strong>Archivo:</strong> <code>src/mmap.rs</code> (305 líneas)</p>
+  <p><strong>Archivo:</strong> <code>src/mmap.rs</code> (264 líneas)</p>
 
   <h2>¿Por qué existe?</h2>
   <p>Proporciona E/S de alto rendimiento mediante <strong>archivos mapeados en memoria</strong>. En lugar de usar <code>read()</code>/<code>write()</code> tradicionales (que copian datos entre kernel y userspace), mmap proyecta el archivo directamente en el espacio de direcciones del proceso, permitiendo acceso con punteros de memoria convencionales.</p>

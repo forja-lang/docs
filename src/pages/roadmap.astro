@@ -5,9 +5,9 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Roadmap — Forja">
   <h1>Roadmap</h1>
 
-  <p>El desarrollo de Forja está organizado en <strong>10 hitos</strong> que representan la evolución del compilador, desde un transpilador simple hasta un sistema completo con 3 VMs, JIT nativo, compilador ASM multi-arquitectura, y playground WASM.</p>
+  <p>El desarrollo de Forja está organizado en <strong>20+ hitos</strong> que representan la evolución del compilador, desde un transpilador simple hasta un sistema completo con 3 VMs, JIT nativo (incluyendo tiered), compilador ASM multi-arquitectura, backend de registros, GC generacional, IR SSA, monomorfización, PGO, y runtimes Android + WASM.</p>
 
-  <div class="info">🔥 <strong>Estado actual:</strong> Forja v1.0-rc — 36+ módulos, ~42,000+ líneas de Rust, 3 VMs + JIT nativo x86-64, 4 backends de ejecución (VM, ASM, JIT, LLVM), package manager, stdlib, LSP + DAP.</div>
+  <div class="info">🔥 <strong>Estado actual:</strong> Forja v9.0.0 — 70+ módulos de Rust (~94,000+ líneas), 3 VMs + JIT nativo x86-64 (tiered), backends de ejecución (VM, ASM, registros, JIT, LLVM), package manager, stdlib, LSP + DAP, GC, Android runtime.</div>
 
   <h2>✅ Hito A: Runtime Stub — Ejecutable autónomo</h2>
 
@@ -78,9 +78,9 @@ import Layout from '../layouts/Layout.astro';
 
   <table>
     <tr><th>VM</th><th>Archivo</th><th>Líneas</th><th>Innovación</th></tr>
-    <tr><td><strong>v1 — Original</strong></td><td><code>src/vm.rs</code></td><td>2040</td><td>VM stack-based funcional, variables por nombre (HashMap), especialización adaptativa</td></tr>
-    <tr><td><strong>v3 — Direct Threading</strong></td><td><code>src/vm_jit.rs</code></td><td>649</td><td>Opcodes como u8 planos, arrays paralelos para operandos</td></tr>
-    <tr><td><strong>v5 — Ultra Fast</strong></td><td><code>src/vm_fast.rs</code></td><td>1454</td><td>Stack caching (top-of-stack register), variables globales O(1), scope_start por frame</td></tr>
+    <tr><td><strong>v1 — Original</strong></td><td><code>src/vm.rs</code></td><td>4302</td><td>VM stack-based funcional, variables por nombre (HashMap), especialización adaptativa</td></tr>
+    <tr><td><strong>v3 — Direct Threading</strong></td><td><code>src/vm_jit.rs</code></td><td>1570</td><td>Opcodes como u8 planos, arrays paralelos para operandos</td></tr>
+    <tr><td><strong>v5 — Ultra Fast</strong></td><td><code>src/vm_fast.rs</code></td><td>8694</td><td>Stack caching (top-of-stack register), variables globales O(1), scope_start por frame, GC generacional</td></tr>
   </table>
 
   <div class="info">💡 <strong>ForjaFast v5</strong> es la VM de producción. Las otras se mantienen como referencia educativa y para benchmarks.</div>
@@ -175,19 +175,89 @@ import Layout from '../layouts/Layout.astro';
     <tr><td>200 ejemplos validados</td><td>✅ Completado</td></tr>
   </table>
 
+  <h2>✅ Hito N: IR SSA + Optimización (v6.0.0)</h2>
+
+  <p>Representación intermedia en <strong>Static Single Assignment</strong> entre el AST y el bytecode, con dominator tree, φ-nodes y un backend register-based completo.</p>
+
+  <table>
+    <tr><th>Componente</th><th>Estado</th></tr>
+    <tr><td><code>ir.rs</code> — IR SSA, <code>Inst</code>, <code>BasicBlock</code>, φ-nodes</td><td>✅ Completado</td></tr>
+    <tr><td><code>ir_constructor.rs</code> — AST → IR SSA</td><td>✅ Completado</td></tr>
+    <tr><td><code>ir_ssa.rs</code> — dominator tree, loops naturales, inserción de φ</td><td>✅ Completado</td></tr>
+    <tr><td><code>ir_to_bytecode.rs</code> — IR SSA → opcodes</td><td>✅ Completado</td></tr>
+    <tr><td><code>stack_to_reg.rs</code> — bytecode stack → registros virtuales</td><td>✅ Completado</td></tr>
+    <tr><td><code>register_ir.rs</code> — live intervals</td><td>✅ Completado</td></tr>
+    <tr><td><code>register_alloc.rs</code> — linear scan + spill</td><td>✅ Completado</td></tr>
+    <tr><td><code>codegen_reg.rs</code> — x86-64 con encoding REX</td><td>✅ Completado</td></tr>
+  </table>
+
+  <h2>✅ Hito Ñ: GC Generacional + Arena + Shapes</h2>
+
+  <p>Recolector de basura generacional para reemplazar <code>Arc</code> en ForjaFast, más allocator por arenas y shapes de objetos con acceso O(1) a campos.</p>
+
+  <table>
+    <tr><th>Componente</th><th>Estado</th></tr>
+    <tr><td><code>gc.rs</code> — young gen (bump) + old gen (mark-sweep)</td><td>✅ Completado</td></tr>
+    <tr><td>Write barriers + remembered set</td><td>✅ Completado</td></tr>
+    <tr><td>Promotion por age (survivor)</td><td>✅ Completado</td></tr>
+    <tr><td><code>gc_intrinsics.rs</code> — safe points, stack maps</td><td>✅ Completado</td></tr>
+    <tr><td><code>arena.rs</code> — arena allocator con scopes</td><td>✅ Completado</td></tr>
+    <tr><td><code>shape.rs</code> — shapes y transiciones de campos</td><td>✅ Completado</td></tr>
+    <tr><td>10+ tests de GC</td><td>✅ Completado</td></tr>
+  </table>
+
+  <h2>✅ Hito O: Monomorfización + PGO + JIT Tiered</h2>
+
+  <p>Instanciación de genéricos por tipo concreto, optimización guiada por perfiles y compilación JIT en niveles con OSR y deoptimización.</p>
+
+  <table>
+    <tr><th>Componente</th><th>Estado</th></tr>
+    <tr><td><code>monomorph.rs</code> — instanciación de genéricos + inferencia</td><td>✅ Completado</td></tr>
+    <tr><td><code>pgo.rs</code> — <code>--pgo=recoger</code> / <code>--pgo=usar</code></td><td>✅ Completado</td></tr>
+    <tr><td><code>jit_tiered.rs</code> — Interpret → JitSimple → JitOptimized</td><td>✅ Completado</td></tr>
+    <tr><td>OSR (on-stack replacement) en loops</td><td>✅ Completado</td></tr>
+    <tr><td>Deoptimización con <code>DeoptFrame</code></td><td>✅ Completado</td></tr>
+  </table>
+
+  <h2>✅ Hito P: Backends LLVM + Incremental + Android</h2>
+
+  <p>Backend LLVM de registros, cache de compilación incremental persistente y runtime de Forja en Android vía JNI con clases Kotlin y Native Activity.</p>
+
+  <table>
+    <tr><th>Componente</th><th>Estado</th></tr>
+    <tr><td><code>backend_llvm.rs</code> — generación de LLVM IR desde el backend de registros</td><td>✅ Completado</td></tr>
+    <tr><td><code>incremental_cache.rs</code> — <code>.forja/cache/</code> con invalidación transitiva</td><td>✅ Completado</td></tr>
+    <tr><td><code>crates/forja-android-rt</code> — JNI + Kotlin (<code>ForjaRuntime</code>, <code>ForjaSession</code>)</td><td>✅ Completado</td></tr>
+    <tr><td>Native Activity — GUI de Forja en Android</td><td>✅ Completado</td></tr>
+    <tr><td><code>forja construir-apk</code> — template Gradle</td><td>✅ Completado</td></tr>
+  </table>
+
+  <h2>✅ Hito Q: GUI WASM (v9.0.0)</h2>
+
+  <p>Renderizado de interfaces Forja en el navegador: <code>crates/forja-wasm-gui</code> dibuja la GUI en un <code>&lt;canvas&gt;</code> HTML5 con la Canvas 2D API, sin depender de Xilem/Vello.</p>
+
+  <table>
+    <tr><th>Componente</th><th>Estado</th></tr>
+    <tr><td><code>forja-wasm-gui</code> — Layout simplificado → Canvas 2D</td><td>✅ Completado</td></tr>
+    <tr><td>Exports wasm-bindgen: <code>renderizar</code>, <code>ejecutar_gui</code>, <code>rerenderizar</code></td><td>✅ Completado</td></tr>
+    <tr><td>Eventos click con hit-testing</td><td>✅ Completado</td></tr>
+    <tr><td>Integración con el playground web</td><td>✅ Completado</td></tr>
+  </table>
+
   <h2>🧩 Features planeadas</h2>
 
   <div class="feature-grid">
-    <div class="feature-card"><span class="icon">🌐</span><h4>Sitio web + Playground integrado</h4><p>Sitio profesional con playground WASM, documentación y ejemplos en vivo (v1.0.0)</p></div>
+    <div class="feature-card"><span class="icon">🌐</span><h4>Sitio web + Playground integrado</h4><p>Sitio profesional con playground WASM, documentación y ejemplos en vivo</p></div>
     <div class="feature-card"><span class="icon">📖</span><h4>Documentación completa</h4><p>Referencia del lenguaje, tutorial, guía de arquitectura, y mejores prácticas</p></div>
     <div class="feature-card"><span class="icon">📊</span><h4>Tuplas y enums nativos</h4><p>Soporte completo en runtime para tipos compuestos</p></div>
     <div class="feature-card"><span class="icon">🖥️</span><h4>BD integrada</h4><p>Soporte completo para <code>BD()</code> con consultas</p></div>
     <div class="feature-card"><span class="icon">🔬</span><h4>Inferencia de tipos completa</h4><p>Tracking completo de tipos no-Copy a través de funciones</p></div>
-    <div class="feature-card"><span class="icon">⚡</span><h4>JIT híbrido completo</h4><p>Profiler de hot paths + compilación automática + POO/funciones en JIT</p></div>
-    <div class="feature-card"><span class="icon">🔧</span><h4>Optimizaciones avanzadas</h4><p>Inline de funciones, eliminación de sub-expresiones comunes, desenrollado de bucles</p></div>
+    <div class="feature-card"><span class="icon">⚡</span><h4>JIT híbrido completo</h4><p>Profiler de hot paths + compilación automática + POO/funciones en JIT, tier 2 SSA/SIMD</p></div>
+    <div class="feature-card"><span class="icon">🔧</span><h4>Optimizaciones avanzadas</h4><p>Inline de funciones, eliminación de sub-expresiones comunes, desenrollado de bucles en todos los backends</p></div>
     <div class="feature-card"><span class="icon">🌐</span><h4>Más targets ASM</h4><p>RISC-V, WASM nativo, GPU compute</p></div>
     <div class="feature-card"><span class="icon">📦</span><h4>Package registry</h4><p>Registro público de paquetes (<code>forja publish</code>) para compartir librerías</p></div>
     <div class="feature-card"><span class="icon">🤖</span><h4>CI/CD + Binarios pre-compilados</h4><p>Builds multi-platform automáticos, releases oficiales</p></div>
+    <div class="feature-card"><span class="icon">🌀</span><h4>GC en producción</h4><p>Activar el GC generacional por defecto en ForjaFast con safe points completos</p></div>
   </div>
 
   <div class="tip"><strong>🔥 ¿Querés contribuir?</strong> Forja es código abierto (source-available). Si te interesa alguna de estas features, ¡podés empezar a implementarla! Mirá la <a href="/docs/arquitectura/pipeline">arquitectura</a> para entender la base.</div>
