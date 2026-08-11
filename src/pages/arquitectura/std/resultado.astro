@@ -8,13 +8,13 @@ import Layout from '../../../layouts/Layout.astro';
   <h2>¿Por qué existe?</h2>
   <p>Proporciona utilidades para trabajar con los tipos algebraicos fundamentales de Forja: <strong>Opcion</strong> (Option — Alguno/None) y <strong>Resultado</strong> (Result — Ok/Error). Estos tipos son la columna vertebral del manejo de errores y valores opcionales en Forja.</p>
 
-  <div class="warning"><strong>📝 Cambio de semántica:</strong> En versiones recientes de Forja, los constructores de Opcion aceptan tanto la forma inglesa como la española: <code>Alguno(valor)</code> / <code>Algo(valor)</code> / <code>Some(valor)</code> para <code>some</code>, y <code>Ninguno()</code> / <code>None()</code> para <code>none</code>. La sintaxis recomendada es usar <code>Alguno</code> y <code>Ninguno</code>.</div>
+  <div class="warning"><strong>📝 Cambio de semántica:</strong> En versiones recientes de Forja, los constructores de Opcion aceptan tanto la forma inglesa como la española: <code>Alguno(valor)</code> / <code>Algo(valor)</code> / <code>Alguno(valor)</code> para <code>alguno</code>, y <code>Ninguno()</code> para <code>none</code>. La sintaxis recomendada es usar <code>Alguno</code> y <code>Ninguno</code>.</div>
 
   <h2>Constructores</h2>
   <table>
     <tr><th>Tipo</th><th>Constructores</th><th>Descripción</th></tr>
-    <tr><td><strong>Opcion</strong></td><td><code>Alguno(valor)</code>, <code>Algo(valor)</code>, <code>Some(valor)</code></td><td>Representa la presencia de un valor</td></tr>
-    <tr><td><strong>Opcion</strong></td><td><code>Ninguno()</code>, <code>None()</code></td><td>Representa la ausencia de valor</td></tr>
+    <tr><td><strong>Opcion</strong></td><td><code>Alguno(valor)</code>, <code>Algo(valor)</code>, <code>Alguno(valor)</code></td><td>Representa la presencia de un valor</td></tr>
+    <tr><td><strong>Opcion</strong></td><td><code>Ninguno()</code></td><td>Representa la ausencia de valor</td></tr>
     <tr><td><strong>Resultado</strong></td><td><code>Ok(valor)</code></td><td>Representa una operación exitosa</td></tr>
     <tr><td><strong>Resultado</strong></td><td><code>Error(mensaje)</code>, <code>Err(mensaje)</code></td><td>Representa un error con mensaje</td></tr>
   </table>

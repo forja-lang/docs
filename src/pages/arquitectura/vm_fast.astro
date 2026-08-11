@@ -6,7 +6,7 @@ import Layout from '../../layouts/Layout.astro';
   <p><strong>Archivo:</strong> <code>src/vm_fast.rs</code> (8694 líneas)</p>
 
   <h2>¿Por qué existe?</h2>
-  <p>La VM Fast (v6) es la <strong>tercera generación de máquinas virtuales</strong> de Forja, diseñada para ofrecer el máximo rendimiento en la interpretación de bytecode. Junto con la VM Direct Threading (<code>vm_jit.rs</code>) es uno de los motores de ejecución de Forja (la VM original <code>vm.rs</code> fue removida en 9.0.0). Utiliza técnicas avanzadas como <strong>NaN Tagging</strong>, <strong>Stack Caching</strong>, <strong>Flat Var Stack</strong>, <strong>Quickening adaptativo</strong> (PEP 659), y <strong>GC generacional stop-the-world</strong> para lograr ejecución de alto rendimiento sin perder la seguridad del tipado dinámico.</p>
+  <p>La VM Fast (v6) es la <strong>tercera generación de máquinas virtuales</strong> de Forja, diseñada para ofrecer el máximo rendimiento en la interpretación de bytecode. Junto con la VM Direct Threading (<code>vm_jit.rs</code>) es uno de los motores de ejecución de Forja (la VM original <code>vm.rs</code> fue removida en 0.9.0). Utiliza técnicas avanzadas como <strong>NaN Tagging</strong>, <strong>Stack Caching</strong>, <strong>Flat Var Stack</strong>, <strong>Quickening adaptativo</strong> (PEP 659), y <strong>GC generacional stop-the-world</strong> para lograr ejecución de alto rendimiento sin perder la seguridad del tipado dinámico.</p>
 
   <h2>Estructuras clave</h2>
 
@@ -168,7 +168,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Los enteros en el rango [-5, 256] se sirven desde un cache estático thread-local (<code>OnceCell</code>), evitando alocar o construir <code>ValorFast</code> repetidamente para constantes pequeñas muy frecuentes.</p>
 
   <h2>¿Cuándo se usa?</h2>
-  <p>Se selecciona automáticamente como el motor de ejecución por defecto. Es el sucesor de la VM original (<code>vm.rs</code>, removida en 9.0.0) y de la VM JIT (<code>vm_jit.rs</code>). La VM Fast ofrece rendimiento cercano al JIT sin la complejidad de generar código máquina en tiempo de ejecución, haciendo de ella la opción óptima para la mayoría de los casos de uso.</p>
+  <p>Se selecciona automáticamente como el motor de ejecución por defecto. Es el sucesor de la VM original (<code>vm.rs</code>, removida en 0.9.0) y de la VM JIT (<code>vm_jit.rs</code>). La VM Fast ofrece rendimiento cercano al JIT sin la complejidad de generar código máquina en tiempo de ejecución, haciendo de ella la opción óptima para la mayoría de los casos de uso.</p>
 
   <p>Para programas que requieren aún más rendimiento, existe el backend <strong>uops + JIT nativo</strong> (<code>jit.rs</code> + <code>jit_engine.rs</code>) que compila directamente a código x86-64/ARM64, y los compiladores <strong>AOT</strong> (<code>aot.rs</code>) que generan binarios nativos estáticos vía ASM o LLVM.</p>
 </Layout>

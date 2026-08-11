@@ -7,7 +7,7 @@ import Layout from '../layouts/Layout.astro';
 
   <p>El desarrollo de Forja está organizado en <strong>20+ hitos</strong> que representan la evolución del compilador, desde un transpilador simple hasta un sistema completo con 2 VMs, JIT nativo (incluyendo tiered), compilador ASM multi-arquitectura, backend de registros, GC generacional, IR SSA, monomorfización, PGO, y runtimes Android + WASM.</p>
 
-  <div class="info">🔥 <strong>Estado actual:</strong> Forja v9.0.0 — 70+ módulos de Rust (~94,000+ líneas), 2 VMs + JIT nativo x86-64 (tiered), backends de ejecución (VM, ASM, registros, JIT, LLVM), package manager, stdlib, LSP + DAP, GC, Android runtime.</div>
+  <div class="info">🔥 <strong>Estado actual:</strong> Forja v0.9.0 — 70+ módulos de Rust (~94,000+ líneas), 2 VMs + JIT nativo x86-64 (tiered), backends de ejecución (VM, ASM, registros, JIT, LLVM), package manager, stdlib, LSP + DAP, GC, Android runtime.</div>
 
   <h2>✅ Hito A: Runtime Stub — Ejecutable autónomo</h2>
 
@@ -74,7 +74,7 @@ import Layout from '../layouts/Layout.astro';
 
   <h2>✅ Hito F: 2 Generaciones de VM</h2>
 
-  <p>Evolución de la VM Direct Threading hasta el motor ultra rápido con stack caching y acceso O(1) a variables. La VM original (v1) fue removida en 9.0.0.</p>
+  <p>Evolución de la VM Direct Threading hasta el motor ultra rápido con stack caching y acceso O(1) a variables. La VM original (v1) fue removida en 0.9.0.</p>
 
   <table>
     <tr><th>VM</th><th>Archivo</th><th>Líneas</th><th>Innovación</th></tr>
@@ -82,7 +82,7 @@ import Layout from '../layouts/Layout.astro';
     <tr><td><strong>v5 — Ultra Fast</strong></td><td><code>src/vm_fast.rs</code></td><td>8694</td><td>Stack caching (top-of-stack register), variables globales O(1), scope_start por frame, GC generacional</td></tr>
   </table>
 
-  <div class="info">💡 <strong>ForjaFast v5</strong> es la VM de producción. La VM original (v1, <code>src/vm.rs</code>) fue removida en 9.0.0.</div>
+  <div class="info">💡 <strong>ForjaFast v5</strong> es la VM de producción. La VM original (v1, <code>src/vm.rs</code>) fue removida en 0.9.0.</div>
 
   <h2>✅ Hito G: Uops y fusión de opcodes</h2>
 
@@ -231,7 +231,7 @@ import Layout from '../layouts/Layout.astro';
     <tr><td><code>forja construir-apk</code> — template Gradle</td><td>✅ Completado</td></tr>
   </table>
 
-  <h2>✅ Hito Q: GUI WASM (v9.0.0)</h2>
+  <h2>✅ Hito Q: GUI WASM (v0.9.0)</h2>
 
   <p>Renderizado de interfaces Forja en el navegador: <code>crates/forja-wasm-gui</code> dibuja la GUI en un <code>&lt;canvas&gt;</code> HTML5 con la Canvas 2D API, sin depender de Xilem/Vello.</p>
 
