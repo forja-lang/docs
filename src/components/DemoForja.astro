@@ -1,0 +1,346 @@
+---
+/**
+ * Demo interactiva de Forja: editor + salida que ejecuta el código en la VM
+ * compilada a WebAssembly. Pensada para embeber el playground en la landing
+ * (F3-T6) sin duplicar la lógica de la página /playground.
+ */
+export interface Props {
+  codigoInicial?: string;
+  ejemplos?: { nombre: string; codigo: string }[];
+  autoEjecutar?: boolean;
+  alto?: number;
+}
+
+const {
+  codigoInicial = `// Aprende programando, en español
+variable quien = "mundo"
+
+funcion saludar(nombre: Texto) -> Texto {
+    retornar "¡Hola, " + nombre + "!"
+}
+
+escribir(saludar(quien))`,
+  ejemplos = [
+    {
+      nombre: 'Hola mundo',
+      codigo: `escribir("¡Hola, mundo desde Forja!")`,
+    },
+    {
+      nombre: 'Contratos',
+      codigo: `funcion dividir(a: Entero, b: Entero) -> Entero
+    requiere b != 0, "No se puede dividir por cero"
+{
+    retornar a / b
+}
+
+escribir("10 / 2 = " + dividir(10, 2))`,
+    },
+    {
+      nombre: 'Resultado',
+      codigo: `funcion dividir(a: Entero, b: Entero) -> Resultado<Entero, Texto> {
+    si (b == 0) { retornar Error("División por cero") }
+    retornar Ok(a / b)
+}
+
+variable r = dividir(10, 2)
+coincidir (r) {
+    caso Ok(v) -> { escribir("Ok: " + v) }
+    caso Error(m) -> { escribir("Error: " + m) }
+}`,
+    },
+    {
+      nombre: 'Fibonacci',
+      codigo: `funcion fib(n) {
+    si (n <= 1) { retornar n }
+    retornar fib(n - 1) + fib(n - 2)
+}
+
+escribir("fib(10) = " + fib(10))`,
+    },
+    {
+      nombre: 'Clases',
+      codigo: `clase Persona {
+    nombre
+    constructor(n) { este.nombre = n }
+    funcion saludar() {
+        escribir("Hola, soy " + este.nombre)
+    }
+}
+
+variable p = nuevo Persona("Ana")
+p.saludar()`,
+    },
+    {
+      nombre: 'Arreglos',
+      codigo: `variable numeros = [3, 1, 4, 1, 5, 9, 2, 6]
+variable suma = 0
+para (variable i = 0; i < longitud(numeros); i = i + 1) {
+    suma = suma + numeros[i]
+}
+escribir("Suma: " + suma)`,
+    },
+  ],
+  autoEjecutar = false,
+  alto = 300,
+} = Astro.props;
+---
+
+<div class="demo-forja" data-demo data-auto={autoEjecutar ? '1' : '0'}>
+  <div class="demo-panel">
+    <div class="demo-head">
+      <span class="demo-file">📄 demo.fa</span>
+      <div class="demo-actions">
+        <button type="button" class="demo-btn demo-run" data-demo-run>▶ Ejecutar</button>
+        <button type="button" class="demo-btn demo-clear" data-demo-clear title="Limpiar editor">🗑</button>
+      </div>
+    </div>
+    <textarea
+      class="demo-editor"
+      data-demo-code
+      spellcheck="false"
+      style={`height:${alto}px`}>{codigoInicial}</textarea>
+  </div>
+  <div class="demo-panel">
+    <div class="demo-head">
+      <span class="demo-file">📋 Salida</span>
+      <span class="demo-status" data-demo-status>✓ listo</span>
+    </div>
+    <div class="demo-output" data-demo-output style={`height:${alto}px`}>
+      <span class="demo-placeholder">Presioná ▶ Ejecutar para correr el código</span>
+    </div>
+  </div>
+
+  {ejemplos.length > 0 && (
+    <div class="demo-chips">
+      {ejemplos.map((ej) => (
+        <button type="button" class="demo-chip" data-demo-example={ej.codigo}>{ej.nombre}</button>
+      ))}
+    </div>
+  )}
+</div>
+
+<style>
+  .demo-forja {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 0 0 12px;
+  }
+  .demo-panel {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-card);
+    min-width: 0;
+  }
+  .demo-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, var(--bg-hover), var(--bg-card));
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+  .demo-actions { display: flex; gap: 6px; }
+  .demo-btn {
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    color: var(--text-dim);
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 0.74rem;
+    font-family: var(--font);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .demo-btn:hover { border-color: var(--fuego); color: var(--fuego-light); }
+  .demo-run {
+    background: var(--verde);
+    border-color: transparent;
+    color: #04110c;
+  }
+  .demo-run:hover { color: #04110c; filter: brightness(1.15); }
+  .demo-editor {
+    flex: 1;
+    min-height: 220px;
+    padding: 14px;
+    border: none;
+    outline: none;
+    resize: vertical;
+    background: var(--bg-card);
+    color: #e2e8f0;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    tab-size: 4;
+  }
+  .demo-output {
+    flex: 1;
+    min-height: 220px;
+    padding: 14px;
+    overflow: auto;
+    background: var(--bg-card);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .demo-output .demo-placeholder { color: var(--text-muted); font-style: italic; }
+  .demo-output .demo-stdout { color: var(--verde); }
+  .demo-output .demo-stderr { color: var(--rojo); }
+  .demo-status { font-size: 0.7rem; }
+  .demo-status.ok { color: var(--verde); }
+  .demo-status.running { color: var(--fuego-light); }
+  .demo-status.timing { color: var(--acero-light); }
+  .demo-status.error { color: var(--rojo); }
+  .demo-chips { display: flex; flex-wrap: wrap; gap: 6px; grid-column: 1 / -1; }
+  .demo-chip {
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--bg-card);
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    font-family: var(--font);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .demo-chip:hover {
+    border-color: var(--fuego);
+    color: var(--fuego-light);
+    background: var(--fuego-bg);
+  }
+  @media (max-width: 700px) {
+    .demo-forja { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  let wasm: any = null;
+  let wasmListo = false;
+  let wasmCargando: Promise<void> | null = null;
+
+  function cargarWASM(): Promise<void> {
+    if (wasmCargando) return wasmCargando;
+    wasmCargando = (async () => {
+      try {
+        // @ts-ignore: módulo generado por wasm-bindgen, sin tipos en el repo
+        wasm = await import('../wasm/forja_wasm.js');
+        await wasm.default();
+        wasmListo = true;
+        console.log('✅ Forja WASM cargado para la demo');
+      } catch (e) {
+        console.warn('⚠ Forja WASM no disponible:', (e as Error).message);
+        wasmListo = false;
+      }
+    })();
+    return wasmCargando;
+  }
+
+  function initDemo(root: HTMLElement) {
+    if (root.dataset.listo) return;
+    root.dataset.listo = '1';
+
+    const code = root.querySelector('[data-demo-code]') as HTMLTextAreaElement | null;
+    const output = root.querySelector('[data-demo-output]') as HTMLElement | null;
+    const status = root.querySelector('[data-demo-status]') as HTMLElement | null;
+    const runBtn = root.querySelector('[data-demo-run]') as HTMLButtonElement | null;
+    const clearBtn = root.querySelector('[data-demo-clear]') as HTMLButtonElement | null;
+    if (!code || !output || !status || !runBtn) return;
+
+    function setStatus(texto: string, clase: string) {
+      status!.textContent = texto;
+      status!.className = 'demo-status ' + clase;
+    }
+
+    function render(salida: string) {
+      output!.innerHTML = '';
+      if (!salida) {
+        output!.innerHTML = '<span class="demo-placeholder">(sin salida)</span>';
+        return;
+      }
+      for (const linea of salida.split('\n')) {
+        const div = document.createElement('div');
+        div.className = 'demo-stdout';
+        div.textContent = linea;
+        output!.appendChild(div);
+      }
+    }
+
+    function renderError(msg: string) {
+      output!.innerHTML = '';
+      const div = document.createElement('div');
+      div.className = 'demo-stderr';
+      div.textContent = msg;
+      output!.appendChild(div);
+    }
+
+    async function ejecutar() {
+      const fuente = code!.value.trim();
+      if (!fuente) {
+        renderError('⚠ No hay código para ejecutar');
+        setStatus('⚠ vacío', 'error');
+        return;
+      }
+      setStatus('⏳ ejecutando…', 'running');
+      const inicio = performance.now();
+      await cargarWASM();
+      try {
+        if (wasmListo && wasm && typeof wasm.forja_ejecutar === 'function') {
+          const resultado = wasm.forja_ejecutar(fuente);
+          render(String(resultado ?? ''));
+          setStatus('⚡ ' + (performance.now() - inicio).toFixed(1) + ' ms', 'timing');
+        } else {
+          renderError('⚠ La VM WASM todavía no está disponible.');
+          setStatus('⚠ sin WASM', 'error');
+        }
+      } catch (err) {
+        renderError('⛔ ' + (err as Error).message);
+        setStatus('❌ error', 'error');
+      }
+    }
+
+    runBtn.addEventListener('click', ejecutar);
+    clearBtn?.addEventListener('click', () => {
+      code!.value = '';
+      output!.innerHTML = '<span class="demo-placeholder">Editor limpiado</span>';
+      setStatus('✓ listo', 'ok');
+    });
+    code.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        ejecutar();
+      }
+    });
+
+    const chips = root.querySelectorAll('[data-demo-example]');
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        code!.value = (chip as HTMLElement).dataset.demoExample || '';
+        ejecutar();
+      });
+    });
+
+    if (root.dataset.auto === '1') {
+      setTimeout(ejecutar, 120);
+    }
+  }
+
+  function boot() {
+    document
+      .querySelectorAll<HTMLElement>('[data-demo]')
+      .forEach(initDemo);
+  }
+
+  document.addEventListener('DOMContentLoaded', boot);
+  window.addEventListener('page-loaded', boot);
+  if (document.readyState !== 'loading') boot();
+</script>
