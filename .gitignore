@@ -2,6 +2,8 @@
 
 # ── Ejecutables ──
 *.exe
+node_modules/
+dist/
 
 # ── Markdown: solo raíz o README ──
 *.md

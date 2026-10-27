@@ -68,6 +68,15 @@ jobs:
             echo "✅ All WASM files ready"
           fi
 
+      - name: Verificar inicialización del WASM
+        run: |
+          if ! node scripts/verificar-wasm.mjs; then
+            echo "⚠️  El WASM descargado no inicializa; restaurando la versión de git..."
+            git checkout -- src/wasm/forja_wasm.js src/wasm/forja_wasm_bg.wasm \
+                             src/wasm/forja_wasm_gui.js src/wasm/forja_wasm_gui_bg.wasm 2>/dev/null || true
+            node scripts/verificar-wasm.mjs
+          fi
+
       - run: npm ci
       - run: npm run build
 
