@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 12 · Tipos enumerados — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 12 · Tipos enumerados</h1>
+  <p class="lead">Un <strong>tipo enumerado</strong> representa un valor que puede ser una de varias opciones. En Forja se modelan con <code>constante</code> para las variantes y se comparan con <code>si</code> o <code>coincidir</code>.</p>
+
+  <h2>Variantes con constantes</h2>
+  <p>La forma más directa de representar un conjunto cerrado de opciones es declarar una <code>constante</code> por cada variante.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>enums.fa</span></div>
+    <pre><code><span class="kw">constante</span> NORTE = <span class="st">0</span>
+<span class="kw">constante</span> SUR = <span class="st">1</span>
+<span class="kw">constante</span> ESTE = <span class="st">2</span>
+<span class="kw">constante</span> OESTE = <span class="st">3</span>
+
+<span class="kw">variable</span> d = NORTE</code></pre>
+  </div>
+
+  <p>Las variantes se usan directamente por su nombre y se comparan con <code>==</code>.</p>
+
+  <h2>Variantes con datos</h2>
+  <p>Cuando cada variante necesita transportar valores, se usa un <strong>mapa</strong> con una clave <code>"tipo"</code> que identifica la variante y claves adicionales para los datos.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>variantes.fa</span></div>
+    <pre><code><span class="kw">variable</span> circulo = &#123;<span class="st">"tipo"</span>: <span class="st">"circulo"</span>, <span class="st">"radio"</span>: <span class="st">2.5</span>&#125;
+<span class="kw">variable</span> rectangulo = &#123;<span class="st">"tipo"</span>: <span class="st">"rectangulo"</span>, <span class="st">"ancho"</span>: <span class="st">3.0</span>, <span class="st">"alto"</span>: <span class="st">4.0</span>&#125;</code></pre>
+  </div>
+
+  <div class="info">
+    <strong>Tip:</strong> los mapas con clave <code>"tipo"</code> se procesan comparando esa clave con <code>si</code> / <code>sino si</code> (día 13) para tratar cada variante de forma clara.
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> define las constantes <code>ACTIVO</code>, <code>INACTIVO</code> y <code>SUSPENDIDO</code>. Crea una variable <code>estado = SUSPENDIDO</code> y mostrá un mensaje distinto según su valor.
+    <br /><a href="/docs/curso/solucionario/#dia-12">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/13-coincidir/">Día 13 · Pattern matching →</a></p>
+</Layout>
