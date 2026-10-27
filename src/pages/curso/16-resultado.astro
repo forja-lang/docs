@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 16 · Resultado y Opción — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 16 · Resultado y Opción</h1>
+  <p class="lead">Forja trae dos tipos integrados para manejar ausencia y errores sin excepciones: <code>Opcion&lt;T&gt;</code> y <code>Resultado&lt;T, E&gt;</code>.</p>
+
+  <h2>Opción</h2>
+  <p><code>Opcion&lt;T&gt;</code> puede ser <code>Alguno(valor)</code> o <code>Ninguno</code>.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>opcion.fa</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">mitad</span>(n) -&gt; <span class="ty">Opcion</span>&lt;<span class="ty">Entero</span>&gt; &#123;
+    <span class="kw">si</span> (n % 2 == 0) &#123;
+        <span class="kw">retornar</span> Alguno(n / 2)
+    &#125;
+    <span class="kw">retornar</span> Ninguno
+&#125;</code></pre>
+  </div>
+
+  <h2>Resultado</h2>
+  <p><code>Resultado&lt;T, E&gt;</code> puede ser <code>Ok(valor)</code> o <code>Error(motivo)</code>.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>resultado.fa</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">dividir</span>(a, b) -&gt; <span class="ty">Resultado</span>&lt;<span class="ty">Decimal</span>, <span class="ty">Texto</span>&gt; &#123;
+    <span class="kw">si</span> (b == 0) &#123;
+        <span class="kw">retornar</span> Error(<span class="st">"división por cero"</span>)
+    &#125;
+    <span class="kw">retornar</span> Ok(a / b)
+&#125;</code></pre>
+  </div>
+
+  <h2>Procesarlos con coincidir</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>procesar.fa</span></div>
+    <pre><code><span class="kw">variable</span> r = <span class="fn">dividir</span>(10, 2)
+<span class="kw">coincidir</span> (r) &#123;
+    <span class="kw">caso</span> Ok(v) -&gt; &#123; <span class="fn">escribir</span>(<span class="st">"Resultado: $&#123;v&#125;"</span>) &#125;
+    <span class="kw">caso</span> Error(e) -&gt; &#123; <span class="fn">escribir</span>(<span class="st">"Error: $&#123;e&#125;"</span>) &#125;
+&#125;</code></pre>
+  </div>
+
+  <div class="info">
+    <strong>Tip:</strong> el operador <code>?</code> propaga automáticamente un <code>Ninguno</code> o <code>Error</code> hacia quien llamó.
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> escribí <code>dividir(10.0, 2.0)</code> y mostrá el resultado usando <code>coincidir</code>.
+    <br /><a href="/docs/curso/solucionario/#dia-16">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/17-modulos/">Día 17 · Módulos e imports →</a></p>
+</Layout>
