@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 24 · Interfaces gráficas — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 24 · Interfaces gráficas</h1>
+  <p class="lead">Forja incluye un sistema de GUI nativa con Material You. Puedes construir ventanas y widgets directamente desde el lenguaje.</p>
+
+  <h2>Una app mínima</h2>
+  <p>Se importa el módulo <code>gui</code> y se describe la interfaz con funciones de layout como <code>columna</code>, <code>texto_grande</code> y <code>boton</code>.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>app.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"gui"</span>
+
+<span class="kw">funcion</span> saludar() &#123;
+    <span class="fn">escribir</span>(<span class="st">"¡Hola!"</span>)
+&#125;
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="fn">tema_material</span>(<span class="st">"#6750A4"</span>, <span class="fn">columna</span>([
+        <span class="fn">texto_grande</span>(<span class="st">"Mi primera app"</span>),
+        <span class="fn">espacio</span>(<span class="st">16</span>),
+        <span class="fn">texto_mediano</span>(<span class="st">"Hola, Forja GUI"</span>),
+        <span class="fn">boton</span>(<span class="st">"Saludar"</span>, &#38;saludar)
+    ]))
+&#125;</code></pre>
+  </div>
+
+  <h2>Ejecutar la app</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>terminal</span></div>
+    <pre><code>forja ejecutar app.fa</code></pre>
+  </div>
+
+  <div class="info">
+    <strong>Tip:</strong> <code>tema_material(seed, contenido)</code> genera una paleta Material You completa a partir de un color semilla y envuelve el layout raíz.
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> crea una app con un título, un texto y un botón que imprima <code>"clic"</code> en consola al pulsarlo.
+    <br /><a href="/docs/curso/solucionario/#dia-24">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/25-gui-avanzada/">Día 25 · GUI avanzada →</a></p>
+</Layout>
