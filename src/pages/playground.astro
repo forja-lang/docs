@@ -18,7 +18,7 @@ import Layout from '../layouts/Layout.astro';
             <span class="toggle-track"><span class="toggle-thumb"></span></span>
           </label>
           <button id="btnRun" class="btn-run">▶ Ejecutar</button>
-          <button id="btnGui" class="btn-gui btn-gui--disabled" title="GUI deshabilitada temporalmente">🎨 GUI</button>
+          <button id="btnGui" class="btn-gui" title="Renderizar la interfaz en el canvas">🎨 GUI</button>
           <button id="btnClear" class="btn-clear">🗑 Limpiar</button>
         </div>
       </div>
@@ -43,16 +43,6 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </div>
 
-  <!-- Modal no-nativo para GUI deshabilitada -->
-  <div id="guiModal" class="modal-overlay" style="display:none;">
-    <div class="modal-box">
-      <div class="modal-icon">🛠️</div>
-      <h3 class="modal-title">GUI deshabilitada</h3>
-      <p class="modal-body">La funcionalidad GUI está deshabilitada por el momento mientras se realizan pruebas. ¡Volverá pronto!</p>
-      <button id="guiModalClose" class="modal-btn">Entendido</button>
-    </div>
-  </div>
-
   <h2>Ejemplos rápidos</h2>
 
   <div class="example-buttons">
@@ -62,6 +52,18 @@ import Layout from '../layouts/Layout.astro';
     <button class="example-btn" data-code='clase P &#123;\n    nombre\n    constructor(n) &#123;\n        este.nombre = n\n    &#125;\n    funcion sal() &#123;\n        escribir(este.nombre)\n    &#125;\n&#125;\nvariable p = nuevo P("Ana")\np.sal()'>Clase</button>
     <button class="example-btn" data-code='variable i = 0\nmientras (i < 5) &#123;\n    escribir("i = " + i)\n    i = i + 1\n&#125;'>Bucle</button>
     <button class="example-btn" data-code='funcion fib(n) &#123;\n    si (n <= 1) &#123;\n        retornar n\n    &#125;\n    retornar fib(n-1) + fib(n-2)\n&#125;\nescribir("fib(10) = " + fib(10))'>Fibonacci</button>
+    <button class="example-btn" data-code='variable nombre = "Carlos"\nvariable edad = 30\nescribir("Hola $&#123;nombre&#125;, tenés $&#123;edad&#125; años")'>Interpolación</button>
+    <button class="example-btn" data-code='funcion dividir(a: Entero, b: Entero) -> Resultado<Entero, Texto> &#123;\n    si (b == 0) &#123; retornar Error("No se puede dividir por cero") &#125;\n    retornar Ok(a / b)\n&#125;\nfuncion ejecutar() -> Resultado<Entero, Texto> &#123;\n    variable r = dividir(10, 2)?\n    escribir(r)\n    retornar Ok(r)\n&#125;\nejecutar()'>Resultado</button>
+    <button class="example-btn" data-code='rasgo Saludador &#123;\n    funcion saludar()\n&#125;\nclase Persona &#123;\n    nombre\n    constructor(n) &#123; este.nombre = n &#125;\n&#125;\nimplementa Saludador para Persona &#123;\n    funcion saludar() &#123;\n        escribir("Hola, soy " + este.nombre)\n    &#125;\n&#125;\nvariable p = nuevo Persona("Ana")\np.saludar()'>Rasgos</button>
+    <button class="example-btn" data-code='funcion identidad<T>(valor: T) -> T &#123;\n    retornar valor\n&#125;\nescribir(identidad(42))\nescribir(identidad("hola"))'>Genéricos</button>
+    <button class="example-btn" data-code='variable tx, rx = canal()\nvariable h = hilo &#123;\n    tx.enviar(42)\n&#125;\nvariable dato = rx.recibir()\nescribir(dato)\nh.unir()'>Concurrencia</button>
+    <button class="example-btn" data-code='variable numeros = [3, 1, 4, 1, 5, 9, 2, 6]\nvariable suma = 0\npara (variable i = 0; i < longitud(numeros); i = i + 1) &#123;\n    suma = suma + numeros[i]\n&#125;\nescribir("Suma: " + suma)'>Arreglos</button>
+    <button class="example-btn" data-code='variable edades = &#123;"Ana": 25, "Luis": 30, "Eva": 28&#125;\nvariable nombres = ["Ana", "Luis", "Eva"]\npara (variable i = 0; i < longitud(nombres); i = i + 1) &#123;\n    variable nombre = nombres[i]\n    escribir(nombre + " tiene " + edades[nombre] + " años")\n&#125;'>Mapas</button>
+    <button class="example-btn" data-code='tipo Forma = Circulo(Decimal) | Rectangulo(Decimal, Decimal)\nfuncion area(f: Forma) -> Decimal &#123;\n    coincidir (f) &#123;\n        caso Circulo(r) -> &#123; retornar 3.14159 * r * r &#125;\n        caso Rectangulo(a, b) -> &#123; retornar a * b &#125;\n    &#125;\n&#125;\nescribir(area(Circulo(2.0)))\nescribir(area(Rectangulo(3.0, 4.0)))'>Enums y match</button>
+    <button class="example-btn" data-code='variable arr = [5, 2, 9, 1, 7, 3]\nvariable n = longitud(arr)\npara (variable i = 0; i < n; i = i + 1) &#123;\n    para (variable j = 0; j < n - i - 1; j = j + 1) &#123;\n        si (arr[j] > arr[j + 1]) &#123;\n            variable tmp = arr[j]\n            arr[j] = arr[j + 1]\n            arr[j + 1] = tmp\n        &#125;\n    &#125;\n&#125;\nescribir(arr)'>Ordenamiento</button>
+    <button class="example-btn" data-code='funcion es_primo(n) &#123;\n    si (n < 2) &#123; retornar falso &#125;\n    variable i = 2\n    mientras (i * i <= n) &#123;\n        si (n % i == 0) &#123; retornar falso &#125;\n        i = i + 1\n    &#125;\n    retornar verdadero\n&#125;\npara (variable i = 1; i <= 20; i = i + 1) &#123;\n    si (es_primo(i)) &#123; escribir(i + " es primo") &#125;\n&#125;'>Primos</button>
+    <button class="example-btn" data-code='variable contador = 0\nfuncion incrementar() &#123;\n    contador = contador + 1\n&#125;\nfuncion main() &#123;\n    columna &#123;\n        titulo("Contador")\n        escribir("Valor: " + contador)\n        boton("Incrementar", incrementar)\n    &#125;\n&#125;'>GUI: contador</button>
+    <button class="example-btn" data-code='importar std/json\nfuncion ejecutar() -> Resultado<Texto, ErrorJSON> &#123;\n    variable datos = &#123;"nombre": "Ana", "edad": 25, "activo": verdadero&#125;\n    variable texto = serializar(datos)?\n    escribir(texto)\n    variable recuperado = parsear(texto)?\n    escribir(recuperado["nombre"])\n    retornar Ok(texto)\n&#125;\nejecutar()'>JSON</button>
   </div>
 </Layout>
 
@@ -205,61 +207,6 @@ import Layout from '../layouts/Layout.astro';
   }
   @media (max-width: 768px) { .playground-layout { grid-template-columns: 1fr; } }
 
-  /* ===== MODAL NO-NATIVO ===== */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.65);
-    backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    animation: fadeIn 0.2s ease;
-  }
-  .modal-box {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px 36px 28px;
-    max-width: 400px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.5);
-    animation: modalPop 0.25s ease;
-  }
-  .modal-icon { font-size: 2.2rem; margin-bottom: 12px; }
-  .modal-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-  .modal-body {
-    font-size: 0.9rem;
-    color: var(--text-dim);
-    margin-bottom: 20px;
-    line-height: 1.5;
-  }
-  .modal-btn {
-    background: linear-gradient(135deg, var(--fuego), var(--fuego-dark));
-    color: #000;
-    border: none;
-    padding: 8px 28px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    font-family: var(--font);
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .modal-btn:hover { filter: brightness(1.2); transform: translateY(-1px); }
-
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes modalPop {
-    from { transform: scale(0.92) translateY(12px); opacity: 0; }
-    to { transform: scale(1) translateY(0); opacity: 1; }
-  }
 </style>
 
 <script>
@@ -424,26 +371,7 @@ import Layout from '../layouts/Layout.astro';
     }
 
     btnRun.addEventListener('click', ejecutar);
-
-    // Modal GUI deshabilitada
-    const guiModal = document.getElementById('guiModal') as HTMLDivElement;
-    const guiModalClose = document.getElementById('guiModalClose') as HTMLButtonElement;
-
-    function mostrarModalGUI() {
-      if (guiModal) guiModal.style.display = 'flex';
-      if (guiSection) guiSection.style.display = 'none';
-    }
-    function cerrarModalGUI() {
-      if (guiModal) guiModal.style.display = 'none';
-    }
-    btnGui.addEventListener('click', mostrarModalGUI);
-    if (guiModalClose) guiModalClose.addEventListener('click', cerrarModalGUI);
-    if (guiModal) guiModal.addEventListener('click', (e: MouseEvent) => {
-      if (e.target === guiModal) cerrarModalGUI();
-    });
-    document.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && guiModal?.style.display === 'flex') cerrarModalGUI();
-    });
+    btnGui.addEventListener('click', ejecutarGUI);
     btnClear.addEventListener('click', limpiar);
     codigo.addEventListener('input', onCodigoChange);
 
