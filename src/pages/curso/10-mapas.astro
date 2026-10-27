@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 10 · Mapas — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 10 · Mapas</h1>
+
+  <p>Un mapa asocia <strong>claves</strong> con <strong>valores</strong>, como un diccionario. Se crea con llaves <code>&#123; &#125;</code>.</p>
+
+  <h2>Crear y acceder</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 Clave → valor</span></div>
+    <pre><code><span class="kw">variable</span> persona = &#123;<span class="st">"nombre"</span>: <span class="st">"Ana"</span>, <span class="st">"edad"</span>: 30&#125;
+<span class="fn">escribir</span>(persona[<span class="st">"nombre"</span>])   <span class="co">// Ana</span>
+<span class="fn">escribir</span>(persona[<span class="st">"edad"</span>])     <span class="co">// 30</span></code></pre>
+  </div>
+
+  <h2>Agregar y modificar</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 Asignación por clave</span></div>
+    <pre><code><span class="kw">variable</span> m = &#123;<span class="st">"a"</span>: 1&#125;
+m[<span class="st">"b"</span>] = 2          <span class="co">// agrega la clave "b"</span>
+m[<span class="st">"a"</span>] = 10         <span class="co">// modifica "a"</span>
+<span class="fn">escribir</span>(m[<span class="st">"b"</span>])   <span class="co">// 2</span></code></pre>
+  </div>
+
+  <h2>Verificar claves</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 contiene</span></div>
+    <pre><code><span class="kw">variable</span> m = &#123;<span class="st">"x"</span>: 1&#125;
+<span class="fn">escribir</span>(<span class="fn">contiene</span>(m, <span class="st">"x"</span>))   <span class="co">// verdadero</span>
+<span class="fn">escribir</span>(<span class="fn">contiene</span>(m, <span class="st">"y"</span>))   <span class="co">// falso</span></code></pre>
+  </div>
+
+  <div class="info">💡 Los mapas son perfectos para representar registros: usuarios, configuraciones, respuestas JSON, etc.</div>
+
+  <h2>Mini-proyecto del Módulo 1</h2>
+  <div class="warning">🏗️ <strong>Proyecto:</strong> escribí un programa que guarde en un mapa los datos de una persona (nombre, edad, ciudad) y los muestre formateados, uno por línea.</div>
+
+  <h2>Ejercicio del día</h2>
+  <div class="warning">✏️ <strong>Ejercicio:</strong> creá un mapa con la clave <code>"edad"</code> = <code>30</code> y mostrá su valor.</div>
+
+  <p>Comparalo con el <a href="/docs/curso/solucionario/#dia-10">solucionario</a>.</p>
+
+  <p class="nav-siguiente"><a href="/docs/curso/11-clases/">Día 11 · Clases y objetos →</a></p>
+
+  <style>
+    .breadcrumb { font-size: 0.85rem; color: var(--text-dim); }
+    .nav-siguiente { margin-top: 2rem; font-weight: 600; }
+  </style>
+</Layout>
