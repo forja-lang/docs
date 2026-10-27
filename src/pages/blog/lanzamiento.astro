@@ -1,0 +1,235 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Anuncio de lanzamiento — Forja"
+  description="Forja (fa) es un lenguaje de programación educativo en español con contratos y tipado que compila a nativo, GUI, WASM y Android. Esta es la historia del proyecto."
+>
+  <article class="post">
+    <p class="post-meta">📰 Blog · Lanzamiento · Forja v0.9.2</p>
+    <h1>Forja: un lenguaje de programación que habla tu idioma</h1>
+
+    <p class="post-lead">
+      Aprender a programar ya es difícil como para que encima tengas que hacerlo
+      en un idioma que no es el tuyo. <strong>Forja</strong> nace de una idea
+      simple: ¿y si el lenguaje de programación que usás para aprender —y para
+      construir— estuviera en español, sin renunciar a nada de lo que hace
+      potentes a los lenguajes modernos?
+    </p>
+
+    <div class="info">
+      🔥 <strong>El pitch en una línea:</strong> aprendé a programar en español,
+      con contratos y tipado, y compilá a nativo, GUI y WASM.
+    </div>
+
+    <h2>El problema</h2>
+
+    <p>
+      La mayoría de la gente que empieza a programar en Latinoamérica y España lo
+      hace en inglés. Eso está bien a largo plazo, pero al principio agrega una
+      barrera invisible: <code>while</code>, <code>return</code>,
+      <code>borrow</code>, <code>match</code>. Palabras que hay que memorizar
+      antes de entender qué hacen. Y los mensajes de error, peor: aparecen en un
+      idioma técnico que no ayuda a nadie que recién arranca.
+    </p>
+
+    <p>
+      Existen lenguajes con palabras clave en español (Pascal derivados, algunos
+      experimentos educativos), pero casi siempre son intérpretes simples,
+      juguetes sin compilación real ni un ecosistema detrás. La otra opción es
+      aprender con un lenguaje profesional y lidiar con la barrera idiomática.
+    </p>
+
+    <p>
+      Forja intenta romper esa dicotomía: <strong>palabras clave y errores en
+      español</strong> por un lado, y por el otro un <strong>compilador de
+      verdad</strong> —lexer, parser, AST, verificación de tipos, optimizador,
+      bytecode, VM, JIT y generación de código— que se puede estudiar de punta a
+      punta.
+    </p>
+
+    <h2>Qué es Forja, concretamente</h2>
+
+    <ul>
+      <li>
+        <strong>Un lenguaje en español</strong> con <code>variable</code>,
+        <code>constante</code>, <code>si</code>/<code>sino</code>,
+        <code>mientras</code>, <code>para</code>, <code>funcion</code>,
+        <code>clase</code>, <code>coincidir</code>, <code>importar</code>.
+      </li>
+      <li>
+        <strong>Tipado y contratos.</strong> Verificador de tipos, análisis de
+        ownership (<em>borrow checker</em>) y <em>design by contract</em>:
+        <code>requiere</code>, <code>asegura</code> e <code>siempre</code> se
+        escriben junto a la función y se verifican.
+      </li>
+      <li>
+        <strong>Errores que enseñan.</strong> Los diagnósticos muestran la línea,
+        el fragmento de código, un código estable (<code>E0308</code>) y una
+        sugerencia en español.
+      </li>
+      <li>
+        <strong>Muchos destinos, un mismo programa.</strong> Ejecutalo en la VM
+        <strong>ForjaFast</strong>, en el <strong>JIT tiered</strong> x86-64, o
+        compilalo a <strong>assembly</strong> nativo, a un proyecto
+        <strong>Rust</strong>, a <strong>WASM</strong> para el navegador o a
+        <strong>Android</strong> vía JNI.
+      </li>
+      <li>
+        <strong>Un ecosistema.</strong> Biblioteca estándar con 48 módulos
+        (red, JSON, SQLite, criptografía, archivos…), gestor de paquetes, GUI
+        nativa, LSP para tu editor y depurador integrado.
+      </li>
+    </ul>
+
+    <h2>Probalo ahora mismo</h2>
+
+    <p>
+      No hace falta instalar nada. El compilador y la VM están compilados a
+      WebAssembly y corren en tu navegador:
+    </p>
+
+    <p>
+      <a class="post-cta" href="/docs/playground/">▶ Abrir el playground</a>
+      <a class="post-cta" href="/docs/#demo">Ver la demo en la portada</a>
+    </p>
+
+    <p>
+      Y si querés tenerlo local, solo necesitás Rust:
+    </p>
+
+    <div class="code-block-wrapper">
+      <div class="code-header"><span>💻 Instalación</span></div>
+      <pre><code>git clone https://github.com/forja-lang/forja
+cd forja &amp;&amp; cargo build --release
+./target/release/forja run ejemplos/01_hola.fa</code></pre>
+    </div>
+
+    <h2>El hola mundo de 5 líneas</h2>
+
+    <div class="code-block-wrapper">
+      <div class="code-header"><span>📄 hola.fa</span></div>
+      <pre><code><span class="co">// Tu primer programa: un saludo y un contrato</span>
+<span class="kw">funcion</span> <span class="fn">saludar</span>(nombre: <span class="ty">Texto</span>) -&gt; <span class="ty">Texto</span>
+    <span class="kw">requiere</span> nombre != <span class="st">""</span>, <span class="st">"Necesito un nombre"</span>
+&lbrace;
+    <span class="kw">retornar</span> <span class="st">"¡Hola, "</span> + nombre + <span class="st">"!"</span>
+&rbrace;
+
+<span class="fn">escribir</span>(<span class="fn">saludar</span>(<span class="st">"mundo"</span>))   <span class="co">// → ¡Hola, mundo!</span></code></pre>
+    </div>
+
+    <h2>Una GUI en Forja</h2>
+
+    <p>
+      Forja puede describir interfaces nativas. Este contador se ejecuta como
+      ventana de escritorio con el runtime Xilem:
+    </p>
+
+    <div class="code-block-wrapper">
+      <div class="code-header"><span>📄 contador.fa</span></div>
+      <pre><code><span class="kw">variable</span> contador = 0
+<span class="kw">funcion</span> <span class="fn">incrementar</span>() &lbrace;
+    contador = contador + 1
+&rbrace;
+<span class="kw">funcion</span> <span class="fn">main</span>() &lbrace;
+    <span class="fn">columna</span> &lbrace;
+        <span class="fn">titulo</span>(<span class="st">"Contador"</span>)
+        <span class="fn">escribir</span>(<span class="st">"Valor: "</span> + contador)
+        <span class="fn">boton</span>(<span class="st">"Incrementar"</span>, &amp;incrementar)
+    &rbrace;
+&rbrace;</code></pre>
+    </div>
+
+    <h2>¿Para quién es Forja?</h2>
+
+    <ul>
+      <li><strong>Quien aprende:</strong> para dar los primeros pasos sin la barrera del idioma, con un curso de 30 días incluido.</li>
+      <li><strong>Quien enseña:</strong> para mostrar cómo funciona un compilador de verdad, con todo el código disponible.</li>
+      <li><strong>Quien construye:</strong> para prototipar herramientas, apps de escritorio, scripts de red o WASM, en español.</li>
+    </ul>
+
+    <h2>Estado y honestidad</h2>
+
+    <p>
+      Forja está en <strong>v0.9.2</strong>: es software educativo real y en
+      desarrollo activo. Hay partes sólidas y partes en progreso, y lo
+      documentamos abiertamente:
+    </p>
+
+    <ul>
+      <li>El pipeline de bytecode tiene un único camino canónico (VM + JIT).</li>
+      <li>El IR intermedio todavía está completándose; su finalización es trabajo en curso.</li>
+      <li>La extracción de la GUI a crates independientes y la publicación en crates.io dependen de resolver un fork de dependencias.</li>
+      <li>El registry de paquetes funciona en modo local/offline; el servidor remoto es deuda futura.</li>
+    </ul>
+
+    <p>
+      La regla es simple: si no está, no lo prometemos. El
+      <a href="/docs/roadmap/">roadmap público</a> refleja el estado verificable.
+    </p>
+
+    <h2>Cómo seguir</h2>
+
+    <ul>
+      <li>⭐ Dale una estrella al repo para seguir el proyecto.</li>
+      <li>🐛 Reportá lo que se rompa con un ejemplo mínimo reproducible.</li>
+      <li>🎓 Hacé el <a href="/docs/curso/">curso de 30 días</a> y contanos dónde te trabás.</li>
+      <li>💬 Compartí tus programas: la mejor publicidad de un lenguaje son los que lo usan.</li>
+    </ul>
+
+    <p class="post-end">
+      Forja existe para que la próxima persona que quiera entender cómo funciona
+      una computadora no tenga que empezar traduciendo. Programá en tu idioma.
+    </p>
+  </article>
+</Layout>
+
+<style>
+  .post { max-width: 760px; }
+  .post-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .post h1 { font-size: 2.4rem; }
+  .post h2 { font-size: 1.4rem; }
+  .post-lead {
+    font-size: 1.05rem;
+    color: var(--text);
+    border-left: 3px solid var(--fuego);
+    padding-left: 16px;
+    margin-bottom: 24px;
+  }
+  .post ul { margin-bottom: 24px; }
+  .post ul li { margin-bottom: 10px; }
+  .post-cta {
+    display: inline-block;
+    padding: 9px 18px;
+    margin: 0 8px 8px 0;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .post-cta:hover {
+    border-color: var(--fuego);
+    color: var(--fuego-light);
+    background: var(--fuego-bg);
+    text-decoration: none;
+  }
+  .post-end {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 1.05rem;
+    color: var(--text);
+    font-style: italic;
+  }
+</style>
