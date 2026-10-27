@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 30 · Proyecto final — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 30 · Proyecto final</h1>
+  <p class="lead">¡Felicidades! Has llegado al final del curso. Es momento de integrar todo lo aprendido en un proyecto completo.</p>
+
+  <h2>Objetivo</h2>
+  <p>Construye una <strong>aplicación de gestión de tareas</strong> con interfaz gráfica y persistencia en SQLite. Debe permitir:</p>
+  <ul>
+    <li>Añadir tareas con descripción.</li>
+    <li>Listar todas las tareas.</li>
+    <li>Marcar tareas como completadas.</li>
+    <li>Eliminar tareas.</li>
+    <li>Persistir los datos entre ejecuciones.</li>
+  </ul>
+
+  <h2>Estructura sugerida</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>tareas.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"gui"</span>
+<span class="kw">importar</span> <span class="st">"std/sqlite"</span>
+
+<span class="kw">clase</span> <span class="ty">Tarea</span> &#123;
+    id
+    descripcion
+    completada
+
+    constructor(id, descripcion) &#123;
+        <span class="kw">este</span>.id = id
+        <span class="kw">este</span>.descripcion = descripcion
+        <span class="kw">este</span>.completada = falso
+    &#125;
+&#125;
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="kw">variable</span> db = <span class="fn">sqlite.abrir</span>(<span class="st">"tareas.db"</span>)
+    <span class="fn">sqlite.ejecutar</span>(db, <span class="st">"CREATE TABLE IF NOT EXISTS tareas (id INTEGER PRIMARY KEY, descripcion TEXT, completada INTEGER)"</span>)
+    <span class="co">// ... construir la interfaz y conectar los callbacks ...</span>
+&#125;</code></pre>
+  </div>
+
+  <h2>Rúbrica de evaluación</h2>
+  <ul>
+    <li>✅ Usa clases y enums para modelar los datos.</li>
+    <li>✅ Maneja errores con <code>Resultado</code>.</li>
+    <li>✅ Organiza el código en módulos.</li>
+    <li>✅ Incluye pruebas con <code>forja test</code>.</li>
+    <li>✅ La interfaz responde correctamente a las acciones del usuario.</li>
+  </ul>
+
+  <div class="info">
+    <strong>Tip:</strong> revisa los ejemplos en <a href="/docs/ejemplos/">la galería de ejemplos</a> para inspirarte en patrones de GUI y SQLite.
+  </div>
+
+  <div class="warning">
+    <strong>Entrega:</strong> comparte tu proyecto y compáralo con el <a href="/docs/curso/solucionario/#dia-30">solucionario de referencia</a>.
+  </div>
+
+  <div class="info">
+    <strong>¡Enhorabuena!</strong> Has completado "Forja en 30 días". Ahora dominas los fundamentos, el nivel intermedio y los temas avanzados del lenguaje. Sigue explorando la <a href="/docs/sintaxis/">guía del lenguaje</a> y la <a href="/docs/arquitectura/">arquitectura</a> para profundizar.
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/">← Volver al índice del curso</a></p>
+</Layout>
