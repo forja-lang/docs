@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 26 · Red y HTTP — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 26 · Red y HTTP</h1>
+  <p class="lead">Forja puede realizar peticiones HTTP y construir servidores, gracias a su biblioteca estándar de red.</p>
+
+  <h2>Petición HTTP GET</h2>
+  <p>El módulo <code>std/cliente_http</code> expone <code>get(url)</code>, que devuelve un objeto con <code>.exito</code>, <code>.codigo</code>, <code>.cuerpo</code> y <code>.error</code>.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>cliente.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/cliente_http"</span>
+<span class="kw">importar</span> <span class="st">"std/io"</span>
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="kw">variable</span> respuesta = <span class="fn">get</span>(<span class="st">"https://api.ejemplo.com/datos"</span>)
+    <span class="kw">si</span> (respuesta.exito) &#123;
+        <span class="fn">escribir</span>(<span class="st">"Código: $&#123;respuesta.codigo&#125;"</span>)
+        <span class="fn">escribir</span>(respuesta.cuerpo)
+    &#125; <span class="kw">sino</span> &#123;
+        <span class="fn">escribir</span>(<span class="st">"Error: $&#123;respuesta.error&#125;"</span>)
+    &#125;
+&#125;</code></pre>
+  </div>
+
+  <h2>Servidor HTTP simple</h2>
+  <p>El módulo <code>std/servidor_web</code> permite registrar rutas con <code>obtener(servidor, ruta, manejador)</code>.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>servidor.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/servidor_web"</span>
+
+<span class="kw">funcion</span> saludar(peticion) &#123;
+    <span class="kw">retornar</span> <span class="st">"Hola desde Forja"</span>
+&#125;
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="kw">variable</span> servidor = <span class="fn">crear_servidor</span>(<span class="st">8080</span>)
+    <span class="fn">obtener</span>(servidor, <span class="st">"/"</span>, &#38;saludar)
+    <span class="fn">iniciar_servidor</span>(servidor)
+&#125;</code></pre>
+  </div>
+
+  <div class="info">
+    <strong>Tip:</strong> las respuestas HTTP suelen venir en JSON; combínalas con <code>json.parsear</code> (día 19) para procesarlas.
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> escribe un servidor que responda <code>"OK"</code> a cualquier petición en el puerto 3000.
+    <br /><a href="/docs/curso/solucionario/#dia-26">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/27-sqlite/">Día 27 · SQLite →</a></p>
+</Layout>
