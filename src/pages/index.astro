@@ -1,455 +1,335 @@
-﻿---
+---
 import Layout from '../layouts/Layout.astro';
+import DemoForja from '../components/DemoForja.astro';
 ---
 
-<Layout title="Forja — Lenguaje de programación en español" description="Forja (fa) es un lenguaje educativo en español con VM propia, JIT, compilador ASM multi-arquitectura y playground WASM">
-
-  <div class="hero">
-    <h1>Forja</h1>
-    <div class="subtitle">Un lenguaje de programación en <strong>español</strong> con <strong>VM propia</strong>, <strong>JIT</strong>, <strong>compilador ASM</strong> (x86-64 / ARM64) y <strong>playground WASM</strong></div>
-    <div class="badge-row">
-      <span class="badge dot">⎔ 2 VMs + JIT Nativo</span>
-      <span class="badge">🦀 Rust backend</span>
-      <span class="badge">⚡ Assembly nativo</span>
-      <span class="badge">🎯 Educativo</span>
-      <span class="badge">📦 Ejecutable único</span>
-      <span class="badge">🌐 WASM</span>
-      <span class="badge">🇪🇸 100% español</span>
-      <span class="badge">🔧 Uops</span>
-      <span class="badge">📐 Optimizador</span>
-      <span class="badge">🎨 GUI nativa (Xilem)</span>
-      <span class="badge">🧬 Traits / Genéricos</span>
-      <span class="badge">🧵 Hilos / Canales</span>
-      <span class="badge">🏷️ Atributos / derive</span>
-      <span class="badge">📖 Doc comments</span>
-      <span class="badge">🌀 GC Generacional</span>
-      <span class="badge">🔀 IR SSA</span>
-      <span class="badge">⚙️ Monomorfización</span>
-      <span class="badge">📈 PGO</span>
-      <span class="badge">📶 JIT Tiered</span>
-      <span class="badge">🪟 Registros / REX</span>
-      <span class="badge">🤖 Android (JNI)</span>
+<Layout
+  title="Forja — Programá en español"
+  description="Forja (fa) es un lenguaje de programación educativo, en español, con contratos y tipado. Compila a nativo, GUI, WASM y más. Probalo en el navegador."
+>
+  <section class="hero landing-hero">
+    <div class="hero-eyebrow">🔥 Lenguaje de programación · v0.9.2</div>
+    <h1>Programá en español.<br />Compilá a todas partes.</h1>
+    <p class="hero-pitch">
+      <strong>Forja</strong> es un lenguaje educativo con <strong>contratos</strong> y
+      <strong>tipado</strong>, hecho para aprender de verdad cómo funciona una
+      computadora. Escribís en tu idioma y compilás a <strong>nativo</strong>,
+      <strong>GUI</strong>, <strong>WASM</strong> y <strong>Android</strong>.
+    </p>
+    <div class="hero-cta">
+      <a class="cta cta-primary" href="#demo">▶ Probar en el navegador</a>
+      <a class="cta" href="/docs/instalacion/">Instalar Forja</a>
+      <a class="cta" href="/docs/curso/">Curso: Forja en 30 días</a>
     </div>
-  </div>
+    <div class="hero-tags">
+      <span class="tagpill">📐 Tipado + contratos</span>
+      <span class="tagpill">⚡ VM propia + JIT</span>
+      <span class="tagpill">🖥️ Compilador ASM</span>
+      <span class="tagpill">🌐 WASM</span>
+      <span class="tagpill">🎨 GUI nativa</span>
+      <span class="tagpill">🦀 Escrito en Rust</span>
+    </div>
+  </section>
 
-  <div class="info">🔥 <strong>Filosofía:</strong> Aprender conceptos modernos de sistemas (ownership, mutabilidad, borrowing, POO, pattern matching) sin la complejidad sintáctica de Rust, y en tu idioma. Todo en un compilador escrito en Rust puro.</div>
-
-  <h2>Stack tecnológico</h2>
-
-  <table>
-    <thead>
-      <tr><th>Componente</th><th>Tecnología</th><th>Archivo(s)</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>Lenguaje</strong></td><td>Rust (edition 2021)</td><td><code>src/main.rs</code>, <code>src/lib.rs</code></td></tr>
-      <tr><td><strong>CLI</strong></td><td>20+ comandos en español/inglés</td><td><code>src/main.rs</code> (2262 líneas)</td></tr>
-      <tr><td><strong>Lexer + Parser</strong></td><td>Recursive Descent</td><td><code>src/lexer.rs</code>, <code>src/parser.rs</code></td></tr>
-      <tr><td><strong>Tokens</strong></td><td>Definición de tokens del lenguaje</td><td><code>src/token.rs</code></td></tr>
-      <tr><td><strong>AST</strong></td><td>Árbol de Sintaxis Abstracta</td><td><code>src/ast.rs</code></td></tr>
-      <tr><td><strong>Semántica</strong></td><td>Type Checker + Borrow Checker</td><td><code>src/semantics.rs</code> (2345 líneas)</td></tr>
-      <tr><td><strong>Tabla de Símbolos</strong></td><td>Resolución de nombres y ámbitos</td><td><code>src/symbol_table.rs</code></td></tr>
-      <tr><td><strong>Descriptores de Clase</strong></td><td>Metadatos de clases y herencia</td><td><code>src/class_descriptor.rs</code></td></tr>
-      <tr><td><strong>Monomorfización</strong></td><td>Instanciación de genéricos + inferencia</td><td><code>src/monomorph.rs</code> (605 líneas)</td></tr>
-      <tr><td><strong>IR SSA</strong></td><td>Mid-level IR en Static Single Assignment</td><td><code>src/ir.rs</code>, <code>src/ir_constructor.rs</code>, <code>src/ir_ssa.rs</code></td></tr>
-      <tr><td><strong>IR → Bytecode</strong></td><td>Traducción de IR SSA a opcodes</td><td><code>src/ir_to_bytecode.rs</code></td></tr>
-      <tr><td><strong>Backend de Registros</strong></td><td>Stack→Reg, live intervals, linear scan, x86-64</td><td><code>src/stack_to_reg.rs</code>, <code>src/register_ir.rs</code>, <code>src/register_alloc.rs</code>, <code>src/codegen_reg.rs</code></td></tr>
-      <tr><td><strong>Bytecode</strong></td><td>60+ opcodes stack-based</td><td><code>src/bytecode.rs</code> (5107 líneas)</td></tr>
-      <tr><td><strong>Micro-opcodes</strong></td><td>Expansión + optimización de opcodes</td><td><code>src/uops.rs</code> (832 líneas)</td></tr>
-      <tr><td><strong>VM v3 DT</strong></td><td>Direct Threading (u8 planos)</td><td><code>src/vm_jit.rs</code> (1570 líneas)</td></tr>
-      <tr><td><strong>VM v5 Fast 🏆</strong></td><td>NaN tagging, stack caching, producción</td><td><code>src/vm_fast.rs</code> (8694 líneas)</td></tr>
-      <tr><td><strong>GC Generacional</strong></td><td>Young bump + old mark-sweep, write barriers</td><td><code>src/gc.rs</code>, <code>src/gc_intrinsics.rs</code></td></tr>
-      <tr><td><strong>Arena / Shapes</strong></td><td>Alocación por arenas y shapes de objetos</td><td><code>src/arena.rs</code>, <code>src/shape.rs</code></td></tr>
-      <tr><td><strong>JIT Nativo ⚡</strong></td><td>Generación de código x86-64 en memoria</td><td><code>src/jit.rs</code>, <code>src/jit_engine.rs</code></td></tr>
-      <tr><td><strong>JIT Tiered</strong></td><td>Interpret → JitSimple → JitOptimized + OSR</td><td><code>src/jit_tiered.rs</code></td></tr>
-      <tr><td><strong>PGO</strong></td><td>Optimización guiada por perfiles</td><td><code>src/pgo.rs</code></td></tr>
-      <tr><td><strong>Compilador ASM</strong></td><td>x86-64 Win/Linux, ARM64 + gcc -O2</td><td><code>src/compiler_asm.rs</code> (3413 líneas)</td></tr>
-      <tr><td><strong>Backend LLVM</strong></td><td>Generación de LLVM IR + optimización</td><td><code>src/compiler_llvm.rs</code>, <code>src/backend_llvm.rs</code></td></tr>
-      <tr><td><strong>Compilador AOT</strong></td><td>.exe autónomo con bytecode incrustado</td><td><code>src/aot.rs</code>, <code>src/selfrun.rs</code></td></tr>
-      <tr><td><strong>Optimizador</strong></td><td>Constant folding + Dead Code Elimination</td><td><code>src/optimizer.rs</code> (2743 líneas)</td></tr>
-      <tr><td><strong>Cache Incremental</strong></td><td>Compilación incremental persistente</td><td><code>src/incremental_cache.rs</code></td></tr>
-      <tr><td><strong>Módulos</strong></td><td>Importación con seguridad anti path traversal</td><td><code>src/module.rs</code></td></tr>
-      <tr><td><strong>Transpilador Rust</strong></td><td>Forja → código Rust</td><td><code>src/transpiler.rs</code> (3484 líneas)</td></tr>
-      <tr><td><strong>Preludio</strong></td><td>Funciones intrínsecas del lenguaje</td><td><code>src/prelude.rs</code></td></tr>
-      <tr><td><strong>WASM</strong></td><td>wasm-bindgen → playground en navegador</td><td><code>crates/forja-wasm/</code>, <code>crates/forja-wasm-gui/</code></td></tr>
-      <tr><td><strong>REPL</strong></td><td>rustyline, variables persistentes</td><td><code>src/repl.rs</code></td></tr>
-      <tr><td><strong>Formatter</strong></td><td>Formateo automático de código</td><td><code>src/formatter.rs</code></td></tr>
-      <tr><td><strong>Diagrama</strong></td><td>HTML interactivo del AST</td><td><code>src/diagrama.rs</code></td></tr>
-      <tr><td><strong>FFI</strong></td><td>Llamadas a librerías nativas (C)</td><td><code>src/ffi.rs</code></td></tr>
-      <tr><td><strong>Extensión VSCode</strong></td><td>TextMate grammar + snippets</td><td><code>vscode/forja-syntax/</code></td></tr>
-      <tr><td><strong>Design by Contract</strong></td><td>pre/post condiciones, invariantes</td><td><code>src/ast.rs</code>, <code>src/bytecode.rs</code></td></tr>
-      <tr><td><strong>Hot Reload</strong></td><td>Recargar módulos en caliente</td><td><code>src/module.rs</code>, <code>src/vm_fast.rs</code></td></tr>
-      <tr><td><strong>Profiler integrado</strong></td><td>Perfilado de funciones y VMs</td><td><code>src/fprofiler.rs</code></td></tr>
-      <tr><td><strong>Package Manager</strong></td><td>add, remove, install, forja.json</td><td><code>src/package_config.rs</code>, <code>src/package_resolver.rs</code></td></tr>
-      <tr><td><strong>Debugger DAP</strong></td><td>Depurador integrado (DAP) + servidor</td><td><code>src/debugger.rs</code>, <code>src/bin/forja_dap.rs</code></td></tr>
-      <tr><td><strong>Servidor LSP</strong></td><td>Language Server Protocol para IDE</td><td><code>src/bin/forja_lsp.rs</code>, <code>src/lsp/</code></td></tr>
-      <tr><td><strong>GUI Nativa</strong></td><td>Xilem runtime, ventanas nativas</td><td><code>crates/forja-gui-rt/</code> (gui_nativa.rs 6905 líneas)</td></tr>
-      <tr><td><strong>GUI WASM</strong></td><td>GUI Forja en Canvas 2D para navegador</td><td><code>crates/forja-wasm-gui/</code></td></tr>
-      <tr><td><strong>Android Runtime</strong></td><td>VM Forja en Android vía JNI (Rust ↔ Kotlin)</td><td><code>crates/forja-android-rt/</code></td></tr>
-      <tr><td><strong>Procesos Win</strong></td><td>Procesos nativos de Windows</td><td><code>src/native_proceso_win.rs</code></td></tr>
-      <tr><td><strong>Sistema de Errores</strong></td><td>Mensajes de error educativos en español</td><td><code>src/error.rs</code></td></tr>
-      <tr><td><strong>Base64</strong></td><td>Codificación/decodificación Base64</td><td><code>src/base64.rs</code></td></tr>
-      <tr><td><strong>Criptografía</strong></td><td>AES-GCM, ChaCha20-Poly1305, cifrado simétrico</td><td><code>src/crypto.rs</code> (1004 líneas)</td></tr>
-      <tr><td><strong>Criptografía Post-Cuántica</strong></td><td>ML-KEM, ML-DSA, SLH-DSA (FIPS 205/206)</td><td><code>src/crypto_pq.rs</code></td></tr>
-      <tr><td><strong>Hash</strong></td><td>BLAKE3, SHA-2, SHA-3 familia completa</td><td><code>src/hash.rs</code></td></tr>
-      <tr><td><strong>Memory-Mapped Files</strong></td><td>E/S de archivos mapeados en memoria</td><td><code>src/mmap.rs</code></td></tr>
-      <tr><td><strong>HTTP/2 Nativo (Core)</strong></td><td>Implementación HTTP/2 sobre h2 crate</td><td><code>src/native_h2_core.rs</code> (1370 líneas)</td></tr>
-      <tr><td><strong>HTTP/2 Nativo (TLS)</strong></td><td>Soporte TLS para HTTP/2 nativo</td><td><code>src/native_h2_tls.rs</code></td></tr>
-      <tr><td><strong>Registro Nativo</strong></td><td>Función FFI masiva: 4700+ líneas de bindings</td><td><code>src/native_registry.rs</code> (4707 líneas)</td></tr>
-      <tr><td><strong>SQLite Nativo</strong></td><td>Bindings directos a libsqlite3</td><td><code>src/native_sqlite.rs</code></td></tr>
-      <tr><td><strong>Sandbox</strong></td><td>Aislamiento de red/archivos/procesos</td><td><code>src/sandbox.rs</code>, <code>stdlib/std/sandbox.fa</code></td></tr>
-      <tr><td><strong>Terminal</strong></td><td>Utilidades de terminal (colores, cursor)</td><td><code>src/terminal.rs</code></td></tr>
-      <tr><td><strong>stdlib Incrustada</strong></td><td>Módulos de std empaquetados en el binario</td><td><code>src/stdlib_embedded.rs</code></td></tr>
-      <tr><td><strong>API Pública</strong></td><td>Biblioteca pública para integración (lib)</td><td><code>src/lib.rs</code> (814 líneas)</td></tr>
-      <tr><td><strong>LSP Completado</strong></td><td>Completado inteligente para IDE</td><td><code>src/lsp/completado.rs</code></td></tr>
-      <tr><td><strong>LSP Firma</strong></td><td>Firma de funciones en hover</td><td><code>src/lsp/firma.rs</code></td></tr>
-      <tr><td><strong>LSP Índice stdlib</strong></td><td>Índice de módulos stdlib para LSP</td><td><code>src/lsp/index_stdlib.rs</code></td></tr>
-      <tr><td><strong>LSP Snippets</strong></td><td>Snippets de código para IDE</td><td><code>src/lsp/snippets.rs</code></td></tr>
-    </tbody>
-  </table>
-
-  <h2>Hola, Mundo</h2>
-
-  <p>Así de simple es escribir tu primer programa en Forja:</p>
-
-  <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 hola_mundo.fa</span></div>
-    <pre><code><span class="co">// Tu primer programa en Forja</span>
-<span class="fn">escribir</span>(<span class="st">"¡Hola, mundo desde Forja!"</span>)</code></pre>
-  </div>
+  <section id="demo" class="landing-section">
+    <h2>Probalo ahora, sin instalar nada</h2>
+    <p>
+      Este es el compilador y la VM reales, compilados a WebAssembly y ejecutándose
+      en tu navegador. Editá el código y presioná <strong>▶ Ejecutar</strong>.
+    </p>
+    <DemoForja autoEjecutar={true} alto={280} />
+  </section>
 
   <h2>¿Por qué Forja?</h2>
 
   <div class="feature-grid">
     <div class="feature-card">
-      <span class="icon">🌎</span>
+      <span class="icon">🇪🇸</span>
       <h4>100% en español</h4>
-      <p>Keywords, errores, documentación y mensajes completamente en español. Ideal para hispanohablantes.</p>
-    </div>
-    <div class="feature-card">
-      <span class="icon">🦀</span>
-      <h4>Escrito en Rust</h4>
-      <p>70+ módulos de Rust puro (~94,000+ líneas de Rust, ~6,800 líneas de stdlib en Forja). Sin dependencias externas para el núcleo del compilador (ni serde, ni JSON, ni runtime pesado).</p>
-    </div>
-    <div class="feature-card">
-      <span class="icon">⎔</span>
-      <h4>VMs + JIT</h4>
-      <p>ForjaFast (v5) con NaN tagging y stack caching como VM de interpretación, más la VM Direct Threading (v3) y el JIT nativo x86-64.</p>
-    </div>
-    <div class="feature-card">
-      <span class="icon">⚡</span>
-      <h4>JIT Nativo + ASM</h4>
-      <p>JIT nativo x86-64 en memoria (7x más lento que Rust). Compilador a assembly x86-64/ARM64 con gcc -O2 para velocidad nativa (~80x más rápido que Python).</p>
-    </div>
-    <div class="feature-card">
-      <span class="icon">📦</span>
-      <h4>Ejecutable único</h4>
-      <p>Generá un .exe autónomo con la VM + bytecode incrustado. Funciona en cualquier PC sin dependencias. Tecnología selfrun.</p>
-    </div>
-    <div class="feature-card">
-      <span class="icon">🔍</span>
-      <h4>Borrow Checker</h4>
-      <p>Análisis de ownership y préstamos al estilo Rust, con mensajes de error educativos en español con sugerencias.</p>
-    </div>
-    <div class="feature-card">
-      <span class="icon">💬</span>
-      <h4>REPL interactivo</h4>
-      <p>Probá código línea por línea con feedback inmediato. Las variables persisten entre líneas. Ideal para aprender.</p>
-    </div>
-    <div class="feature-card">
-      <span class="icon">🧱</span>
-      <h4>POO nativa + Pattern Matching</h4>
-      <p>Clases, constructores, métodos, herencia de campos. Y también <code>coincidir</code>/<code>caso</code> con tipos algebraicos (<code>tipo</code>).</p>
-    </div>
-    <div class="feature-card">
-      <span class="icon">🌐</span>
-      <h4>Playground WASM</h4>
-      <p>Compilador y VM compilados a WebAssembly. Ejecutá Forja directamente en el navegador sin instalar nada.</p>
-    </div>
-    <div class="feature-card">
-      <span class="icon">🔧</span>
-      <h4>Micro-opcodes (Uops)</h4>
-      <p>Sistema de expansión de opcodes compuestos a micro-operaciones. Permite optimizaciones como fusión de opcodes y eliminación de push/pop redundantes.</p>
+      <p>Palabras clave, tipos, errores y documentación en tu idioma. Ideal para quienes aprenden a programar sin pelear con el inglés.</p>
     </div>
     <div class="feature-card">
       <span class="icon">📐</span>
-      <h4>Optimizador de AST</h4>
-      <p>Constant folding en tiempo de compilación y eliminación de código muerto (DCE). Código más eficiente sin esfuerzo.</p>
+      <h4>Tipado y contratos</h4>
+      <p>Verificador de tipos, <em>borrow checker</em> y <em>design by contract</em>: <code>requiere</code>, <code>asegura</code> e <code>siempre</code> como parte del lenguaje.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">📂</span>
-      <h4>Sistema de módulos</h4>
-      <p>Organizá tu código en archivos separados con <code>importar</code>. Resolvedor con protección contra path traversal.</p>
+      <span class="icon">🧠</span>
+      <h4>Aprendés cómo funciona</h4>
+      <p>Un compilador real: lexer, parser, AST, semántica, optimizador, bytecode, VM, JIT y generación de código. Nada de cajas negras.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">🔒</span>
-      <h4>Design by Contract</h4>
-      <p>Precondiciones (<code>requiere</code>), postcondiciones (<code>asegura</code>) e invariantes (<code>siempre</code>) para código más confiable.</p>
+      <span class="icon">⚡</span>
+      <h4>Un motor, muchas salidas</h4>
+      <p>Un mismo programa corre en la VM <strong>ForjaFast</strong>, en el <strong>JIT</strong> x86-64, como <strong>assembly</strong> nativo, como <strong>Rust</strong> o en el <strong>navegador</strong>.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">🔄</span>
-      <h4>Hot Reload</h4>
-      <p>Recargá funciones y módulos sin reiniciar. Ideal para desarrollo interactivo con feedback inmediato.</p>
+      <span class="icon">🎓</span>
+      <h4>Pensado para enseñar</h4>
+      <p>Errores con línea, código y sugerencia en español. Un curso de 30 días, 260+ ejemplos y un playground para practicar.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">📊</span>
-      <h4>Profiler integrado</h4>
-      <p>Perfilá tiempos de ejecución por función. Descubrí cuellos de botella sin herramientas externas.</p>
+      <span class="icon">📦</span>
+      <h4>Ecosistema propio</h4>
+      <p>Biblioteca estándar, gestor de paquetes, GUI nativa, LSP para tu editor y un depurador integrado.</p>
     </div>
-    <div class="feature-card">
-      <span class="icon">🔀</span>
-      <h4>IR SSA + Backend de Registros</h4>
-      <p>Mid-level IR en Static Single Assignment con φ-nodes y dominator tree, más un backend register-based completo: stack→registros, live intervals, linear scan y generación x86-64 con encoding REX.</p>
+  </div>
+
+  <h2>Un compilador de verdad</h2>
+
+  <p>
+    Forja no es un envoltorio sobre otro lenguaje: tiene su propio pipeline de
+    compilación y su propio runtime. Del código fuente salen varios destinos:
+  </p>
+
+  <div class="pipeline-grid">
+    <div class="pipeline-card">
+      <span class="pipeline-icon">⚙️</span>
+      <h4>VM ForjaFast</h4>
+      <p>Intérprete de bytecode con NaN-tagging, stack caching y GC generacional. El destino por defecto al ejecutar.</p>
     </div>
-    <div class="feature-card">
-      <span class="icon">🌀</span>
-      <h4>GC Generacional</h4>
-      <p>Garbage collector generacional: young generation con bump allocation y old generation con mark-sweep. Write barriers, remembered sets y promoción por edad para reemplazar <code>Arc</code> en ForjaFast.</p>
+    <div class="pipeline-card">
+      <span class="pipeline-icon">📶</span>
+      <h4>JIT tiered</h4>
+      <p>Compilación en caliente a código máquina x86-64, con niveles y OSR, sobre el mismo bytecode.</p>
     </div>
-    <div class="feature-card">
-      <span class="icon">⚙️</span>
-      <h4>Monomorfización de Genéricos</h4>
-      <p>Instanciación de funciones y clases genéricas por tipo concreto (<code>obtener_Entero</code>), con inferencia de tipos desde los argumentos. Elimina el dispatch dinámico.</p>
+    <div class="pipeline-card">
+      <span class="pipeline-icon">🖥️</span>
+      <h4>Assembly nativo</h4>
+      <p>Compilación a código ensamblador x86-64 / ARM64 y enlace con <code>gcc -O2</code>.</p>
     </div>
-    <div class="feature-card">
-      <span class="icon">📈</span>
-      <h4>PGO + JIT Tiered</h4>
-      <p>Optimización guiada por perfiles (<code>--pgo=recoger</code>/<code>usar</code>) y compilación en niveles con contadores de hotness, OSR y deoptimización.</p>
+    <div class="pipeline-card">
+      <span class="pipeline-icon">🦀</span>
+      <h4>Transpilador a Rust</h4>
+      <p>Tu programa se convierte en un proyecto Cargo listo para <code>rustc</code>.</p>
     </div>
-    <div class="feature-card">
-      <span class="icon">🔷</span>
-      <h4>Compilador LLVM</h4>
-      <p>Backend alternativo que genera LLVM IR. Optimizaciones avanzadas y potencial multi-plataforma con el pipeline LLVM.</p>
+    <div class="pipeline-card">
+      <span class="pipeline-icon">🌐</span>
+      <h4>WASM / Web</h4>
+      <p>El compilador y la VM se empaquetan a WebAssembly: el playground que ves arriba.</p>
     </div>
-    <div class="feature-card">
-      <span class="icon">🤖</span>
-      <h4>Android Runtime</h4>
-      <p>La VM de Forja corre en Android vía JNI con clases Kotlin (<code>ForjaRuntime</code>, <code>ForjaSession</code>) y Native Activity para la GUI. Compilá tu app con <code>forja construir-apk</code>.</p>
+    <div class="pipeline-card">
+      <span class="pipeline-icon">📱</span>
+      <h4>Android</h4>
+      <p>Runtime nativo vía JNI para llevar tus apps a dispositivos Android.</p>
     </div>
   </div>
 
   <h2>Forja en acción</h2>
 
-  <p>Mirá cómo se ve el código Forja comparado con Rust. La sintaxis es más natural para hispanohablantes:</p>
+  <p>Una función con contrato y tipo: se verifica antes de ejecutar y falla con un mensaje claro.</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔥 forja/ejemplo.fa</span><span>🦀 rust/ejemplo.rs</span></div>
-    <pre><code><span class="co">// ——————— Forja ——————————————————————— // ——————— Rust —————————————————————</span>
-<span class="kw">funcion</span> factorial(n) &lbrace;                    <span class="co">// fn factorial(n: i64) -> i64 &lbrace;</span>
-    <span class="kw">si</span> (n &lt;= 1) &lbrace;                           <span class="co">//     if n &lt;= 1 &lbrace;</span>
-        <span class="kw">retornar</span> 1                               <span class="co">//         return 1</span>
-    &rbrace;                                         <span class="co">//     &rbrace;</span>
-    <span class="kw">retornar</span> n * factorial(n - 1)                <span class="co">//     n * factorial(n - 1)</span>
-&rbrace;                                             <span class="co">// &rbrace;</span>
+    <div class="code-header"><span>📄 contratos.fa</span></div>
+    <pre><code><span class="co">// El contrato es parte de la firma</span>
+<span class="kw">funcion</span> <span class="fn">dividir</span>(a: <span class="ty">Entero</span>, b: <span class="ty">Entero</span>) -&gt; <span class="ty">Entero</span>
+    <span class="kw">requiere</span> b != 0, <span class="st">"No se puede dividir por cero"</span>
+&lbrace;
+    <span class="kw">retornar</span> a / b
+&rbrace;
 
-<span class="fn">escribir</span>(factorial(5))                           <span class="co">// println!("&lbrace;&rbrace;", factorial(5))</span>
-<span class="co">// → 120                                        // → 120</span></code></pre>
+<span class="fn">escribir</span>(<span class="fn">dividir</span>(10, 2))   <span class="co">// → 5</span>
+<span class="fn">dividir</span>(10, 0)            <span class="co">// → error: se incumplió "requiere b != 0"</span></code></pre>
   </div>
 
-  <h2>Probá Forja ahora</h2>
+  <h2>Empezá en 5 minutos</h2>
 
-  <p>Elegí tu forma preferida de usar Forja:</p>
+  <ol class="step-list">
+    <li><strong>Instalá el compilador</strong> — cloná el repo y compilá con <code>cargo build --release</code> (solo necesitás Rust).</li>
+    <li><strong>Escribí tu primer programa</strong> — guardá <code>hola.fa</code> con <code>escribir("¡Hola!")</code>.</li>
+    <li><strong>Ejecutalo</strong> — <code>forja run hola.fa</code> en la VM, o <code>forja build-asm hola.fa</code> para un binario nativo.</li>
+    <li><strong>Seguí con el curso</strong> — 30 lecciones progresivas, de variables a GUI, red y SQLite.</li>
+  </ol>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>⚡ Modos de ejecución</span></div>
-    <pre><code><span class="co"># Assembly nativo (MÁS RÁPIDO ⚡) — x86-64 o ARM64</span>
-forja build-asm ejemplos/01_hola.fa -o programa
+    <div class="code-header"><span>💻 Línea de comandos</span></div>
+    <pre><code><span class="co"># Instalar desde el código fuente</span>
+git clone https://github.com/forja-lang/forja
+cd forja &amp;&amp; cargo build --release
 
-<span class="co"># Transpilar a Rust</span>
-forja transpile ejemplos/01_hola.fa -o programa.rs
-
-<span class="co"># Ejecutar en VM (4 versiones disponibles)</span>
+<span class="co"># Ejecutar en la VM</span>
 forja run ejemplos/01_hola.fa
 
-<span class="co"># GUI interactiva (requiere --features gui)</span>
-cargo run --features gui --bin forja -- run --native ejemplos/204_login_final.fa
+<span class="co"># Compilar a un binario nativo</span>
+forja build-asm ejemplos/01_hola.fa -o programa
 
 <span class="co"># Modo interactivo</span>
-forja repl
-
-<span class="co"># Ejecutable autónomo (VM + bytecode)</span>
-forja build ejemplos/01_hola.fa -o programa.exe
-
-<span class="co"># En el navegador (WASM)</span>
-<span class="co"># Abrí la página de Playground</span></code></pre>
+forja repl</code></pre>
   </div>
 
-  <details>
-    <summary><strong>📊 Comparación de velocidad entre modos</strong></summary>
-    <table>
-      <thead>
-        <tr><th>Modo</th><th>fib(30)</th><th>Bucle suma 10M</th><th>nested_loop(1000)</th><th>vs Rust nativo</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>🦀 Rust nativo</strong></td><td>~1.94 ms</td><td>~2.28 ms</td><td>~0.044 ms</td><td><strong>1.0x</strong></td></tr>
-        <tr><td><code>transpile</code> (Forja AOT + rustc -O)</td><td>~1.94 ms</td><td>~2.28 ms</td><td>~0.044 ms</td><td><strong>~1.0x</strong> ⚡</td></tr>
-        <tr><td><code>build-asm</code> (gcc -O2)</td><td>54.94 μs</td><td>—</td><td>—</td><td><strong>~2.3x</strong> ⚡</td></tr>
-        <tr><td><strong>JIT Nativo x86-64</strong></td><td>—</td><td>153.18 μs</td><td>—</td><td><strong>7.0x</strong> ⚡</td></tr>
-        <tr><td>🐍 Python (CPython 3.12)</td><td>77.15 ms</td><td>320 ms</td><td>3.62 ms</td><td><strong>~40–140x</strong></td></tr>
-        <tr><td><code>run</code> (ForjaFast v5 🏆)</td><td>113.99 μs</td><td>9,544 μs</td><td>—</td><td><strong>~437x</strong></td></tr>
-        <tr><td><code>run --vm jit</code> (VM v3 DT)</td><td>28.59 μs</td><td>34,864 μs</td><td>—</td><td>~1,597x</td></tr>
-      </tbody>
-    </table>
-    <p><em>Benchmarks actualizados al 9 Jul 2026. Forja AOT <code>transpile</code> + <code>rustc -O</code> rinde igual que Rust nativo (mismo backend LLVM). Los benchmarks de VM varían según el hardware.</em></p>
-  </details>
-
-  <h2>Empezá a escribir en 5 minutos</h2>
-
-  <p>Esto es todo lo que necesitás saber para arrancar:</p>
-
-  <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Conceptos básicos</span></div>
-    <pre><code><span class="co">// Variables mutables e inmutables</span>
-<span class="kw">variable</span> nombre = <span class="st">"Gaucho"</span>
-<span class="kw">constante</span> edad = 30
-
-<span class="co">// Condicionales en español</span>
-<span class="kw">si</span> (edad >= 18) &lbrace;
-    <span class="fn">escribir</span>(nombre + <span class="st">" es mayor de edad"</span>)
-&rbrace; <span class="kw">sino</span> &lbrace;
-    <span class="fn">escribir</span>(nombre + <span class="st">" es menor"</span>)
-&rbrace;
-
-<span class="co">// Bucles</span>
-<span class="kw">para</span> (<span class="kw">variable</span> i = 0; i &lt; 5; i = i + 1) &lbrace;
-    <span class="fn">escribir</span>(<span class="st">"Iteración "</span> + i)
-&rbrace;
-
-<span class="co">// Funciones</span>
-<span class="kw">funcion</span> suma(a, b) &lbrace;
-    <span class="kw">retornar</span> a + b
-&rbrace;
-<span class="fn">escribir</span>(<span class="st">"2 + 3 = "</span> + suma(2, 3))
-
-<span class="co">// Clases</span>
-<span class="kw">clase</span> Persona &lbrace;
-    nombre
-    <span class="kw">constructor</span>(n) &lbrace;
-        <span class="kw">este</span>.nombre = n
-    &rbrace;
-    <span class="kw">funcion</span> saludar() &lbrace;
-        <span class="fn">escribir</span>(<span class="st">"Hola, soy "</span> + <span class="kw">este</span>.nombre)
-    &rbrace;
-&rbrace;
-
-<span class="kw">variable</span> p = <span class="kw">nuevo</span> Persona(<span class="st">"Ana"</span>)
-p.saludar()
-
-<span class="co">// Pattern matching</span>
-<span class="kw">coincidir</span> (dia) &lbrace;
-    <span class="kw">caso</span> 1 &lbrace; <span class="fn">escribir</span>(<span class="st">"Lunes"</span>) &rbrace;
-    <span class="kw">caso</span> 2 &lbrace; <span class="fn">escribir</span>(<span class="st">"Martes"</span>) &rbrace;
-    <span class="kw">caso</span> _ &lbrace; <span class="fn">escribir</span>(<span class="st">"Otro"</span>) &rbrace;
-&rbrace;
-
-<span class="co">// Tipos algebraicos (enums)</span>
-<span class="kw">tipo</span> Resultado = Exito(Entero) | Error(Texto)
-
-<span class="co">// Arreglos y mapas</span>
-<span class="kw">variable</span> arr = [1, 2, 3]
-<span class="kw">variable</span> m = <span class="st">"nombre"</span>: <span class="st">"Ana"</span>, <span class="st">"edad"</span>: 30</code></pre>
-  </div>
-
-  <h2>Pipeline de compilación</h2>
-
-  <p>Forja transforma tu código a través de 5+ fases, pudiendo generar Rust, bytecode (para 2 VMs), assembly nativo, LLVM IR, o ejecutarse en el navegador via WASM:</p>
-
-  <div class="code-block-wrapper">
-    <div class="code-header"><span>🔀 Arquitectura completa</span></div>
-    <pre><code is:raw>┌─────────┐   ┌───────┐   ┌─────┐   ┌──────────────┐   ┌──────────┐   ┌─────────────┐
-│ Source  │ → │ Lexer │ → │Parser│ → │Type + Borrow │ → │Optimizer │ → │ Transpiler  │ → Rust .rs
-│  .fa    │   │       │   │     │   │   Checker    │   │(fold+DCE) │   │             │
-└─────────┘   └───────┘   └─────┘   └──────────────┘   └──────────┘   └─────────────┘
-                                                │  Monomorfización (monomorph.rs)
-                                                ▼
-                                       ┌──────────────┐   ┌──────────────────────┐
-                                       │   IR SSA     │   │ Backend de Registros │
-                                       │ (ir_constructor│  │ stack_to_reg → reg IR│
-                                       │  → ir_ssa)   │   │ → register_alloc     │
-                                       └──────┬───────┘   │ → codegen_reg (x86)  │
-                                              │            └──────────────────────┘
-                                       ┌──────▼───────┐
-                                       │ IrToBytecode │
-                                       └──────┬───────┘
-                                       ┌──────▼───────┐
-                                       │ Bytecode Gen │
-                                       │  (bytecode)  │
-                                       │       ↓      │
-                                       │    Uops      │
-                                       │ (expansión)  │
-                                       └──────┬───────┘
-                                              │
-        ┌─────────────────────────────────────┼───────────────────────────────┐
-        ▼                                     ▼                               ▼
-┌──────────────┐   ┌──────────────┐   ┌──────────────┐   ┌────────────────┐   ┌──────────────┐
-│ Compilador   │   │ 2 VMs        │   │ JIT Tiered   │   │ Backend LLVM   │   │ AOT + Self   │
-│ ASM → .exe   │   │ vm_jit/      │   │ interpret →  │   │ (backend_llvm) │   │ Run → .exe   │
-│ (gcc -O2)    │   │ vm_fast 🏆    │   │ jit → opt    │   └────────────────┘   │ autónomo     │
-└──────────────┘   └──────────────┘   └──────────────┘                        └──────────────┘
-                                                     │
-                                              ┌──────▼──────┐
-                                              │ WASM (web)  │ → Playground + GUI WASM
-                                              └─────────────┘</code></pre>
-  </div>
-  <h2>Arquitectura de ejecución</h2>
-
-  <p>Forja tiene <strong>5 estrategias de ejecución</strong> ordenadas por velocidad:</p>
-
-  <table>
-    <thead>
-      <tr><th>#</th><th>Estrategia</th><th>Módulo</th><th>Velocidad</th><th>Descripción</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>1</td><td><strong>Assembly nativo</strong></td><td><code>compiler_asm.rs</code></td><td>⚡⚡⚡⚡⚡</td><td>Forja → .s + gcc -O2. Velocidad C/Rust. Multi-arquitectura.</td></tr>
-      <tr><td>2</td><td><strong>Transpilación a Rust</strong></td><td><code>transpiler.rs</code></td><td>⚡⚡⚡⚡⚡</td><td>Forja → .rs + rustc. Código compilado nativo.</td></tr>
-      <tr><td>3</td><td><strong>Backend de Registros</strong></td><td><code>codegen_reg.rs</code></td><td>⚡⚡⚡⚡</td><td>IR SSA → register IR → linear scan → x86-64 con encoding REX.</td></tr>
-      <tr><td>4</td><td><strong>JIT Nativo / Tiered (x86-64)</strong></td><td><code>jit.rs</code>, <code>jit_tiered.rs</code></td><td>⚡⚡⚡</td><td>Código máquina generado en memoria con tiers y OSR.</td></tr>
-      <tr><td>5</td><td><strong>ForjaFast (VM v5)</strong></td><td><code>vm_fast.rs</code></td><td>⚡⚡</td><td>VM con NaN tagging + stack caching + superinstrucciones + GC.</td></tr>
-      <tr><td>6</td><td><strong>VM v3 Direct Threading</strong></td><td><code>vm_jit.rs</code></td><td>⚡</td><td>VM educativa para referencia y benchmarks.</td></tr>
-    </tbody>
-  </table>
-
-  <h2>Documentación</h2>
+  <h2>Seguí explorando</h2>
 
   <div class="feature-grid">
     <div class="feature-card">
-      <span class="icon">📖</span>
-      <h4><a href="/docs/instalacion">Instalación</a></h4>
-      <p>Compilá Forja desde el código fuente. Solo necesitás Rust.</p>
+      <span class="icon">🎓</span>
+      <h4><a href="/docs/curso/">Curso: Forja en 30 días</a></h4>
+      <p>30 capítulos con ejercicios y solucionario, de cero a proyecto final.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">⚡</span>
-      <h4><a href="/docs/uso">Uso (CLI)</a></h4>
-      <p>Todos los comandos: run, build, build-asm, transpile, repl, fmt, y más.</p>
+      <span class="icon">▶</span>
+      <h4><a href="/docs/playground/">Playground</a></h4>
+      <p>El editor completo, con ejemplos listos y salida en vivo.</p>
     </div>
     <div class="feature-card">
       <span class="icon">📝</span>
-      <h4><a href="/docs/ejemplos">Ejemplos</a></h4>
-      <p>200+ ejemplos comentados, desde hola mundo hasta juegos completos, algoritmos y GUI.</p>
+      <h4><a href="/docs/ejemplos/">Ejemplos</a></h4>
+      <p>260+ programas comentados: algoritmos, juegos, red, GUI y más.</p>
     </div>
     <div class="feature-card">
       <span class="icon">🔧</span>
-      <h4><a href="/docs/sintaxis/variables">Sintaxis</a></h4>
-      <p>Referencia completa del lenguaje: tipos, funciones, clases, módulos.</p>
+      <h4><a href="/docs/sintaxis/variables/">Guía del lenguaje</a></h4>
+      <p>Referencia completa: tipos, funciones, clases, módulos y contratos.</p>
     </div>
     <div class="feature-card">
       <span class="icon">🏗️</span>
-      <h4><a href="/docs/arquitectura/pipeline">Arquitectura</a></h4>
-      <p>Pipeline, VM, bytecode, JIT, compilador ASM, WASM, y más.</p>
+      <h4><a href="/docs/arquitectura/pipeline/">Arquitectura</a></h4>
+      <p>Cómo funciona el compilador por dentro, módulo por módulo.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">🚫</span>
-      <h4><a href="/docs/errores">Errores</a></h4>
-      <p>Sistema de errores educativo con sugerencias en español.</p>
-    </div>
-    <div class="feature-card">
-      <span class="icon">🔄</span>
-      <h4><a href="/docs/roadmap">Roadmap</a></h4>
-      <p>Estado del proyecto y próximos pasos.</p>
-    </div>
-    <div class="feature-card">
-      <span class="icon">🎮</span>
-      <h4><a href="/docs/playground">Playground</a></h4>
-      <p>Probá Forja en el navegador con WASM. Sin instalación.</p>
+      <span class="icon">📰</span>
+      <h4><a href="/docs/blog/lanzamiento/">Anuncio de lanzamiento</a></h4>
+      <p>La historia del proyecto y por qué lo construimos en español.</p>
     </div>
   </div>
+
+  <details>
+    <summary><strong>🔬 Detalle técnico: stack y arquitectura completa</strong></summary>
+    <p>
+      Forja está escrito en Rust puro. Estos son los componentes principales del
+      compilador y el runtime:
+    </p>
+    <table>
+      <thead>
+        <tr><th>Componente</th><th>Módulo(s)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Lexer + Parser</strong></td><td><code>crates/forja-syntax/src/lexer.rs</code>, <code>crates/forja-syntax/src/parser.rs</code>, <code>crates/forja-syntax/src/ast.rs</code></td></tr>
+        <tr><td><strong>Semántica</strong></td><td><code>crates/forja-types/src/semantics.rs</code> (type checker + borrow checker)</td></tr>
+        <tr><td><strong>Optimizador</strong></td><td><code>src/optimizer.rs</code> (constant folding + DCE)</td></tr>
+        <tr><td><strong>IR SSA</strong></td><td><code>src/ir.rs</code>, <code>src/ir_constructor.rs</code>, <code>src/ir_ssa.rs</code></td></tr>
+        <tr><td><strong>Bytecode</strong></td><td><code>src/bytecode.rs</code>, <code>src/uops.rs</code></td></tr>
+        <tr><td><strong>VM ForjaFast</strong></td><td><code>src/vm_fast/</code></td></tr>
+        <tr><td><strong>JIT tiered</strong></td><td><code>src/jit_tiered.rs</code></td></tr>
+        <tr><td><strong>Compilador ASM</strong></td><td><code>src/compiler_asm.rs</code> (x86-64 / ARM64)</td></tr>
+        <tr><td><strong>Transpilador Rust</strong></td><td><code>src/transpiler.rs</code></td></tr>
+        <tr><td><strong>Backend LLVM</strong></td><td><code>src/backend_llvm.rs</code></td></tr>
+        <tr><td><strong>GC generacional</strong></td><td><code>src/gc.rs</code>, <code>src/gc_intrinsics.rs</code></td></tr>
+        <tr><td><strong>Biblioteca estándar</strong></td><td><code>stdlib/std/</code> (48 módulos)</td></tr>
+        <tr><td><strong>GUI nativa</strong></td><td><code>crates/forja-gui-rt/</code>, <code>crates/forja-theme/</code></td></tr>
+        <tr><td><strong>WASM</strong></td><td><code>crates/forja-wasm/</code>, <code>crates/forja-wasm-gui/</code></td></tr>
+        <tr><td><strong>Herramientas</strong></td><td><code>src/formatter.rs</code>, <code>src/bin/forja_lsp.rs</code>, <code>src/debugger.rs</code></td></tr>
+      </tbody>
+    </table>
+    <p>
+      Los benchmarks reproducibles viven en <code>benchmarks/</code> y el pipeline
+      canónico se documenta en
+      <a href="/docs/arquitectura/pipeline/">Arquitectura → Pipeline</a>.
+    </p>
+  </details>
 </Layout>
+
+<style>
+  .landing-hero {
+    padding-bottom: 8px;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.5px;
+    color: var(--fuego-light);
+    background: var(--fuego-bg);
+    border: 1px solid rgba(245, 158, 11, 0.22);
+    border-radius: 20px;
+    padding: 4px 14px;
+    margin-bottom: 18px;
+  }
+  .landing-hero h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  .hero-pitch {
+    font-size: 1.08rem;
+    color: var(--text-dim);
+    max-width: 720px;
+    margin-bottom: 22px;
+  }
+  .hero-pitch strong { color: var(--text); }
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .cta:hover {
+    border-color: var(--fuego);
+    color: var(--fuego-light);
+    background: var(--fuego-bg);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+  .cta-primary {
+    background: linear-gradient(135deg, var(--fuego), var(--fuego-dark));
+    border-color: transparent;
+    color: #1a1206;
+  }
+  .cta-primary:hover {
+    color: #1a1206;
+    filter: brightness(1.1);
+    background: linear-gradient(135deg, var(--fuego-light), var(--fuego));
+  }
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tagpill {
+    font-size: 0.76rem;
+    color: var(--text-dim);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
+  }
+  .landing-section { margin-top: 40px; }
+  .pipeline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .pipeline-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    transition: all 0.2s ease;
+  }
+  .pipeline-card:hover {
+    border-color: var(--acero);
+    background: var(--bg-hover);
+    transform: translateY(-2px);
+  }
+  .pipeline-icon { font-size: 1.3rem; display: block; margin-bottom: 8px; }
+  .pipeline-card h4 { font-size: 0.92rem; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+  .pipeline-card p { font-size: 0.82rem; color: var(--text-dim); margin: 0; }
+  @media (max-width: 600px) {
+    .landing-hero h1 { font-size: 2rem; }
+    .hero-pitch { font-size: 0.98rem; }
+  }
+</style>
