@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 2 · Variables y constantes — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 2 · Variables y constantes</h1>
+
+  <p>Hoy aprenderás a guardar datos en la memoria. Forja distingue entre <strong>variables</strong> (mutables) y <strong>constantes</strong> (inmutables).</p>
+
+  <h2><code>variable</code> — mutable</h2>
+  <p>Se puede reasignar cuantas veces quieras:</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 Reasignación permitida</span></div>
+    <pre><code><span class="kw">variable</span> nombre = <span class="st">"Gaucho"</span>
+<span class="kw">variable</span> edad = 30
+
+edad = 31
+nombre = <span class="st">"Otro nombre"</span>
+<span class="fn">escribir</span>(edad)</code></pre>
+  </div>
+
+  <h2><code>constante</code> — inmutable</h2>
+  <p>No puede modificarse después de su declaración:</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 No se puede reasignar</span></div>
+    <pre><code><span class="kw">constante</span> altura = 1.85
+<span class="co">// altura = 2.0  → ErrorDePropiedad</span></code></pre>
+  </div>
+
+  <div class="info">🔥 <strong>Regla de oro:</strong> <code>variable</code> = <code>let mut</code> en Rust. <code>constante</code> = <code>let</code> en Rust.</div>
+
+  <h2>Con tipo explícito</h2>
+  <p>Podés declarar el tipo después del nombre con <code>: Tipo</code>:</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 Tipado explícito</span></div>
+    <pre><code><span class="kw">variable</span> nombre: <span class="ty">Texto</span> = <span class="st">"Gaucho"</span>
+<span class="kw">variable</span> edad: <span class="ty">Entero</span> = 30
+<span class="kw">constante</span> activo: <span class="ty">Booleano</span> = verdadero</code></pre>
+  </div>
+
+  <div class="info">💡 Forja infiere el tipo automáticamente. Solo necesitás especificarlo cuando no hay valor inicial o querés forzar un tipo distinto.</div>
+
+  <h2>Ejercicio del día</h2>
+  <div class="warning">✏️ <strong>Ejercicio:</strong> creá una variable <code>nombre</code> con el valor <code>"Ana"</code> y mostrala con <code>escribir()</code>.</div>
+
+  <p>Comparalo con el <a href="/docs/curso/solucionario/#dia-2">solucionario</a>.</p>
+
+  <p class="nav-siguiente"><a href="/docs/curso/03-tipos/">Día 3 · Tipos de datos →</a></p>
+
+  <style>
+    .breadcrumb { font-size: 0.85rem; color: var(--text-dim); }
+    .nav-siguiente { margin-top: 2rem; font-weight: 600; }
+  </style>
+</Layout>
