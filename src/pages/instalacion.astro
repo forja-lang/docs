@@ -7,6 +7,51 @@ import Layout from '../layouts/Layout.astro';
 
   <p>Compilá Forja desde el código fuente. Solo necesitás <strong>Rust</strong> instalado en tu sistema.</p>
 
+  <h2>⚡ Instalación rápida (sin Rust)</h2>
+
+  <p>
+    Si solo querés <strong>usar</strong> Forja, descargá el binario precompilado de
+    tu plataforma. No hace falta compilar nada.
+  </p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🐧🍎 Linux / macOS</span></div>
+    <pre><code>curl -fsSL https://raw.githubusercontent.com/forja-lang/forja/main/scripts/install.sh | sh</code></pre>
+  </div>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>🪟 Windows (PowerShell)</span></div>
+    <pre><code>irm https://raw.githubusercontent.com/forja-lang/forja/main/scripts/install.ps1 | iex</code></pre>
+  </div>
+
+  <p>
+    Los instaladores detectan tu sistema, descargan el paquete de la
+    <a href="https://github.com/forja-lang/forja/releases">última release</a>,
+    <strong>verifican el SHA-256</strong> y agregan los binarios a tu
+    <code>PATH</code>.
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>Plataforma</th><th>Paquete</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Linux x86_64</td><td><code>forja-&lt;ver&gt;-linux-x64.tar.gz</code></td></tr>
+      <tr><td>Linux ARM64</td><td><code>forja-&lt;ver&gt;-linux-arm64.tar.gz</code></td></tr>
+      <tr><td>macOS Intel</td><td><code>forja-&lt;ver&gt;-macos-x64.tar.gz</code></td></tr>
+      <tr><td>macOS Apple Silicon</td><td><code>forja-&lt;ver&gt;-macos-arm64.tar.gz</code></td></tr>
+      <tr><td>Windows x64</td><td><code>forja-&lt;ver&gt;-windows-x64.zip</code></td></tr>
+    </tbody>
+  </table>
+
+  <div class="info">
+    🔐 <strong>Integridad:</strong> cada release publica un archivo
+    <code>SHA256SUMS</code> y una atestación de procedencia de build. Verificá con
+    <code>sha256sum -c SHA256SUMS</code> antes de ejecutar.
+  </div>
+
+  <h2>🛠️ Compilar desde el código fuente</h2>
+
   <div class="info">💡 <strong>Requisito único:</strong> <a href="https://rustup.rs" target="_blank">rustup.rs</a> — Instalá Rust con <code>rustup-init.exe</code> en Windows, o con el script oficial en Linux/Mac.</div>
 
   <ol class="step-list">
