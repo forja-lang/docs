@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 14 · Genéricos — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 14 · Genéricos</h1>
+  <p class="lead">Los <strong>genéricos</strong> permiten escribir funciones y clases que funcionan con cualquier tipo, sin duplicar código.</p>
+
+  <h2>Funciones genéricas</h2>
+  <p>Los parámetros de tipo se declaran entre <code>&lt; ></code> después del nombre de la función.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>genericos.fa</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">primero</span>&lt;T>(lista: [T]) -> T &#123;
+    <span class="kw">retornar</span> lista[0]
+&#125;
+
+<span class="kw">variable</span> n = <span class="fn">primero</span>([10, 20, 30])
+<span class="kw">variable</span> s = <span class="fn">primero</span>([<span class="st">"a"</span>, <span class="st">"b"</span>])</code></pre>
+  </div>
+
+  <h2>Clases genéricas</h2>
+  <p>Una clase puede parametrizarse por uno o más tipos.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>caja.fa</span></div>
+    <pre><code><span class="kw">clase</span> <span class="ty">Caja</span>&lt;T> &#123;
+    contenido
+
+    <span class="kw">constructor</span>(valor: T) &#123;
+        <span class="kw">este</span>.contenido = valor
+    &#125;
+
+    <span class="kw">funcion</span> <span class="fn">obtener</span>() -> T &#123;
+        <span class="kw">retornar</span> <span class="kw">este</span>.contenido
+    &#125;
+&#125;
+
+<span class="kw">variable</span> c = <span class="kw">nuevo</span> <span class="ty">Caja</span>(<span class="st">42</span>)</code></pre>
+  </div>
+
+  <div class="info">
+    <strong>Tip:</strong> podés combinar varios parámetros de tipo: <code>&lt;T, U, V></code>.
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> escribí una función genérica <code>ultimo&lt;T>(lista: [T]) -> T</code> que devuelva el último elemento.
+    <br /><a href="/docs/curso/solucionario/#dia-14">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/15-traits/">Día 15 · Traits →</a></p>
+</Layout>
