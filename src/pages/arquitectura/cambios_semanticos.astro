@@ -18,7 +18,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>
     Forja es un lenguaje en español. Todas las palabras clave del lenguaje están en español
     (con algunas excepciones por compatibilidad). El mapeo completo se encuentra en
-    <a href="./lexer"><code>src/lexer.rs:132-191</code></a>.
+    <a href="./lexer"><code>crates/forja-syntax/src/lexer.rs:132-191</code></a>.
   </p>
 
   <h3>1.1. Palabras Clave Principales</h3>
@@ -135,7 +135,7 @@ import Layout from '../../layouts/Layout.astro';
     compatibilidad máxima.
   </p>
 
-  <p><strong>Archivo fuente:</strong> <a href="./ast"><code>src/ast.rs</code></a>, <a href="./bytecode"><code>src/bytecode.rs:1689-1694</code></a></p>
+  <p><strong>Archivo fuente:</strong> <a href="./ast"><code>crates/forja-syntax/src/ast.rs</code></a>, <a href="./bytecode"><code>src/bytecode.rs:1689-1694</code></a></p>
 
   <table>
     <thead>
@@ -199,7 +199,7 @@ Label(label_next)</code></pre>
   <p class="info">
     ℹ️ Para más detalles sobre este proceso, ver
     <a href="./bytecode"><code>src/bytecode.rs:1687-1784</code></a> y
-    <a href="./parser"><code>src/parser.rs:2139-2161</code></a>.
+    <a href="./parser"><code>crates/forja-syntax/src/parser.rs:2139-2161</code></a>.
   </p>
 
   <hr />
@@ -209,7 +209,7 @@ Label(label_next)</code></pre>
   <p>
     Los nombres de tipos en Forja están en español y se manejan como <em>soft keywords</em>
     (identificadores que el parser reconoce como tipos en contexto). Ver
-    <a href="./lexer"><code>src/lexer.rs:182-190</code></a>.
+    <a href="./lexer"><code>crates/forja-syntax/src/lexer.rs:182-190</code></a>.
   </p>
 
   <table>
@@ -231,7 +231,7 @@ Label(label_next)</code></pre>
   <h2>4. Evolución del Sistema de Tipos (AST)</h2>
 
   <p>
-    El AST de Forja (<a href="./ast"><code>src/ast.rs</code></a>) ha evolucionado para
+    El AST de Forja (<a href="./ast"><code>crates/forja-syntax/src/ast.rs</code></a>) ha evolucionado para
     incluir variantes específicas para los tipos algebraicos. Ver la tabla completa de
     <code>Tipo</code> y <code>Expresion</code> en la página del AST.
   </p>
@@ -516,12 +516,12 @@ Label(label_next)</code></pre>
   <p>Todas las referencias a los archivos fuente relevantes:</p>
 
   <ul>
-    <li><strong>Lexer (keywords):</strong> <a href="./lexer"><code>src/lexer.rs:132-191</code></a> — mapeo completo de palabras clave</li>
-    <li><strong>Parser (constructores):</strong> <a href="./parser"><code>src/parser.rs:2139-2161</code></a> — detección de Ok/Error/Algo/Some/None</li>
+    <li><strong>Lexer (keywords):</strong> <a href="./lexer"><code>crates/forja-syntax/src/lexer.rs:132-191</code></a> — mapeo completo de palabras clave</li>
+    <li><strong>Parser (constructores):</strong> <a href="./parser"><code>crates/forja-syntax/src/parser.rs:2139-2161</code></a> — detección de Ok/Error/Algo/Some/None</li>
     <li><strong>Bytecode (tags):</strong> <a href="./bytecode"><code>src/bytecode.rs:1689-1694</code></a> — mapeo de constructores a tags internos</li>
-    <li><strong>AST (tipos):</strong> <a href="./ast"><code>src/ast.rs:38-60</code></a> — enum Tipo con todas las variantes</li>
-    <li><strong>AST (expresiones):</strong> <a href="./ast"><code>src/ast.rs:157-275</code></a> — enum Expresion con Algo/Ninguno/Ok/Error</li>
-    <li><strong>Token (enums):</strong> <a href="./token"><code>src/token.rs</code></a> — TokenKind con todas las keywords</li>
+    <li><strong>AST (tipos):</strong> <a href="./ast"><code>crates/forja-syntax/src/ast.rs:38-60</code></a> — enum Tipo con todas las variantes</li>
+    <li><strong>AST (expresiones):</strong> <a href="./ast"><code>crates/forja-syntax/src/ast.rs:157-275</code></a> — enum Expresion con Algo/Ninguno/Ok/Error</li>
+    <li><strong>Token (enums):</strong> <a href="./token"><code>crates/forja-syntax/src/token.rs</code></a> — TokenKind con todas las keywords</li>
     <li><strong>Transpiler (mapeo):</strong> <a href="./transpilador"><code>src/transpiler.rs:2782-2784</code></a> — Error → Err para Rust</li>
     <li><strong>LSP (snippets):</strong> <a href="./forja_lsp"><code>src/lsp/snippets.rs</code></a> — snippets con palabras clave en español</li>
   </ul>
