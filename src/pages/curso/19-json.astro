@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 19 · JSON — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 19 · JSON</h1>
+  <p class="lead">El módulo <code>std/json</code> permite convertir entre valores de Forja y texto JSON.</p>
+
+  <h2>Parsear JSON</h2>
+  <p><code>json.parsear(texto)</code> devuelve un <code>Resultado</code> con el valor decodificado.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>parsear.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/json"</span>
+
+<span class="kw">variable</span> res = json.<span class="fn">parsear</span>(<span class="st">'&#123;"nombre": "Ana", "edad": 30&#125;'</span>)
+<span class="kw">coincidir</span> (res) &#123;
+    <span class="kw">caso</span> Ok(obj) -> &#123; <span class="fn">escribir</span>(obj[<span class="st">"nombre"</span>]) &#125;
+    <span class="kw">caso</span> Error(e) -> &#123; <span class="fn">escribir</span>(<span class="st">"Error: $&#123;e.mensaje&#125;"</span>) &#125;
+&#125;</code></pre>
+  </div>
+
+  <h2>Generar JSON</h2>
+  <p><code>stringificar(valor)</code> convierte un valor de Forja a texto JSON.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>generar.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/json"</span>
+
+<span class="kw">variable</span> datos = &#123;<span class="st">"nombre"</span>: <span class="st">"Ana"</span>, <span class="st">"edad"</span>: <span class="st">30</span>&#125;
+<span class="kw">variable</span> texto = <span class="fn">stringificar</span>(datos)
+<span class="fn">escribir</span>(texto)</code></pre>
+  </div>
+
+  <div class="info">
+    <strong>Tip:</strong> usá <code>a_texto(valor)</code> para convertir cualquier valor a texto antes de concatenarlo.
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> creá un mapa con dos claves, convertilo a JSON con <code>stringificar</code> y mostralo.
+    <br /><a href="/docs/curso/solucionario/#dia-19">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/20-pruebas/">Día 20 · Pruebas →</a></p>
+</Layout>
