@@ -1,0 +1,49 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 17 · Módulos e imports — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 17 · Módulos e imports</h1>
+  <p class="lead">Los <strong>módulos</strong> permiten organizar el código en archivos y reutilizar la biblioteca estándar.</p>
+
+  <h2>Importar la biblioteca estándar</h2>
+  <p>Se usa <code>importar "std/..."</code> al inicio del archivo.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>importar.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/io"</span>
+<span class="kw">importar</span> <span class="st">"std/matematicas"</span>
+
+<span class="kw">funcion</span> <span class="fn">main</span>() &#123;
+    <span class="fn">escribir</span>(<span class="fn">raiz</span>(<span class="st">16.0</span>))
+&#125;</code></pre>
+  </div>
+
+  <h2>Crear tus propios módulos</h2>
+  <p>Un módulo es simplemente otro archivo <code>.fa</code>. Definí funciones en él y luego importalo por su ruta.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>saludos.fa</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">saludar</span>(nombre) -> <span class="ty">Texto</span> &#123;
+    <span class="kw">retornar</span> <span class="st">"Hola, $&#123;nombre&#125;"</span>
+&#125;</code></pre>
+  </div>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>main.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"saludos"</span>
+
+<span class="kw">funcion</span> <span class="fn">main</span>() &#123;
+    <span class="fn">escribir</span>(<span class="fn">saludar</span>(<span class="st">"Ana"</span>))
+&#125;</code></pre>
+  </div>
+
+  <div class="info">
+    <strong>Tip:</strong> las rutas relativas se resuelven desde el archivo que importa.
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> creá un módulo <code>saludos.fa</code> con una función <code>saludar(nombre)</code> e importalo desde un archivo principal.
+    <br /><a href="/docs/curso/solucionario/#dia-17">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/18-archivos/">Día 18 · Archivos →</a></p>
+</Layout>
