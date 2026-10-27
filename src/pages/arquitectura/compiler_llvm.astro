@@ -1,10 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Compilador LLVM (compiler_llvm.rs) — Forja">
+<Layout title="Compilador LLVM (backend_llvm/legacy.rs) — Forja">
   <h1>Compilador de LLVM IR</h1>
 
-  <p><strong>Archivo:</strong> <code>src/compiler_llvm.rs</code></p>
+  <p><strong>Archivo:</strong> <code>src/backend_llvm/legacy.rs</code></p>
+
+  <div class="warning"><strong>⚠️ Módulo interno/legacy:</strong> <code>backend_llvm/legacy.rs</code> NO es API pública del crate. Fue reubicado como módulo interno (<code>mod</code>) en <code>lib.rs</code> y se retiene únicamente para respaldar la función pública <code>compilar_a_llvm()</code>. El backend LLVM <strong>nuevo en desarrollo</strong> es <code>src/backend_llvm.rs</code>.</div>
 
   <p>El backend de LLVM (Ahead-of-Time / Representación Intermedia) de Forja genera código **LLVM IR (Intermediate Representation)** en formato de texto plano sin requerir dependencias externas de librerías nativas (como la API de C++ de LLVM). El código resultante puede ser procesado directamente por herramientas oficiales como <code>llc</code> (el compilador de LLVM) o <code>clang</code> para generar ejecutables optimizados nativos.</p>
 
