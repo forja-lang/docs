@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 20 · Pruebas — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 20 · Pruebas automatizadas</h1>
+  <p class="lead">Forja incluye un sistema de pruebas integrado. Marcá una función con <code>&#64;test</code> y usá <code>asegurar()</code> para verificar condiciones.</p>
+
+  <h2>Escribir una prueba</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>pruebas.fa</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">es_par</span>(n) -> <span class="ty">Booleano</span> &#123;
+    <span class="kw">retornar</span> n % 2 == 0
+&#125;
+
+<span class="co">&#64;test</span>
+<span class="kw">funcion</span> <span class="fn">prueba_es_par</span>() &#123;
+    <span class="fn">asegurar</span>(<span class="fn">es_par</span>(4))
+    <span class="fn">asegurar</span>(<span class="kw">no</span> <span class="fn">es_par</span>(3))
+&#125;</code></pre>
+  </div>
+
+  <h2>Ejecutar las pruebas</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>💻 Terminal</span></div>
+    <pre><code>forja test pruebas.fa</code></pre>
+  </div>
+
+  <p>Si todas las aserciones pasan, verás un resumen exitoso. Si alguna falla, Forja indica cuál.</p>
+
+  <div class="info">
+    <strong>Tip:</strong> <code>forja test</code> sin argumentos ejecuta todos los <code>.fa</code> de la carpeta <code>ejemplos/</code>.
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> escribí una función <code>es_par(n)</code> y dos pruebas con <code>&#64;test</code> que verifiquen un número par y uno impar.
+    <br /><a href="/docs/curso/solucionario/#dia-20">Ver solución →</a>
+  </div>
+
+  <div class="info">
+    🎉 <strong>¡Felicitaciones!</strong> Completaste el Módulo 2. Ya dominás clases, enums, genéricos, rasgos, manejo de errores, módulos, archivos, JSON y pruebas. En el Módulo 3 vas a explorar concurrencia, GUI nativa, red, bases de datos y rendimiento.
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/21-ownership/">Día 21 · Ownership y préstamos →</a></p>
+</Layout>
