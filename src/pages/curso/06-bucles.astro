@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 6 · Bucles — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 6 · Bucles</h1>
+
+  <p>Los bucles repiten un bloque de código. Forja ofrece <code>mientras</code> y <code>para</code>.</p>
+
+  <h2><code>mientras</code></h2>
+  <p>Repite mientras la condición sea verdadera:</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 mientras</span></div>
+    <pre><code><span class="kw">variable</span> i = 0
+<span class="kw">mientras</span> (i &lt; 3) &#123;
+    <span class="fn">escribir</span>(i)
+    i = i + 1
+&#125;</code></pre>
+  </div>
+
+  <div class="warning">⚠️ Si olvidás modificar la variable dentro del bucle, se vuelve infinito. Asegurate de que la condición llegue a ser falsa.</div>
+
+  <h2><code>para</code></h2>
+  <p>Recorre un rango de forma más compacta:</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 para</span></div>
+    <pre><code><span class="kw">para</span> i <span class="kw">en</span> 1..4 &#123;
+    <span class="fn">escribir</span>(i)   <span class="co">// 1, 2, 3</span>
+&#125;</code></pre>
+  </div>
+
+  <h2>Control de flujo</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 romper / continuar</span></div>
+    <pre><code><span class="kw">para</span> i <span class="kw">en</span> 1..10 &#123;
+    <span class="kw">si</span> (i == 5) &#123; <span class="kw">romper</span> &#125;      <span class="co">// corta el bucle</span>
+    <span class="kw">si</span> (i % 2 == 0) &#123; <span class="kw">continuar</span> &#125; <span class="co">// salta a la siguiente</span>
+    <span class="fn">escribir</span>(i)
+&#125;</code></pre>
+  </div>
+
+  <h2>Ejercicio del día</h2>
+  <div class="warning">✏️ <strong>Ejercicio:</strong> mostrá los números del <code>1</code> al <code>3</code>, uno por línea, usando <code>mientras</code>.</div>
+
+  <p>Comparalo con el <a href="/docs/curso/solucionario/#dia-6">solucionario</a>.</p>
+
+  <p class="nav-siguiente"><a href="/docs/curso/07-funciones/">Día 7 · Funciones →</a></p>
+
+  <style>
+    .breadcrumb { font-size: 0.85rem; color: var(--text-dim); }
+    .nav-siguiente { margin-top: 2rem; font-weight: 600; }
+  </style>
+</Layout>
