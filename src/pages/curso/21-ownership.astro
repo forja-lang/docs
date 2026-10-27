@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 21 · Ownership y préstamos — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 21 · Ownership y préstamos</h1>
+  <p class="lead">Forja gestiona la memoria de forma segura mediante <strong>propiedad</strong> (ownership) y <strong>préstamos</strong> (borrowing), sin recolector de basura.</p>
+
+  <h2>Propiedad</h2>
+  <p>Cada valor tiene un único dueño. Al asignar a otra variable, la propiedad se transfiere (move).</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>ownership.fa</span></div>
+    <pre><code><span class="kw">variable</span> original = [<span class="st">1</span>, <span class="st">2</span>, <span class="st">3</span>]
+<span class="kw">variable</span> movido = original   <span class="co">// la propiedad pasa a 'movido'</span>
+<span class="fn">escribir</span>(movido[<span class="st">0</span>])
+<span class="co">// escribir(original[0])  // ❌ 'original' ya no es válido</span></code></pre>
+  </div>
+
+  <h2>Préstamos</h2>
+  <p>Puedes prestar un valor sin transferir la propiedad usando referencias <code>&#38;</code> (inmutable) o <code>&#38;mut</code> (mutable).</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>prestamos.fa</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">longitud_total</span>(lista) -> <span class="ty">Entero</span> &#123;
+    <span class="kw">retornar</span> <span class="fn">longitud</span>(lista)
+&#125;
+
+<span class="kw">variable</span> datos = [<span class="st">1</span>, <span class="st">2</span>, <span class="st">3</span>]
+<span class="fn">escribir</span>(<span class="fn">longitud_total</span>(&#38;datos))
+<span class="fn">escribir</span>(datos[<span class="st">0</span>])   <span class="co">// datos sigue siendo válido</span></code></pre>
+  </div>
+
+  <div class="info">
+    <strong>Tip:</strong> puedes tener muchos préstamos inmutables (<code>&#38;</code>) o un único préstamo mutable (<code>&#38;mut</code>), pero no ambos a la vez.
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> escribe una función <code>sumar_todos(numeros) -> Entero</code> que recorra y sume, sin consumir el arreglo original (pásalo con <code>&#38;</code>).
+    <br /><a href="/docs/curso/solucionario/#dia-21">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/22-concurrencia/">Día 22 · Concurrencia →</a></p>
+</Layout>
