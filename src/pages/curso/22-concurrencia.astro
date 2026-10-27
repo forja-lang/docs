@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 22 · Concurrencia — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 22 · Concurrencia</h1>
+  <p class="lead">Forja permite ejecutar tareas en paralelo mediante hilos y canales de comunicación.</p>
+
+  <h2>Crear y unir un hilo</h2>
+  <p>Un hilo se crea con la expresión <code>hilo &#123; ... &#125;</code> y se espera con <code>.unir()</code>.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>hilos.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/io"</span>
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="kw">variable</span> h = <span class="kw">hilo</span> &#123;
+        <span class="fn">escribir</span>(<span class="st">"desde el hilo"</span>)
+        <span class="kw">retornar</span> <span class="st">42</span>
+    &#125;
+    <span class="kw">variable</span> valor = h.<span class="fn">unir</span>()
+    <span class="fn">escribir</span>(<span class="st">"el hilo devolvió $&#123;valor&#125;"</span>)
+&#125;</code></pre>
+  </div>
+
+  <h2>Canales</h2>
+  <p>Los canales comunican hilos de forma segura, enviando mensajes en lugar de compartir memoria.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>canales.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/io"</span>
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="kw">variable</span> tx, rx = <span class="fn">canal</span>()
+    <span class="kw">variable</span> h = <span class="kw">hilo</span> &#123;
+        tx.<span class="fn">enviar</span>(<span class="st">42</span>)
+        <span class="kw">retornar</span> <span class="st">0</span>
+    &#125;
+    <span class="fn">escribir</span>(rx.<span class="fn">recibir</span>())
+    h.<span class="fn">unir</span>()
+&#125;</code></pre>
+  </div>
+
+  <div class="info">
+    <strong>Tip:</strong> prefiere canales a memoria compartida: evitan condiciones de carrera por diseño.
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> lanza dos hilos que envíen <code>1</code> y <code>2</code> por un canal, y suma ambos valores recibidos.
+    <br /><a href="/docs/curso/solucionario/#dia-22">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/23-iteradores/">Día 23 · Iteradores →</a></p>
+</Layout>
