@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 15 · Rasgos (traits) — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 15 · Rasgos (traits)</h1>
+  <p class="lead">Un <strong>rasgo</strong> define un conjunto de métodos que una clase se compromete a implementar. Es la forma de compartir comportamiento entre tipos distintos.</p>
+
+  <h2>Definir un rasgo</h2>
+  <p>Se declara con la palabra clave <code>rasgo</code>. Los métodos sin cuerpo son obligatorios para quien lo implemente.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>rasgo.fa</span></div>
+    <pre><code><span class="kw">rasgo</span> <span class="ty">Volador</span> &#123;
+    <span class="kw">funcion</span> <span class="fn">volar</span>()
+    <span class="kw">funcion</span> <span class="fn">aterrizar</span>() -> <span class="ty">Texto</span>
+&#125;</code></pre>
+  </div>
+
+  <h2>Implementar un rasgo</h2>
+  <p>Se usa <code>implementa Rasgo para Clase</code> y se definen los métodos.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>implementa.fa</span></div>
+    <pre><code><span class="kw">clase</span> <span class="ty">Pajaro</span> &#123;
+    nombre
+
+    <span class="kw">constructor</span>() &#123;
+        <span class="kw">este</span>.nombre = <span class="st">"Loro"</span>
+    &#125;
+&#125;
+
+<span class="kw">implementa</span> <span class="ty">Volador</span> <span class="kw">para</span> <span class="ty">Pajaro</span> &#123;
+    <span class="kw">funcion</span> <span class="fn">volar</span>() &#123;
+        <span class="fn">escribir</span>(<span class="st">"$&#123;este.nombre&#125; está volando..."</span>)
+    &#125;
+    <span class="kw">funcion</span> <span class="fn">aterrizar</span>() -> <span class="ty">Texto</span> &#123;
+        <span class="kw">retornar</span> <span class="st">"$&#123;este.nombre&#125; aterrizó"</span>
+    &#125;
+&#125;</code></pre>
+  </div>
+
+  <h2>Métodos por defecto</h2>
+  <p>Un rasgo puede incluir métodos con implementación por defecto, que las clases pueden usar o sobrescribir.</p>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> define un rasgo <code>Area</code> con el método <code>area() -> Decimal</code> e implementalo para una clase <code>Cuadrado</code> con campo <code>lado</code>.
+    <br /><a href="/docs/curso/solucionario/#dia-15">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/16-resultado/">Día 16 · Resultado y Opción →</a></p>
+</Layout>
