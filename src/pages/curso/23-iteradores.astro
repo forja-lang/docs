@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 23 · Iteradores — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 23 · Iteradores</h1>
+  <p class="lead">El módulo <code>std/colecciones</code> permite procesar arreglos con operaciones expresivas: <code>mapa</code>, <code>filtrar</code>, <code>reducir</code> y <code>ordenar</code>.</p>
+
+  <h2>Operaciones básicas</h2>
+  <p>Estas funciones reciben el arreglo y una función pasada por referencia con <code>&#38;</code>.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>iteradores.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/io"</span>
+<span class="kw">importar</span> <span class="st">"std/colecciones"</span>
+
+<span class="kw">funcion</span> duplicar(x) &#123; <span class="kw">retornar</span> x * <span class="st">2</span> &#125;
+<span class="kw">funcion</span> es_par(x) &#123; <span class="kw">retornar</span> x % <span class="st">2</span> == <span class="st">0</span> &#125;
+<span class="kw">funcion</span> sumar(acc, x) &#123; <span class="kw">retornar</span> acc + x &#125;
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="kw">variable</span> numeros = [<span class="st">1</span>, <span class="st">2</span>, <span class="st">3</span>, <span class="st">4</span>, <span class="st">5</span>]
+
+    <span class="kw">variable</span> dobles = <span class="fn">mapa</span>(numeros, &#38;duplicar)
+    <span class="kw">variable</span> pares = <span class="fn">filtrar</span>(numeros, &#38;es_par)
+    <span class="kw">variable</span> total = <span class="fn">reducir</span>(numeros, &#38;sumar, <span class="st">0</span>)
+
+    <span class="fn">escribir</span>(total)
+&#125;</code></pre>
+  </div>
+
+  <h2>Encadenar operaciones</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>cadena.fa</span></div>
+    <pre><code><span class="kw">variable</span> resultado = <span class="fn">reducir</span>(
+    <span class="fn">filtrar</span>(numeros, &#38;es_par),
+    &#38;sumar,
+    <span class="st">0</span>
+)
+<span class="fn">escribir</span>(resultado)   <span class="co">// 6 (2 + 4)</span></code></pre>
+  </div>
+
+  <div class="info">
+    <strong>Tip:</strong> combinar <code>filtrar</code>, <code>mapa</code> y <code>reducir</code> reemplaza la mayoría de los bucles manuales. También existe <code>ordenar(arr)</code>.
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> dado <code>[1, 2, 3, 4, 5, 6]</code>, obtén la suma de los cuadrados de los números pares.
+    <br /><a href="/docs/curso/solucionario/#dia-23">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/24-gui/">Día 24 · Interfaces gráficas →</a></p>
+</Layout>
