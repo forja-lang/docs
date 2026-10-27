@@ -12,7 +12,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>El AOT compila el AST de Forja a código nativo a través de dos backends posibles:</p>
   <ul>
     <li><strong>Backend ASM</strong> (<code>compiler_asm.rs</code>): Genera código assembly x86-64/ARM64 que luego se ensambla con GCC/MSVC.</li>
-    <li><strong>Backend LLVM</strong> (<code>compiler_llvm.rs</code>): Genera IR de LLVM que se compila a nativo con <code>llc</code>.</li>
+    <li><strong>Backend LLVM</strong> (<code>backend_llvm/legacy.rs</code>): Genera IR de LLVM que se compila a nativo con <code>llc</code>.</li>
   </ul>
 
   <h2>Pipeline AOT</h2>
