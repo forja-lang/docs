@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 25 · GUI avanzada — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 25 · GUI avanzada</h1>
+  <p class="lead">Explora widgets avanzados: filas, tarjetas, listas desplazables y etiquetas dinámicas que reflejan el estado.</p>
+
+  <h2>Estado y etiquetas dinámicas</h2>
+  <p>Una <code>etiqueta_dinamica</code> muestra el valor de una variable y se actualiza al cambiar.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>estado.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"gui"</span>
+
+<span class="kw">variable</span> contador = <span class="st">0</span>
+
+<span class="kw">funcion</span> incrementar() &#123;
+    contador = contador + <span class="st">1</span>
+&#125;
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="fn">tema_material</span>(<span class="st">"#1565C0"</span>, <span class="fn">columna</span>([
+        <span class="fn">texto_grande</span>(<span class="st">"Contador"</span>),
+        <span class="fn">etiqueta_dinamica</span>(<span class="st">"contador"</span>),
+        <span class="fn">boton</span>(<span class="st">"+"</span>, &#38;incrementar)
+    ]))
+&#125;</code></pre>
+  </div>
+
+  <h2>Filas, tarjetas y desplazamiento</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>listas.fa</span></div>
+    <pre><code><span class="fn">columna</span>([
+    <span class="fn">tarjeta</span>([<span class="fn">texto_grande</span>(<span class="st">"Título"</span>), <span class="fn">texto_mediano</span>(<span class="st">"Contenido"</span>)]),
+    <span class="fn">fila_con_gap</span>((<span class="fn">etiqueta</span>(<span class="st">"Uno"</span>), <span class="fn">etiqueta</span>(<span class="st">"Dos"</span>)), <span class="st">8</span>, <span class="st">"centro"</span>),
+    <span class="fn">desplazable</span>(<span class="fn">columna</span>([<span class="fn">etiqueta</span>(<span class="st">"Elemento"</span>)]))
+])</code></pre>
+  </div>
+
+  <div class="info">
+    <strong>Tip:</strong> consulta la <a href="/docs/arquitectura/">documentación de arquitectura</a> para el catálogo completo de widgets (charts, navigator, data table, etc.).
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> amplía el contador con un botón <code>"−"</code> que reste 1, y muestra el valor actualizado.
+    <br /><a href="/docs/curso/solucionario/#dia-25">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/26-red/">Día 26 · Red y HTTP →</a></p>
+</Layout>
