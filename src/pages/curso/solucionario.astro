@@ -1,0 +1,422 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Solucionario — Curso Forja en 30 días">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Solucionario</h1>
+  <p class="lead">Soluciones de referencia para los ejercicios de cada día. Intenta resolverlos por tu cuenta antes de consultar aquí.</p>
+
+  <div class="info">
+    <strong>Nota:</strong> estas soluciones son orientativas. Puede haber varias formas correctas de resolver cada ejercicio.
+  </div>
+
+  <h2 id="dia-1">Día 1 · Hola, mundo</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="fn">escribir</span>(<span class="st">"Hola, Forja"</span>)</code></pre>
+  </div>
+
+  <h2 id="dia-2">Día 2 · Variables</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">variable</span> nombre = <span class="st">"Ana"</span>
+<span class="fn">escribir</span>(nombre)</code></pre>
+  </div>
+
+  <h2 id="dia-3">Día 3 · Tipos</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">variable</span> precio = <span class="st">19.99</span>
+<span class="fn">escribir</span>(precio)</code></pre>
+  </div>
+
+  <h2 id="dia-4">Día 4 · Operadores</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="fn">escribir</span>(<span class="st">6</span> * <span class="st">7</span>)   <span class="co">// 42</span></code></pre>
+  </div>
+
+  <h2 id="dia-5">Día 5 · Condicionales</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">variable</span> edad = <span class="st">15</span>
+<span class="kw">si</span> (edad &gt;= <span class="st">18</span>) &#123;
+    <span class="fn">escribir</span>(<span class="st">"Mayor"</span>)
+&#125; <span class="kw">sino</span> &#123;
+    <span class="fn">escribir</span>(<span class="st">"Menor"</span>)
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-6">Día 6 · Bucles</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">variable</span> i = <span class="st">1</span>
+<span class="kw">mientras</span> (i &lt;= <span class="st">3</span>) &#123;
+    <span class="fn">escribir</span>(i)
+    i = i + <span class="st">1</span>
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-7">Día 7 · Funciones</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">suma</span>(a, b) &#123;
+    <span class="kw">retornar</span> a + b
+&#125;
+
+<span class="fn">escribir</span>(<span class="fn">suma</span>(<span class="st">3</span>, <span class="st">4</span>))   <span class="co">// 7</span></code></pre>
+  </div>
+
+  <h2 id="dia-8">Día 8 · Texto</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">variable</span> saludo = <span class="st">"Hola, "</span> + <span class="st">"Forja"</span>
+<span class="fn">escribir</span>(saludo)</code></pre>
+  </div>
+
+  <h2 id="dia-9">Día 9 · Arreglos</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">variable</span> numeros = [<span class="st">5</span>, <span class="st">10</span>, <span class="st">15</span>]
+<span class="fn">escribir</span>(numeros[<span class="st">1</span>])   <span class="co">// 10</span></code></pre>
+  </div>
+
+  <h2 id="dia-10">Día 10 · Mapas</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">variable</span> persona = &#123; <span class="st">"nombre"</span>: <span class="st">"Ana"</span>, <span class="st">"edad"</span>: <span class="st">30</span> &#125;
+<span class="fn">escribir</span>(persona[<span class="st">"edad"</span>])   <span class="co">// 30</span></code></pre>
+  </div>
+
+  <h2 id="dia-11">Día 11 · Clases</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">clase</span> <span class="ty">Rectangulo</span> &#123;
+    ancho
+    alto
+
+    constructor(ancho, alto) &#123;
+        <span class="kw">este</span>.ancho = ancho
+        <span class="kw">este</span>.alto = alto
+    &#125;
+
+    <span class="kw">funcion</span> <span class="fn">area</span>() &#123;
+        <span class="kw">retornar</span> <span class="kw">este</span>.ancho * <span class="kw">este</span>.alto
+    &#125;
+&#125;
+
+<span class="kw">variable</span> r = <span class="kw">nuevo</span> <span class="ty">Rectangulo</span>(<span class="st">4.0</span>, <span class="st">5.0</span>)
+<span class="fn">escribir</span>(r.<span class="fn">area</span>())   <span class="co">// 20.0</span></code></pre>
+  </div>
+
+  <h2 id="dia-12">Día 12 · Tipos enumerados</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">constante</span> ACTIVO = <span class="st">0</span>
+<span class="kw">constante</span> INACTIVO = <span class="st">1</span>
+<span class="kw">constante</span> SUSPENDIDO = <span class="st">2</span>
+
+<span class="kw">variable</span> estado = SUSPENDIDO
+
+<span class="kw">si</span> (estado == ACTIVO) &#123;
+    <span class="fn">escribir</span>(<span class="st">"Activo"</span>)
+&#125; <span class="kw">sino</span> <span class="kw">si</span> (estado == INACTIVO) &#123;
+    <span class="fn">escribir</span>(<span class="st">"Inactivo"</span>)
+&#125; <span class="kw">sino</span> &#123;
+    <span class="fn">escribir</span>(<span class="st">"Suspendido"</span>)
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-13">Día 13 · Pattern matching</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">area</span>(f) &#123;
+    <span class="kw">variable</span> tipo = f[<span class="st">"tipo"</span>]
+    <span class="kw">si</span> (tipo == <span class="st">"circulo"</span>) &#123;
+        <span class="kw">retornar</span> <span class="st">3.1416</span> * f[<span class="st">"radio"</span>] * f[<span class="st">"radio"</span>]
+    &#125; <span class="kw">sino</span> <span class="kw">si</span> (tipo == <span class="st">"rectangulo"</span>) &#123;
+        <span class="kw">retornar</span> f[<span class="st">"ancho"</span>] * f[<span class="st">"alto"</span>]
+    &#125; <span class="kw">sino</span> &#123;
+        <span class="kw">retornar</span> <span class="st">0.0</span>
+    &#125;
+&#125;
+
+<span class="kw">variable</span> forma = &#123;<span class="st">"tipo"</span>: <span class="st">"rectangulo"</span>, <span class="st">"ancho"</span>: <span class="st">3.0</span>, <span class="st">"alto"</span>: <span class="st">4.0</span>&#125;
+<span class="fn">escribir</span>(<span class="fn">area</span>(forma))   <span class="co">// 12.0</span></code></pre>
+  </div>
+
+  <h2 id="dia-14">Día 14 · Genéricos</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">ultimo</span>&lt;<span class="ty">T</span>&gt;(lista) &#123;
+    <span class="kw">retornar</span> lista[<span class="fn">longitud</span>(lista) - <span class="st">1</span>]
+&#125;
+
+<span class="fn">escribir</span>(<span class="fn">ultimo</span>([<span class="st">1</span>, <span class="st">2</span>, <span class="st">3</span>]))       <span class="co">// 3</span>
+<span class="fn">escribir</span>(<span class="fn">ultimo</span>([<span class="st">"a"</span>, <span class="st">"b"</span>]))       <span class="co">// b</span></code></pre>
+  </div>
+
+  <h2 id="dia-15">Día 15 · Traits</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">rasgo</span> <span class="ty">Area</span> &#123;
+    <span class="kw">funcion</span> <span class="fn">area</span>()
+&#125;
+
+<span class="kw">clase</span> <span class="ty">Cuadrado</span> &#123;
+    lado
+
+    constructor(lado) &#123;
+        <span class="kw">este</span>.lado = lado
+    &#125;
+&#125;
+
+<span class="kw">implementa</span> <span class="ty">Area</span> <span class="kw">para</span> <span class="ty">Cuadrado</span> &#123;
+    <span class="kw">funcion</span> <span class="fn">area</span>() &#123;
+        <span class="kw">retornar</span> <span class="kw">este</span>.lado * <span class="kw">este</span>.lado
+    &#125;
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-16">Día 16 · Resultado y Opción</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">dividir</span>(a, b) &#123;
+    <span class="kw">si</span> (b == <span class="st">0.0</span>) &#123;
+        <span class="kw">retornar</span> Error(<span class="st">"división por cero"</span>)
+    &#125;
+    <span class="kw">retornar</span> Ok(a / b)
+&#125;
+
+<span class="kw">coincidir</span> (<span class="fn">dividir</span>(<span class="st">10.0</span>, <span class="st">2.0</span>)) &#123;
+    <span class="kw">caso</span> Ok(v) -&gt; &#123; <span class="fn">escribir</span>(v) &#125;
+    <span class="kw">caso</span> Error(e) -&gt; &#123; <span class="fn">escribir</span>(e) &#125;
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-17">Día 17 · Módulos</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>saludos.fa</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">bienvenida</span>(nombre) &#123;
+    <span class="kw">retornar</span> <span class="st">"Bienvenido, "</span> + nombre
+&#125;</code></pre>
+  </div>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>main.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"saludos"</span>
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="fn">escribir</span>(<span class="fn">bienvenida</span>(<span class="st">"Ana"</span>))
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-18">Día 18 · Archivos</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/archivo"</span>
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="kw">variable</span> texto = <span class="st">""</span>
+    <span class="kw">variable</span> i = <span class="st">1</span>
+    <span class="kw">mientras</span> (i &lt;= <span class="st">5</span>) &#123;
+        texto = texto + <span class="fn">a_texto</span>(i) + <span class="st">"\n"</span>
+        i = i + <span class="st">1</span>
+    &#125;
+    <span class="fn">escribir_archivo</span>(<span class="st">"numeros.txt"</span>, texto)
+    <span class="fn">escribir</span>(<span class="fn">leer_archivo</span>(<span class="st">"numeros.txt"</span>))
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-19">Día 19 · JSON</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/json"</span>
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="kw">variable</span> libro = &#123; <span class="st">"titulo"</span>: <span class="st">"Forja"</span>, <span class="st">"anio"</span>: <span class="st">2025</span> &#125;
+    <span class="fn">escribir</span>(<span class="fn">stringificar</span>(libro))
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-20">Día 20 · Pruebas</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">es_par</span>(n) &#123;
+    <span class="kw">retornar</span> n % <span class="st">2</span> == <span class="st">0</span>
+&#125;
+
+<span class="co">&#64;test</span>
+<span class="kw">funcion</span> <span class="fn">test_par</span>() &#123;
+    <span class="fn">asegurar</span>(<span class="fn">es_par</span>(<span class="st">4</span>))
+&#125;
+
+<span class="co">&#64;test</span>
+<span class="kw">funcion</span> <span class="fn">test_impar</span>() &#123;
+    <span class="fn">asegurar</span>(<span class="fn">es_par</span>(<span class="st">3</span>) == falso)
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-21">Día 21 · Ownership</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">sumar_todos</span>(numeros) &#123;
+    <span class="kw">variable</span> total = <span class="st">0</span>
+    <span class="kw">variable</span> i = <span class="st">0</span>
+    <span class="kw">mientras</span> (i &lt; <span class="fn">longitud</span>(numeros)) &#123;
+        total = total + numeros[i]
+        i = i + <span class="st">1</span>
+    &#125;
+    <span class="kw">retornar</span> total
+&#125;
+
+<span class="kw">variable</span> datos = [<span class="st">1</span>, <span class="st">2</span>, <span class="st">3</span>]
+<span class="fn">escribir</span>(<span class="fn">sumar_todos</span>(&#38;datos))   <span class="co">// 6</span>
+<span class="fn">escribir</span>(datos[<span class="st">0</span>])              <span class="co">// 1 (sigue válido)</span></code></pre>
+  </div>
+
+  <h2 id="dia-22">Día 22 · Concurrencia</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/io"</span>
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="kw">variable</span> tx, rx = <span class="fn">canal</span>()
+    <span class="kw">variable</span> h1 = <span class="kw">hilo</span> &#123; tx.<span class="fn">enviar</span>(<span class="st">1</span>) <span class="kw">retornar</span> <span class="st">0</span> &#125;
+    <span class="kw">variable</span> h2 = <span class="kw">hilo</span> &#123; tx.<span class="fn">enviar</span>(<span class="st">2</span>) <span class="kw">retornar</span> <span class="st">0</span> &#125;
+    <span class="kw">variable</span> suma = rx.<span class="fn">recibir</span>() + rx.<span class="fn">recibir</span>()
+    h1.<span class="fn">unir</span>()
+    h2.<span class="fn">unir</span>()
+    <span class="fn">escribir</span>(suma)   <span class="co">// 3</span>
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-23">Día 23 · Iteradores</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/io"</span>
+<span class="kw">importar</span> <span class="st">"std/colecciones"</span>
+
+<span class="kw">funcion</span> es_par(x) &#123; <span class="kw">retornar</span> x % <span class="st">2</span> == <span class="st">0</span> &#125;
+<span class="kw">funcion</span> cuadrar(x) &#123; <span class="kw">retornar</span> x * x &#125;
+<span class="kw">funcion</span> sumar(acc, x) &#123; <span class="kw">retornar</span> acc + x &#125;
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="kw">variable</span> numeros = [<span class="st">1</span>, <span class="st">2</span>, <span class="st">3</span>, <span class="st">4</span>, <span class="st">5</span>, <span class="st">6</span>]
+    <span class="kw">variable</span> pares = <span class="fn">filtrar</span>(numeros, &#38;es_par)
+    <span class="kw">variable</span> cuadrados = <span class="fn">mapa</span>(pares, &#38;cuadrar)
+    <span class="kw">variable</span> total = <span class="fn">reducir</span>(cuadrados, &#38;sumar, <span class="st">0</span>)
+    <span class="fn">escribir</span>(total)   <span class="co">// 56</span>
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-24">Día 24 · GUI</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"gui"</span>
+
+<span class="kw">funcion</span> al_pulsar() &#123;
+    <span class="fn">escribir</span>(<span class="st">"clic"</span>)
+&#125;
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="fn">tema_material</span>(<span class="st">"#6750A4"</span>, <span class="fn">columna</span>([
+        <span class="fn">texto_grande</span>(<span class="st">"Demo"</span>),
+        <span class="fn">texto_mediano</span>(<span class="st">"Pulsa el botón"</span>),
+        <span class="fn">boton</span>(<span class="st">"Pulsar"</span>, &#38;al_pulsar)
+    ]))
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-25">Día 25 · GUI avanzada</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"gui"</span>
+
+<span class="kw">variable</span> contador = <span class="st">0</span>
+
+<span class="kw">funcion</span> incrementar() &#123; contador = contador + <span class="st">1</span> &#125;
+<span class="kw">funcion</span> decrementar() &#123; contador = contador - <span class="st">1</span> &#125;
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="fn">tema_material</span>(<span class="st">"#1565C0"</span>, <span class="fn">columna</span>([
+        <span class="fn">etiqueta_dinamica</span>(<span class="st">"contador"</span>),
+        <span class="fn">boton</span>(<span class="st">"+"</span>, &#38;incrementar),
+        <span class="fn">boton</span>(<span class="st">"−"</span>, &#38;decrementar)
+    ]))
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-26">Día 26 · Red</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/servidor_web"</span>
+
+<span class="kw">funcion</span> responder(peticion) &#123;
+    <span class="kw">retornar</span> <span class="st">"OK"</span>
+&#125;
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="kw">variable</span> servidor = <span class="fn">crear_servidor</span>(<span class="st">3000</span>)
+    <span class="fn">obtener</span>(servidor, <span class="st">"/"</span>, &#38;responder)
+    <span class="fn">iniciar_servidor</span>(servidor)
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-27">Día 27 · SQLite</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/sqlite"</span>
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="kw">variable</span> db = <span class="fn">sqlite.abrir</span>(<span class="st">"tareas.db"</span>)
+    <span class="fn">sqlite.ejecutar</span>(db, <span class="st">"CREATE TABLE IF NOT EXISTS tareas (id INTEGER, descripcion TEXT)"</span>)
+    <span class="fn">sqlite.ejecutar</span>(db, <span class="st">"INSERT INTO tareas VALUES (1, 'Comprar')"</span>)
+    <span class="fn">sqlite.ejecutar</span>(db, <span class="st">"INSERT INTO tareas VALUES (2, 'Estudiar')"</span>)
+    <span class="kw">variable</span> filas = <span class="fn">sqlite.consultar</span>(db, <span class="st">"SELECT descripcion FROM tareas"</span>)
+    <span class="kw">variable</span> i = <span class="st">0</span>
+    <span class="kw">mientras</span> (i &lt; <span class="fn">longitud</span>(filas)) &#123;
+        <span class="fn">escribir</span>(filas[i][<span class="st">"descripcion"</span>])
+        i = i + <span class="st">1</span>
+    &#125;
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-28">Día 28 · Paquetes</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>terminal</span></div>
+    <pre><code>forja nuevo mi_proyecto
+cd mi_proyecto
+forja add utilidades 1.2.0
+forja install</code></pre>
+  </div>
+
+  <h2 id="dia-29">Día 29 · Rendimiento</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>solucion.fa</span></div>
+    <pre><code><span class="kw">funcion</span> main() &#123;
+    <span class="kw">variable</span> suma = <span class="st">0</span>
+    <span class="kw">variable</span> i = <span class="st">1</span>
+    <span class="kw">mientras</span> (i &lt;= <span class="st">1000000</span>) &#123;
+        suma = suma + i
+        i = i + <span class="st">1</span>
+    &#125;
+    <span class="fn">escribir</span>(suma)
+&#125;</code></pre>
+  </div>
+
+  <h2 id="dia-30">Día 30 · Proyecto final</h2>
+  <p>El proyecto final es abierto: se evalúa con la rúbrica del capítulo. Una solución de referencia completa combina:</p>
+  <ul>
+    <li>Una clase <code>Tarea</code> y constantes para el <code>Estado</code> (por ejemplo <code>PENDIENTE</code>, <code>EN_CURSO</code>, <code>HECHA</code>).</li>
+    <li>Persistencia con <code>std/sqlite</code>.</li>
+    <li>Interfaz con <code>gui</code> (columna, tarjeta, botones).</li>
+    <li>Manejo de errores con <code>Resultado</code>.</li>
+    <li>Pruebas con <code>forja test</code>.</li>
+  </ul>
+  <div class="info">
+    <strong>Consejo:</strong> consulta la <a href="/docs/ejemplos/">galería de ejemplos</a> para ver apps completas de referencia.
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/">← Volver al índice del curso</a></p>
+</Layout>
