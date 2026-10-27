@@ -1,0 +1,65 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 11 · Clases y objetos — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 11 · Clases y objetos</h1>
+  <p class="lead">Una <strong>clase</strong> agrupa datos y comportamiento. Es la base de la programación orientada a objetos en Forja.</p>
+
+  <h2>Definir una clase</h2>
+  <p>Usa la palabra clave <code>clase</code> para declarar un tipo con campos y métodos. Los campos se declaran por su nombre y se inicializan en el <code>constructor()</code>.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>clases.fa</span></div>
+    <pre><code><span class="kw">clase</span> <span class="ty">Persona</span> &#123;
+    nombre
+    edad
+
+    <span class="kw">constructor</span>() &#123;
+        <span class="kw">este</span>.nombre = <span class="st">"Ana"</span>
+        <span class="kw">este</span>.edad = <span class="st">30</span>
+    &#125;
+
+    <span class="kw">funcion</span> <span class="fn">saludar</span>() &#123;
+        <span class="fn">escribir</span>(<span class="st">"Hola, soy $&#123;este.nombre&#125;"</span>)
+    &#125;
+&#125;
+
+<span class="kw">variable</span> p = <span class="kw">nuevo</span> <span class="ty">Persona</span>()
+p.<span class="fn">saludar</span>()</code></pre>
+  </div>
+
+  <div class="info">
+    <strong>Tip:</strong> dentro de un método, <code>este</code> hace referencia a la instancia actual (equivalente a <code>self</code> en otros lenguajes).
+  </div>
+
+  <h2>Crear instancias</h2>
+  <p>Se instancia una clase con la palabra clave <code>nuevo</code> seguida del nombre y paréntesis: <code>nuevo Persona()</code>. Luego podés leer o asignar campos con <code>objeto.campo</code>.</p>
+
+  <h2>Métodos que devuelven valores</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>metodos.fa</span></div>
+    <pre><code><span class="kw">clase</span> <span class="ty">Contador</span> &#123;
+    valor
+
+    <span class="kw">constructor</span>() &#123;
+        <span class="kw">este</span>.valor = <span class="st">0</span>
+    &#125;
+
+    <span class="kw">funcion</span> <span class="fn">incrementar</span>() &#123;
+        <span class="kw">este</span>.valor = <span class="kw">este</span>.valor + <span class="st">1</span>
+    &#125;
+
+    <span class="kw">funcion</span> <span class="fn">actual</span>() -> <span class="ty">Entero</span> &#123;
+        <span class="kw">retornar</span> <span class="kw">este</span>.valor
+    &#125;
+&#125;</code></pre>
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> define una clase <code>Rectangulo</code> con campos <code>ancho</code> y <code>alto</code>, y un método <code>area()</code> que devuelva el producto. Crea un rectángulo de 4×5 y muestra su área.
+    <br /><a href="/docs/curso/solucionario/#dia-11">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/12-enums/">Día 12 · Enums y tipos algebraicos →</a></p>
+</Layout>
