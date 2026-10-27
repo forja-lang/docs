@@ -1,0 +1,65 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 1 · Hola, Forja — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 1 · Hola, Forja</h1>
+
+  <p>Bienvenido al primer día. Hoy vas a instalar Forja, escribir tu primer programa y ejecutarlo. Al terminar, entenderás el ciclo básico: <strong>escribir → ejecutar → ver el resultado</strong>.</p>
+
+  <h2>¿Qué es Forja?</h2>
+  <p>Forja (extensión <code>.fa</code>) es un lenguaje de programación con palabras clave en español, inspirado en Rust, que compila a bytecode y se ejecuta en una máquina virtual con JIT. Es ideal para aprender y para construir aplicaciones reales, incluidas apps de escritorio con GUI nativa.</p>
+
+  <h2>Instalación</h2>
+  <p>Si aún no lo tenés, seguí la <a href="/docs/instalacion/">guía de instalación</a>. Verificá que funciona:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>💻 Terminal</span></div>
+    <pre><code>forja --version</code></pre>
+  </div>
+
+  <h2>Tu primer programa</h2>
+  <p>Creá un archivo llamado <code>hola.fa</code> con este contenido:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 hola.fa</span></div>
+    <pre><code><span class="fn">escribir</span>(<span class="st">"Hola, Forja"</span>)</code></pre>
+  </div>
+
+  <p>La función <code>escribir()</code> imprime en pantalla. El texto entre comillas se llama <strong>cadena</strong> (string).</p>
+
+  <h2>Ejecutarlo</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>💻 Terminal</span></div>
+    <pre><code>forja run hola.fa</code></pre>
+  </div>
+
+  <p>Deberías ver:</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📤 Salida</span></div>
+    <pre><code>Hola, Forja</code></pre>
+  </div>
+
+  <div class="info">🔥 <strong>Regla de oro:</strong> todo programa de Forja empieza ejecutando las instrucciones de arriba hacia abajo. No hace falta una función <code>main</code> para scripts simples.</div>
+
+  <h2>Comentarios</h2>
+  <p>Los comentarios empiezan con <code>//</code> y no se ejecutan:</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 Comentarios</span></div>
+    <pre><code><span class="co">// Esto es un comentario</span>
+<span class="fn">escribir</span>(<span class="st">"Hola"</span>)  <span class="co">// también al final de una línea</span></code></pre>
+  </div>
+
+  <h2>Ejercicio del día</h2>
+  <div class="warning">✏️ <strong>Ejercicio:</strong> escribí un programa que muestre exactamente <code>Hola, Forja</code> en pantalla.</div>
+
+  <p>Cuando lo tengas, comparalo con el <a href="/docs/curso/solucionario/#dia-1">solucionario</a>.</p>
+
+  <p class="nav-siguiente"><a href="/docs/curso/02-variables/">Día 2 · Variables y constantes →</a></p>
+
+  <style>
+    .breadcrumb { font-size: 0.85rem; color: var(--text-dim); }
+    .nav-siguiente { margin-top: 2rem; font-weight: 600; }
+  </style>
+</Layout>
