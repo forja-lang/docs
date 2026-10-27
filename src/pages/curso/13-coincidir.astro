@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 13 · Pattern matching — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 13 · Pattern matching con <code>coincidir</code></h1>
+  <p class="lead">La construcción <code>coincidir</code> permite ejecutar código distinto según el valor de una expresión. Es la herramienta ideal para trabajar con tipos enumerados.</p>
+
+  <h2>Sintaxis básica</h2>
+  <p>Se escribe <code>coincidir (expresión)</code> y dentro una lista de <code>caso Patrón -> &#123; ... &#125;</code>.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>coincidir.fa</span></div>
+    <pre><code><span class="kw">constante</span> NORTE = <span class="st">0</span>
+<span class="kw">constante</span> SUR = <span class="st">1</span>
+<span class="kw">constante</span> ESTE = <span class="st">2</span>
+<span class="kw">constante</span> OESTE = <span class="st">3</span>
+
+<span class="kw">funcion</span> <span class="fn">describir</span>(d) -> <span class="ty">Texto</span> &#123;
+    <span class="kw">coincidir</span> (d) &#123;
+        <span class="kw">caso</span> NORTE -> &#123; <span class="kw">retornar</span> <span class="st">"Hacia el norte"</span> &#125;
+        <span class="kw">caso</span> SUR -> &#123; <span class="kw">retornar</span> <span class="st">"Hacia el sur"</span> &#125;
+        <span class="kw">caso</span> ESTE -> &#123; <span class="kw">retornar</span> <span class="st">"Hacia el este"</span> &#125;
+        <span class="kw">caso</span> OESTE -> &#123; <span class="kw">retornar</span> <span class="st">"Hacia el oeste"</span> &#125;
+    &#125;
+&#125;</code></pre>
+  </div>
+
+  <h2>Extraer datos de un mapa</h2>
+  <p>Cuando el valor es un mapa con clave <code>"tipo"</code>, se discrimina comparando esa clave con <code>si</code> / <code>sino si</code> y se accede a los datos.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>extraer.fa</span></div>
+    <pre><code><span class="kw">funcion</span> <span class="fn">area</span>(f) -> <span class="ty">Decimal</span> &#123;
+    <span class="kw">variable</span> tipo = f[<span class="st">"tipo"</span>]
+    <span class="kw">si</span> (tipo == <span class="st">"circulo"</span>) &#123;
+        <span class="kw">retornar</span> <span class="st">3.1416</span> * f[<span class="st">"radio"</span>] * f[<span class="st">"radio"</span>]
+    &#125; <span class="kw">sino</span> <span class="kw">si</span> (tipo == <span class="st">"rectangulo"</span>) &#123;
+        <span class="kw">retornar</span> f[<span class="st">"ancho"</span>] * f[<span class="st">"alto"</span>]
+    &#125; <span class="kw">sino</span> &#123;
+        <span class="kw">retornar</span> <span class="st">0.0</span>
+    &#125;
+&#125;</code></pre>
+  </div>
+
+  <div class="info">
+    <strong>Tip:</strong> si querés ignorar un valor, usá <code>_</code> como patrón comodín.
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> usando un mapa con clave <code>"tipo"</code>, calculá el área de <code>&#123;"tipo": "rectangulo", "ancho": 3.0, "alto": 4.0&#125;</code> y mostrala.
+    <br /><a href="/docs/curso/solucionario/#dia-13">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/14-genericos/">Día 14 · Genéricos →</a></p>
+</Layout>
