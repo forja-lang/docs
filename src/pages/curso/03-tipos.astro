@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 3 · Tipos de datos — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 3 · Tipos de datos</h1>
+
+  <p>Forja tiene un conjunto pequeño y claro de tipos primitivos. Hoy los conocerás todos.</p>
+
+  <h2>Tipos primitivos</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 Los cuatro tipos base</span></div>
+    <pre><code><span class="kw">variable</span> entero: <span class="ty">Entero</span> = 42
+<span class="kw">variable</span> decimal: <span class="ty">Decimal</span> = 3.14
+<span class="kw">variable</span> texto: <span class="ty">Texto</span> = <span class="st">"hola"</span>
+<span class="kw">variable</span> logico: <span class="ty">Booleano</span> = verdadero</code></pre>
+  </div>
+
+  <ul>
+    <li><strong>Entero</strong> — números sin parte decimal (1, 42, -7).</li>
+    <li><strong>Decimal</strong> — números con parte decimal (3.14, -0.5).</li>
+    <li><strong>Texto</strong> — cadenas de caracteres entre comillas.</li>
+    <li><strong>Booleano</strong> — <code>verdadero</code> o <code>falso</code>.</li>
+  </ul>
+
+  <h2>Inferencia de tipos</h2>
+  <p>No siempre hace falta escribir el tipo; Forja lo deduce del valor:</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 Inferencia</span></div>
+    <pre><code><span class="kw">variable</span> n = 10        <span class="co">// Entero</span>
+<span class="kw">variable</span> p = 2.5       <span class="co">// Decimal</span>
+<span class="kw">variable</span> s = <span class="st">"texto"</span>   <span class="co">// Texto</span>
+<span class="kw">variable</span> b = falso     <span class="co">// Booleano</span></code></pre>
+  </div>
+
+  <h2>Conversiones</h2>
+  <p>Podés convertir entre tipos con funciones de la biblioteca estándar:</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📝 Conversión</span></div>
+    <pre><code><span class="kw">variable</span> n = <span class="fn">entero</span>(<span class="st">"42"</span>)     <span class="co">// Texto → Entero</span>
+<span class="kw">variable</span> s = <span class="fn">texto</span>(3.14)      <span class="co">// Decimal → Texto</span>
+<span class="fn">escribir</span>(n)</code></pre>
+  </div>
+
+  <div class="info">💡 El tipo de una variable no cambia una vez inferido. Si necesitás otro tipo, convertí el valor explícitamente.</div>
+
+  <h2>Ejercicio del día</h2>
+  <div class="warning">✏️ <strong>Ejercicio:</strong> declarar una variable <code>precio</code> de tipo <code>Decimal</code> con valor <code>19.99</code> y mostrarla.</div>
+
+  <p>Comparalo con el <a href="/docs/curso/solucionario/#dia-3">solucionario</a>.</p>
+
+  <p class="nav-siguiente"><a href="/docs/curso/04-operadores/">Día 4 · Operadores →</a></p>
+
+  <style>
+    .breadcrumb { font-size: 0.85rem; color: var(--text-dim); }
+    .nav-siguiente { margin-top: 2rem; font-weight: 600; }
+  </style>
+</Layout>
