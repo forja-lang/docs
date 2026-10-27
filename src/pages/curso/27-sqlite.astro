@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Día 27 · SQLite — Curso Forja">
+  <p class="breadcrumb"><a href="/docs/curso/">← Curso: Forja en 30 días</a></p>
+  <h1>Día 27 · SQLite</h1>
+  <p class="lead">Forja integra SQLite de forma nativa para persistir datos estructurados sin dependencias externas.</p>
+
+  <h2>Abrir una base de datos</h2>
+  <p>El módulo <code>std/sqlite</code> expone <code>sqlite.abrir</code> y <code>sqlite.ejecutar</code>.</p>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>sqlite.fa</span></div>
+    <pre><code><span class="kw">importar</span> <span class="st">"std/sqlite"</span>
+
+<span class="kw">funcion</span> main() &#123;
+    <span class="kw">variable</span> db = <span class="fn">sqlite.abrir</span>(<span class="st">"datos.db"</span>)
+    <span class="fn">sqlite.ejecutar</span>(db, <span class="st">"CREATE TABLE IF NOT EXISTS usuarios (id INTEGER, nombre TEXT)"</span>)
+&#125;</code></pre>
+  </div>
+
+  <h2>Insertar y consultar</h2>
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>crud.fa</span></div>
+    <pre><code><span class="fn">sqlite.ejecutar</span>(db, <span class="st">"INSERT INTO usuarios VALUES (1, 'Ana')"</span>)
+<span class="fn">sqlite.ejecutar</span>(db, <span class="st">"INSERT INTO usuarios VALUES (2, 'Luis')"</span>)
+
+<span class="kw">variable</span> filas = <span class="fn">sqlite.consultar</span>(db, <span class="st">"SELECT nombre FROM usuarios"</span>)
+<span class="kw">variable</span> i = <span class="st">0</span>
+<span class="kw">mientras</span> (i &lt; <span class="fn">longitud</span>(filas)) &#123;
+    <span class="fn">escribir</span>(filas[i][<span class="st">"nombre"</span>])
+    i = i + <span class="st">1</span>
+&#125;</code></pre>
+  </div>
+
+  <div class="info">
+    <strong>Tip:</strong> usa parámetros en las consultas para evitar inyección SQL: <code>sqlite.ejecutar_con_parametros(db, "INSERT INTO usuarios VALUES (?, ?)", [3, "Eva"])</code>.
+  </div>
+
+  <div class="warning">
+    <strong>Ejercicio del día:</strong> crea una tabla <code>tareas</code> con <code>id</code> y <code>descripcion</code>, inserta dos tareas y muéstralas todas.
+    <br /><a href="/docs/curso/solucionario/#dia-27">Ver solución →</a>
+  </div>
+
+  <p class="nav-siguiente"><a href="/docs/curso/28-paquetes/">Día 28 · Paquetes y dependencias →</a></p>
+</Layout>
