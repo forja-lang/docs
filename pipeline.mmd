@@ -146,8 +146,8 @@ flowchart TD
 
 flowchart LR
     subgraph RUTAS["RUTAS POR COMANDO CLI"]
-        C1["`**forja run**`"] --> R1["Lexer → Parser → TC → BC → Opt → Bytecode → Uops → **ForjaFast v5**"]
-        C2["`**forja build**`"] --> R2["Lexer → Parser → TC → BC → Opt → Bytecode → **AOT + Selfrun** → .exe"]
+        C1["`**forja run**`"] --> R1["Lexer → Parser → TC → BC → Opt → Bytecode → Uops → **ForjaFast v5**\n(compilar_pipeline_completa)"]
+        C2["`**forja build**`"] --> R2["Lexer → Parser → TC → BC → Opt → Bytecode → **AOT + Selfrun** → .exe\n(compilar_pipeline_completa)"]
         C3["`**forja build-asm**`"] --> R3["Lexer → Parser → **Compiler ASM** → .s → gcc -O2 → .exe"]
         C4["`**forja .fa**`"] --> R4["Lexer → Parser → TC → BC → Opt → **Transpilador** → código Rust (.rs)"]
         C5["`**forja repl**`"] --> R5["Lexer → Parser → Bytecode → **ForjaFast** (variables persisten)"]
