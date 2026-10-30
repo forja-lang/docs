@@ -2,3 +2,6 @@
 .astro/
 # Perfil temporal de Chrome usado por pruebas locales
 .chrome-test-*/
+
+# Dependencias instaladas (se regeneran con npm ci)
+node_modules/
