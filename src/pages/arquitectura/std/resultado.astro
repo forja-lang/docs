@@ -8,7 +8,7 @@ import Layout from '../../../layouts/Layout.astro';
   <h2>¿Por qué existe?</h2>
   <p>Proporciona utilidades para trabajar con los tipos algebraicos fundamentales de Forja: <strong>Opcion</strong> (Option — Alguno/None) y <strong>Resultado</strong> (Result — Ok/Error). Estos tipos son la columna vertebral del manejo de errores y valores opcionales en Forja.</p>
 
-  <div class="warning"><strong>📝 Cambio de semántica:</strong> En versiones recientes de Forja, los constructores de Opcion aceptan tanto la forma inglesa como la española: <code>Alguno(valor)</code> / <code>Algo(valor)</code> / <code>Alguno(valor)</code> para <code>alguno</code>, y <code>Ninguno()</code> para <code>none</code>. La sintaxis recomendada es usar <code>Alguno</code> y <code>Ninguno</code>.</div>
+  <div class="warning"><strong><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Cambio de semántica:</strong> En versiones recientes de Forja, los constructores de Opcion aceptan tanto la forma inglesa como la española: <code>Alguno(valor)</code> / <code>Algo(valor)</code> / <code>Alguno(valor)</code> para <code>alguno</code>, y <code>Ninguno()</code> para <code>none</code>. La sintaxis recomendada es usar <code>Alguno</code> y <code>Ninguno</code>.</div>
 
   <h2>Constructores</h2>
   <table>
@@ -37,7 +37,7 @@ import Layout from '../../../layouts/Layout.astro';
   <h2>Uso con pattern matching</h2>
   <p>La forma más común de trabajar con estos tipos es usando <code>coincidir</code>:</p>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 manejo_opcion.fa</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> manejo_opcion.fa</span></div>
     <pre><code><span class="kw">variable</span> usuario_opt = env.obtener(<span class="st">"USER"</span>)
 <span class="kw">coincidir</span> (usuario_opt) &brace;
     <span class="kw">caso</span> Alguno(v) -> &brace;
@@ -68,5 +68,5 @@ import Layout from '../../../layouts/Layout.astro';
     <li><strong>FFI:</strong> Retornar Opcion o Resultado desde funciones nativas que pueden fallar</li>
   </ul>
 
-  <div class="tip"><strong>💡 Filosofía:</strong> Forja promueve el manejo explícito de errores mediante tipos algebraicos en lugar de excepciones. Esto hace que el código sea más predecible y seguro, similar a Rust pero con sintaxis en español.</div>
+  <div class="tip"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Filosofía:</strong> Forja promueve el manejo explícito de errores mediante tipos algebraicos en lugar de excepciones. Esto hace que el código sea más predecible y seguro, similar a Rust pero con sintaxis en español.</div>
 </Layout>
