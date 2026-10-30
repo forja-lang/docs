@@ -999,6 +999,49 @@ const { title, description } = Astro.props;
 
   let isTransitioning = false;
 
+  // Astro inserta en el <head> los CSS chicos como <style> inline. La navegación
+  // client-side reemplaza sólo .main-inner, así que hay que copiarlos a mano:
+  // si no, esas páginas se ven sin diseño (sin playground, sin tarjetas, etc.).
+  const estilosInline = new Map();
+
+  function sincronizarAssets(url, doc) {
+    doc.querySelectorAll('script[type="module"][src]').forEach(s => {
+      const src = s.getAttribute('src');
+      const abs = new URL(src, location.href).href;
+      if (Array.from(document.scripts).some(e => e.src === abs)) return;
+      const n = document.createElement('script');
+      n.type = 'module';
+      n.src = src;
+      document.head.appendChild(n);
+    });
+
+    doc.querySelectorAll('link[rel="stylesheet"][href]').forEach(l => {
+      const href = l.getAttribute('href');
+      const abs = new URL(href, location.href).href;
+      if (Array.from(document.querySelectorAll('link[rel="stylesheet"]')).some(e => e.href === abs)) return;
+      const n = document.createElement('link');
+      n.rel = 'stylesheet';
+      n.href = href;
+      document.head.appendChild(n);
+    });
+
+    estilosInline.forEach((nodos, u) => {
+      if (u === url) return;
+      nodos.forEach(n => n.remove());
+      estilosInline.delete(u);
+    });
+    if (!estilosInline.has(url)) {
+      const nodos = [];
+      doc.querySelectorAll('head style').forEach(s => {
+        const n = document.createElement('style');
+        n.textContent = s.textContent;
+        document.head.appendChild(n);
+        nodos.push(n);
+      });
+      estilosInline.set(url, nodos);
+    }
+  }
+
   function waitTransition(el) {
     return new Promise(r => {
       const done = () => { el.removeEventListener('transitionend', done); r(); };
@@ -1026,30 +1069,7 @@ const { title, description } = Astro.props;
       if (nt) document.title = nt.textContent;
 
       mainInner.innerHTML = nc ? nc.innerHTML : '';
-
-      // Load page-specific module scripts not already in the document
-      const scriptRe = /<script\s+type="module"\s+src="([^"]+)"[^>]*><\/script>/gi;
-      let m;
-      while ((m = scriptRe.exec(html)) !== null) {
-        const src = m[1];
-        if (!document.querySelector('script[src="' + src.replace(/"/g, '\\"') + '"]')) {
-          const s = document.createElement('script');
-          s.type = 'module';
-          s.src = src;
-          document.head.appendChild(s);
-        }
-      }
-      // Load page-specific stylesheets not already in the document
-      const cssRe = /<link\s+rel="stylesheet"\s+href="([^"]+)"[^>]*>/gi;
-      while ((m = cssRe.exec(html)) !== null) {
-        const href = m[1];
-        if (!document.querySelector('link[rel="stylesheet"][href="' + href.replace(/"/g, '\\"') + '"]')) {
-          const l = document.createElement('link');
-          l.rel = 'stylesheet';
-          l.href = href;
-          document.head.appendChild(l);
-        }
-      }
+      sincronizarAssets(url, doc);
 
       mainInner.style.transition = 'none';
       mainInner.style.transform = 'translateX(' + (dir * 40) + 'px)';
