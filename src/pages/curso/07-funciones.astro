@@ -10,7 +10,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <h2>Definir y llamar</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Función con parámetros</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Función con parámetros</span></div>
     <pre><code><span class="kw">funcion</span> <span class="fn">saludar</span>(nombre) &#123;
     <span class="fn">escribir</span>(<span class="st">"Hola, "</span> + nombre)
 &#125;
@@ -20,7 +20,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <h2>Devolver un valor</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 retornar</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> retornar</span></div>
     <pre><code><span class="kw">funcion</span> <span class="fn">doble</span>(n) &#123;
     <span class="kw">retornar</span> n * 2
 &#125;
@@ -31,7 +31,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Ámbito</h2>
   <p>Las variables declaradas dentro de una función solo existen dentro de ella:</p>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Ámbito local</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Ámbito local</span></div>
     <pre><code><span class="kw">funcion</span> <span class="fn">contar</span>() &#123;
     <span class="kw">variable</span> local = 10
     <span class="fn">escribir</span>(local)
@@ -39,10 +39,10 @@ import Layout from '../../layouts/Layout.astro';
 <span class="co">// escribir(local)  → error: no existe aquí</span></code></pre>
   </div>
 
-  <div class="info">💡 Las funciones pueden llamar a otras funciones, incluso antes de que estén definidas en el archivo.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Las funciones pueden llamar a otras funciones, incluso antes de que estén definidas en el archivo.</div>
 
   <h2>Ejercicio del día</h2>
-  <div class="warning">✏️ <strong>Ejercicio:</strong> definí <code>suma(a, b)</code> que retorne <code>a + b</code> y mostrá <code>suma(3, 4)</code>.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> <strong>Ejercicio:</strong> definí <code>suma(a, b)</code> que retorne <code>a + b</code> y mostrá <code>suma(3, 4)</code>.</div>
 
   <p>Comparalo con el <a href="/docs/curso/solucionario/#dia-7">solucionario</a>.</p>
 
