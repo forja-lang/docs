@@ -35,7 +35,7 @@ import Layout from '../../../layouts/Layout.astro';
 
   <h2>Ejemplo: Cliente HTTP</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 api_cliente.fa</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> api_cliente.fa</span></div>
     <pre><code><span class="co">// Consultar una API REST</span>
 <span class="kw">importar</span> cliente_http
 
@@ -46,7 +46,7 @@ import Layout from '../../../layouts/Layout.astro';
 
   <h2>Ejemplo: Servidor Web</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 servidor.fa</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> servidor.fa</span></div>
     <pre><code><span class="kw">importar</span> servidor_web
 
 <span class="kw">funcion</span> manejador(solicitud) &brace;
@@ -66,5 +66,5 @@ servidor_web.iniciar(8080, manejador)</code></pre>
     <li><strong>Webhooks:</strong> Recibir notificaciones de servicios externos</li>
   </ul>
 
-  <div class="info"><strong>💡 Alternativas:</strong> Para HTTP/2 usá <code>cliente_h2.fa</code> / <code>servidor_h2.fa</code>. Para HTTP/3 usá <code>cliente_h3.fa</code>. Estos ofrecen mejor rendimiento y multiplexación.</div>
+  <div class="info"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Alternativas:</strong> Para HTTP/2 usá <code>cliente_h2.fa</code> / <code>servidor_h2.fa</code>. Para HTTP/3 usá <code>cliente_h3.fa</code>. Estos ofrecen mejor rendimiento y multiplexación.</div>
 </Layout>
