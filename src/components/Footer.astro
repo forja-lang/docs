@@ -1,0 +1,39 @@
+---
+import { footerNav, repoUrl, siteTagline, siteTitle } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-inner container-wide">
+    <div class="footer-brand">
+      <a class="brand" href="/docs/">
+        <img class="brand-mark" src="/docs/logo.png" alt="" width="34" height="34" />
+        <span class="brand-text">
+          <span class="brand-name">{siteTitle}</span>
+          <span class="brand-tag">{siteTagline}</span>
+        </span>
+      </a>
+      <p>
+        Lenguaje de programación educativo, en español, con contratos y tipado. Compila a
+        nativo, GUI, WASM y Android.
+      </p>
+    </div>
+
+    {footerNav.map((group) => (
+      <div class="footer-col">
+        <h3>{group.title}</h3>
+        {group.links.map((link) => (
+          <a href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+            {link.title}
+          </a>
+        ))}
+      </div>
+    ))}
+  </div>
+
+  <div class="footer-bottom container-wide">
+    <span>© {year} Forja · GPL-3.0-or-later</span>
+    <span>{repoUrl.replace("https://", "")}</span>
+  </div>
+</footer>

@@ -1,0 +1,45 @@
+---
+import { navSections } from "../data/nav";
+import { repoUrl } from "../data/site";
+
+interface Props {
+  /** Se renderiza dentro del menú móvil: sin buscador y con scroll propio. */
+  drawer?: boolean;
+}
+
+const { drawer = false } = Astro.props;
+---
+
+<div class="sidebar-inner">
+  {!drawer && (
+    <label class="docs-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-3.5-3.5" />
+      </svg>
+      <input type="search" placeholder="Filtrar secciones…" data-nav-search aria-label="Filtrar secciones" />
+    </label>
+  )}
+
+  <nav class="sidebar-groups" aria-label="Documentación" data-nav>
+    {navSections.map((section) => (
+      <div class="docs-group">
+        <div class="docs-label">{section.title}</div>
+        <div class="docs-nav">
+          {section.links.map((link) => (
+            <a href={link.href} class={link.sub ? "is-sub" : undefined}>{link.title}</a>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    <div class="docs-group">
+      <div class="docs-label">Proyecto</div>
+      <div class="docs-nav">
+        <a href={`${repoUrl}/releases`} target="_blank" rel="noreferrer">Releases</a>
+        <a href={`${repoUrl}/issues`} target="_blank" rel="noreferrer">Issues</a>
+        <a href={`${repoUrl}/blob/main/README.md`} target="_blank" rel="noreferrer">README</a>
+      </div>
+    </div>
+  </nav>
+</div>

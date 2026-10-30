@@ -235,6 +235,13 @@ escribir("Suma: " + suma)`,
         // @ts-ignore: módulo generado por wasm-bindgen, sin tipos en el repo
         wasm = await import('../wasm/forja_wasm.js');
         await wasm.default();
+        // El primer `forja_ejecutar` cuesta ~40 ms (arranque de la VM): se calienta
+        // acá para que el tiempo que se muestra sea el de régimen normal.
+        try {
+          wasm.forja_ejecutar('escribir("")');
+        } catch {
+          // si el calentamiento falla, el error real aparece al ejecutar
+        }
         wasmListo = true;
         console.log('✅ Forja WASM cargado para la demo');
       } catch (e) {
@@ -291,13 +298,16 @@ escribir("Suma: " + suma)`,
         return;
       }
       setStatus('⏳ ejecutando…', 'running');
-      const inicio = performance.now();
       await cargarWASM();
       try {
         if (wasmListo && wasm && typeof wasm.forja_ejecutar === 'function') {
+          // Sólo la ejecución: cargar el WASM no es tiempo del programa (antes el
+          // primer número incluía la descarga y no cerraba con el playground).
+          const inicio = performance.now();
           const resultado = wasm.forja_ejecutar(fuente);
+          const tiempoMs = (performance.now() - inicio).toFixed(2);
           render(String(resultado ?? ''));
-          setStatus('⚡ ' + (performance.now() - inicio).toFixed(1) + ' ms', 'timing');
+          setStatus('⚡ ' + tiempoMs + ' ms', 'timing');
         } else {
           renderError('⚠ La VM WASM todavía no está disponible.');
           setStatus('⚠ sin WASM', 'error');

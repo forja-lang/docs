@@ -5,3 +5,4 @@
 
 # Dependencias instaladas (se regeneran con npm ci)
 node_modules/
+dist/

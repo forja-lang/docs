@@ -214,6 +214,7 @@ import Layout from '../layouts/Layout.astro';
   let forjaWasm: any = null;
   let guiWasmLoaded: boolean = false;
   let forjaWasmGui: any = null;
+  let guiError: string | null = null;
 
   // Los builtins de GUI (columna, fila, titulo, boton…) sólo existen en el
   // runtime GUI: un programa así no produce salida en la VM.
@@ -224,6 +225,13 @@ import Layout from '../layouts/Layout.astro';
       // @ts-ignore
       forjaWasm = await import('../wasm/forja_wasm.js');
       await forjaWasm.default(); // Inicializar el WASM (descargar y compilar .wasm)
+      // El primer `forja_ejecutar` cuesta ~40 ms (arranque de la VM): se calienta
+      // acá para que el tiempo que se muestra sea el de régimen normal.
+      try {
+        forjaWasm.forja_ejecutar('escribir("")');
+      } catch {
+        // si el calentamiento falla, el error real aparece al ejecutar
+      }
       wasmLoaded = true;
       console.log('✅ Forja WASM cargado exitosamente');
     } catch (e: any) {
@@ -241,6 +249,7 @@ import Layout from '../layouts/Layout.astro';
       console.log('✅ Forja WASM GUI cargado exitosamente');
     } catch (e: any) {
       console.warn('⚠ Forja WASM GUI no disponible:', e.message);
+      guiError = e.message;
       guiWasmLoaded = false;
     }
   }
@@ -260,6 +269,7 @@ import Layout from '../layouts/Layout.astro';
       console.warn('⚠ Faltan elementos esenciales en el DOM del playground');
       return;
     }
+    status.title = 'Tiempo del último programa, sin contar la carga del WASM';
 
     function setStatus(text: string, className: string) {
       status.textContent = text;
@@ -287,33 +297,24 @@ import Layout from '../layouts/Layout.astro';
         output.innerHTML = '<span class="stderr">⚠ No hay código para ejecutar</span>';
         return;
       }
+      // Los builtins de GUI sólo existen en el runtime GUI: un programa así no
+      // escribe nada en la VM, así que va directo al canvas.
+      if (RE_GUI.test(source)) {
+        ejecutarGUI();
+        return;
+      }
       setStatus('⏳ ejecutando...', 'status-running');
       output.innerHTML = '<span class="placeholder">Ejecutando...</span>';
-      const inicio = performance.now();
 
       setTimeout(async () => {
         try {
           if (wasmLoaded && forjaWasm && typeof forjaWasm.forja_ejecutar === 'function') {
-            // Usar la VM real compilada a WASM (cargada como módulo)
-            let resultado: any;
-            try {
-              resultado = forjaWasm.forja_ejecutar(source);
-            } catch (err: any) {
-              // Los builtins de GUI sólo existen en el runtime GUI: la VM sola los
-              // rechaza, así que reintentamos ahí.
-              if (RE_GUI.test(source)) {
-                ejecutarGUI();
-                return;
-              }
-              throw err;
-            }
-            // Un programa GUI sólo declara `main()` y no escribe nada en consola.
-            if (!String(resultado ?? '').trim() && RE_GUI.test(source)) {
-              ejecutarGUI();
-              return;
-            }
+            // El cronómetro arranca acá: el setTimeout del repintado no es tiempo
+            // de ejecución (antes sumaba 50 ms fijos y no cerraba con la home).
+            const inicio = performance.now();
+            const resultado = forjaWasm.forja_ejecutar(source);
             const tiempoMs = (performance.now() - inicio).toFixed(2);
-            mostrarOutput(resultado);
+            mostrarOutput(String(resultado ?? ''));
             setStatus('⚡ ' + tiempoMs + ' ms', 'status-timing');
           } else {
             // Fallback: mostrar mensaje
@@ -337,34 +338,41 @@ import Layout from '../layouts/Layout.astro';
         output.innerHTML = '<span class="stderr">⚠ No hay código para ejecutar</span>';
         return;
       }
-
-      // Mostrar sección GUI
-      if (guiSection) guiSection.style.display = 'block';
+      if (!RE_GUI.test(source)) {
+        // Sin builtins de GUI no hay nada que dibujar: mejor decirlo que mostrar
+        // un canvas en blanco con un "✓" mentiroso.
+        setStatus('⚠ sin GUI', 'status-error');
+        output.innerHTML = '<span class="stderr">⚠ Este código no arma una interfaz. Usá los builtins de GUI (columna, fila, titulo, boton…) dentro de main().</span>';
+        return;
+      }
 
       setStatus('🎨 renderizando GUI...', 'status-running');
 
       setTimeout(async () => {
         try {
-          if (guiWasmLoaded && forjaWasmGui && typeof forjaWasmGui.ejecutar_gui === 'function') {
-            const resultado = forjaWasmGui.ejecutar_gui('forja-canvas', source);
-            if (resultado === 'ok') {
-              setStatus('✓ GUI renderizada', 'status-timing');
-            } else {
-              setStatus('⚠ ' + resultado, 'status-error');
-            }
-          } else if (wasmLoaded && forjaWasm) {
-            // Fallback: mostrar el resultado textual si GUI WASM no está cargado
-            // pero mostrar un mensaje sobre la GUI
-            setStatus('🎨 GUI WASM no disponible, mostrando output textual', 'status-error');
-            // Intentar renderizar igual en canvas con el código
-            output.innerHTML = '<span class="stderr">⚠ GUI WASM no cargado. Compilá con wasm-pack build --target web --release en crates/forja-wasm-gui/</span>';
+          if (!(guiWasmLoaded && forjaWasmGui && typeof forjaWasmGui.ejecutar_gui === 'function')) {
+            setStatus('⚠ sin GUI WASM', 'status-error');
+            output.innerHTML =
+              '<span class="stderr">⚠ El runtime GUI no cargó' +
+              (guiError ? ': ' + guiError : '') +
+              '</span>';
+            return;
+          }
+          const resultado = forjaWasmGui.ejecutar_gui('forja-canvas', source);
+          if (resultado === 'ok') {
+            if (guiSection) guiSection.style.display = 'block';
+            setStatus('✓ GUI renderizada', 'status-timing');
           } else {
-            output.innerHTML = '<span class="stderr">⚠ WASM no disponible.</span>';
-            setStatus('⚠ sin WASM', 'status-error');
+            setStatus('⚠ ' + resultado, 'status-error');
+            output.innerHTML = '<span class="stderr">⚠ ' + resultado + '</span>';
           }
         } catch (err: any) {
-          output.innerHTML = '<span class="stderr">⛔ ' + err.message + '</span>';
+          // Un fallo del runtime GUI no debe romper el resto del playground: se
+          // marca como no disponible y se sigue usando la VM normal.
+          guiWasmLoaded = false;
+          guiError = err.message;
           setStatus('❌ error GUI', 'status-error');
+          output.innerHTML = '<span class="stderr">⛔ ' + err.message + '</span>';
         }
       }, 50);
     }

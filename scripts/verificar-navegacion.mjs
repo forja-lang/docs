@@ -91,11 +91,11 @@ const evaluar = async (expr) => {
 
 // Esperar a que la portada esté lista
 for (let i = 0; i < 60; i++) {
-  if (await evaluar(`document.readyState === 'complete' && !!document.querySelector('.sidebar-nav a')`)) break;
+  if (await evaluar(`document.readyState === 'complete' && !!document.querySelector('[data-nav] a')`)) break;
   await new Promise((r) => setTimeout(r, 250));
 }
 
-const portada = await evaluar(`({ url: location.pathname, links: document.querySelectorAll('.sidebar-nav a').length })`);
+const portada = await evaluar(`({ url: location.pathname, links: document.querySelectorAll('[data-nav] a').length })`);
 if (portada.links === 0) {
   throw new Error('La portada no cargó: ' + JSON.stringify(portada));
 }
@@ -118,7 +118,7 @@ if (await evaluar(`!!${chip}`)) {
 }
 
 // 1) Navegar al playground con un click, como un usuario
-await evaluar(`document.querySelector('.sidebar-nav a[href="/docs/playground/"]').click(); true`);
+await evaluar(`document.querySelector('[data-nav] a[href="/docs/playground/"]').click(); true`);
 await new Promise((r) => setTimeout(r, 4000));
 
 const estado = await evaluar(`

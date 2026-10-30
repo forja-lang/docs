@@ -55,7 +55,7 @@ import Layout from '../../layouts/Layout.astro';
   </table>
 
   <h2>Compilación con wasm-bindgen</h2>
-  <p>El crate es <code>crate-type = ["cdylib"]</code> y depende de <code>wasm-bindgen 0.2</code>, <code>js-sys 0.3</code>, <code>web-sys</code> (features de canvas/DOM/eventos), el crate raíz <code>forja</code> (<code>path = "../.."</code>) y <code>serde_json</code>. En CI (rust.yml) se compila con:</p>
+  <p>El crate es <code>crate-type = ["cdylib"]</code> y depende de <code>wasm-bindgen 0.2</code>, <code>js-sys 0.3</code>, <code>web-sys</code> (features de canvas/DOM/eventos), el crate raíz <code>forja</code> (<code>path = "../.."</code>) y <code>serde_json</code>. En CD (cd.yml, al publicar el release) se compila con:</p>
   <pre><code>WASM_OPT=false wasm-pack build crates/forja-wasm-gui --target web \
   --out-dir ../../wasm-output-gui --out-name forja_wasm_gui --no-opt
 wasm-opt --enable-bulk-memory --enable-nontrapping-float-to-int \

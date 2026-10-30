@@ -19,10 +19,27 @@ src/
 │   ├── sintaxis/    # Documentación del lenguaje
 │   ├── gui/         # Documentación de la GUI
 │   └── ...
-├── components/      # Componentes reutilizables
-├── layouts/         # Layouts de página
+├── components/      # Header, Sidebar, Footer, DemoForja
+├── data/            # nav.ts (navegación) y site.ts (datos del sitio)
+├── layouts/         # Layout.astro: head, shell de docs y scripts
+├── styles/          # global.css: tokens y todo el diseño
 └── wasm/            # Playground WASM
 ```
+
+## Diseño
+
+Todo el estilo vive en [`src/styles/global.css`](src/styles/global.css): tokens de color y
+tipografía en `:root` (`[data-theme="light"]` para el tema claro), layout del sitio y
+componentes de contenido. **Las páginas no definen colores nuevos**: usan las variables
+(`--accent`, `--surface`, `--muted`…) y las clases disponibles (`.info`, `.warning`, `.tip`,
+`.code-block-wrapper`, `.feature-card`, `.tag`, `.step-list`, `details`).
+
+La navegación del sidebar, el menú móvil y el paginador anterior/siguiente salen de
+`src/data/nav.ts`. Para agregar una página al sidebar, editá ese archivo.
+
+La navegación entre páginas la hace `<ClientRouter />` (Astro) con transiciones de vista; los
+scripts del layout escuchan `astro:page-load` para reconstruir el índice, los botones de
+copiar y el paginador después de cada navegación.
 
 ## Pipeline de compilación canónico
 
