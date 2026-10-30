@@ -63,17 +63,28 @@ jobs:
             fi
           done
           if [ "$missing" -eq 1 ]; then
-            echo "❌ Some WASM files are missing — build will fail"
-          else
-            echo "✅ All WASM files ready"
+            echo "::error title=WASM faltante::Faltan archivos WASM y git tampoco los tiene."
+            exit 1
           fi
+          echo "✅ All WASM files ready"
 
       - name: Verificar inicialización del WASM
         run: |
           if ! node scripts/verificar-wasm.mjs; then
+            # El fallback deja el sitio en pie, pero es un síntoma: el WASM del
+            # release no inicializa. Marcarlo en el run y en el resumen para que
+            # no pase desapercibido (antes sólo quedaba un ⚠️ en el log).
+            echo "::warning title=WASM del release roto::El WASM descargado del release no inicializa; el playground se publica con la copia de git."
+            {
+              echo "### ⚠️ WASM del release no inicializa"
+              echo ""
+              echo "Se publicó la copia de git. Revisar el paso wasm-opt del workflow"
+              echo "de release (faltan features: reference-types, multivalue)."
+            } >> "$GITHUB_STEP_SUMMARY"
             echo "⚠️  El WASM descargado no inicializa; restaurando la versión de git..."
             git checkout -- src/wasm/forja_wasm.js src/wasm/forja_wasm_bg.wasm \
                              src/wasm/forja_wasm_gui.js src/wasm/forja_wasm_gui_bg.wasm 2>/dev/null || true
+            # Si tampoco inicializa la copia de git, el deploy falla.
             node scripts/verificar-wasm.mjs
           fi
 
