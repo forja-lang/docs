@@ -10,7 +10,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <h2>Concatenación</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Operador +</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Operador +</span></div>
     <pre><code><span class="kw">variable</span> nombre = <span class="st">"Ana"</span>
 <span class="kw">variable</span> saludo = <span class="st">"Hola, "</span> + nombre
 <span class="fn">escribir</span>(saludo)   <span class="co">// Hola, Ana</span></code></pre>
@@ -18,7 +18,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <h2>Longitud y acceso</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 longitud / caracteres</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> longitud / caracteres</span></div>
     <pre><code><span class="kw">variable</span> s = <span class="st">"Forja"</span>
 <span class="fn">escribir</span>(<span class="fn">longitud</span>(s))   <span class="co">// 5</span>
 <span class="fn">escribir</span>(s[0])          <span class="co">// F</span></code></pre>
@@ -26,23 +26,23 @@ import Layout from '../../layouts/Layout.astro';
 
   <h2>Mayúsculas y minúsculas</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Transformaciones</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Transformaciones</span></div>
     <pre><code><span class="fn">escribir</span>(<span class="fn">mayusculas</span>(<span class="st">"hola"</span>))   <span class="co">// HOLA</span>
 <span class="fn">escribir</span>(<span class="fn">minusculas</span>(<span class="st">"HOLA"</span>))   <span class="co">// hola</span></code></pre>
   </div>
 
   <h2>Buscar y reemplazar</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 contiene / reemplazar</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> contiene / reemplazar</span></div>
     <pre><code><span class="kw">variable</span> frase = <span class="st">"me gusta forja"</span>
 <span class="fn">escribir</span>(<span class="fn">contiene</span>(frase, <span class="st">"forja"</span>))       <span class="co">// verdadero</span>
 <span class="fn">escribir</span>(<span class="fn">reemplazar</span>(frase, <span class="st">"forja"</span>, <span class="st">"fa"</span>)) <span class="co">// me gusta fa</span></code></pre>
   </div>
 
-  <div class="info">💡 El módulo <code>std/texto</code> trae muchas más funciones: <code>dividir</code>, <code>unir</code>, <code>recortar</code>, <code>empieza_con</code>, etc.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> El módulo <code>std/texto</code> trae muchas más funciones: <code>dividir</code>, <code>unir</code>, <code>recortar</code>, <code>empieza_con</code>, etc.</div>
 
   <h2>Ejercicio del día</h2>
-  <div class="warning">✏️ <strong>Ejercicio:</strong> creá <code>nombre = "Forja"</code> y mostrá <code>"Hola, Forja"</code> concatenando.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> <strong>Ejercicio:</strong> creá <code>nombre = "Forja"</code> y mostrá <code>"Hola, Forja"</code> concatenando.</div>
 
   <p>Comparalo con el <a href="/docs/curso/solucionario/#dia-8">solucionario</a>.</p>
 
