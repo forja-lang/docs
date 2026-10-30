@@ -1,2 +1,4 @@
 # Artefactos locales de Astro
 .astro/
+# Perfil temporal de Chrome usado por pruebas locales
+.chrome-test-*/
