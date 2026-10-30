@@ -9,7 +9,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Definir un rasgo</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📐 Sintaxis</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-ruler"/></svg> Sintaxis</span></div>
     <pre><code><span class="kw">rasgo</span> NombreRasgo &lbrace;
     <span class="kw">funcion</span> metodo1(param1: <span class="ty">Tipo</span>) &rarr; <span class="ty">Retorno</span>
     <span class="kw">funcion</span> metodo2() <span class="co">// opcional: cuerpo por defecto</span>
@@ -19,7 +19,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Implementar un rasgo</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🧬 Implementación</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-dna"/></svg> Implementación</span></div>
     <pre><code><span class="kw">implementa</span> NombreRasgo <span class="kw">para</span> MiClase &lbrace;
     <span class="kw">funcion</span> metodo1(param1: <span class="ty">Tipo</span>) &rarr; <span class="ty">Retorno</span> &lbrace;
         <span class="kw">retornar</span> ...
@@ -30,7 +30,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Ejemplo completo</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🎓 Rasgos + Clases</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-graduation-cap"/></svg> Rasgos + Clases</span></div>
     <pre><code><span class="kw">rasgo</span> Volador &lbrace;
     <span class="kw">funcion</span> <span class="fn">volar</span>() &rarr; <span class="ty">Texto</span>
     <span class="kw">funcion</span> <span class="fn">aterrizar</span>() <span class="co">// default vacío</span>
@@ -54,7 +54,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Genéricos con rasgos</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔄 Genéricos boundeados</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-refresh-cw"/></svg> Genéricos boundeados</span></div>
     <pre><code><span class="kw">funcion</span> <span class="fn">imprimir</span>&lt;T: Volador&gt;(valor: T) &lbrace;
     <span class="fn">escribir</span>(valor.<span class="fn">volar</span>())
 &rbrace;</code></pre>
@@ -65,7 +65,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Para bounds complejos con múltiples rasgos, usá la cláusula <code><span class="kw">donde</span></code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📍 Where</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-map-pin"/></svg> Where</span></div>
     <pre><code><span class="kw">funcion</span> <span class="fn">procesar</span>&lt;T&gt;(valor: T)
     <span class="kw">donde</span> T: Volador + Mostrar
 &lbrace;
