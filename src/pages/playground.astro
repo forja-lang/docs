@@ -10,27 +10,27 @@ import Layout from '../layouts/Layout.astro';
   <div class="playground-layout">
     <div class="editor-panel">
       <div class="panel-header">
-        <span>📝 Código Forja (.fa)</span>
+        <span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Código Forja (.fa)</span>
         <div class="panel-actions">
           <label class="live-toggle" title="Ejecutar automáticamente al escribir">
             <span class="live-label">Live</span>
             <input type="checkbox" id="liveSwitch" checked>
             <span class="toggle-track"><span class="toggle-thumb"></span></span>
           </label>
-          <button id="btnRun" class="btn-run">▶ Ejecutar</button>
-          <button id="btnGui" class="btn-gui" title="Renderizar la interfaz en el canvas">🎨 GUI</button>
-          <button id="btnClear" class="btn-clear">🗑 Limpiar</button>
+          <button id="btnRun" class="btn-run"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg> Ejecutar</button>
+          <button id="btnGui" class="btn-gui" title="Renderizar la interfaz en el canvas"><svg class="ico" aria-hidden="true"><use href="#i-palette"/></svg> GUI</button>
+          <button id="btnClear" class="btn-clear"><svg class="ico" aria-hidden="true"><use href="#i-trash-2"/></svg> Limpiar</button>
         </div>
       </div>
       <textarea id="codigo" class="editor" spellcheck="false" placeholder='Escribí tu código Forja acá'>escribir("¡Hola, mundo desde Forja!")</textarea>
     </div>
     <div class="output-panel">
       <div class="panel-header">
-        <span>📋 Output</span>
-        <span id="status" class="status-idle">✓ listo</span>
+        <span><svg class="ico" aria-hidden="true"><use href="#i-clipboard-list"/></svg> Output</span>
+        <span id="status" class="status-idle"><svg class="ico" aria-hidden="true"><use href="#i-circle-check"/></svg> listo</span>
       </div>
       <div id="output" class="output">
-        <span class="placeholder">Presioná ▶ Ejecutar para correr el código</span>
+        <span class="placeholder">Presioná <svg class="ico" aria-hidden="true"><use href="#i-play"/></svg> Ejecutar para correr el código</span>
       </div>
     </div>
   </div>
@@ -62,7 +62,7 @@ import Layout from '../layouts/Layout.astro';
     <button class="example-btn" data-code='tipo Forma = Circulo(Decimal) | Rectangulo(Decimal, Decimal)\nfuncion area(f: Forma) -> Decimal &#123;\n    coincidir (f) &#123;\n        caso Circulo(r) -> &#123; retornar 3.14159 * r * r &#125;\n        caso Rectangulo(a, b) -> &#123; retornar a * b &#125;\n    &#125;\n&#125;\nescribir(area(Circulo(2.0)))\nescribir(area(Rectangulo(3.0, 4.0)))'>Enums y match</button>
     <button class="example-btn" data-code='variable arr = [5, 2, 9, 1, 7, 3]\nvariable n = longitud(arr)\npara (variable i = 0; i < n; i = i + 1) &#123;\n    para (variable j = 0; j < n - i - 1; j = j + 1) &#123;\n        si (arr[j] > arr[j + 1]) &#123;\n            variable tmp = arr[j]\n            arr[j] = arr[j + 1]\n            arr[j + 1] = tmp\n        &#125;\n    &#125;\n&#125;\nescribir(arr)'>Ordenamiento</button>
     <button class="example-btn" data-code='funcion es_primo(n) &#123;\n    si (n < 2) &#123; retornar falso &#125;\n    variable i = 2\n    mientras (i * i <= n) &#123;\n        si (n % i == 0) &#123; retornar falso &#125;\n        i = i + 1\n    &#125;\n    retornar verdadero\n&#125;\npara (variable i = 1; i <= 20; i = i + 1) &#123;\n    si (es_primo(i)) &#123; escribir(i + " es primo") &#125;\n&#125;'>Primos</button>
-    <button class="example-btn" data-code='importar gui\nvariable contador = 0\nvariable resultado = "Valor: " + contador\nfuncion incrementar() -> Texto &#123; retornar "" &#125;\nfuncion main() &#123;\n    columna(\n        titulo("Contador"),\n        escribir(resultado),\n        boton("Incrementar", &incrementar)\n    )\n&#125;'>GUI: contador</button>
+    <button class="example-btn" data-code='importar gui\nvariable contador = 0\nfuncion incrementar() -> Texto &#123;\n    contador = contador + 1\n    retornar ""\n&#125;\nfuncion main() &#123;\n    columna(\n        titulo("Contador"),\n        escribir(contador),\n        boton("Incrementar", &incrementar)\n    )\n&#125;'>GUI: contador</button>
     <button class="example-btn" data-code='importar std/json\nfuncion ejecutar() -> Resultado<Texto, ErrorJSON> &#123;\n    variable datos = &#123;"nombre": "Ana", "edad": 25, "activo": verdadero&#125;\n    variable texto = serializar(datos)?\n    escribir(texto)\n    variable recuperado = parsear(texto)?\n    escribir(recuperado["nombre"])\n    retornar Ok(texto)\n&#125;\nejecutar()'>JSON</button>
   </div>
 </Layout>
@@ -233,9 +233,9 @@ import Layout from '../layouts/Layout.astro';
         // si el calentamiento falla, el error real aparece al ejecutar
       }
       wasmLoaded = true;
-      console.log('✅ Forja WASM cargado exitosamente');
+      console.log('Forja WASM cargado exitosamente');
     } catch (e: any) {
-      console.warn('⚠ Forja WASM no disponible:', e.message);
+      console.warn('Forja WASM no disponible:', e.message);
       wasmLoaded = false;
     }
   }
@@ -246,9 +246,9 @@ import Layout from '../layouts/Layout.astro';
       forjaWasmGui = await import('../wasm/forja_wasm_gui.js');
       await forjaWasmGui.default();
       guiWasmLoaded = true;
-      console.log('✅ Forja WASM GUI cargado exitosamente');
+      console.log('Forja WASM GUI cargado exitosamente');
     } catch (e: any) {
-      console.warn('⚠ Forja WASM GUI no disponible:', e.message);
+      console.warn('Forja WASM GUI no disponible:', e.message);
       guiError = e.message;
       guiWasmLoaded = false;
     }
@@ -266,7 +266,7 @@ import Layout from '../layouts/Layout.astro';
     let liveTimeout: any = null;
 
     if (!codigo || !output || !status || !btnRun || !btnGui || !btnClear || !liveSwitch) {
-      console.warn('⚠ Faltan elementos esenciales en el DOM del playground');
+      console.warn('Faltan elementos esenciales en el DOM del playground');
       return;
     }
     status.title = 'Tiempo del último programa, sin contar la carga del WASM';
@@ -294,7 +294,7 @@ import Layout from '../layouts/Layout.astro';
     function ejecutar() {
       const source = codigo.value.trim();
       if (!source) {
-        output.innerHTML = '<span class="stderr">⚠ No hay código para ejecutar</span>';
+        output.innerHTML = '<span class="stderr">No hay código para ejecutar</span>';
         return;
       }
       // Los builtins de GUI sólo existen en el runtime GUI: un programa así no
@@ -303,7 +303,7 @@ import Layout from '../layouts/Layout.astro';
         ejecutarGUI();
         return;
       }
-      setStatus('⏳ ejecutando...', 'status-running');
+      setStatus('ejecutando...', 'status-running');
       output.innerHTML = '<span class="placeholder">Ejecutando...</span>';
 
       setTimeout(async () => {
@@ -315,19 +315,19 @@ import Layout from '../layouts/Layout.astro';
             const resultado = forjaWasm.forja_ejecutar(source);
             const tiempoMs = (performance.now() - inicio).toFixed(2);
             mostrarOutput(String(resultado ?? ''));
-            setStatus('⚡ ' + tiempoMs + ' ms', 'status-timing');
+            setStatus(tiempoMs + ' ms', 'status-timing');
           } else {
             // Fallback: mostrar mensaje
             output.innerHTML = '';
             const div = document.createElement('div');
             div.className = 'stderr';
-            div.textContent = '⚠ WASM no disponible. Ejecutá scripts\\build-wasm.ps1';
+            div.textContent = 'WASM no disponible. Ejecutá scripts\\build-wasm.ps1';
             output.appendChild(div);
-            setStatus('⚠ sin WASM', 'status-error');
+            setStatus('sin WASM', 'status-error');
           }
         } catch (err: any) {
-          output.innerHTML = '<span class="stderr">⛔ ' + err.message + '</span>';
-          setStatus('❌ error', 'status-error');
+          output.innerHTML = '<span class="stderr">' + err.message + '</span>';
+          setStatus('error', 'status-error');
         }
       }, 50);
     }
@@ -335,25 +335,25 @@ import Layout from '../layouts/Layout.astro';
     function ejecutarGUI() {
       const source = codigo.value.trim();
       if (!source) {
-        output.innerHTML = '<span class="stderr">⚠ No hay código para ejecutar</span>';
+        output.innerHTML = '<span class="stderr">No hay código para ejecutar</span>';
         return;
       }
       if (!RE_GUI.test(source)) {
         // Sin builtins de GUI no hay nada que dibujar: mejor decirlo que mostrar
-        // un canvas en blanco con un "✓" mentiroso.
-        setStatus('⚠ sin GUI', 'status-error');
-        output.innerHTML = '<span class="stderr">⚠ Este código no arma una interfaz. Usá los builtins de GUI (columna, fila, titulo, boton…) dentro de main().</span>';
+        // un canvas en blanco con un "listo" mentiroso.
+        setStatus('sin GUI', 'status-error');
+        output.innerHTML = '<span class="stderr">Este código no arma una interfaz. Usá los builtins de GUI (columna, fila, titulo, boton…) dentro de main().</span>';
         return;
       }
 
-      setStatus('🎨 renderizando GUI...', 'status-running');
+      setStatus('renderizando GUI...', 'status-running');
 
       setTimeout(async () => {
         try {
           if (!(guiWasmLoaded && forjaWasmGui && typeof forjaWasmGui.ejecutar_gui === 'function')) {
-            setStatus('⚠ sin GUI WASM', 'status-error');
+            setStatus('sin GUI WASM', 'status-error');
             output.innerHTML =
-              '<span class="stderr">⚠ El runtime GUI no cargó' +
+              '<span class="stderr">El runtime GUI no cargó' +
               (guiError ? ': ' + guiError : '') +
               '</span>';
             return;
@@ -361,18 +361,18 @@ import Layout from '../layouts/Layout.astro';
           const resultado = forjaWasmGui.ejecutar_gui('forja-canvas', source);
           if (resultado === 'ok') {
             if (guiSection) guiSection.style.display = 'block';
-            setStatus('✓ GUI renderizada', 'status-timing');
+            setStatus('GUI renderizada', 'status-timing');
           } else {
-            setStatus('⚠ ' + resultado, 'status-error');
-            output.innerHTML = '<span class="stderr">⚠ ' + resultado + '</span>';
+            setStatus(resultado, 'status-error');
+            output.innerHTML = '<span class="stderr">' + resultado + '</span>';
           }
         } catch (err: any) {
           // Un fallo del runtime GUI no debe romper el resto del playground: se
           // marca como no disponible y se sigue usando la VM normal.
           guiWasmLoaded = false;
           guiError = err.message;
-          setStatus('❌ error GUI', 'status-error');
-          output.innerHTML = '<span class="stderr">⛔ ' + err.message + '</span>';
+          setStatus('error GUI', 'status-error');
+          output.innerHTML = '<span class="stderr">' + err.message + '</span>';
         }
       }, 50);
     }
@@ -380,14 +380,14 @@ import Layout from '../layouts/Layout.astro';
     function limpiar() {
       codigo.value = '';
       output.innerHTML = '<span class="placeholder">Editor limpiado</span>';
-      setStatus('✓ listo', 'status-idle');
+      setStatus('listo', 'status-idle');
     }
 
     function cargarEjemplo(code: string) {
       codigo.value = code.replace(/\\n/g, '\n');
       output.innerHTML = '<span class="placeholder">Código cargado</span>';
       if (liveSwitch.checked) ejecutar();
-      else setStatus('✓ listo', 'status-idle');
+      else setStatus('listo', 'status-idle');
     }
 
     function onCodigoChange() {
@@ -405,10 +405,10 @@ import Layout from '../layouts/Layout.astro';
 
     liveSwitch.addEventListener('change', () => {
       if (liveSwitch.checked) {
-        setStatus('⚡ en vivo', 'status-idle');
+        setStatus('en vivo', 'status-idle');
         if (codigo.value.trim()) ejecutar();
       } else {
-        setStatus('✓ manual', 'status-idle');
+        setStatus('manual', 'status-idle');
       }
     });
 
