@@ -11,7 +11,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2><code>mientras</code></h2>
   <p>Repite mientras la condición sea verdadera:</p>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 mientras</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> mientras</span></div>
     <pre><code><span class="kw">variable</span> i = 0
 <span class="kw">mientras</span> (i &lt; 3) &#123;
     <span class="fn">escribir</span>(i)
@@ -19,12 +19,12 @@ import Layout from '../../layouts/Layout.astro';
 &#125;</code></pre>
   </div>
 
-  <div class="warning">⚠️ Si olvidás modificar la variable dentro del bucle, se vuelve infinito. Asegurate de que la condición llegue a ser falsa.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> Si olvidás modificar la variable dentro del bucle, se vuelve infinito. Asegurate de que la condición llegue a ser falsa.</div>
 
   <h2><code>para</code></h2>
   <p>Recorre un rango de forma más compacta:</p>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 para</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> para</span></div>
     <pre><code><span class="kw">para</span> i <span class="kw">en</span> 1..4 &#123;
     <span class="fn">escribir</span>(i)   <span class="co">// 1, 2, 3</span>
 &#125;</code></pre>
@@ -32,7 +32,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <h2>Control de flujo</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 romper / continuar</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> romper / continuar</span></div>
     <pre><code><span class="kw">para</span> i <span class="kw">en</span> 1..10 &#123;
     <span class="kw">si</span> (i == 5) &#123; <span class="kw">romper</span> &#125;      <span class="co">// corta el bucle</span>
     <span class="kw">si</span> (i % 2 == 0) &#123; <span class="kw">continuar</span> &#125; <span class="co">// salta a la siguiente</span>
@@ -41,7 +41,7 @@ import Layout from '../../layouts/Layout.astro';
   </div>
 
   <h2>Ejercicio del día</h2>
-  <div class="warning">✏️ <strong>Ejercicio:</strong> mostrá los números del <code>1</code> al <code>3</code>, uno por línea, usando <code>mientras</code>.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> <strong>Ejercicio:</strong> mostrá los números del <code>1</code> al <code>3</code>, uno por línea, usando <code>mientras</code>.</div>
 
   <p>Comparalo con el <a href="/docs/curso/solucionario/#dia-6">solucionario</a>.</p>
 
