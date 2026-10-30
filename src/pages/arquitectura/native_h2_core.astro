@@ -40,5 +40,5 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Integración con TLS</h2>
   <p>El módulo <code>src/native_h2_tls.rs</code> (178 líneas) extiende <code>native_h2_core</code> con soporte TLS, permitiendo conexiones HTTP/2 seguras (<code>h2://</code>). Usa <code>native-tls</code> para manejar certificados y handshake TLS.</p>
 
-  <div class="info"><strong>⚡ Rendimiento:</strong> HTTP/2 nativo está diseñado para aplicaciones de alto rendimiento. La multiplexación elimina el overhead de múltiples conexiones TCP, y el control de flujo previene que un stream lento bloquee a otros.</div>
+  <div class="info"><strong><svg class="ico" aria-hidden="true"><use href="#i-zap"/></svg> Rendimiento:</strong> HTTP/2 nativo está diseñado para aplicaciones de alto rendimiento. La multiplexación elimina el overhead de múltiples conexiones TCP, y el control de flujo previene que un stream lento bloquee a otros.</div>
 </Layout>
