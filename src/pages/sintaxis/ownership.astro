@@ -7,19 +7,19 @@ import Layout from '../../layouts/Layout.astro';
 
   <p>Forja incorpora los conceptos de <strong>ownership</strong> (propiedad) y <strong>préstamos</strong> (borrowing) de Rust, adaptados al español. Este sistema previene errores de memoria <strong>sin necesidad de un garbage collector</strong>, verificando las reglas en tiempo de compilación.</p>
 
-  <div class="info">🔥 <strong>Idea central:</strong> Cada valor tiene un <strong>único dueño</strong>. Cuando asignás una variable a otra, la propiedad se transfiere (move). Si solo querés prestarla, usá <code>&</code>.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg> <strong>Idea central:</strong> Cada valor tiene un <strong>único dueño</strong>. Cuando asignás una variable a otra, la propiedad se transfiere (move). Si solo querés prestarla, usá <code>&</code>.</div>
 
   <h2>Mutabilidad básica</h2>
 
   <p>Lo más simple: las variables mutables se pueden modificar, las constantes no:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>✅ vs ❌</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-circle-check"/></svg> vs <svg class="ico" aria-hidden="true"><use href="#i-circle-x"/></svg></span></div>
     <pre><code><span class="kw">variable</span> contador = 0
-contador = contador + 1   <span class="co">// ✅ OK: es mutable</span>
+contador = contador + 1   <span class="co">// OK OK: es mutable</span>
 
 <span class="kw">constante</span> maximo = 100
-<span class="co">// maximo = 200  // ❌ ErrorDePropiedad: es inmutable</span></code></pre>
+<span class="co">// maximo = 200  // X ErrorDePropiedad: es inmutable</span></code></pre>
   </div>
 
   <h2>Referencias con <code>&</code></h2>
@@ -27,10 +27,10 @@ contador = contador + 1   <span class="co">// ✅ OK: es mutable</span>
   <p>El operador <code>&</code> crea una <strong>referencia</strong> (préstamo) a una variable. La variable original retiene la propiedad:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔗 Préstamo (referencia)</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-link"/></svg> Préstamo (referencia)</span></div>
     <pre><code><span class="kw">variable</span> x = 42
 <span class="kw">variable</span> ref = &x       <span class="co">// préstamo: ref toma prestado x</span>
-<span class="fn">escribir</span>(x)              <span class="co">// ✅ x sigue siendo el dueño</span></code></pre>
+<span class="fn">escribir</span>(x)              <span class="co">// OK x sigue siendo el dueño</span></code></pre>
   </div>
 
   <h2>Préstamo mutable con <code>&mut</code></h2>
@@ -38,7 +38,7 @@ contador = contador + 1   <span class="co">// ✅ OK: es mutable</span>
   <p>Si necesitás modificar un valor prestado, usá un préstamo mutable:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Préstamo mutable</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Préstamo mutable</span></div>
     <pre><code><span class="kw">variable</span> x = 42
 <span class="kw">variable</span> ref = &mut x    <span class="co">// préstamo mutable</span>
 <span class="co">// ref puede modificar x temporalmente</span></code></pre>
@@ -49,24 +49,24 @@ contador = contador + 1   <span class="co">// ✅ OK: es mutable</span>
   <p>Indica que un parámetro de función se recibe por referencia, no por valor. Así la variable original no se mueve (no pierde ownership):</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📥 Referencia inmutable</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-download"/></svg> Referencia inmutable</span></div>
     <pre><code><span class="kw">funcion</span> mostrar(<span class="kw">prestado</span> valor) &lbrace;
     <span class="fn">escribir</span>(<span class="st">"El valor es: "</span> + valor)
 &rbrace;
 
 <span class="kw">variable</span> dato = 100
 mostrar(dato)                          <span class="co">// presta dato a la función</span>
-<span class="fn">escribir</span>(<span class="st">"Dato sigue disponible: "</span> + dato)  <span class="co">// ✅ sigue vivo</span></code></pre>
+<span class="fn">escribir</span>(<span class="st">"Dato sigue disponible: "</span> + dato)  <span class="co">// OK sigue vivo</span></code></pre>
   </div>
 
-  <div class="info">💡 <strong>Sin <code>prestado</code>: </strong> Si el parámetro no lleva <code>prestado</code>, el valor se <strong>mueve</strong> a la función y la variable original ya no se puede usar.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> <strong>Sin <code>prestado</code>: </strong> Si el parámetro no lleva <code>prestado</code>, el valor se <strong>mueve</strong> a la función y la variable original ya no se puede usar.</div>
 
   <h3>Préstamo mutable con <code>prestado mut</code></h3>
 
   <p>Si además de prestar necesitás que la función <strong>modifique</strong> el valor, usá <code>prestado mut</code>. Equivale a <code>&mut T</code> en Rust:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📥 Referencia mutable</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-download"/></svg> Referencia mutable</span></div>
     <pre><code><span class="kw">funcion</span> duplicar(<span class="kw">prestado</span> <span class="kw">mut</span> valor) &lbrace;
     valor = valor * 2    <span class="co">// se puede modificar</span>
 &rbrace;
@@ -76,7 +76,7 @@ duplicar(&mut x)                     <span class="co">// pasamos &mut explicitam
 <span class="fn">escribir</span>(x)                           <span class="co">// right-arrow 10</span></code></pre>
   </div>
 
-  <div class="warning">⚠️ Cuando usás <code>prestado mut</code>, la llamada debe pasar una referencia mutable explícita con <code>&mut</code>. No podés tener otros préstamos activos mientras exista un préstamo mutable.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> Cuando usás <code>prestado mut</code>, la llamada debe pasar una referencia mutable explícita con <code>&mut</code>. No podés tener otros préstamos activos mientras exista un préstamo mutable.</div>
 
   <h2>Errores que previene el Borrow Checker</h2>
 
@@ -93,7 +93,7 @@ duplicar(&mut x)                     <span class="co">// pasamos &mut explicitam
   <h2>Ejemplo completo</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 ownership</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> ownership</span></div>
     <pre><code><span class="co">// Mutabilidad</span>
 <span class="kw">variable</span> contador = 0
 contador = contador + 1
@@ -126,5 +126,5 @@ mostrar(dato)
     <tr><td><code>prestado mut param</code></td><td><code>param: &mut Tipo</code></td></tr>
   </table>
 
-  <div class="warning">⚠️ <strong>Estado actual:</strong> El Borrow Checker de Forja está operativo para verificar declaración de variables, mutabilidad y ámbitos. El tracking completo de movimientos (move) para tipos no-Copy está en desarrollo activo. La keyword <code><span class="kw">prestado</span></code> en parámetros de función habilita el borrowing explícito.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> <strong>Estado actual:</strong> El Borrow Checker de Forja está operativo para verificar declaración de variables, mutabilidad y ámbitos. El tracking completo de movimientos (move) para tipos no-Copy está en desarrollo activo. La keyword <code><span class="kw">prestado</span></code> en parámetros de función habilita el borrowing explícito.</div>
 </Layout>
