@@ -35,7 +35,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Uso desde Forja</h2>
   <p>Expuesto a través del módulo <code>mmap.fa</code> de la stdlib, que provee funciones como <code>mmap_abrir</code>, <code>mmap_cerrar</code>, <code>mmap_leer</code>, y <code>mmap_escribir</code>. Ideal para procesamiento de archivos grandes, bases de datos, y operaciones de E/S de baja latencia.</p>
 
-  <div class="warning"><strong>⚠️ Seguridad:</strong> El sandbox de red (<code>sandbox.rs</code>) no controla mmap, pero el módulo valida rangos de acceso para prevenir lecturas/escrituras fuera de los límites del mapeo.</div>
+  <div class="warning"><strong><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> Seguridad:</strong> El sandbox de red (<code>sandbox.rs</code>) no controla mmap, pero el módulo valida rangos de acceso para prevenir lecturas/escrituras fuera de los límites del mapeo.</div>
 
-  <div class="info"><strong>💡 Beneficio clave:</strong> mmap es significativamente más rápido que <code>read</code>/<code>write</code> tradicionales para archivos grandes porque elimina la copia entre kernel-space y user-space, y delega la carga de páginas al administrador de memoria virtual del SO.</div>
+  <div class="info"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Beneficio clave:</strong> mmap es significativamente más rápido que <code>read</code>/<code>write</code> tradicionales para archivos grandes porque elimina la copia entre kernel-space y user-space, y delega la carga de páginas al administrador de memoria virtual del SO.</div>
 </Layout>
