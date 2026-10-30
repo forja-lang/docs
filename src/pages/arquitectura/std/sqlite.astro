@@ -24,7 +24,7 @@ import Layout from '../../../layouts/Layout.astro';
 
   <h2>Ejemplo de uso</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 agenda.fa</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> agenda.fa</span></div>
     <pre><code><span class="kw">importar</span> sqlite
 
 <span class="co">// Abrir base de datos</span>
@@ -60,7 +60,7 @@ sqlite.sqlite_cerrar(db)</code></pre>
     <li><strong>Aplicaciones desktop:</strong> Almacenamiento local para apps GUI</li>
   </ul>
 
-  <div class="warning"><strong>⚠️ Seguridad:</strong> Siempre usá las funciones <code>*_params</code> cuando incluyas datos del usuario en consultas SQL. Esto previene <strong>SQL injection</strong>.</div>
+  <div class="warning"><strong><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> Seguridad:</strong> Siempre usá las funciones <code>*_params</code> cuando incluyas datos del usuario en consultas SQL. Esto previene <strong>SQL injection</strong>.</div>
 
-  <div class="info"><strong>💡 Sin servidor:</strong> SQLite es una base de datos embebida que no requiere un servidor separado. La base de datos es un solo archivo <code>.db</code> en el disco.</div>
+  <div class="info"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Sin servidor:</strong> SQLite es una base de datos embebida que no requiere un servidor separado. La base de datos es un solo archivo <code>.db</code> en el disco.</div>
 </Layout>
