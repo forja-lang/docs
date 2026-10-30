@@ -32,5 +32,5 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Uso desde Forja</h2>
   <p>Las funciones se exponen a través del módulo <code>sqlite.fa</code> de la stdlib, que provee una API en español con funciones como <code>sqlite_abrir</code>, <code>sqlite_cerrar</code>, <code>sqlite_ejecutar</code>, <code>sqlite_consultar</code>, <code>sqlite_ultimo_id</code>, y <code>sqlite_tablas</code>.</p>
 
-  <div class="tip"><strong>💡 Seguridad:</strong> Las funciones <code>*_params</code> usan consultas parametrizadas de SQLite para prevenir ataques de <strong>SQL injection</strong>. Siempre que se incluyan datos del usuario en una consulta, deben usarse estas funciones.</div>
+  <div class="tip"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Seguridad:</strong> Las funciones <code>*_params</code> usan consultas parametrizadas de SQLite para prevenir ataques de <strong>SQL injection</strong>. Siempre que se incluyan datos del usuario en una consulta, deben usarse estas funciones.</div>
 </Layout>
