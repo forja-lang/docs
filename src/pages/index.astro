@@ -8,7 +8,7 @@ import DemoForja from '../components/DemoForja.astro';
   description="Forja (fa) es un lenguaje de programación educativo, en español, con contratos y tipado. Compila a nativo, GUI, WASM y más. Probalo en el navegador."
 >
   <section class="hero landing-hero">
-    <div class="hero-eyebrow">🔥 Lenguaje de programación · v0.9.5</div>
+    <div class="hero-eyebrow"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg> Lenguaje de programación · v0.9.6</div>
     <h1>Programá en español.<br />Compilá a todas partes.</h1>
     <p class="hero-pitch">
       <strong>Forja</strong> es un lenguaje educativo con <strong>contratos</strong> y
@@ -17,17 +17,17 @@ import DemoForja from '../components/DemoForja.astro';
       <strong>GUI</strong>, <strong>WASM</strong> y <strong>Android</strong>.
     </p>
     <div class="hero-cta">
-      <a class="cta cta-primary" href="#demo">▶ Probar en el navegador</a>
+      <a class="cta cta-primary" href="#demo"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg> Probar en el navegador</a>
       <a class="cta" href="/docs/instalacion/">Instalar Forja</a>
       <a class="cta" href="/docs/curso/">Curso: Forja en 30 días</a>
     </div>
     <div class="hero-tags">
-      <span class="tagpill">📐 Tipado + contratos</span>
-      <span class="tagpill">⚡ VM propia + JIT</span>
-      <span class="tagpill">🖥️ Compilador ASM</span>
-      <span class="tagpill">🌐 WASM</span>
-      <span class="tagpill">🎨 GUI nativa</span>
-      <span class="tagpill">🦀 Escrito en Rust</span>
+      <span class="tagpill"><svg class="ico" aria-hidden="true"><use href="#i-ruler"/></svg> Tipado + contratos</span>
+      <span class="tagpill"><svg class="ico" aria-hidden="true"><use href="#i-zap"/></svg> VM propia + JIT</span>
+      <span class="tagpill"><svg class="ico" aria-hidden="true"><use href="#i-monitor"/></svg> Compilador ASM</span>
+      <span class="tagpill"><svg class="ico" aria-hidden="true"><use href="#i-globe"/></svg> WASM</span>
+      <span class="tagpill"><svg class="ico" aria-hidden="true"><use href="#i-palette"/></svg> GUI nativa</span>
+      <span class="tagpill"><svg class="ico" aria-hidden="true"><use href="#i-box"/></svg> Escrito en Rust</span>
     </div>
   </section>
 
@@ -35,7 +35,7 @@ import DemoForja from '../components/DemoForja.astro';
     <h2>Probalo ahora, sin instalar nada</h2>
     <p>
       Este es el compilador y la VM reales, compilados a WebAssembly y ejecutándose
-      en tu navegador. Editá el código y presioná <strong>▶ Ejecutar</strong>.
+      en tu navegador. Editá el código y presioná <strong><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg> Ejecutar</strong>.
     </p>
     <DemoForja autoEjecutar={true} alto={280} />
   </section>
@@ -44,32 +44,32 @@ import DemoForja from '../components/DemoForja.astro';
 
   <div class="feature-grid">
     <div class="feature-card">
-      <span class="icon">🇪🇸</span>
+      <span class="icon"><svg class="ico" aria-hidden="true"><use href="#i-flag"/></svg></span>
       <h4>100% en español</h4>
       <p>Palabras clave, tipos, errores y documentación en tu idioma. Ideal para quienes aprenden a programar sin pelear con el inglés.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">📐</span>
+      <span class="icon"><svg class="ico" aria-hidden="true"><use href="#i-ruler"/></svg></span>
       <h4>Tipado y contratos</h4>
       <p>Verificador de tipos, <em>borrow checker</em> y <em>design by contract</em>: <code>requiere</code>, <code>asegura</code> e <code>siempre</code> como parte del lenguaje.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">🧠</span>
+      <span class="icon"><svg class="ico" aria-hidden="true"><use href="#i-brain"/></svg></span>
       <h4>Aprendés cómo funciona</h4>
       <p>Un compilador real: lexer, parser, AST, semántica, optimizador, bytecode, VM, JIT y generación de código. Nada de cajas negras.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">⚡</span>
+      <span class="icon"><svg class="ico" aria-hidden="true"><use href="#i-zap"/></svg></span>
       <h4>Un motor, muchas salidas</h4>
       <p>Un mismo programa corre en la VM <strong>ForjaFast</strong>, en el <strong>JIT</strong> x86-64, como <strong>assembly</strong> nativo, como <strong>Rust</strong> o en el <strong>navegador</strong>.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">🎓</span>
+      <span class="icon"><svg class="ico" aria-hidden="true"><use href="#i-graduation-cap"/></svg></span>
       <h4>Pensado para enseñar</h4>
       <p>Errores con línea, código y sugerencia en español. Un curso de 30 días, 260+ ejemplos y un playground para practicar.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">📦</span>
+      <span class="icon"><svg class="ico" aria-hidden="true"><use href="#i-package"/></svg></span>
       <h4>Ecosistema propio</h4>
       <p>Biblioteca estándar, gestor de paquetes, GUI nativa, LSP para tu editor y un depurador integrado.</p>
     </div>
@@ -84,32 +84,32 @@ import DemoForja from '../components/DemoForja.astro';
 
   <div class="pipeline-grid">
     <div class="pipeline-card">
-      <span class="pipeline-icon">⚙️</span>
+      <span class="pipeline-icon"><svg class="ico" aria-hidden="true"><use href="#i-settings"/></svg></span>
       <h4>VM ForjaFast</h4>
       <p>Intérprete de bytecode con NaN-tagging, stack caching y GC generacional. El destino por defecto al ejecutar.</p>
     </div>
     <div class="pipeline-card">
-      <span class="pipeline-icon">📶</span>
+      <span class="pipeline-icon"><svg class="ico" aria-hidden="true"><use href="#i-signal"/></svg></span>
       <h4>JIT tiered</h4>
       <p>Compilación en caliente a código máquina x86-64, con niveles y OSR, sobre el mismo bytecode.</p>
     </div>
     <div class="pipeline-card">
-      <span class="pipeline-icon">🖥️</span>
+      <span class="pipeline-icon"><svg class="ico" aria-hidden="true"><use href="#i-monitor"/></svg></span>
       <h4>Assembly nativo</h4>
       <p>Compilación a código ensamblador x86-64 / ARM64 y enlace con <code>gcc -O2</code>.</p>
     </div>
     <div class="pipeline-card">
-      <span class="pipeline-icon">🦀</span>
+      <span class="pipeline-icon"><svg class="ico" aria-hidden="true"><use href="#i-box"/></svg></span>
       <h4>Transpilador a Rust</h4>
       <p>Tu programa se convierte en un proyecto Cargo listo para <code>rustc</code>.</p>
     </div>
     <div class="pipeline-card">
-      <span class="pipeline-icon">🌐</span>
+      <span class="pipeline-icon"><svg class="ico" aria-hidden="true"><use href="#i-globe"/></svg></span>
       <h4>WASM / Web</h4>
       <p>El compilador y la VM se empaquetan a WebAssembly: el playground que ves arriba.</p>
     </div>
     <div class="pipeline-card">
-      <span class="pipeline-icon">📱</span>
+      <span class="pipeline-icon"><svg class="ico" aria-hidden="true"><use href="#i-smartphone"/></svg></span>
       <h4>Android</h4>
       <p>Runtime nativo vía JNI para llevar tus apps a dispositivos Android.</p>
     </div>
@@ -120,7 +120,7 @@ import DemoForja from '../components/DemoForja.astro';
   <p>Una función con contrato y tipo: se verifica antes de ejecutar y falla con un mensaje claro.</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 contratos.fa</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> contratos.fa</span></div>
     <pre><code><span class="co">// El contrato es parte de la firma</span>
 <span class="kw">funcion</span> <span class="fn">dividir</span>(a: <span class="ty">Entero</span>, b: <span class="ty">Entero</span>) -&gt; <span class="ty">Entero</span>
     <span class="kw">requiere</span> b != 0, <span class="st">"No se puede dividir por cero"</span>
@@ -142,7 +142,7 @@ import DemoForja from '../components/DemoForja.astro';
   </ol>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>💻 Línea de comandos</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-monitor"/></svg> Línea de comandos</span></div>
     <pre><code><span class="co"># Instalar desde el código fuente</span>
 git clone https://github.com/forja-lang/forja
 cd forja &amp;&amp; cargo build --release
@@ -161,39 +161,39 @@ forja repl</code></pre>
 
   <div class="feature-grid">
     <div class="feature-card">
-      <span class="icon">🎓</span>
+      <span class="icon"><svg class="ico" aria-hidden="true"><use href="#i-graduation-cap"/></svg></span>
       <h4><a href="/docs/curso/">Curso: Forja en 30 días</a></h4>
       <p>30 capítulos con ejercicios y solucionario, de cero a proyecto final.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">▶</span>
+      <span class="icon"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg></span>
       <h4><a href="/docs/playground/">Playground</a></h4>
       <p>El editor completo, con ejemplos listos y salida en vivo.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">📝</span>
+      <span class="icon"><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg></span>
       <h4><a href="/docs/ejemplos/">Ejemplos</a></h4>
       <p>260+ programas comentados: algoritmos, juegos, red, GUI y más.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">🔧</span>
+      <span class="icon"><svg class="ico" aria-hidden="true"><use href="#i-wrench"/></svg></span>
       <h4><a href="/docs/sintaxis/variables/">Guía del lenguaje</a></h4>
       <p>Referencia completa: tipos, funciones, clases, módulos y contratos.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">🏗️</span>
+      <span class="icon"><svg class="ico" aria-hidden="true"><use href="#i-building-2"/></svg></span>
       <h4><a href="/docs/arquitectura/pipeline/">Arquitectura</a></h4>
       <p>Cómo funciona el compilador por dentro, módulo por módulo.</p>
     </div>
     <div class="feature-card">
-      <span class="icon">📰</span>
+      <span class="icon"><svg class="ico" aria-hidden="true"><use href="#i-newspaper"/></svg></span>
       <h4><a href="/docs/blog/lanzamiento/">Anuncio de lanzamiento</a></h4>
       <p>La historia del proyecto y por qué lo construimos en español.</p>
     </div>
   </div>
 
   <details>
-    <summary><strong>🔬 Detalle técnico: stack y arquitectura completa</strong></summary>
+    <summary><strong><svg class="ico" aria-hidden="true"><use href="#i-microscope"/></svg> Detalle técnico: stack y arquitectura completa</strong></summary>
     <p>
       Forja está escrito en Rust puro. Estos son los componentes principales del
       compilador y el runtime:
