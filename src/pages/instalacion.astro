@@ -7,7 +7,7 @@ import Layout from '../layouts/Layout.astro';
 
   <p>Compilá Forja desde el código fuente. Solo necesitás <strong>Rust</strong> instalado en tu sistema.</p>
 
-  <h2>⚡ Instalación rápida (sin Rust)</h2>
+  <h2><svg class="ico" aria-hidden="true"><use href="#i-zap"/></svg> Instalación rápida (sin Rust)</h2>
 
   <p>
     Si solo querés <strong>usar</strong> Forja, descargá el binario precompilado de
@@ -15,12 +15,12 @@ import Layout from '../layouts/Layout.astro';
   </p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🐧🍎 Linux / macOS</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-snowflake"/></svg><svg class="ico" aria-hidden="true"><use href="#i-apple"/></svg> Linux / macOS</span></div>
     <pre><code>curl -fsSL https://raw.githubusercontent.com/forja-lang/forja/main/scripts/install.sh | sh</code></pre>
   </div>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🪟 Windows (PowerShell)</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-app-window"/></svg> Windows (PowerShell)</span></div>
     <pre><code>irm https://raw.githubusercontent.com/forja-lang/forja/main/scripts/install.ps1 | iex</code></pre>
   </div>
 
@@ -45,14 +45,14 @@ import Layout from '../layouts/Layout.astro';
   </table>
 
   <div class="info">
-    🔐 <strong>Integridad:</strong> cada release publica un archivo
+    <svg class="ico" aria-hidden="true"><use href="#i-lock-keyhole"/></svg> <strong>Integridad:</strong> cada release publica un archivo
     <code>SHA256SUMS</code> y una atestación de procedencia de build. Verificá con
     <code>sha256sum -c SHA256SUMS</code> antes de ejecutar.
   </div>
 
-  <h2>🛠️ Compilar desde el código fuente</h2>
+  <h2><svg class="ico" aria-hidden="true"><use href="#i-wrench"/></svg> Compilar desde el código fuente</h2>
 
-  <div class="info">💡 <strong>Requisito único:</strong> <a href="https://rustup.rs" target="_blank">rustup.rs</a> — Instalá Rust con <code>rustup-init.exe</code> en Windows, o con el script oficial en Linux/Mac.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> <strong>Requisito único:</strong> <a href="https://rustup.rs" target="_blank">rustup.rs</a> — Instalá Rust con <code>rustup-init.exe</code> en Windows, o con el script oficial en Linux/Mac.</div>
 
   <ol class="step-list">
     <li><strong>Clonar el repositorio</strong> — Descargá el código fuente de Forja</li>
@@ -65,7 +65,7 @@ import Layout from '../layouts/Layout.astro';
   <h2>1. Clonar el repositorio</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📥 Terminal</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-download"/></svg> Terminal</span></div>
     <pre><code>git clone https://github.com/forja-lang/forja
 <span class="kw">cd</span> forja</code></pre>
   </div>
@@ -73,31 +73,31 @@ import Layout from '../layouts/Layout.astro';
   <h2>2. Compilar</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔨 Modo debug</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-hammer"/></svg> Modo debug</span></div>
     <pre><code>cargo build</code></pre>
   </div>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🚀 Modo release (recomendado para benchmarks)</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-rocket"/></svg> Modo release (recomendado para benchmarks)</span></div>
     <pre><code>cargo build --release</code></pre>
   </div>
 
   <h2>3. Verificar</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>✅ Probar el binario</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-circle-check"/></svg> Probar el binario</span></div>
     <pre><code>.\target\release\forja.exe --help</code></pre>
   </div>
 
   <p>Deberías ver la ayuda completa del comando Forja con todas las opciones disponibles.</p>
 
-  <div class="info">🔧 <strong>Pro tip:</strong> Agregá la carpeta del binario a tu PATH para usar <code>forja</code> desde cualquier directorio:
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-wrench"/></svg> <strong>Pro tip:</strong> Agregá la carpeta del binario a tu PATH para usar <code>forja</code> desde cualquier directorio:
   <br><code>$env:Path += ";C:\Users\tu.usuario\forja\target\release\"</code> (PowerShell)</div>
 
   <h2>4. Ejecutar los tests</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🧪 Suite de 90+ tests</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-flask-conical"/></svg> Suite de 90+ tests</span></div>
     <pre><code><span class="co"># Todos los tests</span>
 cargo test
 
@@ -113,7 +113,7 @@ cargo test -- vm</code></pre>
   <h2>5. Probar con un ejemplo</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🎯 Primer programa</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg> Primer programa</span></div>
     <pre><code>cargo run --release --bin forja -- run ejemplos/01_hola.fa
 <span class="co">// → ¡Hola, mundo desde Forja!</span></code></pre>
   </div>
