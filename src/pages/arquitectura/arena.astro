@@ -30,7 +30,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Cómo se integra</h2>
   <p>Se usa en las fases de compilación que producen muchas estructuras temporales de vida acotada (AST, símbolos, IR intermedio). Al final de cada pasada, <code>reset()</code> recupera toda la memoria de una sola vez sin costo de <code>free</code> individual. <code>ScopedArena</code> permite, además, marcar niveles: <code>push_scope</code> guarda el <code>total_allocated</code> actual y <code>pop_scope</code> rebobina los chunks a ese punto.</p>
 
-  <div class="warning"><strong>⚠️</strong> <code>alloc&lt;T&gt;</code> solo funciona correctamente cuando no se mantienen referencias previas al hacer nuevas asignaciones (los chunks pueden reubicarse o crearse nuevos). Usá <code>alloc_raw</code> si necesitás punteros estables.</div>
+  <div class="warning"><strong><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg></strong> <code>alloc&lt;T&gt;</code> solo funciona correctamente cuando no se mantienen referencias previas al hacer nuevas asignaciones (los chunks pueden reubicarse o crearse nuevos). Usá <code>alloc_raw</code> si necesitás punteros estables.</div>
 
-  <div class="info"><strong>💡</strong> <code>pop_scope</code> invalida todas las referencias asignadas desde el <code>push_scope</code> correspondiente: es el mecanismo de "liberar por nivel" que evita leaks en pasadas anidadas del compilador.</div>
+  <div class="info"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg></strong> <code>pop_scope</code> invalida todas las referencias asignadas desde el <code>push_scope</code> correspondiente: es el mecanismo de "liberar por nivel" que evita leaks en pasadas anidadas del compilador.</div>
 </Layout>
