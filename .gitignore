@@ -9,3 +9,4 @@ dist/
 *.md
 !/*.md
 !README.md
+.chrome-test-*/
