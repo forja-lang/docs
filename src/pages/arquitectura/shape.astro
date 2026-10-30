@@ -32,5 +32,5 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Cómo se integra</h2>
   <p>El registry mantiene el mapa <code>clase_a_shape</code> (clase → shape base) y es consultado por el compilador y la VM para compilar accesos a campos a índices directos, y para resolver campos dinámicos en tiempo de ejecución.</p>
 
-  <div class="info"><strong>💡</strong> El patrón de transiciones con shape padre cacheado evita generar un shape nuevo por cada objeto distinto: el mismo <code>ShapeId</code> se comparte entre todos los objetos con idéntica estructura.</div>
+  <div class="info"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg></strong> El patrón de transiciones con shape padre cacheado evita generar un shape nuevo por cada objeto distinto: el mismo <code>ShapeId</code> se comparte entre todos los objetos con idéntica estructura.</div>
 </Layout>
