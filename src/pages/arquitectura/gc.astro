@@ -42,7 +42,7 @@ import Layout from '../../layouts/Layout.astro';
   <pre><code>set_field(obj, offset, new_value); // mutar primero
 gc.write_barrier(&amp;obj, offset);    // notificar al GC</code></pre>
 
-  <div class="warning"><strong>⚠️</strong> Sin write barriers, una referencia old→young que se cree durante la ejecución hace que la young collection libere objetos vivos: <code>use-after-free</code>.</div>
+  <div class="warning"><strong><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg></strong> Sin write barriers, una referencia old→young que se cree durante la ejecución hace que la young collection libere objetos vivos: <code>use-after-free</code>.</div>
 
-  <div class="tip"><strong>💡</strong> Los umbrales se calculan al 80% del tamaño de cada generación (<code>nursery_threshold</code> y <code>old_threshold</code>), y los tamaños por defecto son 4 MB de nursery, 4 MB de survivor y 16 MB de old (<code>with_sizes</code> permite personalizarlos).</div>
+  <div class="tip"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg></strong> Los umbrales se calculan al 80% del tamaño de cada generación (<code>nursery_threshold</code> y <code>old_threshold</code>), y los tamaños por defecto son 4 MB de nursery, 4 MB de survivor y 16 MB de old (<code>with_sizes</code> permite personalizarlos).</div>
 </Layout>
