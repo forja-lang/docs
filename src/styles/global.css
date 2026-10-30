@@ -1018,6 +1018,189 @@ pre code {
 .op { color: var(--syn-op); }
 .nu { color: var(--syn-nu); }
 
+/* ---------- Iconos (sprite lucide) ---------- */
+.ico {
+  width: 1em;
+  height: 1em;
+  flex: none;
+  vertical-align: -0.15em;
+}
+
+/* ---------- Botón Ejecutar + mini consola ---------- */
+.code-header > span:first-child {
+  margin-right: auto;
+}
+
+.run-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.run-btn:hover {
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+pre + .run-console {
+  margin: 0;
+}
+
+.run-console {
+  padding: 12px 16px;
+  background: #0b0a08;
+  color: var(--syn-fn);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  box-shadow: inset 0 1px 0 var(--line);
+}
+
+.run-console .run-out {
+  color: var(--syn-fn);
+}
+
+.run-console .run-msg {
+  color: var(--faint);
+  font-style: italic;
+}
+
+.run-console.is-running .run-msg {
+  color: var(--accent);
+}
+
+.run-console .run-error {
+  color: var(--danger);
+}
+
+.run-console .run-time {
+  margin-top: 8px;
+  color: var(--faint);
+  font-size: 10.5px;
+}
+
+/* ---------- Ver código (arquitectura) ---------- */
+.ver-codigo {
+  margin-top: 44px;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.ver-codigo-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px 12px 16px;
+  background: var(--surface-soft);
+}
+
+.ver-codigo-titulo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.ver-codigo-btn {
+  flex: none;
+}
+
+.ver-codigo-cuerpo {
+  border-top: 1px solid var(--line);
+}
+
+.ver-codigo-pre {
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  max-height: 560px;
+}
+
+.ver-codigo-cargando,
+.ver-codigo-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.ver-codigo-error {
+  color: var(--danger);
+}
+
+.spinner {
+  animation: girar 0.9s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Rust cargado de GitHub: highlight.js mapeado a la paleta --syn-* */
+.ver-codigo-pre .hljs-keyword,
+.ver-codigo-pre .hljs-literal {
+  color: var(--syn-kw);
+  font-weight: 600;
+}
+
+.ver-codigo-pre .hljs-string,
+.ver-codigo-pre .hljs-char {
+  color: var(--syn-st);
+}
+
+.ver-codigo-pre .hljs-comment {
+  color: var(--syn-co);
+  font-style: italic;
+}
+
+.ver-codigo-pre .hljs-number {
+  color: var(--syn-nu);
+}
+
+.ver-codigo-pre .hljs-type,
+.ver-codigo-pre .hljs-title.class,
+.ver-codigo-pre .hljs-built_in {
+  color: var(--syn-ty);
+}
+
+.ver-codigo-pre .hljs-title,
+.ver-codigo-pre .hljs-title.function {
+  color: var(--syn-fn);
+}
+
+.ver-codigo-pre .hljs-meta,
+.ver-codigo-pre .hljs-attr {
+  color: var(--syn-op);
+}
+
+.ver-codigo-pre .hljs-symbol {
+  color: var(--syn-ty);
+}
+
 /* ---------- Callouts ---------- */
 .info,
 .warning,
