@@ -6,6 +6,8 @@ import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Sidebar from "../components/Sidebar.astro";
+import SpriteIconos from "../components/SpriteIconos.astro";
+import { fuentePara } from "../data/codigo";
 
 export interface Props {
   title: string;
@@ -13,6 +15,7 @@ export interface Props {
 }
 
 const { title, description = "Documentación del lenguaje de programación Forja (fa)" } = Astro.props;
+const fuente = fuentePara(Astro.url.pathname);
 ---
 
 <!doctype html>
@@ -43,6 +46,7 @@ const { title, description = "Documentación del lenguaje de programación Forja
   <body>
     <a class="skip-link" href="#content">Saltar al contenido</a>
     <div id="progress" aria-hidden="true"></div>
+    <SpriteIconos />
 
     <Header />
 
@@ -53,6 +57,21 @@ const { title, description = "Documentación del lenguaje de programación Forja
 
       <main class="docs-content prose" id="content" data-content>
         <slot />
+
+        {fuente && (
+          <section class="ver-codigo" data-ver-codigo data-repo={fuente.repo} data-ruta={fuente.path}>
+            <div class="ver-codigo-head">
+              <span class="ver-codigo-titulo">
+                <svg class="ico" aria-hidden="true"><use href="#i-code"/></svg>
+                {fuente.repo.replace("forja-lang/", "")}/{fuente.path}
+              </span>
+              <button type="button" class="btn btn-sm ver-codigo-btn" data-ver-codigo-btn>
+                <svg class="ico" aria-hidden="true"><use href="#i-code"/></svg> Ver código
+              </button>
+            </div>
+            <div class="ver-codigo-cuerpo" data-ver-codigo-cuerpo hidden></div>
+          </section>
+        )}
       </main>
 
       <aside class="docs-toc" aria-label="En esta página">
@@ -65,16 +84,22 @@ const { title, description = "Documentación del lenguaje de programación Forja
 
     <script>
       import { navLinks } from "../data/nav";
+      import { ejecutarForja } from "../wasm/run.js";
+      import { resaltarForja, resaltarRust } from "../wasm/highlight.js";
 
       /* ── Tema ──────────────────────────────────────────────── */
       const THEME_KEY = "forja-theme";
 
-      function setTheme(theme: "dark" | "light") {
+      function aplicarTema(theme: "dark" | "light") {
         document.documentElement.dataset.theme = theme;
-        localStorage.setItem(THEME_KEY, theme);
         document
           .querySelector("[data-theme-color]")
           ?.setAttribute("content", theme === "light" ? "#f7f4ee" : "#0a0908");
+      }
+
+      function setTheme(theme: "dark" | "light") {
+        aplicarTema(theme);
+        localStorage.setItem(THEME_KEY, theme);
       }
 
       /* ── Listener delegados: el router reemplaza el <body> ── */
@@ -216,6 +241,119 @@ const { title, description = "Documentación del lenguaje de programación Forja
         });
       }
 
+      /* ── Ejecutar bloques Forja + mini consola ─────────────── */
+      function esForja(codigo: string) {
+        // Sin comentarios ni strings, para no confundir palabras sueltas.
+        const limpio = codigo
+          .replace(/\/\/[^\n]*/g, " ")
+          .replace(/\/\*[\s\S]*?\*\//g, " ")
+          .replace(/"(?:[^"\\]|\\.)*"/g, ' "" ')
+          .replace(/'(?:[^'\\]|\\.)'/g, " ' ' ");
+        // Rust (inglés) → no es Forja, no ejecutable.
+        if (/\b(pub|struct|enum|impl|trait|use|mod|match|self|fn|let|unsafe|async|await|dyn|ref|move|where|type|for|while|if|else|return|static|Option|Result|Vec|String)\b/.test(limpio)) {
+          return false;
+        }
+        // Forja (español).
+        return /\b(variable|constante|funcion|escribir|leer|para|mientras|si|sino|retornar|clase|rasgo|coincidir|caso|importar|Texto|Entero|Decimal|Booleano|Exacto|verdadero|falso|nulo|requiere|asegura|siempre|nuevo|constructor|implementa|seleccionar|resultado|repetir|romper|continuar|hilo|canal|prestado|enviar|recibir)\b/.test(limpio);
+      }
+
+      async function ejecutarBloque(pre: HTMLElement, cons: HTMLElement) {
+        const codigo = (pre.textContent ?? "").trim();
+        cons.hidden = false;
+        cons.classList.add("is-running");
+        cons.innerHTML = '<span class="run-msg">Ejecutando…</span>';
+        try {
+          const { salida, ms } = await ejecutarForja(codigo);
+          cons.classList.remove("is-running");
+          cons.innerHTML = "";
+          if (salida) {
+            salida.split("\n").forEach((linea) => {
+              const d = document.createElement("div");
+              d.className = "run-out";
+              d.textContent = linea || " ";
+              cons.appendChild(d);
+            });
+          } else {
+            cons.innerHTML = '<span class="run-msg">(sin salida)</span>';
+          }
+          const tiempo = document.createElement("div");
+          tiempo.className = "run-time";
+          tiempo.textContent = ms + " ms";
+          cons.appendChild(tiempo);
+        } catch (err) {
+          cons.classList.remove("is-running");
+          cons.innerHTML = `<span class="run-error">${(err as Error).message}</span>`;
+        }
+      }
+
+      function initRunBlocks() {
+        document.querySelectorAll<HTMLElement>("pre").forEach((pre) => {
+          // Forja = palabras clave en español; los bloques de Rust/bash/salida no.
+          const codigo = (pre.textContent ?? "").trim();
+          if (!esForja(codigo)) return;
+          const contenedor = pre.closest<HTMLElement>(".code-block-wrapper") ?? pre;
+          if (contenedor.querySelector("[data-run-btn]")) return;
+
+          const boton = document.createElement("button");
+          boton.type = "button";
+          boton.className = "run-btn";
+          boton.dataset.runBtn = "";
+          boton.innerHTML = '<svg class="ico" aria-hidden="true"><use href="#i-play"/></svg> Ejecutar';
+
+          const consola = document.createElement("div");
+          consola.className = "run-console";
+          consola.hidden = true;
+          consola.innerHTML = '<span class="run-msg">Presioná Ejecutar para correr este ejemplo</span>';
+
+          const header = contenedor.querySelector(".code-header");
+          if (header) {
+            header.appendChild(boton);
+            pre.after(consola);
+          } else {
+            pre.after(boton, consola);
+          }
+          boton.addEventListener("click", () => ejecutarBloque(pre, consola));
+        });
+      }
+
+      /* ── Ver código desde GitHub (arquitectura) ────────────── */
+      function initVerCodigo() {
+        const seccion = document.querySelector<HTMLElement>("[data-ver-codigo]");
+        if (!seccion) return;
+        const boton = seccion.querySelector<HTMLButtonElement>("[data-ver-codigo-btn]");
+        const cuerpo = seccion.querySelector<HTMLElement>("[data-ver-codigo-cuerpo]");
+        if (!boton || !cuerpo || boton.dataset.listo) return;
+        boton.dataset.listo = "1";
+
+        boton.addEventListener("click", async () => {
+          if (seccion.classList.contains("is-open")) {
+            seccion.classList.remove("is-open");
+            cuerpo.hidden = true;
+            return;
+          }
+          const repo = seccion.dataset.repo ?? "";
+          const ruta = seccion.dataset.ruta ?? "";
+          seccion.classList.add("is-open");
+          cuerpo.hidden = false;
+          cuerpo.innerHTML =
+            '<span class="ver-codigo-cargando"><svg class="ico spinner" aria-hidden="true"><use href="#i-loader-circle"/></svg> Cargando…</span>';
+          try {
+            const res = await fetch(`https://raw.githubusercontent.com/${repo}/main/${ruta}`);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const texto = await res.text();
+            const pre = document.createElement("pre");
+            pre.className = "ver-codigo-pre";
+            const code = document.createElement("code");
+            code.innerHTML = ruta.endsWith(".rs") ? resaltarRust(texto) : resaltarForja(texto);
+            pre.appendChild(code);
+            cuerpo.innerHTML = "";
+            cuerpo.appendChild(pre);
+          } catch (err) {
+            cuerpo.innerHTML = `<span class="ver-codigo-error">No se pudo cargar ${ruta}: ${(err as Error).message}</span>`;
+          }
+        });
+      }
+
       /* ── Paginador anterior / siguiente ────────────────────── */
       function buildPager(navLinks: { title: string; href: string }[]) {
         const content = document.querySelector<HTMLElement>("[data-content]");
@@ -265,14 +403,39 @@ const { title, description = "Documentación del lenguaje de programación Forja
         { passive: true },
       );
 
+      /* ── Diagramas mermaid (carga perezosa) ──────────────── */
+      let mermaidApi: any = null;
+
+      async function renderMermaid() {
+        const nodos = document.querySelectorAll(".mermaid:not([data-processed])");
+        if (!nodos.length) return;
+        try {
+          if (!mermaidApi) {
+            const mod = await import("mermaid");
+            mermaidApi = mod.default ?? mod;
+            mermaidApi.initialize({ startOnLoad: false, theme: "dark", securityLevel: "loose" });
+          }
+          await mermaidApi.run({ nodes: nodos });
+        } catch (err) {
+          console.warn("Mermaid no disponible:", (err as Error)?.message ?? err);
+        }
+      }
+
       /* ── Arranque y reinicio en cada navegación ────────────── */
       function initPage() {
         document.querySelector("#mobile-menu")?.classList.remove("is-open");
         document.documentElement.style.overflow = "";
+        // El ClientRouter reemplaza el <html> (con data-theme="dark" hardcodeado)
+        // en cada navegación: re-aplicar el tema guardado para no volver a oscuro.
+        const guardado = localStorage.getItem(THEME_KEY);
+        if (guardado === "light" || guardado === "dark") aplicarTema(guardado);
         markActive();
         buildToc();
         addCopyButtons();
+        initRunBlocks();
+        initVerCodigo();
         buildPager(navLinks);
+        renderMermaid();
         updateProgress();
         // Compatibilidad: playground y DemoForja esperan este evento.
         window.dispatchEvent(new CustomEvent("page-loaded", { detail: location.pathname }));
