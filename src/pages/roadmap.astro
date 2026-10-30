@@ -15,7 +15,7 @@ import Layout from '../layouts/Layout.astro';
   </p>
 
   <div class="info">
-    🔥 <strong>Estado actual: Forja v0.9.5.</strong> ~137.562 líneas de Rust
+    🔥 <strong>Estado actual: Forja v0.9.5.</strong> ~137.571 líneas de Rust
     (~72.000 en <code>src/</code> y ~36.000 en <code>crates/</code>), <strong>2 motores</strong>
     (<code>vm_fast</code> + <code>jit_tiered</code>), frontend en
     <code>forja-syntax</code> / <code>forja-types</code>, <strong>263 ejemplos</strong>,
@@ -295,9 +295,9 @@ import Layout from '../layouts/Layout.astro';
 <!-- BEGIN plan4: generado por scripts/metricas.py -->
   <div class="feature-grid">
     <div class="feature-card"><span class="icon">✅</span><h4>F11 — IR completo y paridad</h4><p>HECHO</p></div>
-    <div class="feature-card"><span class="icon">🚧</span><h4>F12 — Runtime, concurrencia y datos</h4><p>EN-CURSO — T1/T2/T5 hechos; T3 (corpus 259/260 compilan, 220/260 corren) y T4 (firmas/límites/auditoría hechos, falta OIDC/TLS/despliegue) parciales</p></div>
-    <div class="feature-card"><span class="icon">🔒</span><h4>F13 — Distribución y CI real</h4><p>BLOQUEADO-EXTERNO</p></div>
-    <div class="feature-card"><span class="icon">🚧</span><h4>F14 — Calidad y ecosistema</h4><p>EN-CURSO — T2 (rendimiento AST vs IR) y T3 (firmas Ed25519) hechos; T1 excluido (GUI); T4 hecho</p></div>
+    <div class="feature-card"><span class="icon">🚧</span><h4>F12 — Runtime, concurrencia y datos</h4><p>EN-CURSO — T1/T2/T5 hechos; T3 (259/260 compilan, 220/260 corren) y T4 (firmas/límites/auditoría hechos; falta OIDC/TLS/despliegue) parciales</p></div>
+    <div class="feature-card"><span class="icon">🔒</span><h4>F13 — Distribución y CI real</h4><p>BLOQUEADO-EXTERNO (workflows corregidos y validados en local, nunca ejecutados en GitHub)</p></div>
+    <div class="feature-card"><span class="icon">🚧</span><h4>F14 — Calidad y ecosistema</h4><p>EN-CURSO — T2 (rendimiento AST vs IR) y T3 (firmas Ed25519) y T4 (docs vivas) hechos; T1 excluido por el usuario (GUI)</p></div>
   </div>
 <!-- END plan4 -->
 </Layout>
