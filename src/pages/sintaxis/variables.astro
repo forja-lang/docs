@@ -7,18 +7,18 @@ import Layout from '../../layouts/Layout.astro';
 
   <p>Forja distingue entre <strong>variables</strong> (mutables, se pueden reasignar) y <strong>constantes</strong> (inmutables, no se pueden modificar). Esto refleja el sistema de mutabilidad de Rust pero con palabras en español.</p>
 
-  <div class="info">🔥 <strong>Regla de oro:</strong> <code><span class="kw">variable</span></code> = <code>let mut</code> en Rust. <code><span class="kw">constante</span></code> = <code>let</code> en Rust.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg> <strong>Regla de oro:</strong> <code><span class="kw">variable</span></code> = <code>let mut</code> en Rust. <code><span class="kw">constante</span></code> = <code>let</code> en Rust.</div>
 
   <h2><code>variable</code> — Mutable</h2>
 
   <p>Las variables se pueden reasignar cuantas veces quieras:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Reasignación permitida</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Reasignación permitida</span></div>
     <pre><code><span class="kw">variable</span> nombre = <span class="st">"Gaucho"</span>
 <span class="kw">variable</span> edad = 30
 
-<span class="co">// ✅ Reasignación permitida</span>
+<span class="co">// OK Reasignación permitida</span>
 edad = 31
 nombre = <span class="st">"Otro nombre"</span></code></pre>
   </div>
@@ -28,11 +28,11 @@ nombre = <span class="st">"Otro nombre"</span></code></pre>
   <p>Las constantes no pueden modificarse después de su declaración:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 No se puede reasignar</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> No se puede reasignar</span></div>
     <pre><code><span class="kw">constante</span> altura = 1.85
 <span class="kw">constante</span> pais = <span class="st">"Argentina"</span>
 
-<span class="co">// ❌ Error: No se puede modificar una constante</span>
+<span class="co">// X Error: No se puede modificar una constante</span>
 <span class="co">// altura = 2.0  → ErrorDePropiedad</span></code></pre>
   </div>
 
@@ -41,7 +41,7 @@ nombre = <span class="st">"Otro nombre"</span></code></pre>
   <p>Podés declarar el tipo después del nombre con <code>: Tipo</code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Tipado explícito</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Tipado explícito</span></div>
     <pre><code><span class="kw">variable</span> nombre: <span class="ty">Texto</span> = <span class="st">"Gaucho"</span>
 <span class="kw">variable</span> edad: <span class="ty">Entero</span> = 30
 <span class="kw">variable</span> altura: <span class="ty">Decimal</span> = 1.85
@@ -53,12 +53,12 @@ nombre = <span class="st">"Otro nombre"</span></code></pre>
   <p>Podés declarar una variable sin asignarle valor, aunque necesitás especificar el tipo:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Declaración sin inicialización</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Declaración sin inicialización</span></div>
     <pre><code><span class="kw">variable</span> mensaje: <span class="ty">Texto</span> = <span class="st">""</span>
 <span class="kw">variable</span> contador = 0</code></pre>
   </div>
 
-  <div class="info">💡 Forja infiere el tipo automáticamente. Solo necesitás especificarlo cuando no hay valor inicial o cuando querés forzar un tipo distinto al inferido.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Forja infiere el tipo automáticamente. Solo necesitás especificarlo cuando no hay valor inicial o cuando querés forzar un tipo distinto al inferido.</div>
 
 
   <h2>Reasignación de variables</h2>
@@ -66,16 +66,16 @@ nombre = <span class="st">"Otro nombre"</span></code></pre>
   <p>Una vez declarada con <code>variable</code>, podés cambiar su valor con el operador <code>=</code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Reasignación</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Reasignación</span></div>
     <pre><code><span class="kw">variable</span> contador = 0
-contador = 10            <span class="co">// ✅ Reasignación permitida</span>
-contador = contador + 1  <span class="co">// ✅ Se puede reasignar con expresiones</span>
+contador = 10            <span class="co">// OK Reasignación permitida</span>
+contador = contador + 1  <span class="co">// OK Se puede reasignar con expresiones</span>
 
 <span class="kw">constante</span> maximo = 100
-<span class="co">// maximo = 200  → ErrorDePropiedad (❌ constante es inmutable)</span></code></pre>
+<span class="co">// maximo = 200  → ErrorDePropiedad (X constante es inmutable)</span></code></pre>
   </div>
 
-  <div class="warning">⚠️ Solo las variables declaradas con <code>variable</code> pueden reasignarse. Las declaradas con <code>constante</code> son inmutables.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> Solo las variables declaradas con <code>variable</code> pueden reasignarse. Las declaradas con <code>constante</code> son inmutables.</div>
 
 
   <h2>Asignación múltiple</h2>
@@ -83,13 +83,13 @@ contador = contador + 1  <span class="co">// ✅ Se puede reasignar con expresio
   <p>Podés declarar varias variables de una sola vez separándolas con comas. Todas comparten la misma mutabilidad y el mismo valor inicial:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Múltiples variables</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Múltiples variables</span></div>
     <pre><code><span class="kw">variable</span> a, b = 0          <span class="co">// a = 0, b = 0 (ambas mutables)</span>
 <span class="kw">constante</span> x, y = 10        <span class="co">// x = 10, y = 10 (ambas inmutables)</span>
 <span class="kw">variable</span> m, n = <span class="fn">leer</span>()    <span class="co">// ambas reciben el mismo valor de entrada</span></code></pre>
   </div>
 
-  <div class="info">💡 Es útil para inicializar varias variables al mismo valor, o para recibir el mismo resultado en múltiples variables.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Es útil para inicializar varias variables al mismo valor, o para recibir el mismo resultado en múltiples variables.</div>
 
 
   <h2>Destructuring (asignación por patrón)</h2>
@@ -99,7 +99,7 @@ contador = contador + 1  <span class="co">// ✅ Se puede reasignar con expresio
   <h3>Con tuplas <code>variable (x, y) = expr</code></h3>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📦 Destructuring de tupla</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-package"/></svg> Destructuring de tupla</span></div>
     <pre><code><span class="co">// canal() retorna (emisor, receptor)</span>
 <span class="kw">variable</span> (tx, rx) = <span class="fn">canal</span>()
 
@@ -110,12 +110,12 @@ contador = contador + 1  <span class="co">// ✅ Se puede reasignar con expresio
   <h3>Con arreglos <code>variable [a, b] = expr</code></h3>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📦 Destructuring de arreglo</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-package"/></svg> Destructuring de arreglo</span></div>
     <pre><code><span class="kw">variable</span> [primero, segundo] = [1, 2, 3]
 <span class="co">// primero = 1, segundo = 2</span></code></pre>
   </div>
 
-  <div class="info">💡 El destructuring con tuplas se usa frecuentemente con <code>canal()</code> para obtener el emisor y receptor en una sola línea.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> El destructuring con tuplas se usa frecuentemente con <code>canal()</code> para obtener el emisor y receptor en una sola línea.</div>
 
 
   <h2>Referencias a variables (<code>&</code> y <code>&mut</code>)</h2>
@@ -123,24 +123,24 @@ contador = contador + 1  <span class="co">// ✅ Se puede reasignar con expresio
   <p>Forja permite crear <strong>referencias (préstamos)</strong> a variables usando el operador <code>&</code>. Esto permite acceder al valor sin transferir la propiedad (ownership):</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔗 Préstamo inmutable (<code>&</code>)</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-link"/></svg> Préstamo inmutable (<code>&</code>)</span></div>
     <pre><code><span class="kw">variable</span> x = 42
 <span class="kw">variable</span> ref = &x        <span class="co">// referencia (préstamo) a x</span>
-<span class="fn">escribir</span>(x)               <span class="co">// ✅ x sigue siendo el dueño</span>
-<span class="fn">escribir</span>(ref)             <span class="co">// ✅ se puede leer via la referencia</span></code></pre>
+<span class="fn">escribir</span>(x)               <span class="co">// OK x sigue siendo el dueño</span>
+<span class="fn">escribir</span>(ref)             <span class="co">// OK se puede leer via la referencia</span></code></pre>
   </div>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔗 Préstamo mutable (<code>&mut</code>)</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-link"/></svg> Préstamo mutable (<code>&mut</code>)</span></div>
     <pre><code><span class="kw">variable</span> x = 42
 <span class="kw">variable</span> ref = &mut x    <span class="co">// préstamo mutable</span>
-ref = 100                 <span class="co">// ✅ se puede modificar a través de la referencia</span>
-<span class="co">// x = 50  → ❌ Error si hay préstamos activos</span></code></pre>
+ref = 100                 <span class="co">// OK se puede modificar a través de la referencia</span>
+<span class="co">// x = 50  → X Error si hay préstamos activos</span></code></pre>
   </div>
 
-  <div class="warning">⚠️ <strong>Reglas de préstamos:</strong> Podés tener múltiples referencias inmutables (<code>&</code>) O una única referencia mutable (<code>&mut</code>), pero no ambas a la vez. El Borrow Checker verifica estas reglas en tiempo de compilación.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> <strong>Reglas de préstamos:</strong> Podés tener múltiples referencias inmutables (<code>&</code>) O una única referencia mutable (<code>&mut</code>), pero no ambas a la vez. El Borrow Checker verifica estas reglas en tiempo de compilación.</div>
 
-  <p>📖 <strong>Más información:</strong> Consultá la página de <a href="/docs/sintaxis/ownership">Ownership y préstamos</a> para entender el sistema completo de ownership, el keyword <code>prestado</code> en parámetros, y las reglas del Borrow Checker.</p>
+  <p><svg class="ico" aria-hidden="true"><use href="#i-book-open"/></svg> <strong>Más información:</strong> Consultá la página de <a href="/docs/sintaxis/ownership">Ownership y préstamos</a> para entender el sistema completo de ownership, el keyword <code>prestado</code> en parámetros, y las reglas del Borrow Checker.</p>
 
 
   <h2>El keyword <code>mut</code> en parámetros</h2>
@@ -148,9 +148,9 @@ ref = 100                 <span class="co">// ✅ se puede modificar a través d
   <p>El keyword <code>mut</code> se usa junto con <code>prestado</code> en los parámetros de función para indicar un <strong>préstamo mutable</strong> (<code>&mut T</code> en Rust):</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Parámetro prestado mutable</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Parámetro prestado mutable</span></div>
     <pre><code><span class="kw">funcion</span> incrementar(<span class="kw">prestado</span> <span class="kw">mut</span> valor) &lbrace;
-    valor = valor + 1   <span class="co">// ✅ se puede modificar porque es prestado mut</span>
+    valor = valor + 1   <span class="co">// OK se puede modificar porque es prestado mut</span>
 &rbrace;
 
 <span class="kw">variable</span> x = 5
@@ -186,5 +186,5 @@ incrementar(&mut x)     <span class="co">// pasamos una referencia mutable</span
     <tr><td><code>prestado mut param</code></td><td><code>param: &mut Tipo</code></td></tr>
   </table>
 
-  <div class="warning">⚠️ <strong>Diferencia clave con Rust:</strong> En Rust las variables son <strong>inmutables por defecto</strong>. Forja invierte esto: <code>variable</code> es mutable, <code>constante</code> es inmutable. Esto es más intuitivo para quienes están aprendiendo.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> <strong>Diferencia clave con Rust:</strong> En Rust las variables son <strong>inmutables por defecto</strong>. Forja invierte esto: <code>variable</code> es mutable, <code>constante</code> es inmutable. Esto es más intuitivo para quienes están aprendiendo.</div>
 </Layout>
