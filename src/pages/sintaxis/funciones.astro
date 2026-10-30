@@ -10,7 +10,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Sintaxis básica</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 Plantilla de función</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> Plantilla de función</span></div>
     <pre><code><span class="kw">funcion</span> nombre(param1, param2, ...) &lbrace;
     <span class="co">// cuerpo de la función</span>
     <span class="kw">retornar</span> valor  <span class="co">// opcional</span>
@@ -22,7 +22,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Función que recibe dos argumentos y retorna su suma:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>➕ Función con retorno</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg> Función con retorno</span></div>
     <pre><code><span class="kw">funcion</span> suma(a, b) &lbrace;
     <span class="kw">retornar</span> a + b
 &rbrace;
@@ -36,7 +36,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Las funciones que solo ejecutan acciones no necesitan <code>retornar</code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📢 Procedimiento</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-megaphone"/></svg> Procedimiento</span></div>
     <pre><code><span class="kw">funcion</span> saludo(nombre) &lbrace;
     <span class="fn">escribir</span>(<span class="st">"Hola, "</span> + nombre + <span class="st">"!"</span>)
 &rbrace;
@@ -50,20 +50,20 @@ saludo(<span class="st">"Forja"</span>)   <span class="co">// → Hola, Forja!</
   <p>Podés especificar el tipo de retorno con <code>-> Tipo</code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🎯 Tipado explícito</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg> Tipado explícito</span></div>
     <pre><code><span class="kw">funcion</span> suma(a: <span class="ty">Entero</span>, b: <span class="ty">Entero</span>) -> <span class="ty">Entero</span> &lbrace;
     <span class="kw">retornar</span> a + b
 &rbrace;</code></pre>
   </div>
 
-  <div class="info">💡 El tipo de retorno se indica con <code>-> Tipo</code> (igual que en Rust). Si no se especifica, se infiere.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> El tipo de retorno se indica con <code>-> Tipo</code> (igual que en Rust). Si no se especifica, se infiere.</div>
 
   <h2>Funciones externas (FFI)</h2>
 
   <p>Usá <code><span class="kw">funcion</span> <span class="kw">externa</span></code> para declarar funciones definidas en otros lenguajes (C, Rust, etc.). Terminan con <code>;</code> en lugar de <code>&#123; ... &#125;</code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔌 FFI</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-plug"/></svg> FFI</span></div>
     <pre><code><span class="kw">funcion</span> <span class="kw">externa</span> <span class="fn">printf</span>(formato: <span class="ty">Texto</span>) -> <span class="ty">Entero</span>;</code></pre>
   </div>
 
@@ -72,7 +72,7 @@ saludo(<span class="st">"Forja"</span>)   <span class="co">// → Hola, Forja!</
   <p>Las funciones pueden tener parámetros genéricos con restricciones de rasgo usando <code>&lt;T: Rasgo&gt;</code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔄 Genéricos</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-refresh-cw"/></svg> Genéricos</span></div>
     <pre><code><span class="kw">funcion</span> <span class="fn">imprimir</span>&lt;T: <span class="kw">Rasgo</span>&gt;(valor: T) &lbrace;
     <span class="fn">escribir</span>(valor.<span class="fn">mostrar</span>())
 &rbrace;</code></pre>
@@ -83,14 +83,14 @@ saludo(<span class="st">"Forja"</span>)   <span class="co">// → Hola, Forja!</
   <p>Usá <code><span class="kw">prestado</span></code> para indicar que un parámetro se pasa como referencia (<code>&T</code> en Rust). Esto permite que la variable original siga disponible después de la llamada:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔗 Préstamo (borrowing)</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-link"/></svg> Préstamo (borrowing)</span></div>
     <pre><code><span class="kw">funcion</span> mostrar(<span class="kw">prestado</span> valor) &lbrace;
     <span class="fn">escribir</span>(<span class="st">"El valor es: "</span> + valor)
 &rbrace;
 
 <span class="kw">variable</span> dato = 42
 mostrar(dato)  <span class="co">// prestado, no se mueve</span>
-<span class="fn">escribir</span>(dato) <span class="co">// ✅ dato sigue disponible</span></code></pre>
+<span class="fn">escribir</span>(dato) <span class="co">// OK dato sigue disponible</span></code></pre>
   </div>
 
   <h2>Equivalencia con Rust</h2>
