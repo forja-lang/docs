@@ -46,7 +46,7 @@ variable c2 = nueva Caja&lt;Texto&gt; &#123; valor: "hola" &#125;</code></pre>
   <h2>Cómo se integra</h2>
   <p>El monomorphizer corre como una pasada sobre el AST (<code>ast::Programa</code>) antes de la compilación a bytecode: reemplaza los tipos <code>Parametro</code> por los concretos en parámetros, retorno y campos con <code>replace_type_params</code>, y devuelve las declaraciones especializadas con <code>get_specializations</code> para que el resto del pipeline las compile como funciones/clases normales.</p>
 
-  <div class="info"><strong>💡</strong> <code>ConcreteType::from_tipo</code> no monomorfiza tipos función ni <code>RasgoObjeto</code>, y los <code>Parametro</code> sin resolver retornan <code>None</code>: la monomorfización solo actúa sobre tipos concretos.</div>
+  <div class="info"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg></strong> <code>ConcreteType::from_tipo</code> no monomorfiza tipos función ni <code>RasgoObjeto</code>, y los <code>Parametro</code> sin resolver retornan <code>None</code>: la monomorfización solo actúa sobre tipos concretos.</div>
 
-  <div class="warning"><strong>⚠️</strong> El cuerpo de la función especializada se clona sin reemplazo de tipos en su interior (simplificación documentada); la inferencia completa de expresiones de variables requiere el type checker.</div>
+  <div class="warning"><strong><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg></strong> El cuerpo de la función especializada se clona sin reemplazo de tipos en su interior (simplificación documentada); la inferencia completa de expresiones de variables requiere el type checker.</div>
 </Layout>
