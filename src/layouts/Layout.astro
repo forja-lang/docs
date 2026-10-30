@@ -1166,10 +1166,12 @@ const { title, description } = Astro.props;
         const nt = doc.querySelector('title');
         if (nt) document.title = nt.textContent;
         mainInner.innerHTML = nc ? nc.innerHTML : '';
+        sincronizarAssets(url, doc);
         const nl = pageLinks.find(l => l.getAttribute('href') === url);
         if (nl) setActive(nl);
         appendPageNav();
         precarga();
+        window.dispatchEvent(new CustomEvent('page-loaded', { detail: url }));
       } catch (_) {}
       mainInner.classList.remove('slide-transition');
     })();
