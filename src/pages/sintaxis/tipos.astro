@@ -26,7 +26,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>En lugar de <code>true</code> / <code>false</code>, Forja usa palabras en español:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔘 Valores booleanos</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-circle"/></svg> Valores booleanos</span></div>
     <pre><code><span class="kw">variable</span> activo = <span class="kw">verdadero</span>
 <span class="kw">variable</span> inactivo = <span class="kw">falso</span>
 <span class="kw">variable</span> es_mayor = edad >= 18  <span class="co">// resultado: verdadero o falso</span></code></pre>
@@ -35,7 +35,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Literales numéricos</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔢 Números</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-hash"/></svg> Números</span></div>
     <pre><code><span class="kw">variable</span> entero = 42       <span class="co">// Entero (i64)</span>
 <span class="kw">variable</span> decimal = 3.14    <span class="co">// Decimal (f64)</span>
 <span class="kw">variable</span> negativo = -10    <span class="co">// Entero negativo</span></code></pre>
@@ -44,7 +44,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Literales de texto</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Strings</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Strings</span></div>
     <pre><code><span class="kw">variable</span> saludo = <span class="st">"Hola mundo"</span>
 
 <span class="co">// Caracteres de escape</span>
@@ -57,7 +57,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Podés incrustar expresiones dentro de literales de texto usando <code>&#123;expresion&#125;</code> o <code>$&#123;expresion&#125;</code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔗 Interpolación</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-link"/></svg> Interpolación</span></div>
     <pre><code><span class="kw">variable</span> nombre = <span class="st">"Mundo"</span>
 <span class="kw">variable</span> edad = 25
 
@@ -71,12 +71,12 @@ import Layout from '../../layouts/Layout.astro';
 <span class="fn">escribir</span>(<span class="st">"Llave literal: \&#123;no interpola\&#125;"</span>)</code></pre>
   </div>
 
-  <div class="info">💡 Ambas formas (<code>&#123;expr&#125;</code> y <code>$&#123;expr&#125;</code>) son equivalentes. Usá la que te resulte más cómoda. Para incluir llaves literales, escapá con <code>\&#123;</code> y <code>\&#125;</code>.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Ambas formas (<code>&#123;expr&#125;</code> y <code>$&#123;expr&#125;</code>) son equivalentes. Usá la que te resulte más cómoda. Para incluir llaves literales, escapá con <code>\&#123;</code> y <code>\&#125;</code>.</div>
 
   <h2>Arreglos</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📦 Colecciones</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-package"/></svg> Colecciones</span></div>
     <pre><code><span class="kw">variable</span> numeros = [1, 2, 3, 4, 5]
 <span class="kw">variable</span> nombres = [<span class="st">"Ana"</span>, <span class="st">"Juan"</span>, <span class="st">"Pedro"</span>]
 
@@ -96,7 +96,7 @@ numeros.empujar(6)  <span class="co">// (alias: .push())</span></code></pre>
   <h2>Mapas (diccionarios)</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🗺️ Mapas</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-map"/></svg> Mapas</span></div>
 <pre><code><span class="kw">variable</span> persona = &lbrace;<span class="st">"nombre"</span>: <span class="st">"Ana"</span>, <span class="st">"edad"</span>: 30&rbrace;
 <span class="co">// Acceso por clave</span>
 persona[<span class="st">"nombre"</span>]  <span class="co">// → "Ana"</span>
@@ -109,7 +109,7 @@ persona.edad    <span class="co">// → 30</span>
 persona[<span class="st">"edad"</span>] = 31</code></pre>
   </div>
 
-  <div class="info">💡 La sintaxis <code>mapa.clave</code> es azúcar sintáctico para <code>mapa["clave"]</code>. Podés usar ambas formas indistintamente.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> La sintaxis <code>mapa.clave</code> es azúcar sintáctico para <code>mapa["clave"]</code>. Podés usar ambas formas indistintamente.</div>
 
   <h2>Métodos integrados en primitivos</h2>
 
@@ -144,12 +144,12 @@ persona[<span class="st">"edad"</span>] = 31</code></pre>
   <p>Forja permite definir tipos algebraicos con la palabra clave <code><span class="kw">tipo</span></code>. Son ideales para representar datos que pueden tomar diferentes formas.</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📐 Sintaxis</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-ruler"/></svg> Sintaxis</span></div>
     <pre><code><span class="kw">tipo</span> Nombre = Variante1 | Variante2 | Variante3(Tipo1, Tipo2)</code></pre>
   </div>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🎯 Ejemplos</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg> Ejemplos</span></div>
     <pre><code><span class="co">// Opción: puede ser Algo (con valor) o Nada</span>
 <span class="kw">tipo</span> Opcion = Algo | Nada
 
@@ -177,7 +177,7 @@ persona[<span class="st">"edad"</span>] = 31</code></pre>
   <p>Cuando querés ser específico con los tipos:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Tipado explícito</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Tipado explícito</span></div>
     <pre><code><span class="kw">variable</span> nombre: <span class="ty">Texto</span> = <span class="st">"Ana"</span>
 <span class="kw">variable</span> edad: <span class="ty">Entero</span> = 25
 <span class="kw">variable</span> altura: <span class="ty">Decimal</span> = 1.75
