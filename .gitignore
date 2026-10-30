@@ -1,12 +1,2 @@
-.forja_gui_cache/
-
-# ── Ejecutables ──
-*.exe
-node_modules/
-dist/
-
-# ── Markdown: solo raíz o README ──
-*.md
-!/*.md
-!README.md
-.chrome-test-*/
+# Artefactos locales de Astro
+.astro/
