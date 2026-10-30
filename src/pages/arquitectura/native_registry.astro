@@ -56,5 +56,5 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code>crear_valor(ValorFast::* )</code></td><td>Crea valores Forja desde Rust (entero, texto, decimal, booleano, nulo)</td></tr>
   </table>
 
-  <div class="info"><strong>🔧 Arquitectura:</strong> Cada módulo de la stdlib (<code>*.fa</code>) tiene una función <code>registrar_*</code> que se llama durante la inicialización. Por ejemplo, <code>registrar_sqlite(reg)</code> registra todas las funciones <code>_sqlite_*</code>. El registro centralizado en <code>native_registry</code> permite que la VM encuentre cualquier función nativa con una sola búsqueda en el HashMap.</div>
+  <div class="info"><strong><svg class="ico" aria-hidden="true"><use href="#i-wrench"/></svg> Arquitectura:</strong> Cada módulo de la stdlib (<code>*.fa</code>) tiene una función <code>registrar_*</code> que se llama durante la inicialización. Por ejemplo, <code>registrar_sqlite(reg)</code> registra todas las funciones <code>_sqlite_*</code>. El registro centralizado en <code>native_registry</code> permite que la VM encuentre cualquier función nativa con una sola búsqueda en el HashMap.</div>
 </Layout>
