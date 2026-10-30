@@ -197,5 +197,5 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code>compilar_a_asm_con_target(programa, target) -> Result&lt;String, Vec&lt;ErrorForja>></code></td><td>Compila a ASM para una arquitectura específica (cross‑compilation).</td></tr>
   </table>
 
-  <div class="warning">⚠️ <strong>Limitaciones:</strong> El backend ASM es el más cercano al hardware pero también el más verboso. No soporta todas las características de Forja (clases con herencia compleja, pattern matching anidado). Para programas completos se recomienda usar bytecode + VM Fast o LLVM backend.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> <strong>Limitaciones:</strong> El backend ASM es el más cercano al hardware pero también el más verboso. No soporta todas las características de Forja (clases con herencia compleja, pattern matching anidado). Para programas completos se recomienda usar bytecode + VM Fast o LLVM backend.</div>
 </Layout>
