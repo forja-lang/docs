@@ -11,7 +11,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Marca una función como test. Podés agrupar tests en un archivo y ejecutarlos con <code>forja test archivo.fa</code>.</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🧪 Tests</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-flask-conical"/></svg> Tests</span></div>
     <pre><code><span class="kw">@test</span>
 <span class="kw">funcion</span> <span class="fn">test_suma</span>() &lbrace;
     <span class="fn">asegurar</span>(<span class="fn">suma</span>(2, 3) == 5)
@@ -35,7 +35,7 @@ import Layout from '../../layouts/Layout.astro';
   </table>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🏷️ Derive</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-tag"/></svg> Derive</span></div>
     <pre><code><span class="kw">@derive</span>(Mostrar, Igual)
 <span class="kw">clase</span> Punto &lbrace;
     x
@@ -54,7 +54,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Uso combinado</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🧪 + 🏷️</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-flask-conical"/></svg> + <svg class="ico" aria-hidden="true"><use href="#i-tag"/></svg></span></div>
     <pre><code><span class="kw">@derive</span>(Mostrar, Igual)
 <span class="kw">clase</span> Usuario &lbrace;
     nombre
