@@ -4,14 +4,14 @@ import Layout from '../../layouts/Layout.astro';
 <Layout title="GUI (importar gui) — Forja">
   <h1>GUI nativa con Xilem</h1>
 
-  <p>Forja puede abrir una <strong>ventana gráfica nativa</strong> usando <code>importar gui</code>. Internamente transpila tu código a Rust y usa el framework <strong>Xilem</strong> con GPU (<strong>Vello</strong>/<strong>wgpu</strong>) para renderizar widgets reactivos.</p>
+  <p>Forja abre una <strong>ventana gráfica nativa</strong> con <code>importar gui</code>. Internamente transpila tu código a Rust y usa <strong>Xilem</strong> con GPU (<strong>Vello</strong>/<strong>wgpu</strong>) para renderizar widgets reactivos.</p>
 
   <div class="info">💡 Para ejecutar código GUI necesitás compilar Forja con <code>--features gui</code>. Si no lo hiciste, visitá <a href="/docs/instalacion">Instalación</a>.</div>
 
   <h2>Ejemplo mínimo</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 gui.fa</span></div>
+    <div class="code-header"><span>gui.fa</span></div>
     <pre><code><span class="kw">importar</span> gui
 
 <span class="kw">funcion</span> <span class="fn">al_saludar</span>() &lbrace;
@@ -20,61 +20,271 @@ import Layout from '../../layouts/Layout.astro';
 
 <span class="kw">funcion</span> <span class="fn">main</span>() &lbrace;
     <span class="kw">variable</span> nombre = <span class="st">""</span>
-    <span class="kw">variable</span> volumen = 50
 
-    <span class="fn">columna</span>(
-        <span class="fn">etiqueta</span>(<span class="st">"🎯 Forja GUI"</span>),
-        <span class="fn">entrada_texto</span>(<span class="st">"nombre"</span>),
-        <span class="fn">deslizante</span>(<span class="st">"volumen"</span>, 0, 100),
-        <span class="fn">casilla</span>(<span class="st">"Activo"</span>, <span class="st">"nombre"</span>),
-        <span class="fn">boton</span>(<span class="st">"Saludar"</span>, &al_saludar)
+    <span class="fn">tema_fluent</span>(
+        <span class="fn">columna</span>(
+            <span class="fn">titulo</span>(<span class="st">"Forja GUI"</span>),
+            <span class="fn">campo_texto</span>(<span class="st">"nombre"</span>, <span class="st">"Tu nombre"</span>),
+            <span class="fn">boton_relleno</span>(<span class="st">"Saludar"</span>, &amp;al_saludar)
+        )
     )
 &rbrace;</code></pre>
+  </div>
+
+  <h2>Diseños predeterminados</h2>
+
+  <p>Forja trae dos diseños listos para usar, cada uno en <strong>claro</strong> y <strong>oscuro</strong>. Se aplican envolviendo el layout raíz y afectan colores, formas y elevación de todos los hijos.</p>
+
+  <table>
+    <tr><th>Función</th><th>Modo</th><th>Estilo</th></tr>
+    <tr><td><code>tema_fluent(hijo)</code></td><td>Claro</td><td>Fluent (Windows 11): fondo Mica <code>#F3F3F3</code>, acento <code>#005FB8</code>, esquinas 4-8px</td></tr>
+    <tr><td><code>tema_fluent_oscuro(hijo)</code></td><td>Oscuro</td><td>Fluent oscuro: fondo <code>#202020</code>, acento <code>#4CC2FF</code></td></tr>
+    <tr><td><code>tema_liquid_glass(hijo)</code></td><td>Claro</td><td>Liquid Glass: fondo vidrioso <code>#F2F6FC</code>, acento <code>#007AFF</code>, esquinas 20-32px</td></tr>
+    <tr><td><code>tema_liquid_glass_oscuro(hijo)</code></td><td>Oscuro</td><td>Liquid Glass oscuro: fondo <code>#0A0C10</code>, acento <code>#0A84FF</code></td></tr>
+  </table>
+
+  <p>Alias: <code>tema_windows11</code>, <code>tema_vidrio</code> y sus variantes <code>_oscuro</code>. También podés generar un tema Material You desde un color semilla con <code>tema_material("#FF5722", hijo)</code>.</p>
+
+  <p>Cambiar de diseño es cambiar una línea. Las variables de color (<code>color_primario</code>, <code>color_superficie</code>, …) y la tipografía se recalculan solas a partir del tema activo:</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>cambiar de diseño</span></div>
+    <pre><code><span class="co">// Fluent claro</span>
+<span class="fn">tema_fluent</span>(<span class="fn">columna</span>(...))
+
+<span class="co">// Liquid Glass oscuro</span>
+<span class="fn">tema_liquid_glass_oscuro</span>(<span class="fn">columna</span>(...))</code></pre>
+  </div>
+
+  <h2>Grid responsivo</h2>
+
+  <p><code>grilla(hijos, columnas, gap)</code> usa el grid real de Masonry: las columnas se reparten el ancho disponible (se adaptan al redimensionar la ventana) y cada fila toma la altura de su contenido (autosize). En pantallas angostas baja automáticamente a 2 o 1 columna.</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>grilla.fa</span></div>
+    <pre><code><span class="co">// 3 columnas que se estiran con la ventana, 16px de separación</span>
+<span class="fn">grilla</span>([
+    <span class="fn">tarjeta</span>(<span class="fn">columna</span>(<span class="fn">titulo</span>(<span class="st">"Ventas"</span>), <span class="fn">cuerpo_mediano</span>(<span class="st">"$1.200"</span>))),
+    <span class="fn">tarjeta</span>(<span class="fn">columna</span>(<span class="fn">titulo</span>(<span class="st">"Gastos"</span>), <span class="fn">cuerpo_mediano</span>(<span class="st">"$800"</span>))),
+    <span class="fn">tarjeta</span>(<span class="fn">columna</span>(<span class="fn">titulo</span>(<span class="st">"Balance"</span>), <span class="fn">cuerpo_mediano</span>(<span class="st">"$400"</span>)))
+], 3, 16)</code></pre>
   </div>
 
   <h2>Layouts</h2>
 
   <table>
-    <tr><th>Función Forja</th><th>Widget Xilem</th><th>Descripción</th></tr>
-    <tr><td><code>columna(hijos...)</code></td><td><code>flex(Axis::Vertical, ...)</code></td><td>Contenedor vertical</td></tr>
-    <tr><td><code>fila(hijos...)</code></td><td><code>flex(Axis::Horizontal, ...)</code></td><td>Contenedor horizontal</td></tr>
-    <tr><td><code>pila(hijos...)</code></td><td><code>zstack(...)</code></td><td>Superposición en Z</td></tr>
-    <tr><td><code>desplazable(hijo)</code></td><td><code>portal(...)</code></td><td>Contenedor con scroll</td></tr>
-    <tr><td><code>panel_dividido(a, b, dir)</code></td><td><code>split(...)</code></td><td>Panel redimensionable</td></tr>
-    <tr><td><code>caja_fija(hijo, ancho, alto)</code></td><td><code>sized_box(...)</code></td><td>Caja con tamaño fijo</td></tr>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>columna(hijos...)</code></td><td>Contenedor vertical</td></tr>
+    <tr><td><code>columna_con_gap(hijos, gap, alineacion)</code></td><td>Columna con separación y alineación</td></tr>
+    <tr><td><code>columna_centrada(hijos...)</code></td><td>Columna centrada horizontalmente</td></tr>
+    <tr><td><code>fila(hijos...)</code></td><td>Contenedor horizontal</td></tr>
+    <tr><td><code>fila_con_gap(hijos, gap, alineacion)</code></td><td>Fila con separación y alineación</td></tr>
+    <tr><td><code>pila(hijos...)</code></td><td>Superposición en Z</td></tr>
+    <tr><td><code>grilla(hijos, columnas, gap)</code></td><td>Grid responsivo (columnas elásticas, filas autosize)</td></tr>
+    <tr><td><code>flujo(hijos, gap)</code></td><td>Flow layout con salto de línea automático</td></tr>
+    <tr><td><code>flex_layout(hijos, eje, gap, wrap)</code></td><td>Flex configurable</td></tr>
+    <tr><td><code>panel_dividido(a, b, direccion)</code></td><td>Panel redimensionable</td></tr>
+    <tr><td><code>desplazable(hijo)</code></td><td>Contenedor con scroll</td></tr>
+    <tr><td><code>caja_fija(hijo, ancho, alto)</code></td><td>Tamaño fijo en px</td></tr>
+    <tr><td><code>caja_relativa(hijo, ratio)</code></td><td>Relación de aspecto fija</td></tr>
+    <tr><td><code>contenedor(hijo, ancho_maximo)</code></td><td>Ancho máximo</td></tr>
+    <tr><td><code>relleno(hijo, px)</code></td><td>Padding alrededor</td></tr>
+    <tr><td><code>expansor(hijo)</code></td><td>Ocupa el espacio disponible</td></tr>
+    <tr><td><code>centrado(hijo)</code></td><td>Centra en ambos ejes</td></tr>
+    <tr><td><code>adaptable(compacto, medio, expandido)</code></td><td>Tres variantes según el ancho</td></tr>
+    <tr><td><code>girar(hijo)</code> / <code>rotar(hijo)</code></td><td>Rota 90°</td></tr>
+    <tr><td><code>zoom_pellizco(hijo, min, max)</code></td><td>Zoom con gesto de pellizco</td></tr>
+    <tr><td><code>espacio(px)</code> / <code>separador()</code></td><td>Espaciador / línea divisoria</td></tr>
   </table>
 
-  <h2>Widgets</h2>
+  <h2>Texto</h2>
 
   <table>
-    <tr><th>Función Forja</th><th>Descripción</th></tr>
+    <tr><th>Función</th><th>Descripción</th></tr>
     <tr><td><code>etiqueta(texto)</code></td><td>Texto estático</td></tr>
-    <tr><td><code>etiqueta_dinamica(variable)</code></td><td>Texto que se actualiza automáticamente</td></tr>
-    <tr><td><code>texto_enriquecido(texto)</code></td><td>Texto Markdown con formato</td></tr>
+    <tr><td><code>etiqueta_dinamica(variable)</code></td><td>Texto que se actualiza solo</td></tr>
+    <tr><td><code>titulo(texto)</code></td><td>Título con la escala del tema</td></tr>
+    <tr><td><code>texto_color(texto, color)</code></td><td>Texto con color explícito o role</td></tr>
+    <tr><td><code>texto_grande</code>, <code>texto_mediano</code>, <code>texto_pequeño</code></td><td>Escala display</td></tr>
+    <tr><td><code>titular_grande</code>, <code>titular_mediano</code>, <code>titular_pequeño</code></td><td>Escala headline</td></tr>
+    <tr><td><code>encabezado_grande</code>, <code>encabezado_mediano</code>, <code>encabezado_pequeño</code></td><td>Escala title</td></tr>
+    <tr><td><code>cuerpo_grande</code>, <code>cuerpo_mediano</code>, <code>cuerpo_pequeño</code></td><td>Escala body</td></tr>
+    <tr><td><code>etiqueta_grande</code>, <code>etiqueta_mediana</code>, <code>etiqueta_pequeña</code></td><td>Escala label</td></tr>
+    <tr><td><code>texto_enriquecido(markdown)</code></td><td>Markdown renderizado</td></tr>
+  </table>
+
+  <h2>Iconos</h2>
+
+  <p>Los iconos son <strong>paths SVG reales</strong> dibujados con Vello, no emojis: mantienen el color del tema y se ven nítidos en cualquier tamaño y DPI. Hay más de 100 iconos en el catálogo.</p>
+
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>icono_material(nombre, tamaño, color)</code></td><td>Icono por nombre (<code>"home"</code>, <code>"settings"</code>, <code>"search"</code>, <code>"delete"</code>…)</td></tr>
+    <tr><td><code>icono_material(nombre, tamaño, color, estilo)</code></td><td>Con estilo: <code>filled</code>, <code>outlined</code>, <code>rounded</code>, <code>sharp</code>, <code>twotone</code></td></tr>
+    <tr><td><code>icono_relleno</code>, <code>icono_perfilado</code>, <code>icono_redondo</code>, <code>icono_agudo</code>, <code>icono_dos_tonos</code></td><td>Atajos por estilo</td></tr>
+    <tr><td><code>circulo_color(color)</code></td><td>Muestra de color sólido</td></tr>
+  </table>
+
+  <h2>Botones</h2>
+
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>boton(texto, &amp;callback)</code></td><td>Botón básico</td></tr>
+    <tr><td><code>boton_relleno</code>, <code>boton_tonal</code>, <code>boton_perfilado</code>, <code>boton_texto</code>, <code>boton_elevado</code></td><td>Cinco variantes Material</td></tr>
+    <tr><td><code>boton_icono(icono, &amp;cb)</code></td><td>Botón de icono</td></tr>
+    <tr><td><code>boton_icono_relleno</code>, <code>boton_icono_tonal</code>, <code>boton_icono_perfilado</code></td><td>Variantes de icon button</td></tr>
+    <tr><td><code>fab(icono, &amp;cb)</code></td><td>Floating action button</td></tr>
+    <tr><td><code>fab_pequeño</code>, <code>fab_grande</code>, <code>fab_extendido(icono, texto, &amp;cb)</code></td><td>Tamaños de FAB</td></tr>
+    <tr><td><code>segmentado(opciones, seleccion, &amp;cb)</code></td><td>Segmented button</td></tr>
+    <tr><td><code>segmentado_multiple</code></td><td>Selección múltiple</td></tr>
+    <tr><td><code>boton_morphing(icono, texto, &amp;cb)</code></td><td>Botón que se expande a texto</td></tr>
+    <tr><td><code>subconjunto_asistente</code>, <code>subconjunto_filtro</code>, <code>subconjunto_entrada</code>, <code>subconjunto_sugerencia</code></td><td>Chips (assist / filter / input / suggestion)</td></tr>
+  </table>
+
+  <h2>Entradas de datos</h2>
+
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
     <tr><td><code>entrada_texto(variable)</code></td><td>Campo de texto simple</td></tr>
-    <tr><td><code>area_texto(variable)</code></td><td>Área de texto multilínea</td></tr>
-    <tr><td><code>boton(texto, &callback)</code></td><td>Botón con callback</td></tr>
-    <tr><td><code>casilla(etiqueta, variable)</code></td><td>Casilla de verificación</td></tr>
-    <tr><td><code>deslizante(variable, min, max)</code></td><td>Control deslizante</td></tr>
-    <tr><td><code>barra_progreso(variable)</code></td><td>Barra de progreso</td></tr>
-    <tr><td><code>cargando()</code></td><td>Indicador de carga</td></tr>
-    <tr><td><code>separador()</code></td><td>Línea separadora</td></tr>
-    <tr><td><code>espacio(tamaño)</code></td><td>Espaciador</td></tr>
+    <tr><td><code>area_texto(variable)</code></td><td>Multilínea</td></tr>
+    <tr><td><code>campo_texto(variable, label)</code></td><td>TextField relleno</td></tr>
+    <tr><td><code>campo_perfilado(variable, label)</code></td><td>TextField con contorno</td></tr>
+    <tr><td><code>campo_texto_error(variable, label, error)</code></td><td>Con mensaje de error</td></tr>
+    <tr><td><code>campo_contrasena(variable, label)</code></td><td>Contraseña con visor</td></tr>
+    <tr><td><code>campo_numero(variable, label, min, max)</code></td><td>Numérico con límites</td></tr>
+    <tr><td><code>campo_busqueda(variable, placeholder)</code></td><td>Búsqueda con icono</td></tr>
+    <tr><td><code>campo_email</code>, <code>campo_telefono</code>, <code>campo_url</code></td><td>Validación por tipo</td></tr>
+    <tr><td><code>dropdown(opciones, seleccionada)</code></td><td>Menú desplegable</td></tr>
+    <tr><td><code>contraer_desplegable(opciones, seleccionada, placeholder)</code></td><td>Dropdown con placeholder</td></tr>
+    <tr><td><code>menu_seleccion(opciones, seleccionada, label)</code></td><td>Select con label</td></tr>
+    <tr><td><code>autocompletar(opciones, variable)</code></td><td>Autocompletado</td></tr>
+    <tr><td><code>grupo_radio(nombre, opciones, seleccion, &amp;cb)</code></td><td>Radio group</td></tr>
+    <tr><td><code>interruptor(label, variable)</code></td><td>Switch</td></tr>
+    <tr><td><code>casilla(label, variable)</code></td><td>Checkbox</td></tr>
+    <tr><td><code>deslizante(variable, min, max)</code></td><td>Slider continuo</td></tr>
+    <tr><td><code>deslizante_discreto(variable, min, max, pasos)</code></td><td>Slider con pasos</td></tr>
+    <tr><td><code>deslizante_rango(var_ini, var_fin, min, max)</code></td><td>Rango doble</td></tr>
+    <tr><td><code>grupo_subconjuntos(chips, seleccion, &amp;cb)</code></td><td>Grupo de chips</td></tr>
+    <tr><td><code>selector_fecha(variable)</code></td><td>Date picker</td></tr>
+    <tr><td><code>selector_hora(variable)</code></td><td>Time picker</td></tr>
+    <tr><td><code>selector_color(variable)</code></td><td>Color picker</td></tr>
+    <tr><td><code>selector_archivo(tipos, multiple, &amp;cb)</code></td><td>Diálogo nativo de archivos</td></tr>
+  </table>
+
+  <h2>Contenedores y listas</h2>
+
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>tarjeta(hijo)</code>, <code>tarjeta_elevada</code>, <code>tarjeta_perfilada</code>, <code>tarjeta_seleccionable</code></td><td>Cards Material</td></tr>
+    <tr><td><code>tarjeta_vidrio(hijo)</code></td><td>Tarjeta con efecto vidrio</td></tr>
+    <tr><td><code>superficie(hijo)</code>, <code>superficie_tonal(hijo)</code></td><td>Superficies del tema</td></tr>
+    <tr><td><code>elemento_lista(titulo, &amp;cb)</code></td><td>Ítem de lista</td></tr>
+    <tr><td><code>elemento_lista_doble(titulo, subtitulo, icono)</code></td><td>Ítem con dos líneas</td></tr>
+    <tr><td><code>lista(items)</code>, <code>lista_con_dividores(items)</code></td><td>Listas</td></tr>
+    <tr><td><code>lista_seleccion(items, seleccion, &amp;cb)</code></td><td>Lista con selección</td></tr>
+    <tr><td><code>lista_dinamica(variable, funcion_item)</code></td><td>Lista generada desde un arreglo</td></tr>
+    <tr><td><code>tabla_datos(columnas, filas)</code></td><td>Tabla de datos</td></tr>
+    <tr><td><code>tabla_ordenable</code>, <code>tabla_seleccion</code></td><td>Tabla con orden / selección</td></tr>
+    <tr><td><code>andamio(barra_superior, contenido, fab)</code></td><td>Scaffold</td></tr>
+  </table>
+
+  <h2>Navegación</h2>
+
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>navegador(pantallas, var_actual, tipo, &amp;cb)</code></td><td>Navegación entre pantallas; tipo: <code>barra()</code>, <code>riel()</code>, <code>cajon()</code>, <code>"pestañas"</code></td></tr>
+    <tr><td><code>pantalla(id, titulo, contenido, icono)</code></td><td>Una pantalla dentro de <code>navegador</code></td></tr>
+    <tr><td><code>barra_superior(titulo, acciones)</code></td><td>Top app bar</td></tr>
+    <tr><td><code>barra_superior_media</code>, <code>barra_superior_grande</code></td><td>Variantes de altura</td></tr>
+    <tr><td><code>barra_inferior(acciones)</code></td><td>Bottom app bar</td></tr>
+    <tr><td><code>barra_navegacion(items, seleccion, &amp;cb)</code></td><td>Navigation bar</td></tr>
+    <tr><td><code>riel_navegacion(items, seleccion, &amp;cb)</code></td><td>Navigation rail</td></tr>
+    <tr><td><code>cajon_navegacion</code>, <code>cajon_modal</code></td><td>Navigation drawer</td></tr>
+    <tr><td><code>item_navegacion(icono, label)</code></td><td>Ítem de navegación</td></tr>
+    <tr><td><code>pestañas(tabs, seleccion, &amp;cb)</code></td><td>Tabs</td></tr>
+    <tr><td><code>pestañas_desplazables</code></td><td>Tabs con scroll</td></tr>
+    <tr><td><code>migaja_de_pan(items)</code></td><td>Breadcrumbs</td></tr>
+    <tr><td><code>asistente_pasos(pasos, actual, &amp;cb)</code></td><td>Stepper / wizard</td></tr>
+    <tr><td><code>barra_busqueda(placeholder, variable)</code></td><td>Search bar</td></tr>
+  </table>
+
+  <h2>Feedback e indicadores</h2>
+
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>barra_progreso(variable)</code></td><td>Progreso determinado</td></tr>
+    <tr><td><code>barra_progreso_indeterminada()</code></td><td>Progreso indeterminado</td></tr>
+    <tr><td><code>circulo_progreso(variable)</code></td><td>Progreso circular</td></tr>
+    <tr><td><code>circulo_progreso_indeterminado()</code> / <code>cargando()</code></td><td>Spinner</td></tr>
+    <tr><td><code>distintivo(hijo, numero)</code>, <code>distintivo_punto(hijo)</code></td><td>Badge</td></tr>
+    <tr><td><code>esqueleto(ancho, alto)</code>, <code>esqueleto_tarjeta</code>, <code>esqueleto_linea</code></td><td>Skeletons de carga</td></tr>
+    <tr><td><code>estado_vacio(icono, mensaje, accion)</code></td><td>Empty state</td></tr>
+    <tr><td><code>estado_error(mensaje, &amp;reintentar)</code></td><td>Error state</td></tr>
+    <tr><td><code>avatar(nombre)</code>, <code>avatar_icono(icono)</code>, <code>avatar_imagen(ruta)</code>, <code>grupo_avatar(avatares)</code></td><td>Avatares</td></tr>
+    <tr><td><code>notificación(texto)</code>, <code>notificación_accion(texto, accion, &amp;cb)</code></td><td>Snackbar</td></tr>
+    <tr><td><code>dialogo_alerta(titulo, texto)</code>, <code>dialogo_confirmacion(...)</code>, <code>dialogo_personalizado(...)</code>, <code>dialogo_completo(...)</code></td><td>Diálogos</td></tr>
+    <tr><td><code>hoja_inferior(...)</code>, <code>hoja_inferior_modal(...)</code>, <code>hoja_inferior_grande(...)</code></td><td>Bottom sheets</td></tr>
+    <tr><td><code>información(texto, hijo)</code></td><td>Tooltip</td></tr>
+    <tr><td><code>menú_desplegable(...)</code>, <code>menu_contexto(...)</code></td><td>Menús</td></tr>
+    <tr><td><code>transición(hijo, visible)</code></td><td>Fade in/out</td></tr>
+    <tr><td><code>efecto_onda(hijo)</code></td><td>Ripple al hacer clic</td></tr>
+    <tr><td><code>tirar_recargar(hijo, &amp;cb, variable)</code></td><td>Pull to refresh</td></tr>
+    <tr><td><code>deslizar_descartar(hijo, &amp;cb, variable)</code></td><td>Swipe to dismiss</td></tr>
+  </table>
+
+  <h2>Gráficos y datos</h2>
+
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>gráfico_linea(datos, etiquetas)</code></td><td>Líneas</td></tr>
+    <tr><td><code>gráfico_barras(datos, etiquetas, colores)</code></td><td>Barras</td></tr>
+    <tr><td><code>gráfico_pastel(datos, etiquetas)</code></td><td>Pastel</td></tr>
+    <tr><td><code>gráfico_donut(datos, etiquetas)</code></td><td>Donut</td></tr>
+    <tr><td><code>gráfico_indicador(valor, min, max)</code></td><td>Gauge</td></tr>
+    <tr><td><code>minigráfico(datos)</code></td><td>Sparkline</td></tr>
+    <tr><td><code>calificación(valor, maximo, &amp;cb)</code></td><td>Estrellas</td></tr>
+    <tr><td><code>calendario(mes, año, &amp;cb)</code></td><td>Calendario mensual</td></tr>
+    <tr><td><code>visor_qr(texto, tamaño)</code></td><td>Código QR</td></tr>
+    <tr><td><code>lienzo(variable_comandos, ancho, alto)</code></td><td>Dibujo libre</td></tr>
+  </table>
+
+  <h2>Estilo y efectos</h2>
+
+  <table>
+    <tr><th>Función</th><th>Descripción</th></tr>
+    <tr><td><code>color_primario(hijo)</code></td><td>Aplica un role de color del tema (<code>color_secundario</code>, <code>color_superficie</code>, <code>color_error</code>, <code>color_perfil</code>…)</td></tr>
+    <tr><td><code>esquinas_pequeñas</code>, <code>esquinas_medianas</code>, <code>esquinas_grandes</code>, <code>esquinas_completas</code></td><td>Radios de borde</td></tr>
+    <tr><td><code>sombra(hijo, nivel)</code></td><td>Elevación</td></tr>
+    <tr><td><code>gradiente_lineal(hijo, colores...)</code></td><td>Fondo con gradiente</td></tr>
+    <tr><td><code>gradiente_radial(hijo, colores...)</code></td><td>Gradiente radial</td></tr>
+    <tr><td><code>fondo_expresivo(hijo)</code></td><td>Fondo animado</td></tr>
+    <tr><td><code>efecto_brillo(hijo)</code></td><td>Borde con glow</td></tr>
+    <tr><td><code>visor_markdown(texto)</code></td><td>Markdown renderizado</td></tr>
+  </table>
+
+  <h2>Constantes de estilo</h2>
+
+  <p>Valores que esperan las funciones de navegación, gradientes y estados. Escriben texto, así que también podés pasar el literal directamente.</p>
+
+  <table>
+    <tr><th>Función</th><th>Valor</th></tr>
+    <tr><td><code>barra()</code>, <code>inferior()</code></td><td><code>"barra"</code> — navegación inferior</td></tr>
+    <tr><td><code>riel()</code>, <code>lateral()</code></td><td><code>"riel"</code> — navegación lateral</td></tr>
+    <tr><td><code>cajon()</code></td><td><code>"cajon"</code> — drawer</td></tr>
+    <tr><td><code>fade()</code>, <code>slide()</code></td><td>Animación de transición</td></tr>
+    <tr><td><code>radial()</code>, <code>sweep()</code></td><td>Dirección de gradiente</td></tr>
+    <tr><td><code>hover()</code>, <code>pressed()</code>, <code>focused()</code>, <code>disabled()</code></td><td>Estados visuales</td></tr>
   </table>
 
   <h2>Ejecutar</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🖼️ Comandos</span></div>
+    <div class="code-header"><span>Comandos</span></div>
     <pre><code><span class="co"># Native runner (AST directo a Xilem, sin compilar Rust)</span>
-cargo run --features gui --bin forja -- run --native ejemplos/204_login_final.fa
+cargo run --features gui --bin forja -- run --native ejemplos/208_gui_galeria.fa
 
 <span class="co"># Transpilado a Rust (genera .exe autónomo)</span>
-cargo run --features gui --bin forja -- transpile ejemplos/204_login_final.fa
-cd .forja_gui_cache && cargo run --release
-
-<span class="co"># GUI Launcher directo</span>
-cargo build --features gui
-.\target\debug\forja-gui.exe ejemplos/204_login_final.fa</code></pre>
+cargo run --features gui --bin forja -- transpile ejemplos/208_gui_galeria.fa
+cd .forja_gui_cache &amp;&amp; cargo run --release</code></pre>
   </div>
 </Layout>
