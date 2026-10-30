@@ -7,7 +7,8 @@
 export function codificar_url(codigo: string): string;
 
 /**
- * Compila código Forja a Rust (transpilación)
+ * Transpila código Forja a Rust (transpilación; la API WASM conserva el
+ * nombre `compilar` por compatibilidad con el JS existente).
  */
 export function compilar(codigo: string): string;
 
@@ -17,7 +18,8 @@ export function compilar(codigo: string): string;
 export function decodificar_url(codigo_encoded: string): string;
 
 /**
- * Compila y ejecuta código Forja en la VM, devolviendo el output
+ * Compila y ejecuta código Forja en la VM, devolviendo el output.
+ * El navegador no interpreta ANSI: los errores se devuelven sin color.
  */
 export function forja_ejecutar(source: string): string;
 
@@ -40,17 +42,19 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
     readonly memory: WebAssembly.Memory;
-    readonly codificar_url: (a: number, b: number, c: number) => void;
-    readonly compilar: (a: number, b: number, c: number) => void;
-    readonly decodificar_url: (a: number, b: number, c: number) => void;
-    readonly forja_ejecutar: (a: number, b: number, c: number) => void;
-    readonly forja_tokenizar: (a: number, b: number, c: number) => void;
-    readonly obtener_ejemplos: (a: number) => void;
-    readonly version: (a: number) => void;
-    readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
-    readonly __wbindgen_export: (a: number, b: number) => number;
-    readonly __wbindgen_export2: (a: number, b: number, c: number, d: number) => number;
-    readonly __wbindgen_export3: (a: number, b: number, c: number) => void;
+    readonly codificar_url: (a: number, b: number) => [number, number];
+    readonly compilar: (a: number, b: number) => [number, number];
+    readonly decodificar_url: (a: number, b: number) => [number, number];
+    readonly forja_ejecutar: (a: number, b: number) => [number, number, number, number];
+    readonly forja_tokenizar: (a: number, b: number) => [number, number, number, number];
+    readonly obtener_ejemplos: () => [number, number];
+    readonly version: () => [number, number];
+    readonly __wbindgen_externrefs: WebAssembly.Table;
+    readonly __wbindgen_malloc: (a: number, b: number) => number;
+    readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
+    readonly __wbindgen_free: (a: number, b: number, c: number) => void;
+    readonly __externref_table_dealloc: (a: number) => void;
+    readonly __wbindgen_start: () => void;
 }
 
 export type SyncInitInput = BufferSource | WebAssembly.Module;

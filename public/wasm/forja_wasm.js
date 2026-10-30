@@ -9,23 +9,20 @@ export function codificar_url(codigo) {
     let deferred2_0;
     let deferred2_1;
     try {
-        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        const ptr0 = passStringToWasm0(codigo, wasm.__wbindgen_export, wasm.__wbindgen_export2);
+        const ptr0 = passStringToWasm0(codigo, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        wasm.codificar_url(retptr, ptr0, len0);
-        var r0 = getDataViewMemory0().getInt32(retptr + 4 * 0, true);
-        var r1 = getDataViewMemory0().getInt32(retptr + 4 * 1, true);
-        deferred2_0 = r0;
-        deferred2_1 = r1;
-        return getStringFromWasm0(r0, r1);
+        const ret = wasm.codificar_url(ptr0, len0);
+        deferred2_0 = ret[0];
+        deferred2_1 = ret[1];
+        return getStringFromWasm0(ret[0], ret[1]);
     } finally {
-        wasm.__wbindgen_add_to_stack_pointer(16);
-        wasm.__wbindgen_export3(deferred2_0, deferred2_1, 1);
+        wasm.__wbindgen_free(deferred2_0, deferred2_1, 1);
     }
 }
 
 /**
- * Compila código Forja a Rust (transpilación)
+ * Transpila código Forja a Rust (transpilación; la API WASM conserva el
+ * nombre `compilar` por compatibilidad con el JS existente).
  * @param {string} codigo
  * @returns {string}
  */
@@ -33,18 +30,14 @@ export function compilar(codigo) {
     let deferred2_0;
     let deferred2_1;
     try {
-        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        const ptr0 = passStringToWasm0(codigo, wasm.__wbindgen_export, wasm.__wbindgen_export2);
+        const ptr0 = passStringToWasm0(codigo, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        wasm.compilar(retptr, ptr0, len0);
-        var r0 = getDataViewMemory0().getInt32(retptr + 4 * 0, true);
-        var r1 = getDataViewMemory0().getInt32(retptr + 4 * 1, true);
-        deferred2_0 = r0;
-        deferred2_1 = r1;
-        return getStringFromWasm0(r0, r1);
+        const ret = wasm.compilar(ptr0, len0);
+        deferred2_0 = ret[0];
+        deferred2_1 = ret[1];
+        return getStringFromWasm0(ret[0], ret[1]);
     } finally {
-        wasm.__wbindgen_add_to_stack_pointer(16);
-        wasm.__wbindgen_export3(deferred2_0, deferred2_1, 1);
+        wasm.__wbindgen_free(deferred2_0, deferred2_1, 1);
     }
 }
 
@@ -57,23 +50,20 @@ export function decodificar_url(codigo_encoded) {
     let deferred2_0;
     let deferred2_1;
     try {
-        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        const ptr0 = passStringToWasm0(codigo_encoded, wasm.__wbindgen_export, wasm.__wbindgen_export2);
+        const ptr0 = passStringToWasm0(codigo_encoded, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        wasm.decodificar_url(retptr, ptr0, len0);
-        var r0 = getDataViewMemory0().getInt32(retptr + 4 * 0, true);
-        var r1 = getDataViewMemory0().getInt32(retptr + 4 * 1, true);
-        deferred2_0 = r0;
-        deferred2_1 = r1;
-        return getStringFromWasm0(r0, r1);
+        const ret = wasm.decodificar_url(ptr0, len0);
+        deferred2_0 = ret[0];
+        deferred2_1 = ret[1];
+        return getStringFromWasm0(ret[0], ret[1]);
     } finally {
-        wasm.__wbindgen_add_to_stack_pointer(16);
-        wasm.__wbindgen_export3(deferred2_0, deferred2_1, 1);
+        wasm.__wbindgen_free(deferred2_0, deferred2_1, 1);
     }
 }
 
 /**
- * Compila y ejecuta código Forja en la VM, devolviendo el output
+ * Compila y ejecuta código Forja en la VM, devolviendo el output.
+ * El navegador no interpreta ANSI: los errores se devuelven sin color.
  * @param {string} source
  * @returns {string}
  */
@@ -81,26 +71,20 @@ export function forja_ejecutar(source) {
     let deferred3_0;
     let deferred3_1;
     try {
-        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        const ptr0 = passStringToWasm0(source, wasm.__wbindgen_export, wasm.__wbindgen_export2);
+        const ptr0 = passStringToWasm0(source, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        wasm.forja_ejecutar(retptr, ptr0, len0);
-        var r0 = getDataViewMemory0().getInt32(retptr + 4 * 0, true);
-        var r1 = getDataViewMemory0().getInt32(retptr + 4 * 1, true);
-        var r2 = getDataViewMemory0().getInt32(retptr + 4 * 2, true);
-        var r3 = getDataViewMemory0().getInt32(retptr + 4 * 3, true);
-        var ptr2 = r0;
-        var len2 = r1;
-        if (r3) {
+        const ret = wasm.forja_ejecutar(ptr0, len0);
+        var ptr2 = ret[0];
+        var len2 = ret[1];
+        if (ret[3]) {
             ptr2 = 0; len2 = 0;
-            throw takeObject(r2);
+            throw takeFromExternrefTable0(ret[2]);
         }
         deferred3_0 = ptr2;
         deferred3_1 = len2;
         return getStringFromWasm0(ptr2, len2);
     } finally {
-        wasm.__wbindgen_add_to_stack_pointer(16);
-        wasm.__wbindgen_export3(deferred3_0, deferred3_1, 1);
+        wasm.__wbindgen_free(deferred3_0, deferred3_1, 1);
     }
 }
 
@@ -113,26 +97,20 @@ export function forja_tokenizar(source) {
     let deferred3_0;
     let deferred3_1;
     try {
-        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        const ptr0 = passStringToWasm0(source, wasm.__wbindgen_export, wasm.__wbindgen_export2);
+        const ptr0 = passStringToWasm0(source, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        wasm.forja_tokenizar(retptr, ptr0, len0);
-        var r0 = getDataViewMemory0().getInt32(retptr + 4 * 0, true);
-        var r1 = getDataViewMemory0().getInt32(retptr + 4 * 1, true);
-        var r2 = getDataViewMemory0().getInt32(retptr + 4 * 2, true);
-        var r3 = getDataViewMemory0().getInt32(retptr + 4 * 3, true);
-        var ptr2 = r0;
-        var len2 = r1;
-        if (r3) {
+        const ret = wasm.forja_tokenizar(ptr0, len0);
+        var ptr2 = ret[0];
+        var len2 = ret[1];
+        if (ret[3]) {
             ptr2 = 0; len2 = 0;
-            throw takeObject(r2);
+            throw takeFromExternrefTable0(ret[2]);
         }
         deferred3_0 = ptr2;
         deferred3_1 = len2;
         return getStringFromWasm0(ptr2, len2);
     } finally {
-        wasm.__wbindgen_add_to_stack_pointer(16);
-        wasm.__wbindgen_export3(deferred3_0, deferred3_1, 1);
+        wasm.__wbindgen_free(deferred3_0, deferred3_1, 1);
     }
 }
 
@@ -144,16 +122,12 @@ export function obtener_ejemplos() {
     let deferred1_0;
     let deferred1_1;
     try {
-        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        wasm.obtener_ejemplos(retptr);
-        var r0 = getDataViewMemory0().getInt32(retptr + 4 * 0, true);
-        var r1 = getDataViewMemory0().getInt32(retptr + 4 * 1, true);
-        deferred1_0 = r0;
-        deferred1_1 = r1;
-        return getStringFromWasm0(r0, r1);
+        const ret = wasm.obtener_ejemplos();
+        deferred1_0 = ret[0];
+        deferred1_1 = ret[1];
+        return getStringFromWasm0(ret[0], ret[1]);
     } finally {
-        wasm.__wbindgen_add_to_stack_pointer(16);
-        wasm.__wbindgen_export3(deferred1_0, deferred1_1, 1);
+        wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
     }
 }
 
@@ -165,53 +139,35 @@ export function version() {
     let deferred1_0;
     let deferred1_1;
     try {
-        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        wasm.version(retptr);
-        var r0 = getDataViewMemory0().getInt32(retptr + 4 * 0, true);
-        var r1 = getDataViewMemory0().getInt32(retptr + 4 * 1, true);
-        deferred1_0 = r0;
-        deferred1_1 = r1;
-        return getStringFromWasm0(r0, r1);
+        const ret = wasm.version();
+        deferred1_0 = ret[0];
+        deferred1_1 = ret[1];
+        return getStringFromWasm0(ret[0], ret[1]);
     } finally {
-        wasm.__wbindgen_add_to_stack_pointer(16);
-        wasm.__wbindgen_export3(deferred1_0, deferred1_1, 1);
+        wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
     }
 }
 function __wbg_get_imports() {
     const import0 = {
         __proto__: null,
-        __wbg_Error_92b29b0548f8b746: function(arg0, arg1) {
+        __wbg_Error_30c8987f7c2ed4e2: function(arg0, arg1) {
             const ret = Error(getStringFromWasm0(arg0, arg1));
-            return addHeapObject(ret);
+            return ret;
+        },
+        __wbindgen_init_externref_table: function() {
+            const table = wasm.__wbindgen_externrefs;
+            const offset = table.grow(4);
+            table.set(0, undefined);
+            table.set(offset + 0, undefined);
+            table.set(offset + 1, null);
+            table.set(offset + 2, true);
+            table.set(offset + 3, false);
         },
     };
     return {
         __proto__: null,
         "./forja_wasm_bg.js": import0,
     };
-}
-
-function addHeapObject(obj) {
-    if (heap_next === heap.length) heap.push(heap.length + 1);
-    const idx = heap_next;
-    heap_next = heap[idx];
-
-    heap[idx] = obj;
-    return idx;
-}
-
-function dropObject(idx) {
-    if (idx < 1028) return;
-    heap[idx] = heap_next;
-    heap_next = idx;
-}
-
-let cachedDataViewMemory0 = null;
-function getDataViewMemory0() {
-    if (cachedDataViewMemory0 === null || cachedDataViewMemory0.buffer.detached === true || (cachedDataViewMemory0.buffer.detached === undefined && cachedDataViewMemory0.buffer !== wasm.memory.buffer)) {
-        cachedDataViewMemory0 = new DataView(wasm.memory.buffer);
-    }
-    return cachedDataViewMemory0;
 }
 
 function getStringFromWasm0(ptr, len) {
@@ -225,13 +181,6 @@ function getUint8ArrayMemory0() {
     }
     return cachedUint8ArrayMemory0;
 }
-
-function getObject(idx) { return heap[idx]; }
-
-let heap = new Array(1024).fill(undefined);
-heap.push(undefined, null, true, false);
-
-let heap_next = heap.length;
 
 function passStringToWasm0(arg, malloc, realloc) {
     if (realloc === undefined) {
@@ -270,10 +219,10 @@ function passStringToWasm0(arg, malloc, realloc) {
     return ptr;
 }
 
-function takeObject(idx) {
-    const ret = getObject(idx);
-    dropObject(idx);
-    return ret;
+function takeFromExternrefTable0(idx) {
+    const value = wasm.__wbindgen_externrefs.get(idx);
+    wasm.__externref_table_dealloc(idx);
+    return value;
 }
 
 let cachedTextDecoder = new TextDecoder('utf-8', { ignoreBOM: true, fatal: true });
@@ -310,18 +259,22 @@ function __wbg_finalize_init(instance, module) {
     wasmInstance = instance;
     wasm = instance.exports;
     wasmModule = module;
-    cachedDataViewMemory0 = null;
     cachedUint8ArrayMemory0 = null;
+    wasm.__wbindgen_start();
     return wasm;
 }
 
 async function __wbg_load(module, imports) {
     if (typeof Response === 'function' && module instanceof Response) {
+        if (!module.ok) {
+            throw new Error(`failed to fetch Wasm: ${module.status} ${module.statusText} fetching '${module.url}'`);
+        }
+
         if (typeof WebAssembly.instantiateStreaming === 'function') {
             try {
                 return await WebAssembly.instantiateStreaming(module, imports);
             } catch (e) {
-                const validResponse = module.ok && expectedResponseType(module.type);
+                const validResponse = expectedResponseType(module.type);
 
                 if (validResponse && module.headers.get('Content-Type') !== 'application/wasm') {
                     console.warn("`WebAssembly.instantiateStreaming` failed because your server does not serve Wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n", e);
