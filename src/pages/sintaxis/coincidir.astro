@@ -7,12 +7,12 @@ import Layout from '../../layouts/Layout.astro';
 
   <p>Forja soporta <strong>pattern matching</strong> con <code><span class="kw">coincidir</span></code> y <code><span class="kw">caso</span></code>. Te permite evaluar un valor contra múltiples patrones y desestructurar tipos algebraicos, tuplas y valores literales.</p>
 
-  <div class="info">💡 <strong>Analogía:</strong> Es un <code>si</code> súper-cargado que pregunta “¿esto se ve como...?” en lugar de solo “¿es mayor que 5?”.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> <strong>Analogía:</strong> Es un <code>si</code> súper-cargado que pregunta “¿esto se ve como...?” en lugar de solo “¿es mayor que 5?”.</div>
 
   <h2>Sintaxis básica</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📐 Estructura</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-ruler"/></svg> Estructura</span></div>
     <pre><code><span class="kw">coincidir</span> (expresión) &lbrace;
     <span class="kw">caso</span> patrón1 &rarr; &lbrace;
         <span class="co">// código si coincide con patrón1</span>
@@ -28,7 +28,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>El caso más simple: comparar contra valores concretos o rangos:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔢 Números</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-hash"/></svg> Números</span></div>
     <pre><code><span class="kw">variable</span> dia = 3
 
 <span class="kw">coincidir</span> (dia) &lbrace;
@@ -48,14 +48,14 @@ import Layout from '../../layouts/Layout.astro';
 <span class="co">// → Miércoles</span></code></pre>
   </div>
 
-  <div class="tip"><strong>💡 Alternativa:</strong> También podés usar <code><span class="kw">otro</span></code> como wildcard/default explícito en lugar de <code>_</code>: <code>caso otro &rarr; &lbrace; ... &rbrace;</code></div>
+  <div class="tip"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Alternativa:</strong> También podés usar <code><span class="kw">otro</span></code> como wildcard/default explícito en lugar de <code>_</code>: <code>caso otro &rarr; &lbrace; ... &rbrace;</code></div>
 
   <h2>Tipos algebraicos (enums)</h2>
 
   <p>Podés desestructurar variantes de un <code>tipo</code> definido con <code>tipo</code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📦 Enums</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-package"/></svg> Enums</span></div>
     <pre><code><span class="kw">tipo</span> Resultado = Exito(Entero) | Error(Texto)
 
 <span class="kw">variable</span> r = Exito(200)
@@ -75,7 +75,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Podés combinar patrones con <code>|</code> y usar <code>_</code> como comodín:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔀 Pipes y wildcard</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-shuffle"/></svg> Pipes y wildcard</span></div>
     <pre><code><span class="kw">coincidir</span> (nota) &lbrace;
     <span class="kw">caso</span> 10 | 9 &rarr; &lbrace;
         <span class="fn">escribir</span>(<span class="st">"Excelente"</span>)
