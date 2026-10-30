@@ -7,19 +7,19 @@ import Layout from '../../layouts/Layout.astro';
 
   <p>Forja permite definir <strong>tipos algebraicos</strong> (enums) con la palabra clave <code><span class="kw">tipo</span></code>. Son ideales para representar datos que pueden tomar diferentes formas, como el resultado de una operación o los estados de un proceso.</p>
 
-  <div class="info">💡 <strong>Analogía:</strong> Un tipo algebraico es como una <strong>lista de opciones</strong> donde cada opción puede llevar datos adicionales. En Rust se llaman <code>enum</code>, en Haskell "tipos suma".</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> <strong>Analogía:</strong> Un tipo algebraico es como una <strong>lista de opciones</strong> donde cada opción puede llevar datos adicionales. En Rust se llaman <code>enum</code>, en Haskell "tipos suma".</div>
 
   <h2>Sintaxis</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📐 Estructura</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-ruler"/></svg> Estructura</span></div>
     <pre><code><span class="kw">tipo</span> Nombre = Variante1 | Variante2 | Variante3(Tipo1, Tipo2)</code></pre>
   </div>
 
   <h2>Ejemplos</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🎯 Opción con datos</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg> Opción con datos</span></div>
     <pre><code><span class="co">// Tipo Opcion: puede ser Algo (con un valor) o Nada</span>
 <span class="kw">tipo</span> Opcion = Algo | Nada
 
@@ -35,7 +35,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Los tipos algebraicos pueden tener parámetros genéricos para ser reutilizables:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🧬 Genéricos</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-dna"/></svg> Genéricos</span></div>
     <pre><code><span class="kw">tipo</span> Resultado&lt;T, E&gt; = Exito(T) | Error(E)
 <span class="kw">tipo</span> Opcion&lt;T&gt; = Algun(T) | Ninguno</code></pre>
   </div>
@@ -45,7 +45,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Los tipos algebraicos se usan junto con <code>coincidir</code> para hacer pattern matching:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔀 Ejemplo completo</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-shuffle"/></svg> Ejemplo completo</span></div>
     <pre><code><span class="kw">tipo</span> Resultado = Exito(Entero) | Error(Texto)
 
 <span class="kw">funcion</span> dividir(a, b) &lbrace;
@@ -79,5 +79,5 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code>caso Algo(n) &rarr; &lbrace; ... &rbrace;</code></td><td><code>Opcion::Algo(n) =&gt; &lbrace; ... &rbrace;</code></td></tr>
   </table>
 
-  <div class="warning">⚠️ <strong>Estado:</strong> Los tipos algebraicos están definidos a nivel de AST y lexer con soporte parcial en VM y transpilador. El soporte completo está en desarrollo activo.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> <strong>Estado:</strong> Los tipos algebraicos están definidos a nivel de AST y lexer con soporte parcial en VM y transpilador. El soporte completo está en desarrollo activo.</div>
 </Layout>
