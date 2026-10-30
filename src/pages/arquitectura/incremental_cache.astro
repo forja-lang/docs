@@ -31,7 +31,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Cómo se integra</h2>
   <p>El pipeline de compilación calcula el hash de cada fuente (<code>ModuleResolver::hash_fuente</code>), consulta <code>get</code> para reutilizar bytecode sin recompilar, y guarda con <code>put</code> los módulos recién compilados. <code>invalidate_changed</code> detecta cambios de fuente y la invalidación transitiva garantiza que, si <code>base.fa</code> cambia, <code>lib.fa</code> (que lo importa) también se recompile.</p>
 
-  <div class="info"><strong>💡</strong> <code>invalidate</code> usa un stack DFS con <code>HashSet</code> de visitados: la invalidación de un módulo se propaga a todos sus dependientes en cadena.</div>
+  <div class="info"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg></strong> <code>invalidate</code> usa un stack DFS con <code>HashSet</code> de visitados: la invalidación de un módulo se propaga a todos sus dependientes en cadena.</div>
 
-  <div class="warning"><strong>⚠️</strong> Si cambia <code>CACHE_VERSION</code>, toda la caché existente se invalida: cada entrada almacena la versión con la que fue creada y <code>get</code> la compara.</div>
+  <div class="warning"><strong><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg></strong> Si cambia <code>CACHE_VERSION</code>, toda la caché existente se invalida: cada entrada almacena la versión con la que fue creada y <code>get</code> la compara.</div>
 </Layout>
