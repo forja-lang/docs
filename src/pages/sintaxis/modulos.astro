@@ -7,14 +7,14 @@ import Layout from '../../layouts/Layout.astro';
 
   <p>Forja permite organizar tu código en múltiples archivos usando el sistema de <strong>módulos</strong> con la palabra clave <code><span class="kw">importar</span></code>.</p>
 
-  <div class="info">💡 <strong>Idea:</strong> Dividí tu programa en archivos separados y conectalos con <code>importar</code>. Cada archivo es un módulo.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> <strong>Idea:</strong> Dividí tu programa en archivos separados y conectalos con <code>importar</code>. Cada archivo es un módulo.</div>
 
   <h2>Importar módulos externos (FFI)</h2>
 
   <p>Usá <code><span class="kw">importar</span> <span class="kw">externa</span></code> para cargar bibliotecas del sistema (.dll/.so):</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔌 FFI</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-plug"/></svg> FFI</span></div>
     <pre><code><span class="kw">importar</span> <span class="kw">externa</span> <span class="st">"libreria.dll"</span></code></pre>
   </div>
 
@@ -23,7 +23,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Sintaxis</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📐 Importar un módulo</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-ruler"/></svg> Importar un módulo</span></div>
     <pre><code><span class="kw">importar</span> ruta/del/modulo</code></pre>
   </div>
 
@@ -34,7 +34,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Proyecto con dos archivos:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 main.fa</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> main.fa</span></div>
     <pre><code><span class="kw">importar</span> modulos/matematica
 
 <span class="fn">escribir</span>(sumar(5, 3))
@@ -42,7 +42,7 @@ import Layout from '../../layouts/Layout.astro';
   </div>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 modulos/matematica.fa</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> modulos/matematica.fa</span></div>
     <pre><code><span class="kw">funcion</span> sumar(a, b) &lbrace;
     <span class="kw">retornar</span> a + b
 &rbrace;
@@ -61,14 +61,14 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code>principal</code></td><td><code>./principal.fa</code></td></tr>
   </table>
 
-  <div class="warning">⚠️ <strong>Seguridad:</strong> Las rutas con <code>..</code> (path traversal) son rechazadas por el resolvedor de módulos. Esto evita accesos no autorizados a archivos fuera del proyecto.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> <strong>Seguridad:</strong> Las rutas con <code>..</code> (path traversal) son rechazadas por el resolvedor de módulos. Esto evita accesos no autorizados a archivos fuera del proyecto.</div>
 
   <h2>Importar en el CLI</h2>
 
   <p>Los proyectos con módulos se ejecutan desde el directorio raíz:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>⚡ Ejecutar</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-zap"/></svg> Ejecutar</span></div>
     <pre><code>forja run main.fa</code></pre>
   </div>
 </Layout>
