@@ -7,7 +7,7 @@ import Layout from '../../layouts/Layout.astro';
   description="Forja (fa) es un lenguaje de programación educativo en español con contratos y tipado que compila a nativo, GUI, WASM y Android. Esta es la historia del proyecto."
 >
   <article class="post">
-    <p class="post-meta">📰 Blog · Lanzamiento · Forja v0.9.3</p>
+    <p class="post-meta"><svg class="ico" aria-hidden="true"><use href="#i-newspaper"/></svg> Blog · Lanzamiento · Forja v0.9.3</p>
     <h1>Forja: un lenguaje de programación que habla tu idioma</h1>
 
     <p class="post-lead">
@@ -19,7 +19,7 @@ import Layout from '../../layouts/Layout.astro';
     </p>
 
     <div class="info">
-      🔥 <strong>El pitch en una línea:</strong> aprendé a programar en español,
+      <svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg> <strong>El pitch en una línea:</strong> aprendé a programar en español,
       con contratos y tipado, y compilá a nativo, GUI y WASM.
     </div>
 
@@ -91,7 +91,7 @@ import Layout from '../../layouts/Layout.astro';
     </p>
 
     <p>
-      <a class="post-cta" href="/docs/playground/">▶ Abrir el playground</a>
+      <a class="post-cta" href="/docs/playground/"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg> Abrir el playground</a>
       <a class="post-cta" href="/docs/#demo">Ver la demo en la portada</a>
     </p>
 
@@ -100,7 +100,7 @@ import Layout from '../../layouts/Layout.astro';
     </p>
 
     <div class="code-block-wrapper">
-      <div class="code-header"><span>💻 Instalación</span></div>
+      <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-monitor"/></svg> Instalación</span></div>
       <pre><code>git clone https://github.com/forja-lang/forja
 cd forja &amp;&amp; cargo build --release
 ./target/release/forja run ejemplos/01_hola.fa</code></pre>
@@ -109,7 +109,7 @@ cd forja &amp;&amp; cargo build --release
     <h2>El hola mundo de 5 líneas</h2>
 
     <div class="code-block-wrapper">
-      <div class="code-header"><span>📄 hola.fa</span></div>
+      <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> hola.fa</span></div>
       <pre><code><span class="co">// Tu primer programa: un saludo y un contrato</span>
 <span class="kw">funcion</span> <span class="fn">saludar</span>(nombre: <span class="ty">Texto</span>) -&gt; <span class="ty">Texto</span>
     <span class="kw">requiere</span> nombre != <span class="st">""</span>, <span class="st">"Necesito un nombre"</span>
@@ -128,7 +128,7 @@ cd forja &amp;&amp; cargo build --release
     </p>
 
     <div class="code-block-wrapper">
-      <div class="code-header"><span>📄 contador.fa</span></div>
+      <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> contador.fa</span></div>
       <pre><code><span class="kw">variable</span> contador = 0
 <span class="kw">funcion</span> <span class="fn">incrementar</span>() &lbrace;
     contador = contador + 1
@@ -173,10 +173,10 @@ cd forja &amp;&amp; cargo build --release
     <h2>Cómo seguir</h2>
 
     <ul>
-      <li>⭐ Dale una estrella al repo para seguir el proyecto.</li>
-      <li>🐛 Reportá lo que se rompa con un ejemplo mínimo reproducible.</li>
-      <li>🎓 Hacé el <a href="/docs/curso/">curso de 30 días</a> y contanos dónde te trabás.</li>
-      <li>💬 Compartí tus programas: la mejor publicidad de un lenguaje son los que lo usan.</li>
+      <li><svg class="ico" aria-hidden="true"><use href="#i-star"/></svg> Dale una estrella al repo para seguir el proyecto.</li>
+      <li><svg class="ico" aria-hidden="true"><use href="#i-bug"/></svg> Reportá lo que se rompa con un ejemplo mínimo reproducible.</li>
+      <li><svg class="ico" aria-hidden="true"><use href="#i-graduation-cap"/></svg> Hacé el <a href="/docs/curso/">curso de 30 días</a> y contanos dónde te trabás.</li>
+      <li><svg class="ico" aria-hidden="true"><use href="#i-message-circle"/></svg> Compartí tus programas: la mejor publicidad de un lenguaje son los que lo usan.</li>
     </ul>
 
     <p class="post-end">
