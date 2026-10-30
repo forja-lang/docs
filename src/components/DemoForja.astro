@@ -88,10 +88,10 @@ escribir("Suma: " + suma)`,
 <div class="demo-forja" data-demo data-auto={autoEjecutar ? '1' : '0'}>
   <div class="demo-panel">
     <div class="demo-head">
-      <span class="demo-file">📄 demo.fa</span>
+      <span class="demo-file"><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> demo.fa</span>
       <div class="demo-actions">
-        <button type="button" class="demo-btn demo-run" data-demo-run>▶ Ejecutar</button>
-        <button type="button" class="demo-btn demo-clear" data-demo-clear title="Limpiar editor">🗑</button>
+        <button type="button" class="demo-btn demo-run" data-demo-run><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg> Ejecutar</button>
+        <button type="button" class="demo-btn demo-clear" data-demo-clear title="Limpiar editor"><svg class="ico" aria-hidden="true"><use href="#i-trash-2"/></svg></button>
       </div>
     </div>
     <textarea
@@ -102,11 +102,11 @@ escribir("Suma: " + suma)`,
   </div>
   <div class="demo-panel">
     <div class="demo-head">
-      <span class="demo-file">📋 Salida</span>
-      <span class="demo-status" data-demo-status>✓ listo</span>
+      <span class="demo-file"><svg class="ico" aria-hidden="true"><use href="#i-clipboard-list"/></svg> Salida</span>
+      <span class="demo-status" data-demo-status><svg class="ico" aria-hidden="true"><use href="#i-circle-check"/></svg> listo</span>
     </div>
     <div class="demo-output" data-demo-output style={`height:${alto}px`}>
-      <span class="demo-placeholder">Presioná ▶ Ejecutar para correr el código</span>
+      <span class="demo-placeholder">Presioná <svg class="ico" aria-hidden="true"><use href="#i-play"/></svg> Ejecutar para correr el código</span>
     </div>
   </div>
 
@@ -243,9 +243,9 @@ escribir("Suma: " + suma)`,
           // si el calentamiento falla, el error real aparece al ejecutar
         }
         wasmListo = true;
-        console.log('✅ Forja WASM cargado para la demo');
+        console.log('Forja WASM cargado para la demo');
       } catch (e) {
-        console.warn('⚠ Forja WASM no disponible:', (e as Error).message);
+        console.warn('Forja WASM no disponible:', (e as Error).message);
         wasmListo = false;
       }
     })();
@@ -293,11 +293,11 @@ escribir("Suma: " + suma)`,
     async function ejecutar() {
       const fuente = code!.value.trim();
       if (!fuente) {
-        renderError('⚠ No hay código para ejecutar');
-        setStatus('⚠ vacío', 'error');
+        renderError('No hay código para ejecutar');
+        setStatus('vacío', 'error');
         return;
       }
-      setStatus('⏳ ejecutando…', 'running');
+      setStatus('ejecutando…', 'running');
       await cargarWASM();
       try {
         if (wasmListo && wasm && typeof wasm.forja_ejecutar === 'function') {
@@ -307,14 +307,14 @@ escribir("Suma: " + suma)`,
           const resultado = wasm.forja_ejecutar(fuente);
           const tiempoMs = (performance.now() - inicio).toFixed(2);
           render(String(resultado ?? ''));
-          setStatus('⚡ ' + tiempoMs + ' ms', 'timing');
+          setStatus(tiempoMs + ' ms', 'timing');
         } else {
-          renderError('⚠ La VM WASM todavía no está disponible.');
-          setStatus('⚠ sin WASM', 'error');
+          renderError('La VM WASM todavía no está disponible.');
+          setStatus('sin WASM', 'error');
         }
       } catch (err) {
-        renderError('⛔ ' + (err as Error).message);
-        setStatus('❌ error', 'error');
+        renderError((err as Error).message);
+        setStatus('error', 'error');
       }
     }
 
@@ -322,7 +322,7 @@ escribir("Suma: " + suma)`,
     clearBtn?.addEventListener('click', () => {
       code!.value = '';
       output!.innerHTML = '<span class="demo-placeholder">Editor limpiado</span>';
-      setStatus('✓ listo', 'ok');
+      setStatus('listo', 'ok');
     });
     code.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
