@@ -8,7 +8,7 @@ import Layout from '../../../layouts/Layout.astro';
   <h2>¿Por qué existen?</h2>
   <p>Proveen capacidades de comunicación en red de bajo y alto nivel. <code>sockets.fa</code> expone sockets TCP/UDP para comunicación directa, mientras que <code>red.fa</code> ofrece utilidades de red de más alto nivel como resolución DNS y verificación de conectividad.</p>
 
-  <div class="warning"><strong>⚠️ Sandbox:</strong> Por defecto, Forja bloquea todas las conexiones de red. Usá <code>--allow-net</code> para habilitar conectividad. Ver <a href="/docs/arquitectura/sandbox">Sandbox de Red</a>.</div>
+  <div class="warning"><strong><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> Sandbox:</strong> Por defecto, Forja bloquea todas las conexiones de red. Usá <code>--allow-net</code> para habilitar conectividad. Ver <a href="/docs/arquitectura/sandbox">Sandbox de Red</a>.</div>
 
   <h2>Módulo <code>sockets</code> — Sockets TCP/UDP</h2>
   <table>
@@ -34,7 +34,7 @@ import Layout from '../../../layouts/Layout.astro';
 
   <h2>Ejemplo: Cliente TCP básico</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 cliente_tcp.fa</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> cliente_tcp.fa</span></div>
     <pre><code><span class="co">// Cliente TCP que envía y recibe datos</span>
 <span class="kw">importar</span> sockets
 
@@ -53,5 +53,5 @@ sockets.cerrar(socket)</code></pre>
     <li><strong>IoT:</strong> Comunicación con dispositivos de red</li>
   </ul>
 
-  <div class="tip"><strong>💡 Alternativa:</strong> Para protocolos de alto nivel, usá <code>cliente_http</code> para HTTP/1.1, <code>cliente_h2</code> para HTTP/2, o <code>websocket</code> para conexiones WebSocket.</div>
+  <div class="tip"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Alternativa:</strong> Para protocolos de alto nivel, usá <code>cliente_http</code> para HTTP/1.1, <code>cliente_h2</code> para HTTP/2, o <code>websocket</code> para conexiones WebSocket.</div>
 </Layout>
