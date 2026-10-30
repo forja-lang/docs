@@ -39,7 +39,7 @@ forja build --pgo=usar programa.fa    → recompila con el perfil</code></pre>
   <h2>Cómo se integra</h2>
   <p>El JIT engine (<code>jit_engine.rs</code>) carga el perfil con <code>cargar_perfil</code>, usa <code>pgo_loop_unroll_factor</code> para el unrolling de loops calientes, y <code>es_pgo_tier2_candidate</code> para decidir optimizaciones agresivas por función. La VM aplica el perfil con <code>aplicar_pgo</code> antes de ejecutar y mergea los datos recolectados con los previos al finalizar (<code>lib.rs::ejecutar_con_pgo_impl</code>).</p>
 
-  <div class="info"><strong>💡</strong> La serialización actual usa JSON via serde_json. El código documenta alternativas (bincode, binario manual con endian fijo, postcard) para reducir tamaño (~2-5x actual) y acelerar la serialización.</div>
+  <div class="info"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg></strong> La serialización actual usa JSON via serde_json. El código documenta alternativas (bincode, binario manual con endian fijo, postcard) para reducir tamaño (~2-5x actual) y acelerar la serialización.</div>
 
-  <div class="warning"><strong>⚠️</strong> Los umbrales son heurísticos: 100 llamadas para inline, 1000 para tier-2, 10000 iteraciones para unrolling. Un perfil de una corrida atípica puede producir decisiones subóptimas; por eso el flujo <strong>mergea</strong> los perfiles entre corridas.</div>
+  <div class="warning"><strong><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg></strong> Los umbrales son heurísticos: 100 llamadas para inline, 1000 para tier-2, 10000 iteraciones para unrolling. Un perfil de una corrida atípica puede producir decisiones subóptimas; por eso el flujo <strong>mergea</strong> los perfiles entre corridas.</div>
 </Layout>
