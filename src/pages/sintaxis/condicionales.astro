@@ -16,7 +16,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Sintaxis básica</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📐 Estructura básica</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-ruler"/></svg> Estructura básica</span></div>
     <pre><code><span class="kw">si</span> (condición) &lbrace;
     <span class="co">// se ejecuta si la condición es verdadera</span>
 &rbrace; <span class="kw">sino</span> &lbrace;
@@ -27,7 +27,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Ejemplo básico</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📐 Comparación simple</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-ruler"/></svg> Comparación simple</span></div>
     <pre><code><span class="kw">variable</span> x = 10
 <span class="kw">variable</span> y = 5
 
@@ -44,7 +44,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Cuando un <code>si</code> está dentro de una función, podés usar <code><span class="kw">retornar</span></code> directamente como reemplazo de <code>sino</code>. Esto evita un bloque anidado y hace el código más compacto:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>↩️ <code>retornar</code> como else directo</span></div>
+    <div class="code-header"><span>↩ <code>retornar</code> como else directo</span></div>
     <pre><code><span class="kw">funcion</span> max(a: Entero, b: Entero) -> Entero &lbrace;
     <span class="kw">si</span> (a > b) &lbrace;
         <span class="kw">retornar</span> a
@@ -56,7 +56,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>También funciona encadenado con <code>si</code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔗 <code>retornar si</code> como else-if</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-link"/></svg> <code>retornar si</code> como else-if</span></div>
     <pre><code><span class="kw">funcion</span> clasificar_nota(nota: Entero) -> Texto &lbrace;
     <span class="kw">si</span> (nota >= 90) &lbrace;
         <span class="kw">retornar</span> <span class="st">"Excelente"</span>
@@ -67,14 +67,14 @@ import Layout from '../../layouts/Layout.astro';
 &rbrace;</code></pre>
   </div>
 
-  <p><strong>⚠️ Atención:</strong> <code>retornar</code> como <code>sino</code> solo tiene sentido dentro de funciones, ya que implica un retorno de la función.</p>
+  <p><strong><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> Atención:</strong> <code>retornar</code> como <code>sino</code> solo tiene sentido dentro de funciones, ya que implica un retorno de la función.</p>
 
   <h2>Múltiples condiciones: <code>sino si</code> / <code>o si</code></h2>
 
   <p>En lugar de anidar <code>si</code> dentro de <code>sino</code>, podés usar <code><span class="kw">sino si</span></code> o <code><span class="kw">o si</span></code> para encadenar condiciones de forma más limpia:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📊 Evaluación de nota</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-bar-chart-3"/></svg> Evaluación de nota</span></div>
     <pre><code><span class="kw">variable</span> nota = 85
 
 <span class="kw">si</span> (nota >= 90) &lbrace;
@@ -90,7 +90,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>También podés usar <code><span class="kw">o si</span></code> como alternativa a <code>sino si</code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔀 <code>o si</code> como alternativa</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-shuffle"/></svg> <code>o si</code> como alternativa</span></div>
     <pre><code><span class="kw">variable</span> x = 2
 
 <span class="kw">si</span> x == 1 &lbrace;
@@ -108,7 +108,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Usá operadores lógicos para combinar condiciones. Podés usar tanto los operadores simbólicos como sus versiones en español:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔗 Con <code>o</code> (OR en español)</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-link"/></svg> Con <code>o</code> (OR en español)</span></div>
     <pre><code><span class="kw">variable</span> edad = 20
 <span class="kw">variable</span> tiene_permiso = verdadero
 
@@ -137,7 +137,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Además de los operadores simbólicos, podés usar keywords en español para escribir condiciones más naturales:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🇪🇸 Lógica en español</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-flag"/></svg> Lógica en español</span></div>
     <pre><code><span class="kw">variable</span> activo = falso
 <span class="kw">variable</span> temporal = verdadero
 
