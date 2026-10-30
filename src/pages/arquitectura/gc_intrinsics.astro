@@ -38,5 +38,5 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Cómo se integra</h2>
   <p>Es el puente entre el backend LLVM y el runtime GC: el backend registra un <code>StackMap</code> por función compilada (<code>new_function_id</code> → <code>register_stack_map</code>), marca los safe points (<code>register_safe_point</code>) e inserta las write barriers según <code>WriteBarrier::for_write</code>. En runtime, el GC usa <code>find_stack_map</code> para localizar el mapa más cercano a un PC dado y <code>is_safe_point</code> para saber si puede pausar.</p>
 
-  <div class="info"><strong>💡</strong> El manager asigna <code>function_id</code>s únicos (desde 1) y soporta búsqueda del stack map más cercano a un PC, incluso cuando el PC cae entre safe points.</div>
+  <div class="info"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg></strong> El manager asigna <code>function_id</code>s únicos (desde 1) y soporta búsqueda del stack map más cercano a un PC, incluso cuando el PC cae entre safe points.</div>
 </Layout>
