@@ -67,7 +67,7 @@ import Layout from '../layouts/Layout.astro';
         <li>Si existe una línea anterior, la agrega con formato <code>[NroLínea] │ [Texto]</code>.</li>
         <li>Agrega la línea del error apuntando con un cursor <code>↑ [Mensaje]</code> desplazado espacialmente según la columna.</li>
         <li>Si existe una línea posterior, la concatena para completar el bloque visual.</li>
-        <li>Añade el emoji representativo y la sugerencia de corrección formateada al pie del error.</li>
+        <li>Añade la sugerencia de corrección formateada al pie del error.</li>
       </ol>
     </li>
     <li><strong>¿Para qué?:</strong> Generar el reporte contextualizado que se imprime en consola al fallar la compilación o transpilación en la terminal.</li>
@@ -88,13 +88,6 @@ import Layout from '../layouts/Layout.astro';
   </ul>
 
   <h2>Funciones del Módulo Asociadas</h2>
-
-  <h3><code>pub fn emoji_para(tipo: &ErrorTipo) -> &'static str</code></h3>
-  <ul>
-    <li><strong>¿Por qué?:</strong> Brinda un identificador visual rápido para que el usuario asocie la naturaleza del error de inmediato.</li>
-    <li><strong>¿Cómo?:</strong> Mapea cada variante de <code>ErrorTipo</code> a un emoji representativo (por ejemplo, 🏷️ para errores de propiedad/ownership o 🧠 para semántica).</li>
-    <li><strong>¿Para qué?:</strong> Proporcionar el emoji impreso al renderizar el error.</li>
-  </ul>
 
   <h3><code>pub fn categoria_educativa(tipo: &ErrorTipo) -> &'static str</code></h3>
   <ul>
