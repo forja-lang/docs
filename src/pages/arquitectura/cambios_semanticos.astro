@@ -36,8 +36,8 @@ import Layout from '../../layouts/Layout.astro';
       <tr><td><code>mientras</code></td><td><code>while</code></td><td>—</td><td>Bucle controlado por condición</td></tr>
       <tr><td><code>para</code></td><td><code>for</code></td><td>—</td><td>Bucle clásico de estilo C</td></tr>
       <tr><td><code>repetir</code></td><td><code>loop</code>, <code>repeat</code></td><td>—</td><td>Bucle de repetición fija</td></tr>
-      <tr><td><code>romper</code> / <code>break</code></td><td><code>break</code></td><td><code>break</code> ✅</td><td>Sale del bucle activo</td></tr>
-      <tr><td><code>continuar</code> / <code>continue</code></td><td><code>continue</code></td><td><code>continue</code> ✅</td><td>Pasa a la siguiente iteración</td></tr>
+      <tr><td><code>romper</code> / <code>break</code></td><td><code>break</code></td><td><code>break</code> <svg class="ico" aria-hidden="true"><use href="#i-circle-check"/></svg></td><td>Sale del bucle activo</td></tr>
+      <tr><td><code>continuar</code> / <code>continue</code></td><td><code>continue</code></td><td><code>continue</code> <svg class="ico" aria-hidden="true"><use href="#i-circle-check"/></svg></td><td>Pasa a la siguiente iteración</td></tr>
       <tr><td><code>retornar</code></td><td><code>return</code></td><td>—</td><td>Devuelve un valor desde una función</td></tr>
       <tr><td><code>importar</code></td><td><code>import</code></td><td>—</td><td>Carga módulos externos</td></tr>
       <tr><td><code>clase</code></td><td><code>class</code></td><td>—</td><td>Declara una clase</td></tr>
@@ -51,7 +51,7 @@ import Layout from '../../layouts/Layout.astro';
       <tr><td><code>este</code></td><td><code>this</code>, <code>self</code></td><td>—</td><td>Referencia a la instancia actual</td></tr>
       <tr><td><code>constructor</code></td><td><code>constructor</code>, <code>init</code></td><td>—</td><td>Declara el constructor de una clase</td></tr>
       <tr><td><code>prestado</code></td><td><code>ref</code>, <code>&</code></td><td>—</td><td>Referencia prestada (borrowing)</td></tr>
-      <tr><td><code>mut</code></td><td><code>mut</code></td><td><code>mut</code> ✅</td><td>Modificador de mutabilidad</td></tr>
+      <tr><td><code>mut</code></td><td><code>mut</code></td><td><code>mut</code> <svg class="ico" aria-hidden="true"><use href="#i-circle-check"/></svg></td><td>Modificador de mutabilidad</td></tr>
       <tr><td><code>verdadero</code></td><td><code>true</code></td><td>—</td><td>Literal booleano verdadero</td></tr>
       <tr><td><code>falso</code></td><td><code>false</code></td><td>—</td><td>Literal booleano falso</td></tr>
       <tr><td><code>nulo</code></td><td><code>null</code></td><td>—</td><td>Valor nulo / ausencia de valor</td></tr>
@@ -120,7 +120,7 @@ import Layout from '../../layouts/Layout.astro';
   </table>
 
   <p class="info">
-    ⚠️ <strong>Nota:</strong> Los operadores <code>&&</code>, <code>||</code> y <code>!</code>
+    <svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> <strong>Nota:</strong> Los operadores <code>&&</code>, <code>||</code> y <code>!</code>
     también son válidos. La versión textual en español es la recomendada.
   </p>
 
@@ -197,7 +197,7 @@ Label(label_next)</code></pre>
   </div>
 
   <p class="info">
-    ℹ️ Para más detalles sobre este proceso, ver
+    <svg class="ico" aria-hidden="true"><use href="#i-info"/></svg> Para más detalles sobre este proceso, ver
     <a href="./bytecode"><code>src/bytecode.rs:1687-1784</code></a> y
     <a href="./parser"><code>crates/forja-syntax/src/parser.rs:2139-2161</code></a>.
   </p>
