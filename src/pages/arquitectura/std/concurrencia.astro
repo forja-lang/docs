@@ -35,7 +35,7 @@ import Layout from '../../../layouts/Layout.astro';
 
   <h2>Ejemplo: Productor-Consumidor</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 productor_consumidor.fa</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> productor_consumidor.fa</span></div>
     <pre><code><span class="kw">importar</span> concurrencia
 
 <span class="kw">variable</span> (tx, rx) = concurrencia.canal_crear()
@@ -62,7 +62,7 @@ concurrencia.hilo_unir(h2)</code></pre>
 
   <h2>Ejemplo: Select (equivalente a <code>select</code> en Go)</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 select.fa</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> select.fa</span></div>
     <pre><code><span class="kw">importar</span> concurrencia
 
 <span class="kw">variable</span> (tx1, rx1) = concurrencia.canal_crear()
@@ -81,5 +81,5 @@ concurrencia.hilo_unir(h2)</code></pre>
     <li><strong>Timeouts:</strong> Combinar <code>seleccionar</code> con temporizadores</li>
   </ul>
 
-  <div class="info"><strong>💡 Modelo CSP:</strong> Forja implementa el modelo de <strong>Comunicación Secuencial de Procesos</strong> (CSP), similar a Go y Erlang. Las comunicaciones entre hilos se hacen mediante canales, no memoria compartida.</div>
+  <div class="info"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Modelo CSP:</strong> Forja implementa el modelo de <strong>Comunicación Secuencial de Procesos</strong> (CSP), similar a Go y Erlang. Las comunicaciones entre hilos se hacen mediante canales, no memoria compartida.</div>
 </Layout>
