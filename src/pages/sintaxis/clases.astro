@@ -9,7 +9,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Estructura de una clase</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🧱 Plantilla</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-brick-wall"/></svg> Plantilla</span></div>
     <pre><code><span class="kw">clase</span> Nombre &lbrace;
     campo1
     campo2
@@ -30,7 +30,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Una clase <code>Estudiante</code> con campos, constructor y métodos:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🎓 Clase Estudiante</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-graduation-cap"/></svg> Clase Estudiante</span></div>
     <pre><code><span class="kw">clase</span> Estudiante &lbrace;
     nombre
     edad
@@ -75,7 +75,7 @@ alumno.presentarse()
   <p>Instancia una clase y (si existe) llama al constructor automáticamente:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🚀 Instanciación posicional</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-rocket"/></svg> Instanciación posicional</span></div>
     <pre><code><span class="kw">variable</span> p = <span class="kw">nuevo</span> Persona(<span class="st">"Juan"</span>)    <span class="co">// con constructor posicional</span>
 <span class="kw">variable</span> q = <span class="kw">nuevo</span> Punto()               <span class="co">// sin constructor</span></code></pre>
   </div>
@@ -85,7 +85,7 @@ alumno.presentarse()
   <p>Podés inicializar objetos usando llaves con nombres de campo, sin necesidad de definir un constructor posicional:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🏗️ Struct-literal</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-building-2"/></svg> Struct-literal</span></div>
     <pre><code><span class="kw">clase</span> Persona &lbrace;
     nombre
     edad
@@ -97,14 +97,14 @@ alumno.presentarse()
 <span class="fn">escribir</span>(p.edad)   <span class="co">// → 25</span></code></pre>
   </div>
 
-  <div class="info">💡 La sintaxis struct-literal <code>nuevo Clase &lbrace; campo: valor &rbrace;</code> es especialmente útil cuando la clase tiene muchos campos. El orden de los campos no importa y el código resulta más legible.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> La sintaxis struct-literal <code>nuevo Clase &lbrace; campo: valor &rbrace;</code> es especialmente útil cuando la clase tiene muchos campos. El orden de los campos no importa y el código resulta más legible.</div>
 
   <h2>Clase sin constructor</h2>
 
   <p>Si no definís un constructor, los campos se inicializan con <code>nulo</code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📍 Punto 2D</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-map-pin"/></svg> Punto 2D</span></div>
     <pre><code><span class="kw">clase</span> Punto &lbrace;
     x
     y
@@ -119,7 +119,7 @@ alumno.presentarse()
   <p>Las clases pueden implementar <strong>rasgos</strong> (interfaces) con <code><span class="kw">rasgo</span></code> e <code><span class="kw">implementa</span></code>:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🧬 Rasgo + Clase</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-dna"/></svg> Rasgo + Clase</span></div>
     <pre><code><span class="kw">rasgo</span> Volador &lbrace;
     <span class="kw">funcion</span> <span class="fn">volar</span>() -> <span class="ty">Texto</span>
 &rbrace;
@@ -136,7 +136,7 @@ alumno.presentarse()
 &rbrace;</code></pre>
   </div>
 
-  <div class="info">💡 Los rasgos se definen con <code>rasgo</code> y se implementan con <code>implementa ... para</code>. Son equivalentes a <code>trait</code> e <code>impl ... for</code> en Rust.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Los rasgos se definen con <code>rasgo</code> y se implementan con <code>implementa ... para</code>. Son equivalentes a <code>trait</code> e <code>impl ... for</code> en Rust.</div>
 
   <h2>Equivalencia con Rust</h2>
 
