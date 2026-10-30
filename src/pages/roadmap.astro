@@ -15,10 +15,10 @@ import Layout from '../layouts/Layout.astro';
   </p>
 
   <div class="info">
-    🔥 <strong>Estado actual: Forja v0.9.5.</strong> ~126.738 líneas de Rust
+    🔥 <strong>Estado actual: Forja v0.9.5.</strong> ~137.562 líneas de Rust
     (~72.000 en <code>src/</code> y ~36.000 en <code>crates/</code>), <strong>2 motores</strong>
     (<code>vm_fast</code> + <code>jit_tiered</code>), frontend en
-    <code>forja-syntax</code> / <code>forja-types</code>, <strong>262 ejemplos</strong>,
+    <code>forja-syntax</code> / <code>forja-types</code>, <strong>263 ejemplos</strong>,
     <strong>47 módulos</strong> en <code>stdlib/std</code>, curso de 30 días, LSP + DAP,
     GC generacional, IR-first para el subconjunto principal del lenguaje, registry
     remoto de desarrollo y releases precompilados.
@@ -187,7 +187,7 @@ import Layout from '../layouts/Layout.astro';
     <tr><td>LSP — completado, hover, go-to-definition</td><td>✅ Hecho</td></tr>
     <tr><td>DAP Debugger (<code>src/debugger.rs</code>)</td><td>✅ Hecho</td></tr>
     <tr><td>Errores con span, código estable y sugerencia (F2-T1)</td><td>✅ Hecho</td></tr>
-    <tr><td>262 ejemplos en <code>ejemplos/</code></td><td>✅ Hecho</td></tr>
+    <tr><td>263 ejemplos en <code>ejemplos/</code></td><td>✅ Hecho</td></tr>
   </table>
 
   <h2>🚧 Hito N: IR SSA + backend de registros</h2>
@@ -280,19 +280,6 @@ import Layout from '../layouts/Layout.astro';
     <tr><td>IR real: emisión AST→IR con paridad verificada (F4-T8)</td><td>🚧 IR-first para funciones/clases/enums/contratos/colecciones; fallback acotado (Plan 4 · F11)</td></tr>
   </table>
 
-  <h2>🚧 En progreso (Plan 4)</h2>
-
-  <div class="feature-grid">
-    <div class="feature-card"><span class="icon">🔀</span><h4>IR sin fallback</h4><p>Falta cubrir closures, hilos/canales, <code>try</code>, traits/FFI y retirar el fallback AST (F11).</p></div>
-    <div class="feature-card"><span class="icon">🧵</span><h4>Closures y concurrencia</h4><p>Las closures anónimas y los casos límite de canales/heaps están en F12.</p></div>
-    <div class="feature-card"><span class="icon">📦</span><h4>Registry de producción</h4><p>Cliente y servidor de desarrollo listos; faltan TLS, auth de autores y firmas asimétricas (F12-T4/F14-T3).</p></div>
-    <div class="feature-card"><span class="icon">🎨</span><h4>GUI core completo</h4><p><code>forja-gui-core</code> ya contiene signals/logging; widgets y animación siguen en <code>forja-gui-rt</code> (F14-T1).</p></div>
-    <div class="feature-card"><span class="icon">🪟</span><h4>Windows ARM64</h4><p>La matriz existe; falta validarla en el runner con MSVC ARM64 (F13-T2).</p></div>
-    <div class="feature-card"><span class="icon">🔐</span><h4>Firma keyless en release</h4><p>La firma local está verificada; falta ejecutarla en un release real de GitHub (F13-T3).</p></div>
-    <div class="feature-card"><span class="icon">🧩</span><h4>Marketplace y Homebrew</h4><p>El <code>.vsix</code> y el tap están preparados; falta publicarlos (F13-T4).</p></div>
-    <div class="feature-card"><span class="icon">🧪</span><h4>CI real 3 OS</h4><p>La suite y los YAML están validados localmente; falta la corrida en GitHub Actions (F13-T1).</p></div>
-  </div>
-
   <h2>🗺️ Planeado</h2>
 
   <div class="feature-grid">
@@ -305,4 +292,12 @@ import Layout from '../layouts/Layout.astro';
   </div>
 
   <div class="tip"><strong>🔥 ¿Querés contribuir?</strong> Forja es software libre (licencia GPL-3.0-or-later). Si te interesa alguna de estas features, ¡podés empezar a implementarla! Mirá la <a href="/docs/arquitectura/pipeline">arquitectura</a> para entender la base.</div>
+<!-- BEGIN plan4: generado por scripts/metricas.py -->
+  <div class="feature-grid">
+    <div class="feature-card"><span class="icon">✅</span><h4>F11 — IR completo y paridad</h4><p>HECHO</p></div>
+    <div class="feature-card"><span class="icon">🚧</span><h4>F12 — Runtime, concurrencia y datos</h4><p>EN-CURSO — T1/T2/T5 hechos; T3 (corpus 259/260 compilan, 220/260 corren) y T4 (firmas/límites/auditoría hechos, falta OIDC/TLS/despliegue) parciales</p></div>
+    <div class="feature-card"><span class="icon">🔒</span><h4>F13 — Distribución y CI real</h4><p>BLOQUEADO-EXTERNO</p></div>
+    <div class="feature-card"><span class="icon">🚧</span><h4>F14 — Calidad y ecosistema</h4><p>EN-CURSO — T2 (rendimiento AST vs IR) y T3 (firmas Ed25519) hechos; T1 excluido (GUI); T4 hecho</p></div>
+  </div>
+<!-- END plan4 -->
 </Layout>
