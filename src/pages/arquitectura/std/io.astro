@@ -21,7 +21,7 @@ import Layout from '../../../layouts/Layout.astro';
 
   <h2>Uso básico</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📄 ejemplo_io.fa</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> ejemplo_io.fa</span></div>
     <pre><code><span class="fn">escribir</span>(<span class="st">"¿Cómo te llamas? "</span>)
 <span class="kw">variable</span> nombre = <span class="fn">leer_linea</span>()
 <span class="fn">escribir_linea</span>(<span class="st">"¡Hola, "</span> + nombre + <span class="st">"!"</span>)</code></pre>
@@ -35,5 +35,5 @@ import Layout from '../../../layouts/Layout.astro';
     <li><strong>Logging simple:</strong> Salida de estado de programas en ejecución</li>
   </ul>
 
-  <div class="tip"><strong>💡 Dato:</strong> Las funciones <code>escribir</code> y <code>escribir_linea</code> son las más usadas en todo el ecosistema Forja. <code>escribir_linea</code> es el equivalente a <code>println!</code> de Rust.</div>
+  <div class="tip"><strong><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Dato:</strong> Las funciones <code>escribir</code> y <code>escribir_linea</code> son las más usadas en todo el ecosistema Forja. <code>escribir_linea</code> es el equivalente a <code>println!</code> de Rust.</div>
 </Layout>
