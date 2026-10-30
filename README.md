@@ -20,10 +20,10 @@ src/
 │   ├── gui/         # Documentación de la GUI
 │   └── ...
 ├── components/      # Header, Sidebar, Footer, DemoForja
-├── data/            # nav.ts (navegación) y site.ts (datos del sitio)
+├── data/            # nav.ts (navegación), site.ts (datos del sitio) y codigo.ts (fuentes)
 ├── layouts/         # Layout.astro: head, shell de docs y scripts
 ├── styles/          # global.css: tokens y todo el diseño
-└── wasm/            # Playground WASM
+└── wasm/            # Playground WASM + run.js (ejecución compartida)
 ```
 
 ## Diseño
@@ -34,12 +34,25 @@ componentes de contenido. **Las páginas no definen colores nuevos**: usan las v
 (`--accent`, `--surface`, `--muted`…) y las clases disponibles (`.info`, `.warning`, `.tip`,
 `.code-block-wrapper`, `.feature-card`, `.tag`, `.step-list`, `details`).
 
+Los iconos son un sprite SVG de [lucide](https://lucide.dev) (`src/components/SpriteIconos.astro`),
+generado por `scripts/iconos.mjs`, que también reemplaza los emojis del HTML por
+`<svg class="ico"><use href="#i-…"/></svg>`. No toca `<pre>/<code>`: ahí vive código de ejemplo.
+
 La navegación del sidebar, el menú móvil y el paginador anterior/siguiente salen de
 `src/data/nav.ts`. Para agregar una página al sidebar, editá ese archivo.
 
 La navegación entre páginas la hace `<ClientRouter />` (Astro) con transiciones de vista; los
 scripts del layout escuchan `astro:page-load` para reconstruir el índice, los botones de
-copiar y el paginador después de cada navegación.
+copiar/ejecutar y el paginador después de cada navegación.
+
+## Bloques de ejemplo y código fuente
+
+- **Ejecutar**: todo bloque de código Forja (el que lleva resaltado de sintaxis) recibe un
+  botón *Ejecutar* y una mini consola pegada debajo. Corre la VM real compilada a WASM
+  (`src/wasm/run.js`, el mismo módulo que el playground).
+- **Ver código**: las páginas de `arquitectura/` muestran un botón *Ver código* que descarga
+  el fuente real desde GitHub (`src/data/codigo.ts`). El mapeo página → archivo se regenera
+  con `scripts/generar-codigo.mjs`.
 
 ## Pipeline de compilación canónico
 
