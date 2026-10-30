@@ -17,7 +17,7 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code><span class="op">%</span></code></td><td>Módulo (resto)</td><td><code>10 % 3</code></td><td><code>1</code></td></tr>
   </table>
 
-  <div class="info">💡 El operador <code>+</code> también concatena strings: <code>"Hola " + "mundo"</code> → <code>"Hola mundo"</code></div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> El operador <code>+</code> también concatena strings: <code>"Hola " + "mundo"</code> → <code>"Hola mundo"</code></div>
 
   <h2>Asignación compuesta</h2>
 
@@ -51,7 +51,7 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code><span class="op">!</span></code> / <code><span class="kw">no</span></code></td><td>NO (NOT)</td><td><code>!activo</code> / <code>no activo</code></td></tr>
   </table>
 
-  <div class="info">💡 Además de <code>!</code>, podés usar la keyword <code><span class="kw">no</span></code> como operador de negación lógica en español: <code>si (no activo) &lbrace; ... &rbrace;</code></div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Además de <code>!</code>, podés usar la keyword <code><span class="kw">no</span></code> como operador de negación lógica en español: <code>si (no activo) &lbrace; ... &rbrace;</code></div>
 
   <h2>Referencia y acceso</h2>
 
@@ -66,14 +66,14 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code><span class="op">?</span></code></td><td>Propagación de errores (try)</td><td><code>valor?</code></td></tr>
   </table>
 
-  <div class="tip"><strong>⚡ Propagación de errores:</strong> El operador <code>?</code> propaga errores automáticamente. Si la expresión es <code>Error(msg)</code>, la función retorna el error. Si es <code>Exito(valor)</code>, extrae el valor. Ideal para encadenar operaciones fallibles.</div>
+  <div class="tip"><strong><svg class="ico" aria-hidden="true"><use href="#i-zap"/></svg> Propagación de errores:</strong> El operador <code>?</code> propaga errores automáticamente. Si la expresión es <code>Error(msg)</code>, la función retorna el error. Si es <code>Exito(valor)</code>, extrae el valor. Ideal para encadenar operaciones fallibles.</div>
 
   <h2>Operador ternario</h2>
 
   <p>El operador ternario permite expresiones condicionales en línea:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>❓ Ternario</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-circle-help"/></svg> Ternario</span></div>
     <pre><code><span class="kw">variable</span> edad = 20
 <span class="kw">variable</span> categoria = edad >= 18 <span class="op">?</span> <span class="st">"Mayor"</span> <span class="op">:</span> <span class="st">"Menor"</span>
 <span class="fn">escribir</span>(categoria) <span class="co">// → "Mayor"</span>
@@ -105,7 +105,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Usá paréntesis <code>( ... )</code> para agrupar y forzar precedencia:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📐 Agrupación</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-ruler"/></svg> Agrupación</span></div>
     <pre><code><span class="kw">variable</span> resultado = (2 + 3) * (10 - 5)
 <span class="co">// resultado = 25</span>
 
