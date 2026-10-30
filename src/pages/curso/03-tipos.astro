@@ -10,7 +10,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <h2>Tipos primitivos</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Los cuatro tipos base</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Los cuatro tipos base</span></div>
     <pre><code><span class="kw">variable</span> entero: <span class="ty">Entero</span> = 42
 <span class="kw">variable</span> decimal: <span class="ty">Decimal</span> = 3.14
 <span class="kw">variable</span> texto: <span class="ty">Texto</span> = <span class="st">"hola"</span>
@@ -27,7 +27,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Inferencia de tipos</h2>
   <p>No siempre hace falta escribir el tipo; Forja lo deduce del valor:</p>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Inferencia</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Inferencia</span></div>
     <pre><code><span class="kw">variable</span> n = 10        <span class="co">// Entero</span>
 <span class="kw">variable</span> p = 2.5       <span class="co">// Decimal</span>
 <span class="kw">variable</span> s = <span class="st">"texto"</span>   <span class="co">// Texto</span>
@@ -37,16 +37,16 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Conversiones</h2>
   <p>Podés convertir entre tipos con funciones de la biblioteca estándar:</p>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Conversión</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Conversión</span></div>
     <pre><code><span class="kw">variable</span> n = <span class="fn">entero</span>(<span class="st">"42"</span>)     <span class="co">// Texto → Entero</span>
 <span class="kw">variable</span> s = <span class="fn">texto</span>(3.14)      <span class="co">// Decimal → Texto</span>
 <span class="fn">escribir</span>(n)</code></pre>
   </div>
 
-  <div class="info">💡 El tipo de una variable no cambia una vez inferido. Si necesitás otro tipo, convertí el valor explícitamente.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> El tipo de una variable no cambia una vez inferido. Si necesitás otro tipo, convertí el valor explícitamente.</div>
 
   <h2>Ejercicio del día</h2>
-  <div class="warning">✏️ <strong>Ejercicio:</strong> declarar una variable <code>precio</code> de tipo <code>Decimal</code> con valor <code>19.99</code> y mostrarla.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> <strong>Ejercicio:</strong> declarar una variable <code>precio</code> de tipo <code>Decimal</code> con valor <code>19.99</code> y mostrarla.</div>
 
   <p>Comparalo con el <a href="/docs/curso/solucionario/#dia-3">solucionario</a>.</p>
 
