@@ -12,7 +12,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Ejecuta un bloque <strong>mientras</strong> la condición sea verdadera. Ideal cuando no sabés exactamente cuántas veces vas a iterar:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔄 Cuenta regresiva</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-refresh-cw"/></svg> Cuenta regresiva</span></div>
     <pre><code><span class="kw">variable</span> contador = 0
 <span class="kw">mientras</span> (contador &#x3C; 5) &lbrace;
     <span class="fn">escribir</span>(<span class="st">"Contador: "</span> + contador)
@@ -26,7 +26,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Además del estilo C clásico, <code>para</code> también puede iterar sobre colecciones directamente (como <code>for ... in</code> en Rust):</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📋 Iteración sobre colección</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-clipboard-list"/></svg> Iteración sobre colección</span></div>
     <pre><code><span class="kw">para</span> elemento <span class="kw">en</span> coleccion &lbrace;
     <span class="fn">escribir</span>(elemento)
 &rbrace;</code></pre>
@@ -35,28 +35,28 @@ import Layout from '../../layouts/Layout.astro';
   <p>También soporta el estilo clásico C, ideal cuando sabés exactamente cuántas veces iterar:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📋 Sintaxis</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-clipboard-list"/></svg> Sintaxis</span></div>
     <pre><code><span class="kw">para</span> (inicialización; condición; incremento) &lbrace;
     <span class="co">// cuerpo del bucle</span>
 &rbrace;</code></pre>
   </div>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔢 Ejemplo</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-hash"/></svg> Ejemplo</span></div>
     <pre><code><span class="kw">para</span> (<span class="kw">variable</span> i = 0; i &#x3C; 3; i = i + 1) &lbrace;
     <span class="fn">escribir</span>(<span class="st">"i = "</span> + i)
 &rbrace;
 <span class="co">// → i = 0, i = 1, i = 2</span></code></pre>
   </div>
 
-  <div class="tip"><strong>⚡ Optimización:</strong> El patrón <code>i = 0; i &#x3C; N; i = i + 1</code> se optimiza a <code>for i in 0..N</code> en el código Rust generado. ¡Más eficiente y elegante!</div>
+  <div class="tip"><strong><svg class="ico" aria-hidden="true"><use href="#i-zap"/></svg> Optimización:</strong> El patrón <code>i = 0; i &#x3C; N; i = i + 1</code> se optimiza a <code>for i in 0..N</code> en el código Rust generado. ¡Más eficiente y elegante!</div>
 
   <h2><code>repetir</code> — Repetición fija</h2>
 
   <p>Ejecuta un bloque una cantidad fija de veces, sin necesidad de contador manual. Es el más simple de todos:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🔁 Sin contador visible</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-repeat"/></svg> Sin contador visible</span></div>
     <pre><code><span class="kw">repetir</span> (4) &lbrace;
     <span class="fn">escribir</span>(<span class="st">"Esto se repite 4 veces"</span>)
 &rbrace;
