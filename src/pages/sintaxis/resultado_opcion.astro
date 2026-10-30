@@ -12,12 +12,12 @@ import Layout from '../../layouts/Layout.astro';
   <p>Úsalo cuando un valor pueda ser <code>Algun(valor)</code> o <code>Ninguno</code>. Evita el uso de <code>nulo</code> y fuerza el manejo explícito del caso ausente.</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📦 Definición</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-package"/></svg> Definición</span></div>
     <pre><code><span class="kw">tipo</span> Opcion&lt;T&gt; = Algun(T) | Ninguno</code></pre>
   </div>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🧪 Ejemplo</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-flask-conical"/></svg> Ejemplo</span></div>
     <pre><code><span class="kw">funcion</span> <span class="fn">primer_caracter</span>(texto: <span class="ty">Texto</span>) &rarr; <span class="ty">Opcion</span>&lt;<span class="ty">Texto</span>> &lbrace;
     <span class="kw">si</span> (texto == <span class="st">""</span>) &lbrace;
         <span class="kw">retornar</span> <span class="kw">Ninguno</span>
@@ -38,12 +38,12 @@ import Layout from '../../layouts/Layout.astro';
   <p>Úsalo para operaciones que pueden devolver <code>Exito(valor)</code> o <code>Error(mensaje)</code>.</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📦 Definición</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-package"/></svg> Definición</span></div>
     <pre><code><span class="kw">tipo</span> Resultado&lt;T, E&gt; = Exito(T) | Error(E)</code></pre>
   </div>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🧪 Ejemplo</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-flask-conical"/></svg> Ejemplo</span></div>
     <pre><code><span class="kw">funcion</span> <span class="fn">dividir</span>(a: <span class="ty">Entero</span>, b: <span class="ty">Entero</span>) &rarr; <span class="ty">Resultado</span>&lt;<span class="ty">Entero</span>, <span class="ty">Texto</span>> &lbrace;
     <span class="kw">si</span> (b == 0) &lbrace;
         <span class="kw">retornar</span> <span class="kw">Error</span>(<span class="st">"División por cero"</span>)
@@ -64,7 +64,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>La keyword <code><span class="kw">resultado</span></code> se usa dentro de postcondiciones (<code>asegura</code>) para referirse al valor de retorno de una función. Es parte del sistema de <strong>Design by Contract</strong> de Forja:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📜 Postcondición</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-scroll-text"/></svg> Postcondición</span></div>
     <pre><code><span class="kw">funcion</span> <span class="fn">dividir</span>(a: <span class="ty">Entero</span>, b: <span class="ty">Entero</span>) -> <span class="ty">Entero</span>
     <span class="kw">requiere</span> b != 0
     <span class="kw">asegura</span> <span class="kw">resultado</span> * b == a
@@ -73,7 +73,7 @@ import Layout from '../../layouts/Layout.astro';
 &rbrace;</code></pre>
   </div>
 
-  <div class="info">💡 Las postcondiciones se evalúan después de ejecutar la función. La keyword <code>resultado</code> representa el valor de retorno.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> Las postcondiciones se evalúan después de ejecutar la función. La keyword <code>resultado</code> representa el valor de retorno.</div>
 
 
   <h3>Keyword <code>anterior</code> — valor previo en postcondiciones</h3>
@@ -81,7 +81,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>La keyword <code><span class="kw">anterior</span></code> captura el valor de una expresión <strong>antes</strong> de ejecutar la función. Se usa dentro de <code>asegura</code> para referirse al estado previo:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📜 Postcondición con anterior</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-scroll-text"/></svg> Postcondición con anterior</span></div>
     <pre><code><span class="kw">funcion</span> <span class="fn">incrementar</span>(<span class="kw">prestado</span> <span class="kw">mut</span> x: <span class="ty">Entero</span>)
     <span class="kw">asegura</span> x == <span class="kw">anterior</span>(x) + 1
 &lbrace;
@@ -97,7 +97,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>La keyword <code><span class="kw">siempre</span></code> define <strong>invariantes</strong> de clase: condiciones que deben cumplirse siempre, antes y después de cualquier método. Si un método deja la clase en un estado inválido, el invariante se rompe:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📜 Invariante de clase</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-scroll-text"/></svg> Invariante de clase</span></div>
     <pre><code><span class="kw">clase</span> CuentaBancaria &lbrace;
     saldo
 
@@ -117,7 +117,7 @@ import Layout from '../../layouts/Layout.astro';
 &rbrace;</code></pre>
   </div>
 
-  <div class="warning">⚠️ El invariante <code>siempre</code> se verifica al final de cada método de la clase. Si un método no lo cumple, se reporta un error en tiempo de ejecución.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> El invariante <code>siempre</code> se verifica al final de cada método de la clase. Si un método no lo cumple, se reporta un error en tiempo de ejecución.</div>
 
 
   <h2>Tabla completa de Design by Contract</h2>
