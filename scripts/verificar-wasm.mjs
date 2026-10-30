@@ -14,6 +14,18 @@ async function verificar(nombre, archivoJs, archivoWasm) {
   }
   modulo.initSync({ module: readFileSync(resolve(raiz, 'src/wasm', archivoWasm)) });
   const version = typeof modulo.version === 'function' ? modulo.version() : 'sin versión';
+  // Inicializar no alcanza: un wasm con el compilador roto (o con el glue
+  // desincronizado) puede instanciar igual. El core tiene que poder ejecutar.
+  if (nombre === 'core') {
+    if (typeof modulo.forja_ejecutar !== 'function') {
+      throw new Error('forja_wasm.js no exporta forja_ejecutar');
+    }
+    const programa = 'funcion main() { escribir("ok") }\nmain()\n';
+    const salida = modulo.forja_ejecutar(programa);
+    if (!String(salida).includes('ok')) {
+      throw new Error(`forja_ejecutar no ejecuta: ${JSON.stringify(salida)}`);
+    }
+  }
   console.log(`✅ ${nombre}: ${version}`);
 }
 
