@@ -10,7 +10,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <h2>Crear y acceder</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Índices desde 0</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Índices desde 0</span></div>
     <pre><code><span class="kw">variable</span> nums = [10, 20, 30]
 <span class="fn">escribir</span>(nums[0])   <span class="co">// 10 (el primero)</span>
 <span class="fn">escribir</span>(nums[2])   <span class="co">// 30 (el último)</span></code></pre>
@@ -18,7 +18,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <h2>Modificar</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Asignación por índice</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Asignación por índice</span></div>
     <pre><code><span class="kw">variable</span> nums = [1, 2, 3]
 nums[1] = 99
 <span class="fn">escribir</span>(nums[1])   <span class="co">// 99</span></code></pre>
@@ -26,7 +26,7 @@ nums[1] = 99
 
   <h2>Longitud y recorrido</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 longitud + mientras</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> longitud + mientras</span></div>
     <pre><code><span class="kw">variable</span> a = [7, 8, 9]
 <span class="fn">escribir</span>(<span class="fn">longitud</span>(a))   <span class="co">// 3</span>
 
@@ -39,16 +39,16 @@ nums[1] = 99
 
   <h2>Operaciones comunes</h2>
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 agregar / contiene</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> agregar / contiene</span></div>
     <pre><code><span class="kw">variable</span> a = [1, 2]
 <span class="fn">agregar</span>(a, 3)              <span class="co">// [1, 2, 3]</span>
 <span class="fn">escribir</span>(<span class="fn">contiene</span>(a, 2))   <span class="co">// verdadero</span></code></pre>
   </div>
 
-  <div class="warning">⚠️ Acceder a un índice fuera de rango produce un error en tiempo de ejecución. Verificá siempre con <code>longitud()</code>.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> Acceder a un índice fuera de rango produce un error en tiempo de ejecución. Verificá siempre con <code>longitud()</code>.</div>
 
   <h2>Ejercicio del día</h2>
-  <div class="warning">✏️ <strong>Ejercicio:</strong> creá el arreglo <code>[5, 10, 15]</code> y mostrá su segundo elemento.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> <strong>Ejercicio:</strong> creá el arreglo <code>[5, 10, 15]</code> y mostrá su segundo elemento.</div>
 
   <p>Comparalo con el <a href="/docs/curso/solucionario/#dia-9">solucionario</a>.</p>
 
