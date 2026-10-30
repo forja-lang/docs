@@ -66,7 +66,19 @@ import Layout from '../../layouts/Layout.astro';
 &rbrace;</code></pre>
   </div>
 
-  <p>El bloque <code>seleccionar</code> prueba cada canal con <code>try_recibir</code> no bloqueante y ejecuta el primero que tenga datos disponibles. El brazo <code>tiempo</code> ejecuta un timeout, y <code>otro</code> es el caso default si ningún canal tiene datos.</p>
+  <p>El bloque <code>seleccionar</code> sondea los canales y ejecuta <strong>un solo</strong> cuerpo: el del primero que tenga datos disponibles. Sin <code>tiempo</code> ni <code>otro</code> espera hasta que alguno reciba; <code>tiempo ms</code> espera como máximo ese tiempo (y entonces ejecuta su cuerpo) y <code>otro</code> es el caso por defecto cuando ningún canal tiene datos en ese instante (no espera).</p>
+
+  <h3>Canales acotados (backpressure)</h3>
+
+  <p><code>canal(n)</code> crea el canal con capacidad <code>n</code>: cuando la cola está llena, <code>enviar</code> bloquea al emisor en lugar de crecer sin límite. <code>canal(0)</code> es un canal de encuentro (el emisor espera a que alguien reciba) y <code>canal()</code> usa la capacidad por defecto (1024).</p>
+
+  <div class="code-block-wrapper">
+    <div class="code-header"><span>📡 canal con capacidad</span></div>
+    <pre><code><span class="kw">variable</span> tx, rx = <span class="fn">canal</span>(<span class="nm">64</span>)   <span class="cm">// cola de 64 mensajes</span>
+<span class="kw">variable</span> t2, r2 = <span class="fn">canal</span>(<span class="nm">0</span>)    <span class="cm">// rendezvous</span></code></pre>
+  </div>
+
+  <p><code>rx.try_recibir()</code> es la recepción <strong>no bloqueante</strong>: devuelve el mensaje o <code>nulo</code> si no hay nada.</p>
 
   <h2>2. Async/Await</h2>
 
@@ -215,7 +227,7 @@ import Layout from '../../layouts/Layout.astro';
   <table>
     <tr><th>Keyword</th><th>Descripción</th></tr>
     <tr><td><code>hilo</code></td><td>Lanza un hilo (despachado al Thread Pool)</td></tr>
-    <tr><td><code>canal()</code></td><td>Crea un canal de comunicación mpsc</td></tr>
+    <tr><td><code>canal()</code> / <code>canal(n)</code></td><td>Crea un canal mpsc (capacidad por defecto 1024, o <code>n</code> explícita)</td></tr>
     <tr><td><code>.enviar(valor)</code></td><td>Envía un dato por el canal</td></tr>
     <tr><td><code>.recibir()</code></td><td>Recibe un dato del canal (bloqueante)</td></tr>
     <tr><td><code>.try_recibir()</code></td><td>Recibe no bloqueante (retorna nulo si vacío)</td></tr>
@@ -223,7 +235,7 @@ import Layout from '../../layouts/Layout.astro';
     <tr><td><code>funcion asincrona</code></td><td>Declara función asincrónica (ThreadSpawn)</td></tr>
     <tr><td><code>await expr</code></td><td>Espera un Future/Hilo (equivale a <code>expr.unir()</code>)</td></tr>
     <tr><td><code>esperar(ms)</code></td><td>Pausa la ejecución en milisegundos</td></tr>
-    <tr><td><code>seleccionar</code></td><td>Select multiplexado sobre canales (no bloqueante)</td></tr>
+    <tr><td><code>seleccionar</code></td><td>Select multiplexado sobre canales (ejecuta un solo cuerpo)</td></tr>
     <tr><td><code>caso</code></td><td>Brazo de recepción dentro de <code>seleccionar</code></td></tr>
     <tr><td><code>tiempo</code></td><td>Timeout en <code>seleccionar</code></td></tr>
     <tr><td><code>otro</code></td><td>Caso default en <code>seleccionar</code></td></tr>
