@@ -16,7 +16,7 @@ import Layout from '../../layouts/Layout.astro';
   <h3>Crear un hilo</h3>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🧵 Sintaxis</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-spline"/></svg> Sintaxis</span></div>
     <pre><code><span class="kw">variable</span> h = <span class="kw">hilo</span> &lbrace;
     <span class="co">// se ejecuta en std::thread (Thread Pool)</span>
     <span class="kw">retornar</span> resultado
@@ -31,7 +31,7 @@ import Layout from '../../layouts/Layout.astro';
   <h3>Canales mpsc</h3>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📡 canales</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-radio-tower"/></svg> canales</span></div>
     <pre><code><span class="kw">variable</span> e, r = <span class="fn">canal</span>()
 
 <span class="kw">hilo</span> &lbrace;
@@ -49,7 +49,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Usa <code>seleccionar</code> para multiplexar la recepción de múltiples canales:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📡 seleccionar</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-radio-tower"/></svg> seleccionar</span></div>
     <pre><code><span class="kw">seleccionar</span> &lbrace;
     <span class="kw">caso</span> rx1 -> dato -> &lbrace;
         <span class="fn">escribir</span>(<span class="st">"Canal 1: "</span> + dato)
@@ -73,7 +73,7 @@ import Layout from '../../layouts/Layout.astro';
   <p><code>canal(n)</code> crea el canal con capacidad <code>n</code>: cuando la cola está llena, <code>enviar</code> bloquea al emisor en lugar de crecer sin límite. <code>canal(0)</code> es un canal de encuentro (el emisor espera a que alguien reciba) y <code>canal()</code> usa la capacidad por defecto (1024).</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📡 canal con capacidad</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-radio-tower"/></svg> canal con capacidad</span></div>
     <pre><code><span class="kw">variable</span> tx, rx = <span class="fn">canal</span>(<span class="nm">64</span>)   <span class="cm">// cola de 64 mensajes</span>
 <span class="kw">variable</span> t2, r2 = <span class="fn">canal</span>(<span class="nm">0</span>)    <span class="cm">// rendezvous</span></code></pre>
   </div>
@@ -87,7 +87,7 @@ import Layout from '../../layouts/Layout.astro';
   <h3>Declaración de función asincrónica</h3>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>⚡ función asincrónica</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-zap"/></svg> función asincrónica</span></div>
     <pre><code><span class="co">// Declaración con retorno</span>
 <span class="kw">funcion asincrona</span> tarea_lenta() -> Texto &lbrace;
     <span class="fn">esperar</span>(2)
@@ -118,7 +118,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Puedes lanzar varias funciones async y esperar sus resultados:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>⚡ múltiples async</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-zap"/></svg> múltiples async</span></div>
     <pre><code><span class="kw">funcion asincrona</span> tarea(id: Entero) -> Texto &lbrace;
     <span class="kw">retornar</span> <span class="st">"Tarea "</span> + id + <span class="st">" completada"</span>
 &rbrace;
@@ -169,7 +169,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>El bloque <code>cuando</code> permite observar cambios en variables. Si la condición es una variable simple, <code>cuando</code> entra en un bucle que detecta cambios (polling cada 50ms). Si es una expresión compleja, se comporta como un <code>si</code> simple:</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>👀 Observador</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-eye"/></svg> Observador</span></div>
     <pre><code><span class="co">// Watch reactivo (variable simple)</span>
 <span class="kw">variable</span> contador = 0
 <span class="kw">cuando</span> (contador) &lbrace;
@@ -190,7 +190,7 @@ import Layout from '../../layouts/Layout.astro';
   <p>Crea un pool de N workers. Retorna <code>[tx_tareas, rx_resultados]</code>.</p>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>🏭 Pool de Workers</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-factory"/></svg> Pool de Workers</span></div>
     <pre><code><span class="kw">importar</span> <span class="st">"std/concurrencia"</span>
 
 <span class="kw">variable</span> pool = <span class="fn">pool_trabajadores</span>(3, duplicar)
@@ -245,7 +245,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Ejemplo completo</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📝 Ejemplo integrado</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg> Ejemplo integrado</span></div>
     <pre><code><span class="co">// Combinación de hilos, canales y async/await</span>
 <span class="kw">funcion asincrona</span> productor(canal_emisor) -> Texto &lbrace;
     canal_emisor.<span class="fn">enviar</span>(<span class="st">"dato 1"</span>)
