@@ -215,6 +215,10 @@ import Layout from '../layouts/Layout.astro';
   let guiWasmLoaded: boolean = false;
   let forjaWasmGui: any = null;
 
+  // Los builtins de GUI (columna, fila, titulo, boton…) sólo existen en el
+  // runtime GUI: un programa así no produce salida en la VM.
+  const RE_GUI = /\b(columna|fila|pila|titulo|boton)\s*\(/;
+
   async function cargarWASM() {
     try {
       // @ts-ignore
@@ -291,7 +295,23 @@ import Layout from '../layouts/Layout.astro';
         try {
           if (wasmLoaded && forjaWasm && typeof forjaWasm.forja_ejecutar === 'function') {
             // Usar la VM real compilada a WASM (cargada como módulo)
-            const resultado = forjaWasm.forja_ejecutar(source);
+            let resultado: any;
+            try {
+              resultado = forjaWasm.forja_ejecutar(source);
+            } catch (err: any) {
+              // Los builtins de GUI sólo existen en el runtime GUI: la VM sola los
+              // rechaza, así que reintentamos ahí.
+              if (RE_GUI.test(source)) {
+                ejecutarGUI();
+                return;
+              }
+              throw err;
+            }
+            // Un programa GUI sólo declara `main()` y no escribe nada en consola.
+            if (!String(resultado ?? '').trim() && RE_GUI.test(source)) {
+              ejecutarGUI();
+              return;
+            }
             const tiempoMs = (performance.now() - inicio).toFixed(2);
             mostrarOutput(resultado);
             setStatus('⚡ ' + tiempoMs + ' ms', 'status-timing');
