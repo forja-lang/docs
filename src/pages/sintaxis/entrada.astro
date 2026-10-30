@@ -7,12 +7,12 @@ import Layout from '../../layouts/Layout.astro';
 
   <p>Forja permite leer datos ingresados por el usuario con la función <code><span class="fn">leer</span></code>.</p>
 
-  <div class="info">💡 <strong>Filosofía:</strong> <code>leer()</code> es la forma más simple de hacer que tu programa interactúe con el usuario. Siempre devuelve <code>Texto</code>.</div>
+  <div class="info"><svg class="ico" aria-hidden="true"><use href="#i-lightbulb"/></svg> <strong>Filosofía:</strong> <code>leer()</code> es la forma más simple de hacer que tu programa interactúe con el usuario. Siempre devuelve <code>Texto</code>.</div>
 
   <h2>Sintaxis</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>📖 Leer entrada</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-book-open"/></svg> Leer entrada</span></div>
     <pre><code><span class="kw">variable</span> nombre = <span class="fn">leer</span>()</code></pre>
   </div>
 
@@ -21,7 +21,7 @@ import Layout from '../../layouts/Layout.astro';
   <h2>Ejemplo completo</h2>
 
   <div class="code-block-wrapper">
-    <div class="code-header"><span>💬 Conversación simple</span></div>
+    <div class="code-header"><span><svg class="ico" aria-hidden="true"><use href="#i-message-circle"/></svg> Conversación simple</span></div>
     <pre><code><span class="fn">escribir</span>(<span class="st">"¿Cómo te llamás?"</span>)
 <span class="kw">variable</span> nombre = <span class="fn">leer</span>()
 <span class="fn">escribir</span>(<span class="st">"¡Hola, "</span> + nombre + <span class="st">"!"</span>)
@@ -31,7 +31,7 @@ import Layout from '../../layouts/Layout.astro';
 <span class="co">// edad_texto es Texto, no Entero</span></code></pre>
   </div>
 
-  <div class="warning">⚠️ <strong>Nota:</strong> <code>leer()</code> siempre devuelve <code>Texto</code>. Si necesitás un número, usá la conversión automática de la VM o parseá manualmente.</div>
+  <div class="warning"><svg class="ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg> <strong>Nota:</strong> <code>leer()</code> siempre devuelve <code>Texto</code>. Si necesitás un número, usá la conversión automática de la VM o parseá manualmente.</div>
 
   <h2>Equivalencia con Rust</h2>
 
